@@ -23,3 +23,5 @@ Imports:
   spelling,
   tidyverse,
   viridis
+URL: https://github.com/njtierney/bettervis
+BugReports: https://github.com/njtierney/bettervis/issues
