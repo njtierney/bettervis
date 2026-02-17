@@ -30,23 +30,27 @@
 - Reshaping data with `pivot_longer()` and `pivot_wider()`
 - Line graphs with `geom_line()` and `group`
 
-
-### Polishing
+### Polishing and Extensions
 
 - Polishing workflow
 - Using labels with `labs()`
 - Colourblind-safe colour palettes
-- Themes, and how to extend them
-- Legends, position, customisation
+- Extension themes (such as ggthemes and hrbrthemes)
+- How to extend themes
+- Legends, position, customisation (patchwork)
+- Customise text with marquee
 - Writing plots to file
 
 ### Advanced Topics & Practice
 
-- Handling many data points and overplotting
+- Handling many data points and overplotting (gghighlight and ggrepel)
 - Using boxplots
+- Using animation with gganimate
 - Understanding trade offs of summaries (Anscombe's Quartet)
 - Plots to show distribution and data: half plots, raincloud plots
 - Comparing groups by using a light background
+- Interactive graphics with ggiraph
+- Discussion of extension packages at https://exts.ggplot2.tidyverse.org/gallery/
 - Exploring missing data with {naniar}
 - Open practice time and Q&A session
 

@@ -2,38 +2,22 @@
 
 - Basic R programming experience
 - No familiarity with ggplot2 required
-- Experience working with data
 
 ## Learning outcomes
 
-- How to think about creating good plots
-- Good vs bad charts  
-- Data-ink ratio  
-- Clear message communication  
-- Hierarchy of plot design (concepts of proximity)
-- Fundamentals of ggplot2:
-    - Understanding the grammar of graphics
-    - Working with different geoms and aesthetics
-    - Common pitfalls and how to avoid them
-    - Polishing plots for publication
-    - Brief introduction to useful common extensions (e.g., patchwork)
-
-
-## Learning Outcomes
-
-By the end of this course, participants will be able to:
-
-1. Understand the grammar of graphics and how ggplot2 implements it
-2. Map variables to aesthetics (x, y, colour, fill, shape, size) appropriately
-3. Choose appropriate geometries for different data types (points, lines, bars, histograms)
-4. Use faceting strategically to create small multiples with `facet_wrap()` and `facet_grid()`
-5. Apply the proximity principle when designing multi-variable plots
-6. Recognise and create tidy data suitable for ggplot2
-7. Reshape data using `pivot_longer()` and `pivot_wider()`
-8. Create effective bar plots with proper sorting and positioning
-9. Polish plots with labels, themes, colours, and legends
-10. Handle overplotting using jitter, transparency, and summaries
-11. Save publication-quality figures with `ggsave()`
+- Apply the grammar of graphics
+- Use different geoms and aesthetics
+- Choose the right graphic for the right data type
+- Use facets to explore subsets
+- Apply principles of plot hierarchy and proximity
+- Understand the fundamentals of tidy data
+- Link tidy data with ggplot2
+- Polish graphics for publication with labels, themes, colours, and legends
+- Save ggplots as high quality images
+- Use ggplot2 extensions such as patchwork, marquee, and ggrepel
+- Apply techniques to improve clarity (overplotting, faceting, highlighting, colour)
+- Identify and avoid common pitfalls
+- Critique graphics using principles such as data:ink ratio and hierarchy
 
 
 ## Course website
