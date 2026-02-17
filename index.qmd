@@ -1,0 +1,11 @@
+---
+title: "Making Better Graphs with ggplot2"
+---
+
+## Welcome
+
+Welcome to Making Better Graphs! This course will help you create clear, effective, and beautiful visualisations using ggplot2.
+
+## Course Materials
+
+Materials will be added here as we progress through the course.
