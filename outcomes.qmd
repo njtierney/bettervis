@@ -1,9 +1,11 @@
-## Prerequisites
+<https://better-vis.njtierney.com>
+
+**Prerequisites**
 
 - Basic R programming experience
 - No familiarity with ggplot2 required
 
-## Learning outcomes
+**Learning outcomes**
 
 - Apply the grammar of graphics
 - Use different geoms and aesthetics
@@ -18,8 +20,3 @@
 - Apply techniques to improve clarity (overplotting, faceting, highlighting, colour)
 - Identify and avoid common pitfalls
 - Critique graphics using principles such as data:ink ratio and hierarchy
-
-
-## Course website
-
-<https://better-vis.njtierney.com>
