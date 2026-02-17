@@ -1,0 +1,22 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Making Better Graphs",
+    "section": "",
+    "text": "0.1 Welcome\nWelcome to Making Better Graphs! This course will help you create clear, effective, and beautiful visualisations using ggplot2.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Making Better Graphs with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "Making Better Graphs",
+    "section": "0.2 Course Materials",
+    "text": "0.2 Course Materials\nMaterials will be added here as we progress through the course.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Making Better Graphs with ggplot2</span>"
+    ]
+  }
+]
