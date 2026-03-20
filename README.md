@@ -7,117 +7,117 @@
 
 <!-- badges: end -->
 
-## Prerequisites
+<https://better-vis.njtierney.com>
+
+**Prerequisites**
 
 - Basic R programming experience
 - No familiarity with ggplot2 required
-- Experience working with data
 
-## Learning outcomes
+**Learning outcomes**
 
-- How to think about creating good plots
-- Good vs bad charts  
-- Data-ink ratio  
-- Clear message communication  
-- Hierarchy of plot design (concepts of proximity)
-- Fundamentals of ggplot2:
-  - Understanding the grammar of graphics
-  - Working with different geoms and aesthetics
-  - Common pitfalls and how to avoid them
-  - Polishing plots for publication
-  - Brief introduction to useful common extensions (e.g., patchwork)
-
-## Learning Outcomes
-
-By the end of this course, participants will be able to:
-
-1.  Understand the grammar of graphics and how ggplot2 implements it
-2.  Map variables to aesthetics (x, y, colour, fill, shape, size)
-    appropriately
-3.  Choose appropriate geometries for different data types (points,
-    lines, bars, histograms)
-4.  Use faceting strategically to create small multiples with
-    `facet_wrap()` and `facet_grid()`
-5.  Apply the proximity principle when designing multi-variable plots
-6.  Recognise and create tidy data suitable for ggplot2
-7.  Reshape data using `pivot_longer()` and `pivot_wider()`
-8.  Create effective bar plots with proper sorting and positioning
-9.  Polish plots with labels, themes, colours, and legends
-10. Handle overplotting using jitter, transparency, and summaries
-11. Save publication-quality figures with `ggsave()`
-
-## Course website
-
-<https://better-vis.njtierney.com>
+- Apply the grammar of graphics
+- Use different geoms and aesthetics
+- Choose the right graphic for the right data type
+- Use facets to explore subsets
+- Apply principles of plot hierarchy and proximity
+- Understand the fundamentals of tidy data
+- Link tidy data with ggplot2
+- Polish graphics for publication with labels, themes, colours, and
+  legends
+- Save ggplots as high quality images
+- Use ggplot2 extensions such as patchwork, marquee, and ggrepel
+- Apply techniques to improve clarity (overplotting, faceting,
+  highlighting, colour)
+- Identify and avoid common pitfalls
+- Critique graphics using principles such as data:ink ratio and
+  hierarchy
 
 This course goes through not just how to create graphics, but how to
-communicate your message in your graphic.
+communicate your message effectively.
 
 ## Schedule
 
-### Session 1: Introduction & Scatterplots
+### Introduction & Scatterplots
 
 - Philosophy and approach to understanding ggplot2
-- Learn the anatomy of a ggplot using the template approach
-- Map variables to aesthetics (x, y, colour, shape, size)
-- Understand the difference between mapping aesthetics inside `aes()`
-  versus setting them outside
-- Practice with `variables-aesthetics.R` and `colour.R`
+- Anatomy of a ggplot
+- Variables and aesthetics (x, y, colour, shape, size)
+- Aesthetics inside `aes()` versus outside
 
-### Session 2: Faceting & Small Multiples
+### Bar Plots & Histograms
 
-- Learn to create small multiples with `facet_wrap()` and `facet_grid()`
-- Understand when to use single vs multiple variable faceting
-- Apply the proximity principle: put the comparisons you want readers to
-  make close together
-- Explore different orderings of colour vs facets to change
-  interpretations
-- Practice recreating plots with different faceting strategies using
-  `facet.R`
+- Using `geom_bar()` vs `geom_col()`
+- Sorting: `fct_infreq()` and `fct_rev()`
+- Aesthetics: `fill` vs `colour`
+- Position in barplots (stack, dodge, fill)
+- Histograms, binwidths, bins
+- Overlaying multiple histograms
 
-### Session 3: Tidy Data & Line Graphs
+### Faceting & Small Multiples
 
-- Introduction to tidy data principles and why they matter for ggplot2
-- Learn to identify if data is tidy using the template: variables,
-  observations, and values
-- Reshape data with `pivot_longer()` and `pivot_wider()`
-- Create line graphs with `geom_line()` using gapminder data
-- Understand the `group` aesthetic for multiple series
-- Practice with `tidy-data.R` and `gapminder-line.R`
+- Small multiples with `facet_wrap()` and `facet_grid()`
+- Single vs multiple variable faceting
+- Proximity principle: put comparisons closer together
+- Orderings of colour vs facets to change interpretations
 
-### Session 4: Bar Plots & Histograms
+### Tidy Data & Line Graphs
 
-- Create bar plots with `geom_bar()` and understand when to use
-  `geom_col()`
-- Learn the importance of sorting with `fct_infreq()` and `fct_rev()`
-- Understand `fill` vs `colour` for 2D shapes
-- Use position options (stack, dodge, fill) for grouped bar plots
-- Create histograms with `geom_histogram()` and choose appropriate bins
-  or binwidth
-- Handle overlapping histograms with `alpha` and `position = "identity"`
-- Practice with `barplots.R` and `histogram.R`
+- Why Tidy Data matters in ggplot2
+- Identifying tidy data
+- Reshaping data with `pivot_longer()` and `pivot_wider()`
+- Line graphs with `geom_line()` and `group`
 
-### Session 5: Polishing Your Plots
+### Polishing and Extensions
 
-- Learn the polishing workflow: save plots to objects, then add labels,
-  improve colours, apply themes, and adjust legends
-- Add comprehensive labels with `labs()`
-- Use colourblind-safe colour palettes: `scale_colour_brewer()`,
-  `scale_colour_viridis_d()`, and colorspace palettes
-- Apply built-in themes like `theme_minimal()` and extension themes from
-  `ggthemes` and `hrbrthemes`
-- Control legend position with `theme(legend.position)`
-- Save publication-quality plots with `ggsave()`
-- Practice with `polish.R`
+- Polishing workflow
+- Using labels with `labs()`
+- Colourblind-safe colour palettes
+- Extension themes (such as ggthemes and hrbrthemes)
+- How to extend themes
+- Legends, position, customisation (patchwork)
+- Customise text with marquee
+- Writing plots to file
 
-### Session 6: Advanced Topics & Practice
+### Advanced Topics & Practice
 
-- Handle overplotting with `geom_jitter()`, controlling width and using
-  `alpha` for transparency
-- Understand boxplot anatomy and when to use summaries
-- Learn why summaries lose detail (DataSaurus revisited)
-- Explore alternatives like half-and-half plots with `gghalves` and
-  raincloud plots with `ggrain`
-- Advanced tricks: adding background data layers to faceted plots, and
-  plotting many variables at once with `pivot_longer()` and faceting
+- Handling many data points and overplotting (gghighlight and ggrepel)
+- Using boxplots
+- Using animation with gganimate
+- Understanding trade offs of summaries (Anscombe’s Quartet)
+- Plots to show distribution and data: half plots, raincloud plots
+- Comparing groups by using a light background
+- Interactive graphics with ggiraph
+- Discussion of extension packages at
+  https://exts.ggplot2.tidyverse.org/gallery/
+- Exploring missing data with {naniar}
 - Open practice time and Q&A session
+
+## Packages
+
+``` r
+install.packages(c(
+  "tidyverse",
+  "palmerpenguins",
+  "gapminder",
+  "colorspace",
+  "viridis",
+  "gghalves",
+  "ggrain",
+  "patchwork"
+))
+```
+
+## Resources
+
+- [ggplot2 book](https://ggplot2-book.org/) by Hadley Wickham
+- [R for Data Science](https://r4ds.had.co.nz/) by Hadley Wickham &
+  Garrett Grolemund
+- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)
+  by Claus Wilke
+- [Data Visualization: A Practical Introduction](https://socviz.co/) by
+  Kieran Healy
+- [R Graph Gallery](https://r-graph-gallery.com/)
+- [Tidy Data for
+  Reproducibility](https://openscapes.org/blog/2020-10-12-tidy-data/)
+  blog post

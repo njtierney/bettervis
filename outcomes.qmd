@@ -19,4 +19,4 @@
 - Use ggplot2 extensions such as patchwork, marquee, and ggrepel
 - Apply techniques to improve clarity (overplotting, faceting, highlighting, colour)
 - Identify and avoid common pitfalls
-- Critique graphics using principles such as data:ink ratio and hierarchy
+- Critique graphics using principles such as data\:ink ratio and hierarchy
