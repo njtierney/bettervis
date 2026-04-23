@@ -1,13 +1,13 @@
 ## Schedule
 
-### Introduction & Scatterplots
+#### Introduction & Scatterplots
 
 - Philosophy and approach to understanding ggplot2
 - Anatomy of a ggplot
 - Variables and aesthetics (x, y, colour, shape, size)
 - Aesthetics inside `aes()` versus outside
 
-### Bar Plots & Histograms
+#### Bar Plots & Histograms
 
 - Using `geom_bar()` vs `geom_col()`
 - Sorting: `fct_infreq()` and `fct_rev()`
@@ -16,21 +16,21 @@
 - Histograms, binwidths, bins
 - Overlaying multiple histograms
 
-### Faceting & Small Multiples
+#### Faceting & Small Multiples
 
 - Small multiples with `facet_wrap()` and `facet_grid()`
 - Single vs multiple variable faceting
 - Proximity principle: put comparisons closer together
 - Orderings of colour vs facets to change interpretations
 
-### Tidy Data & Line Graphs
+#### Tidy Data & Line Graphs
 
 - Why Tidy Data matters in ggplot2
 - Identifying tidy data
 - Reshaping data with `pivot_longer()` and `pivot_wider()`
 - Line graphs with `geom_line()` and `group`
 
-### Polishing and Extensions
+#### Polishing and Extensions
 
 - Polishing workflow
 - Using labels with `labs()`
@@ -41,7 +41,7 @@
 - Customise text with marquee
 - Writing plots to file
 
-### Advanced Topics & Practice
+#### Advanced Topics & Practice
 
 - Handling many data points and overplotting (gghighlight and ggrepel)
 - Using boxplots
@@ -53,7 +53,6 @@
 - Discussion of extension packages at https://exts.ggplot2.tidyverse.org/gallery/
 - Exploring missing data with {naniar}
 - Open practice time and Q&A session
-
 
 ## Packages
 
