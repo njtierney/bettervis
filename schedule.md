@@ -1,79 +1,122 @@
-## Schedule
+# Schedule
 
-#### Introduction & Scatterplots
+## Anatomy of a ggplot
 
-- Philosophy and approach to understanding ggplot2
-- Anatomy of a ggplot
+*`aes()`, geoms, layers*
+
+- Taking a finished plot apart
+- The seven pieces of the grammar
+- Building a plot up from nothing
 - Variables and aesthetics (x, y, colour, shape, size)
 - Aesthetics inside `aes()` versus outside
+- Adding layers
 
-#### Bar Plots & Histograms
+## The shape of your data
 
-- Using `geom_bar()` vs `geom_col()`
-- Sorting: `fct_infreq()` and `fct_rev()`
-- Aesthetics: `fill` vs `colour`
-- Position in barplots (stack, dodge, fill)
-- Histograms, binwidths, bins
-- Overlaying multiple histograms
+*tidy data, `pivot_longer()`, `group`*
 
-#### Faceting & Small Multiples
+- What shape ggplot2 expects
+- Reshaping with `pivot_longer()` and `pivot_wider()`
+- Line graphs, `group`, and why they come out as a scribble
+- Missing values, and the rows ggplot2 quietly drops, with {naniar}
 
+## What gets computed
+
+*`geom_bar()` vs `geom_col()`, binwidths, scales, coords*
+
+- Geoms that count for you: `geom_bar()` versus `geom_col()`
+- Geoms that bin for you: histograms, binwidths, bins
+- Overlaying distributions
+- Scales, log scales, and coords
+
+## What am I comparing?
+
+*`facet_wrap()`, `facet_grid()`, position adjustments*
+
+- Why a plot can hold all your data and answer nothing
 - Small multiples with `facet_wrap()` and `facet_grid()`
-- Single vs multiple variable faceting
-- Proximity principle: put comparisons closer together
-- Orderings of colour vs facets to change interpretations
+- Proximity: what is adjacent is what gets compared
+- Swapping colour for facets, and what that changes
+- Position in bar plots (stack, dodge, fill)
+- Free scales, and what they cost
 
-#### Tidy Data & Line Graphs
+## What's in the way?
 
-- Why Tidy Data matters in ggplot2
-- Identifying tidy data
-- Reshaping data with `pivot_longer()` and `pivot_wider()`
-- Line graphs with `geom_line()` and `group`
+*data:ink, `alpha`, `geom_hex()`, gghighlight, raincloud plots*
 
-#### Polishing and Extensions
+- The data:ink ratio, and how far to take it
+- Overplotting: `alpha`, jittering, `geom_hex()`
+- Highlighting with gghighlight and labelling with ggrepel
+- What summaries hide: Anscombe's quartet
+- Boxplots, and when they mislead
+- Showing distribution and data together: half plots, raincloud plots
 
-- Polishing workflow
-- Using labels with `labs()`
-- Colourblind-safe colour palettes
-- Extension themes (such as ggthemes and hrbrthemes)
-- How to extend themes
-- Legends, position, customisation (patchwork)
-- Customise text with marquee
-- Writing plots to file
+## Where should the eye go?
 
-#### Advanced Topics & Practice
+*`fct_reorder()`, colour palettes, colourblind safety*
 
-- Handling many data points and overplotting (gghighlight and ggrepel)
-- Using boxplots
-- Using animation with gganimate
-- Understanding trade offs of summaries (Anscombe's Quartet)
-- Plots to show distribution and data: half plots, raincloud plots
-- Comparing groups by using a light background
-- Interactive graphics with ggiraph
-- Discussion of extension packages at https://exts.ggplot2.tidyverse.org/gallery/
-- Exploring missing data with {naniar}
-- Open practice time and Q&A session
+- Visual hierarchy, and what a reader looks at first
+- Ordering with `fct_reorder()`, `fct_infreq()`, and `fct_rev()`
+- Matching the palette to the variable: qualitative, sequential, diverging
+- Colourblind-safe colour, with colorspace and viridis
+- Aesthetics: `fill` versus `colour`
+- Emphasis by contrast, and direct labelling instead of legends
 
-## Packages
+## Making it land
+
+*`labs()`, themes, patchwork, `ggsave()`*
+
+- When to start polishing
+- Labels with `labs()`, and titles that state the finding
+- Alt text with `labs(alt = )`
+- Customising text with marquee
+- Themes, extending them, and writing your own
+- Extension themes such as ggthemes and hrbrthemes
+- Combining plots with patchwork
+- Writing plots to file with `ggsave()`
+- Critique: the four questions
+- Open practice and Q&A
+
+## Appendices
+
+- Just enough dplyr
+- Beyond the static plot: gganimate and ggiraph
+
+# Packages
 
 ```r
 install.packages(c(
   "tidyverse",
-  "palmerpenguins",
-  "gapminder",
+  "naniar",
   "colorspace",
   "viridis",
-  "gghalves",
+  "hexbin",
+  "gghighlight",
+  "ggrepel",
   "ggrain",
-  "patchwork"
+  "patchwork",
+  "marquee",
+  "ggthemes",
+  "hrbrthemes",
+  "DAAG",
+  "gapminder",
+  "ozbabynames",
+  "tsibbledata"
 ))
 ```
 
-## Resources
+Optional, for the appendix:
+
+```r
+install.packages(c("gganimate", "ggiraph"))
+```
+
+# Resources
 
 - [ggplot2 book](https://ggplot2-book.org/) by Hadley Wickham
-- [R for Data Science](https://r4ds.had.co.nz/) by Hadley Wickham & Garrett Grolemund
+- [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel and Garrett Grolemund
 - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) by Claus Wilke
 - [Data Visualization: A Practical Introduction](https://socviz.co/) by Kieran Healy
 - [R Graph Gallery](https://r-graph-gallery.com/)
+- [ggplot2 extension gallery](https://exts.ggplot2.tidyverse.org/gallery/)
 - [Tidy Data for Reproducibility](https://openscapes.org/blog/2020-10-12-tidy-data/) blog post

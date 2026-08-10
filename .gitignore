@@ -10,3 +10,15 @@ docs
 *.pdf
 *.tex
 *.toc
+*.rds
+
+# Rendered figures and the knitr cache. This is a plotting course, so these
+# directories fill up fast and are all reproducible from the .qmd files.
+*_files
+*_cache
+_freeze
+site_libs
+index_files
+
+**/*.quarto_ipynb
+teaching-timing/

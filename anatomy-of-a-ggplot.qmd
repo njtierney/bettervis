@@ -1,0 +1,643 @@
+# Anatomy of a ggplot {#sec-anatomy}
+
+You can get really far with ggplot2 by copying an example, changing the variable names, and a bit of use of an LLM.
+
+One of the challenges with this, is that you might not have internalised the mental model of how ggplot plots are built. The system is rich, and built on a great foundation of theory that help you think about both how to build your data for data analysis, and how to then present it in a plot. 
+
+This chapter is about the underlying features of ggplot2. We will take plots, tease them apart, and put them back together.
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** 45 minutes
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- What is this plot telling me, and what is it made of?
+- What are the seven pieces of a ggplot?
+- How do I build one up from nothing?
+- How do I map a variable onto colour, shape, or size?
+- Why does `colour` inside `aes()` do something different to `colour` outside it?
+- How do I add a second layer?
+
+:::
+
+```{r}
+#| label: setup
+#| message: false
+library(ggplot2)
+library(naniar)
+```
+
+## A nice looking plot
+
+> Here's one I prepared earlier.
+
+Let's start with a mostly finished product. Let's take a moment to just look at it.
+
+```{r}
+#| label: fig-elnino
+#| warning: false
+#| fig-alt: |
+#|   Scatterplot of sea temperature against air temperature. The points form
+#|   two separate clusters. The 1993 readings sit between 22 and 25 degrees,
+#|   and the 1997 readings sit between 26 and 30 degrees.
+
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    colour = factor(year)
+  )
+) +
+  geom_point(alpha = 0.6)
+```
+
+Each point is a reading from a buoy floating in the tropical Pacific. The
+horizontal axis is the air temperature, the vertical axis is the temperature of
+the sea underneath it, and the colour is the year the reading was taken.
+
+There are two clouds of data points.
+
+1. One between 20-25C
+2. One up between 26-29C
+
+So what happened between 1993 and 1997?
+
+```{r}
+#| label: mean-temps
+library(dplyr)
+oceanbuoys |> 
+  group_by(year) |> 
+  summarise(
+    mean_sea_temp_c = mean(sea_temp_c, na.rm = TRUE)
+  )
+```
+
+It is a big jump - nearly five degrees celcius, in the same patch of ocean, four years apart. This is the result of
+[El Niño](https://en.wikipedia.org/wiki/El_Ni%C3%B1o), and the 1997 to 1998
+event was one of the strongest on record.
+
+I think that is a lovely thing to be able to see in a plain scatterplot.
+
+Now let's remove the colour, and see how that clear story disappears.
+
+```{r}
+#| label: fig-elnino-nocolour
+#| warning: false
+#| fig-alt: |
+#|   The same scatterplot without colour. The points now read as one elongated
+#|   cloud with a gap in the middle.
+#| fig-cap: "The same readings, with the year removed."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point(alpha = 0.6)
+```
+
+You can still see this gap in the data, but you lose some of that strong clarity.
+
+The gap is the story! And the plot showed this nicely. We mapped the variable "year" onto "colour", and that made this clearer.
+
+A big question when showing data is to think:
+
+> What is the right plot to use
+
+Which is a good question.
+
+But now I think we can also add to this:
+
+> What do I want the plot to tell me? And what have I left out?
+
+### What is it made of?
+
+Let's take @fig-elnino apart.
+
+Let's take another look at the code
+
+1. We see **data**, `oceanbuoys`, which is from the {naniar} package.
+2. There is a set of instructions saying which column goes where. `air_temp_c`
+across, `sea_temp_c` up, `year` onto colour. Those live inside `aes()`.
+3. And there is a `+` between them, which is how you glue the parts together.
+4. There is something saying **draw a point for each row**: is `geom_point()`.
+
+```{r}
+library(naniar)
+library(ggplot2)
+ggplot(
+  data = oceanbuoys,      # <1>
+  aes(                    # <2>
+    x = air_temp_c,       # <2>
+    y = sea_temp_c,       # <2>
+    color = factor(year)  # <2>
+  )
+) +                       # <3>
+  geom_point(alpha = 0.6) # <4>
+```
+
+
+::: {.callout-note title="Your Turn"}
+
+Look at @fig-elnino and answer these without running any code.
+
+1. How many rows do you think `oceanbuoys` has? Have a guess, then check with
+   `nrow(oceanbuoys)`.
+2. If you mapped `humidity` onto the y axis instead of `sea_temp_c`,
+   which part of the code would change?
+3. If you wanted crosses instead of dots, which part would change?
+
+:::
+
+## The seven pieces
+
+The grammar of graphics is an idea from
+[Leland Wilkinson](https://en.wikipedia.org/wiki/Leland_Wilkinson), and ggplot2
+is [Hadley Wickham's](https://hadley.nz/) implementation of it. It is described as a grammar, in the sense that you can express complex things with few words to say something complex.
+
+There are seven parts to the grammar of graphics - and you don't need to know them all by heart. But they are very useful pieces of the map to have.
+
+| Piece | Its job | Chapter |
+|---|---|---|
+| **Data** | The data frame you are plotting | @sec-shape |
+| **Aesthetics** | Which column maps onto which visual channel | this chapter |
+| **Geoms** | What mark gets drawn | this chapter |
+| **Stats** | What gets computed before drawing | @sec-computed |
+| **Scales** | How data values turn into positions and colours | @sec-computed |
+| **Coords** | The coordinate system the marks sit in | @sec-computed |
+| **Facets** | How the plot splits into panels | @sec-comparing |
+
+In this chapter we focus on using three of them: Data, aesthetics, and geoms.
+
+We will come back to this table as we go in the course. But I find that knowing the names of these features of the plot provide useful features of a mental model to focus on and understand.
+
+## Building a plot back up
+
+We took a plot apart before. Let's build one up again.
+
+Start with nothing but the data.
+
+```{r}
+#| label: fig-blank
+#| fig-alt: A completely blank grey panel with no axes and no marks.
+#| fig-cap: "Data, and nothing else."
+ggplot(data = oceanbuoys)
+```
+
+This isn't super inspiring, but it is worth thinking about. I told ggplot2
+what data to use, and absolutely nothing else. It does not know what to put on
+the axes, and it does not know what to draw. It gives you a panel and waits.
+
+Now let's say which columns go where, by specifying how they map onto an axes:
+
+```{r}
+#| label: fig-axes
+#| fig-alt: |
+#|   A grey panel with labelled axes for air temperature and sea temperature,
+#|   but no points.
+#| fig-cap: "Now with aesthetics. Axes appear, but nothing is drawn."
+ggplot(
+  data = oceanbuoys,
+  mapping = aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+)
+```
+
+Now we get axes! These correspond to the range of the data. But we haven't said what data to put on there. We specify that with **A geom**.
+
+```{r}
+#| label: fig-points
+#| warning: false
+#| fig-alt: |
+#|   The scatterplot with black points, forming one elongated cloud with a gap
+#|   in the middle.
+#| fig-cap: "And now a geom. This is a plot."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point()
+```
+
+A plot!
+
+Three lines, three pieces. Data, aesthetics, geom.
+
+Let's show this as a set of panel tabs, to get a bit more of a sense of the plot being built up.
+
+
+:::{.panel-tabset}
+
+## grey
+
+```{r}
+ggplot(oceanbuoys)
+```
+
+## axes
+
+```{r}
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+)
+```
+
+## geom
+
+```{r}
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point()
+```
+
+
+:::
+
+### A small (but worthwhile) digression into missing data
+
+You might have noticed a warning:
+
+```
+Removed 81 rows containing missing values or values outside the scale range
+```
+
+That is no mistake! There are 81 readings in this data where the air
+temperature was never recorded, and ggplot2 cannot draw a point when it does not
+know where to put it, so it drops them and tells you.
+
+This is a good thing, I think. For two reasons:
+
+1. The fact it told you at all! Missing values are often omitted. It's nice ggplot2 is honest.
+
+2. The plot you are looking at is __missing__ 81 readings, and nothing on the plot itself shows you that. You would have to read the warning.
+
+I've spent a lot of time looking at missing data, and so I wrote two R packages to help explore data, and missing data: [{visdat}](https://docs.ropensci.org/visdat/), and [{naniar}](https://naniar.njtierney.com/).
+
+A plot that I think is worthwhile showing is the `vis_miss()` plot from `{visdat}`:
+
+```{r}
+library(visdat)
+vis_miss(oceanbuoys)
+```
+
+This shows the overall missingness in the dataset.
+
+We come back to missing data properly in @sec-shape, where we draw those rows instead of throwing them away. For now, just know that they are missing.
+
+<!-- NOTE: UP TO HERE -->
+
+### Colour
+
+```{r}
+#| label: fig-rebuilt
+#| warning: false
+#| fig-alt: |
+#|   The scatterplot with points coloured by year, showing two separate
+#|   clusters for 1993 and 1997.
+#| fig-cap: "Mapping year onto colour. The gap becomes a story."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    colour = factor(year)
+  )
+) +
+  geom_point(alpha = 0.6)
+```
+
+One extra aesthetic, and the plot went from a shrug to a finding.
+
+::: {.callout-note title="Your Turn"}
+
+Build a plot up the same way, one piece at a time. Run each line before you add
+the next, so you can see what each part contributes.
+
+1. `ggplot(oceanbuoys)`
+2. Add `aes(x = humidity, y = air_temp_c)`
+3. Add `geom_point()`
+4. Now add `colour = factor(year)` to the `aes()`
+
+What does the year do to this plot? Is it as dramatic as it was for sea
+temperature?
+
+:::
+
+## Mapping more variables
+
+Position is not the only channel available. There are several, and you map a
+variable onto one the same way every time, inside `aes()`.
+
+Let's try shape.
+
+```{r}
+#| label: fig-shape
+#| warning: false
+#| fig-alt: |
+#|   Scatterplot where 1993 readings are circles and 1997 readings are
+#|   triangles.
+#| fig-cap: "Year mapped onto shape instead of colour."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    shape = factor(year)
+  )
+) +
+  geom_point(alpha = 0.6)
+```
+
+It works, and I think it is clearly worse than the colour version.
+
+The two groups are separated well enough here that you can still see them, but
+you are now doing shape recognition instead of colour recognition, and shape is
+slower. Try the same thing with five groups and it falls apart completely.
+
+Now let's try size.
+
+```{r}
+#| label: fig-size
+#| warning: false
+#| fig-alt: |
+#|   Scatterplot where point size varies with humidity, producing a cluttered
+#|   overlapping mess.
+#| fig-cap: "Humidity mapped onto size. This is not a good plot."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    size = humidity
+  )
+) +
+  geom_point(alpha = 0.4)
+```
+
+Hmm.
+
+There is information in there, technically. But the big points are covering the
+small ones, the sizes are hard to compare unless they happen to be next to each
+other, and the whole thing is harder to read than the plot we started with.
+
+Size is nearly always worse than people expect. I reckon that is because it
+looks like it comes for free, when in fact it costs you the thing that made the
+plot readable in the first place.
+
+**The channels are not equal.** Position is the best one by a long way, which is
+why x and y do the heavy lifting in almost every good plot. Colour is a strong
+second for a small number of groups. Shape works for a few categories. Size is
+a last resort.
+
+We come back to this properly in @sec-eye, where choosing between channels
+becomes the whole question.
+
+::: {.callout-note title="Your Turn"}
+
+1. Make a scatterplot of `wind_ew` against `wind_ns`, coloured by year.
+2. Now map `sea_temp_c` onto colour instead. What is different about the legend?
+3. Try mapping `year` onto colour **without** wrapping it in `factor()`. What
+   happens, and why do you think that is?
+
+:::
+
+## Inside and outside `aes()`
+
+This one catches everybody, and it caught me for an embarrassingly long time.
+
+Say you want blue points. Reasonable enough. So you write this.
+
+```{r}
+#| label: fig-bluebug
+#| warning: false
+#| fig-alt: |
+#|   Scatterplot with salmon-coloured points and a legend titled "colour" with
+#|   a single entry labelled "blue".
+#| fig-cap: "Asking for blue. Getting salmon, and a legend."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    colour = "blue"
+  )
+) +
+  geom_point()
+```
+
+The points are salmon, and there is a legend with a single entry, labelled
+"blue".
+
+So what happened?
+
+Everything inside `aes()` is a **mapping**. You are saying "take this variable
+and use it to decide the colour", so ggplot2 did exactly that. It took the value
+`"blue"`, treated it as a variable with one single category, and gave that
+category the first colour from its default palette, which happens to be salmon.
+
+The legend is the real giveaway here. ggplot2 built one because it thought you
+were mapping something, and legends are what you get when you map.
+
+If you want to **set** a colour rather than map one, it goes outside `aes()`,
+in the geom.
+
+```{r}
+#| label: fig-bluefixed
+#| warning: false
+#| fig-alt: Scatterplot with blue points and no legend.
+#| fig-cap: "Setting the colour instead of mapping it."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point(colour = "blue")
+```
+
+Blue points, and no legend at all, because nothing was mapped.
+
+::: {.callout-important title="This will bite you"}
+
+The rule is short, and it is worth memorising.
+
+**Inside `aes()` maps a variable. Outside `aes()` sets a value.**
+
+If you get an unexpected legend, you have accidentally mapped something. If you
+get an unexpected colour, look at which side of the bracket it is sitting on.
+
+:::
+
+::: {.callout-note title="Your Turn"}
+
+1. Make the points in your wind plot dark green and slightly transparent.
+2. Now deliberately put `colour = "darkgreen"` inside `aes()` and look at what
+   you get.
+3. `size = 3` and `alpha = 0.5` follow exactly the same rule. Try setting each
+   of them in both places.
+
+:::
+
+## Layers
+
+The `+` is doing real work, and it's worth being explicit about what.
+
+Each thing you add with `+` is a **layer**, and layers draw on top of each other
+in the order you write them. So let's add a second one.
+
+```{r}
+#| label: fig-smooth
+#| message: false
+#| warning: false
+#| fig-alt: |
+#|   Scatterplot coloured by year with a separate fitted trend line running
+#|   through each of the two clusters.
+#| fig-cap: "Two layers. Points, then a smooth on top."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    colour = factor(year)
+  )
+) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm")
+```
+
+Two trend lines, one per year.
+
+I never told `geom_smooth()` about the years. It inherited the whole `aes()`
+from the `ggplot()` call, including the colour mapping, and a colour mapping
+splits the data into groups. So it fitted one line per group.
+
+That inheritance is the useful default most of the time. When you do not want
+it, give the layer its own `aes()` and it will use that one instead.
+
+```{r}
+#| label: fig-smooth-override
+#| message: false
+#| warning: false
+#| fig-alt: |
+#|   The same scatterplot, but with a single black trend line running across
+#|   both clusters instead of one line per year.
+#| fig-cap: "Overriding the inherited mapping for one layer only."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point(aes(colour = factor(year)), alpha = 0.4) +
+  geom_smooth(method = "lm", colour = "black")
+```
+
+Now the colour mapping lives on the points, so the smooth doesn't see it, and
+you get one line across everything.
+
+Those two plots say quite different things, and the only difference is where the
+`aes()` sits. Worth remembering when a smooth does something you didn't expect.
+
+::: {.callout-note title="Your Turn"}
+
+1. Add `geom_smooth()` to your humidity plot.
+2. Swap the order of `geom_point()` and `geom_smooth()`. Can you see the
+   difference? Look closely at where the lines and points overlap.
+3. Try `geom_smooth(se = FALSE)`. What went away?
+
+:::
+
+## To summarise
+
+Three things to take out of this chapter.
+
+1. **A ggplot is data, aesthetics, and a geom, glued together with `+`.**
+   Everything else is detail hanging off those three.
+2. **Inside `aes()` maps a variable, outside `aes()` sets a value.** An
+   unexpected legend means you mapped something by accident.
+3. **The channels are not equal.** Position first, then colour, then shape, and
+   size only when you have run out of better ideas.
+
+And one habit, which is the one I actually care about.
+
+When a plot surprises you, do not reach for a different example to copy. Ask
+which of the seven pieces is doing something you did not ask it to do. Nearly
+every ggplot2 problem I have ever had turned out to be one piece behaving
+exactly as documented, in a way I had not thought about.
+
+Next up is the shape of your data, which is where most of the remaining
+surprises come from.
+
+
+```{r}
+#| echo: false
+#| eval: false
+# example nicer last plot
+library(marquee)
+
+# RColorBrewer::brewer.pal(name = "Dark2", n = 3) |> scales::show_col()
+plot_cols <- RColorBrewer::brewer.pal(name = "Dark2", n = 3) |> 
+  as.list() |>
+  setNames(c("green", "orange", "purple"))
+
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    colour = factor(year)
+  )
+) +
+  geom_point(alpha = 0.6) +
+  scale_colour_brewer(palette = "Dark2") +
+  labs(
+    title = "Sea and air temperature from buoys in the tropical Pacific",
+    x = "Air Temp (C)",
+    y = "Sea Temp (C)",
+    colour = "Year"
+  ) +
+  annotate(
+    x = 24.5,
+    y = 22.5,
+    geom = "text",
+    colour = plot_cols$green,
+    size = 15,
+    label = "1997",
+    size.unit = "pt"
+  ) +
+  annotate(
+    x = 26.5,
+    y = 29.5,
+    geom = "text",
+    colour = plot_cols$orange,
+    size = 15,
+    label = "1993",
+    size.unit = "pt"
+  ) +
+  theme(legend.position = "none",
+        aspect.ratio = 1/1.618)
+```
+

@@ -1,27 +1,88 @@
-project: 
+project:
   type: book
   output-dir: docs
+
+# Applied to every chapter. linkate collects each chapter's links and lists
+# them at the end. Set here rather than per-chapter so they cannot drift.
+filters:
+  - linkate
+  # The chapter overview box. HTML gets it from chapter-overview.scss;
+  # this is the LaTeX half, and it is a no-op in every other format.
+  - overview-box.lua
 
 book:
   title: "Making Better Graphs"
   author: "Nicholas Tierney"
   site-url: https://better-vis.njtierney.com
-  repo-url: https://https://github.com/njtierney/better-vis
+  repo-url: https://github.com/njtierney/better-vis
   repo-branch: main
   repo-actions: [edit, issue]
   date: "2026-02-17"
-  page-footer: "Copyright 2026, Nicholas Tierney" 
+  page-footer: "Copyright 2026, Nicholas Tierney"
   page-navigation: true
   search: true
   chapters:
     - "index.qmd"
+    - "setup.qmd"
+    # Two chapters of grammar, then the course turns and every chapter is
+    # named for a design question. Those four questions are the critique
+    # checklist the course hands over at the end, so their order and their
+    # wording are load bearing.
+    # - "anatomy-of-a-ggplot.qmd"
+    # - "shape-of-your-data.qmd"
+    # - "what-gets-computed.qmd"
+    # - "what-am-i-comparing.qmd"
+    # - "whats-in-the-way.qmd"
+    # - "where-should-the-eye-go.qmd"
+    # - "making-it-land.qmd"
+  appendices:
+    # - "appendix-just-enough-dplyr.qmd"
+    # - "appendix-beyond-the-static-plot.qmd"
+
+# Only `##` and above get a number. Set 4 Aug 2026: the review section in
+# chapter 3 nests named moves under named passes, and Quarto's own numbering
+# on top of that gave headings like "3.5.5 5. Review the comments".
+number-depth: 2
 
 format:
   html:
-    theme: 
+    theme:
       - cosmo
-    code-background: true
+      - measured/_measured-palette.scss    # Dark2 colours
+      - measured/_measured-structure.scss  # code blocks, callout shape
+      - measured/_measured-house.scss      # what each callout type means
+      - measured/measured-legible.scss     # Atkinson Hyperlegible + Fira Code
+      - book-grid.scss                     # book column is narrower than a website
+      - chapter-overview.scss              # the box each chapter opens with
     code-copy: true
-    code-overflow: wrap
+    code-line-numbers: true
     toc: true
-
+    # `code-overflow: wrap` is deliberately NOT set. measured sizes blocks
+    # to 80 characters and scrolls beyond that; wrapping instead would
+    # destroy the indentation that shows the shape of a pipeline.
+  pdf:
+    documentclass: scrbook
+    classoption: [a4paper]
+    include-in-header: pdf-preamble.tex
+    keep-tex: true
+    # The mono font needs box-drawing glyphs. The file trees in chapter 1 use
+    # U+2500, U+251C, U+2514 and U+2502, and a font without them drops every
+    # one silently, leaving an indented list of names with no structure.
+    monofont: "Fira Code"
+    # The margin is the point of this layout. Figure captions go out there,
+    # and what is left is room to write on a printed page.
+    #
+    # `reference-location: margin` would put footnotes out there too, and it
+    # is deliberately NOT set: on this project it makes Quarto's own filter
+    # die with "attempt to get length of a Block value". Narrowed to that one
+    # option - every other margin setting is fine - but it does not reproduce
+    # in a minimal book, so the cause is still unknown. The book has four
+    # footnotes in total, so this costs almost nothing.
+    cap-location: margin
+    geometry:
+      - left=2.2cm
+      - right=7cm
+      - top=2.5cm
+      - bottom=2.5cm
+      - marginparwidth=5.2cm
+      - marginparsep=0.6cm

@@ -4,19 +4,15 @@
 
 - Basic R programming experience
 - No familiarity with ggplot2 required
+- Some dplyr is handy, but there is an appendix if you want it
 
 **Learning outcomes**
 
-- Apply the grammar of graphics
-- Use different geoms and aesthetics
-- Choose the right graphic for the right data type
-- Use facets to explore subsets
-- Apply principles of plot hierarchy and proximity
-- Understand the fundamentals of tidy data
-- Link tidy data with ggplot2
-- Polish graphics for publication with labels, themes, colours, and legends
-- Save ggplots as high quality images
-- Use ggplot2 extensions such as patchwork, marquee, and ggrepel
-- Apply techniques to improve clarity (overplotting, faceting, highlighting, colour)
-- Identify and avoid common pitfalls
-- Critique graphics using principles such as data\:ink ratio and hierarchy
+- Build a plot from the grammar of graphics, rather than copying an example
+- Get your data into the shape ggplot2 needs, and diagnose a plot that came out wrong
+- Know what a geom computes before it draws, and control it with scales and coords
+- Arrange a plot around the comparison you actually care about, using facets and position
+- Strip out what is in the way, and know what your summary is hiding
+- Direct a reader's attention with order, colour, and contrast, in a way that works for colourblind readers
+- Polish a plot with labels, themes, and alt text, and save it so it looks the same outside RStudio
+- Critique any graph, including your own, with four questions
