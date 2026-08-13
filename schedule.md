@@ -2,7 +2,7 @@
 
 ## Anatomy of a ggplot
 
-*`aes()`, geoms, layers*
+**`aes()`, geoms, layers**
 
 - Taking a finished plot apart
 - The seven pieces of the grammar
@@ -13,7 +13,7 @@
 
 ## The shape of your data
 
-*tidy data, `pivot_longer()`, `group`*
+**tidy data, `pivot_longer()`, `separate_\*()`**
 
 - What shape ggplot2 expects
 - Reshaping with `pivot_longer()` and `pivot_wider()`
@@ -22,7 +22,7 @@
 
 ## What gets computed
 
-*`geom_bar()` vs `geom_col()`, binwidths, scales, coords*
+**`geom_bar()` vs `geom_col()`, binwidths, scales, coords**
 
 - Geoms that count for you: `geom_bar()` versus `geom_col()`
 - Geoms that bin for you: histograms, binwidths, bins
@@ -31,7 +31,7 @@
 
 ## What am I comparing?
 
-*`facet_wrap()`, `facet_grid()`, position adjustments*
+**`facet_wrap()`, `facet_grid()`, position adjustments**
 
 - Why a plot can hold all your data and answer nothing
 - Small multiples with `facet_wrap()` and `facet_grid()`
@@ -42,7 +42,7 @@
 
 ## What's in the way?
 
-*data:ink, `alpha`, `geom_hex()`, gghighlight, raincloud plots*
+**data:ink, `alpha`, `geom_hex()`, gghighlight, raincloud plots**
 
 - The data:ink ratio, and how far to take it
 - Overplotting: `alpha`, jittering, `geom_hex()`
@@ -53,7 +53,7 @@
 
 ## Where should the eye go?
 
-*`fct_reorder()`, colour palettes, colourblind safety*
+**`fct_reorder()`, colour palettes, colourblind safety**
 
 - Visual hierarchy, and what a reader looks at first
 - Ordering with `fct_reorder()`, `fct_infreq()`, and `fct_rev()`
@@ -64,7 +64,7 @@
 
 ## Making it land
 
-*`labs()`, themes, patchwork, `ggsave()`*
+**`labs()`, themes, patchwork, `ggsave()`**
 
 - When to start polishing
 - Labels with `labs()`, and titles that state the finding

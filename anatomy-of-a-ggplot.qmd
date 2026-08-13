@@ -1,5 +1,7 @@
 # Anatomy of a ggplot {#sec-anatomy}
 
+![](images/sketches/sketch-anatomy.png)
+
 You can get really far with ggplot2 by copying an example, changing the variable names, and a bit of use of an LLM.
 
 One of the challenges with this, is that you might not have internalised the mental model of how ggplot plots are built. The system is rich, and built on a great foundation of theory that help you think about both how to build your data for data analysis, and how to then present it in a plot. 
@@ -28,6 +30,7 @@ This chapter is about the underlying features of ggplot2. We will take plots, te
 - A session of RStudio open
 - naniar package installed
 - tidyverse package installed
+- Something to draw on, and something to draw with
 
 ```{r}
 #| label: setup
@@ -36,6 +39,7 @@ This chapter is about the underlying features of ggplot2. We will take plots, te
 library(ggplot2)
 library(naniar)
 library(dplyr)
+library(tidyr)
 ```
 
 :::
@@ -200,7 +204,7 @@ Look at @fig-elnino and answer these without running any code.
 
 I think this is almost always a useful exercise, but it is especially really useful when you are starting out with crafting data visualisations, and especially so with ggplot2.
 
-Doing these kinds of sketches is something that [Nicola Rennie]() promotes in her book, [The art of data visualisation with ggplot2](https://nrennie.rbind.io/art-of-viz/). It is free to read online, and is a great read, and goes into more advanced concepts than this book.
+Doing these kinds of sketches is something that [Nicola Rennie](https://nrennie.rbind.io/) promotes in her book, [The art of data visualisation with ggplot2](https://nrennie.rbind.io/art-of-viz/). It is free to read online, and is a great read, and goes into more advanced concepts than this book.
 
 The sketches don't have to be perfect! They can just represent your intentions. I also find it really useful because it gets you to focus on how your graphic links back to your data.
 
@@ -212,15 +216,161 @@ Let's practice doing some sketches of data based on a few snippets of data.
 
 I'll show my drawings of a couple of these, and you can then practice on some other data.
 
-<!-- NOTE: up to here: -->
+### Sketching out data based on feel
+
+Here are six rows of `oceanbuoys`, and two of its columns.
+
+```{r}
+#| label: sketch-scatter-data
+#| echo: false
+set.seed(2026-08-13)
+oceanbuoys |>
+  drop_na() |> 
+  slice_sample(n = 6) |> 
+  select(air_temp_c, sea_temp_c) |> 
+  knitr::kable()
+```
+
+Have a look at those numbers before you read on. Where does each row go?
+
+Here's what I do. I draw two axes and label them, air temperature across and
+sea temperature up. Then having a look at the numbers, I just do a rough sketch of the kind of plot I want to draw.
+
+![My sketch of that data.](images/sketches/sketch-scatter.png){#fig-sketch-scatter fig-alt="A hand-drawn sketch of a scatterplot. Two axes are labelled, air temperature across the bottom and sea temperature up the side."}
+
+It took about thirty seconds. I like it. It isn't the prettiest, but I know what I want to draw:
+
+- air temperature on x axis
+- sea temp on y axis
+- one mark per row. 
+
+That's data, aesthetics, and a geom.
+
+The code says the same thing:
+
+```{r}
+#| label: fig-sketch-scatter-code
+#| warning: false
+#| fig-alt: |
+#|   Scatterplot of sea temperature against air temperature, with all 736
+#|   readings drawn as black points in two clusters.
+#| fig-cap: "The same sketch, with all 736 rows instead of six."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point()
+```
+
+I sketched the rows and ggplot2 drew all of them, so the plot is a lot denser. But the two clumps I drew are in the plot, and I found them by hand before I wrote a
+line of code.
+
+That's the bit I want you to notice.
+
+### One column, and a lot of rows
+
+Now a different snippet. One column this time.
+
+```{r}
+#| label: sketch-hist-data
+#| echo: false
+oceanbuoys |>
+  slice(1:8) |>
+  select(humidity) |>
+  knitr::kable()
+```
+
+How would you draw this? What would you draw? What do you call this? You can't draw a scatterplot!
+
+So the mark has to change. Instead of drawing each row, I draw the shape of
+them, which means how many readings land in each slice of the range.
+
+![My sketch of the humidity readings.](images/sketches/sketch-histogram.png){#fig-sketch-histogram fig-alt="A hand-drawn sketch of a histogram. Humidity runs along the bottom axis from about 75 to about 80, count runs up the side, and a row of bars of uneven height sits on the axis forming a single hump."}
+
+I don't know the heights. That's fine, I am not trying to know the heights.
+
+Here's the plot:
+
+```{r}
+#| label: fig-sketch-hist-code
+#| message: false
+#| warning: false
+#| fig-alt: |
+#|   Histogram of humidity. The bars run from about 72 to about 95, with a
+#|   single peak around 87 and a long tail to the left.
+#| fig-cap: "Humidity for all 736 readings."
+ggplot(
+  oceanbuoys,
+  aes(x = humidity)
+) +
+  geom_histogram()
+```
+
+My sketch got the mark right and the axis wrong.
+
+The eight rows I looked at all sit between 75 and 80, so that's the range I
+drew. The full data runs from 71.6 up to 94.8, and it piles up near 87, which
+is off the end of my sketch entirely.
+
+I like that this happened, and I have left the drawing as it was. A snippet tells
+you what kind of plot you want. It does not tell you the range, and it will
+happily mislead you about it if you let it.
+
+::: {.callout-note title="Your Turn"}
+
+Three snippets. Sketch each one before you write any code, then write the code
+and see how close you got.
+
+**1.** Sea temperature, and the latitude of the buoy that recorded it.
+
+```{r}
+#| label: turn-lat-data
+#| echo: false
+oceanbuoys |>
+  slice(1, 150, 300, 420, 560, 700) |>
+  select(latitude, sea_temp_c) |>
+  knitr::kable()
+```
+
+**2.** The two wind columns, and the year.
+
+```{r}
+#| label: turn-wind-data
+#| echo: false
+oceanbuoys |>
+  slice(1, 150, 300, 420, 560, 700) |>
+  select(wind_ew, wind_ns, year) |>
+  knitr::kable()
+```
+
+**3.** Four numeric columns, and you have two axes.
+
+```{r}
+#| label: turn-four-data
+#| echo: false
+oceanbuoys |>
+  slice(1, 150, 300, 420, 560, 700) |>
+  select(air_temp_c, sea_temp_c, humidity, wind_ew) |>
+  knitr::kable()
+```
+
+Which two columns go on the axes, and what happens to the other two? There's no
+right answer here. But whatever you leave out, you are deciding it doesn't
+matter for the question you are asking, so it is worth knowing what the
+question is.
+
+:::
 
 ## The components of the grammar of graphics
 
 The grammar of graphics is an idea from
-[Leland Wilkinson](https://en.wikipedia.org/wiki/Leland_Wilkinson), and [ggplot2]()
+[Leland Wilkinson](https://en.wikipedia.org/wiki/Leland_Wilkinson), and [ggplot2](https://ggplot2.tidyverse.org/)
 is [Hadley Wickham](https://hadley.nz/)'s implementation of it. It is described as a grammar, in the sense that you can combine components together to express something complex.
 
-There is more detail to the differences between Wilkinson's grammar of graphics, and the grammar implemented in ggplot2. If you want to learn more about the specific differences, the [ggplot2 book]() describes these, but I also would recommend reading the chapter in [Hadley Wickham's PhD thesis](http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf), which provides other detail, too.
+There is more detail to the differences between Wilkinson's grammar of graphics, and the grammar implemented in ggplot2. If you want to learn more about the specific differences, the [ggplot2 book](https://ggplot2-book.org/) describes these, but I also would recommend reading the chapter in [Hadley Wickham's PhD thesis](http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf), which provides other detail, too.
 
 There are seven parts to the grammar of graphics as implemented in ggplot. I don't know them off by heart, and I don't expect you to. But they do provide a useful outline for the different features we will discuss in this course:
 
@@ -235,6 +385,87 @@ There are seven parts to the grammar of graphics as implemented in ggplot. I don
 In this chapter we focus on: Data, aesthetics, and geoms.
 
 We will come back to this table as we go in the course. But I find that knowing the names of these features of the plot provide useful features of a mental model to focus on and understand.
+
+To give you a visceral sense of some of these features, I would like you to explore plotting another dataset. There are only 9 values, so you should be able to draw these. 
+
+```{r}
+#| echo: false
+pen_short <- penguins |> 
+        as_tibble() |> 
+        select(species, year, bill_len, bill_dep) |> 
+        drop_na() |> 
+        group_by(species, year) |> 
+        slice(1) |> 
+        ungroup()
+
+knitr::kable(pen_short)
+```
+
+
+::: {.callout-note title="Your Turn"}
+
+Sketch!
+
+Here's the data again:
+
+```{r}
+pen_short
+```
+
+
+I want you to draw a rough sketch of the penguins data, as a scatterplot:
+
+- Bill Length (bill_len) on the x axis
+- Bill Depth (bill_dep) on the y axis
+- Each point should be coloured
+
+Some things to consider as you draw:
+
+- You can use symbols for the species if you don't have multiple colour options
+  - How will you know which species is which (you will need a legend!)
+- What should the range of the x axis be?
+- What should the range of the y axis be?
+
+Let's take 5 minutes to do this - I'll draw this too.
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+library(countdown)
+countdown(minutes = 5)
+```
+
+:::
+
+Here's one I prepared earlier:
+
+::: {.callout-note title="My plot" collapse="true"}
+![](images/sketches/sketch-colour-penguins.png)
+:::
+
+Here's what ggplot2 does:
+
+```{r}
+library(ggplot2)
+ggplot(pen_short,
+       aes(x = bill_len,
+           y = bill_dep,
+           colour = species)) + 
+        geom_point(size = 5)
+
+```
+
+(I totally fluked getting the colours the same)
+
+::: {.callout-note title="Your Turn"}
+
+- What did you notice about drawing your plot?
+- Did you notice the extra steps for drawing a legend?
+- The steps for determining the x and y axis?
+
+There are many decisions you need to make when making a plot. I think ggplot really does a great job of breaking down those components in a way that make you think about the data, at the right level of detail.
+
+:::
 
 ## Building a plot back up
 

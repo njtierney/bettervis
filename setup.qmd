@@ -116,7 +116,6 @@ We use the base pipe, `|>`, rather than `%>%` throughout. If you are used to `%>
 
 - **This book** - <https://better-vis.njtierney.com>, and there is a PDF download in the sidebar if you would rather print it or annotate it.
 - **The book's source** - <https://github.com/njtierney/bettervis>. Every page has an "Edit this page" link, which goes straight to the file that made it.
-- **The books exercises** - <https://github.com/njtierney/mbg-exercises>. We will discuss how to "automagically" open this in the course
 
 **If you find a mistake, please tell me.** Every page has a link to open an issue, or you can email me. Errors in teaching material are worth more than errors in almost anything else I write, because thirty people hit them at once. Finding one is a favour, not a complaint.
 
@@ -229,28 +228,25 @@ Installation problems are almost always specific to one machine, and they are mu
 
 One thing that isn't software: **something to draw on, and something to draw with.**
 
-Paper and a pen is perfect. There is nothing to buy.
+Paper and a pen is perfect.
 
-We draw plots by hand a few times during the day, before we build them in ggplot2. I want you to have a picture of what you are aiming at before you start typing, and the quickest way to get one is to draw it badly on a bit of paper.
+We draw plots by hand a few times during lessons, before we build them in ggplot2. I want you to have a picture of what you are aiming at before you start typing, and I have found sketching on paper to be a really effective way to understand what you want in a graphic, and also for you to get a sense of the components of data visualisation. Also, it's fun!
 
-The sketches are rough on purpose. Mine certainly are, and you will see a few of them in this book.
+The sketches are rough on purpose. Mine certainly are! A tablet works too if you would rather. I draw on a reMarkable for class, but I always keep an A2 art sketch pad on my desk for sketches.
 
-A tablet works too if you would rather. I draw on a reMarkable for class, but I always keep an A2 art sketch pad on my desk for sketches.
+<!-- ## Get course exercise materials on your machine {#sec-rbp-exercises} -->
 
-## Get course exercise materials on your machine {#sec-rbp-exercises}
+<!-- :::{.callout-note title="Your Turn"} -->
 
+<!-- Let's download the course exercise - try running this code: -->
 
-:::{.callout-note title="Your Turn"}
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- use_course("njtierney/mbg-exercises") -->
+<!-- ``` -->
 
-Let's download the course exercise - try running this code:
+<!-- Which will prompt you to download the repository, <https://github.com/njtierney/mbg-exercises>, and then open it in an RStudio project. -->
 
-```{r}
-#| eval: false
-use_course("njtierney/mbg-exercises")
-```
+<!-- ::: -->
 
-Which will prompt you to download the repository, <https://github.com/njtierney/mbg-exercises>, and then open it in an RStudio project.
-
-:::
-
-If you have troubles with this (sometimes firewalls can stop you) you can download it from the github page <https://github.com/njtierney/mbg-exercises>.
+<!-- If you have troubles with this (sometimes firewalls can stop you) you can download it from the github page <https://github.com/njtierney/mbg-exercises>. -->
