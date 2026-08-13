@@ -2,28 +2,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicholas Tierney">
-<meta name="dcterms.date" content="2026-02-17">
+<meta name="dcterms.date" content="2026-08-13">
 
 <title>Making Better Graphs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -35,16 +73,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./setup.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b45b7b0fa9169e986df15f1ef60a279c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d186ee71915d1414126d49a598f8905e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-e0b6b96b77ec8933f411bc2e1c5b7ba7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -85,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Making Better Graphs with ggplot2</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -102,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Making Better Graphs</a> 
         <div class="sidebar-tools-main">
-    <a href="https://https://github.com/njtierney/better-vis" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/njtierney/bettervis" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -116,7 +155,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Making Better Graphs with ggplot2</span></span></a>
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup</span></span></a>
   </div>
 </li>
     </ul>
@@ -129,10 +174,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome"><span class="header-section-number">0.1</span> Welcome</a></li>
-  <li><a href="#course-materials" id="toc-course-materials" class="nav-link" data-scroll-target="#course-materials"><span class="header-section-number">0.2</span> Course Materials</a></li>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#course-materials" id="toc-course-materials" class="nav-link" data-scroll-target="#course-materials">Course materials</a></li>
+  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a>
+  <ul class="collapse">
+  <li><a href="#anatomy-of-a-ggplot" id="toc-anatomy-of-a-ggplot" class="nav-link" data-scroll-target="#anatomy-of-a-ggplot">Anatomy of a ggplot</a></li>
+  <li><a href="#the-shape-of-your-data" id="toc-the-shape-of-your-data" class="nav-link" data-scroll-target="#the-shape-of-your-data">The shape of your data</a></li>
+  <li><a href="#what-gets-computed" id="toc-what-gets-computed" class="nav-link" data-scroll-target="#what-gets-computed">What gets computed</a></li>
+  <li><a href="#what-am-i-comparing" id="toc-what-am-i-comparing" class="nav-link" data-scroll-target="#what-am-i-comparing">What am I comparing?</a></li>
+  <li><a href="#whats-in-the-way" id="toc-whats-in-the-way" class="nav-link" data-scroll-target="#whats-in-the-way">What’s in the way?</a></li>
+  <li><a href="#where-should-the-eye-go" id="toc-where-should-the-eye-go" class="nav-link" data-scroll-target="#where-should-the-eye-go">Where should the eye go?</a></li>
+  <li><a href="#making-it-land" id="toc-making-it-land" class="nav-link" data-scroll-target="#making-it-land">Making it land</a></li>
+  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">Appendices</a></li>
+  </ul></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
+  <ul class="collapse">
+  <li>Links</li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://https://github.com/njtierney/better-vis/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://https://github.com/njtierney/better-vis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/njtierney/bettervis/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/njtierney/bettervis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -156,7 +217,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 17, 2026</p>
+      <p class="date">August 13, 2026</p>
     </div>
   </div>
   
@@ -168,15 +229,176 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="welcome"><span class="header-section-number">0.1</span> Welcome</h2>
+<section id="welcome" class="level1 unnumbered">
+<h1 class="unnumbered">Welcome</h1>
 <p>Welcome to Making Better Graphs! This course will help you create clear, effective, and beautiful visualisations using ggplot2.</p>
 </section>
-<section id="course-materials" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="course-materials"><span class="header-section-number">0.2</span> Course Materials</h2>
+<section id="course-materials" class="level1 unnumbered">
+<h1 class="unnumbered">Course materials</h1>
 <p>Materials will be added here as we progress through the course.</p>
+<p><a href="https://better-vis.njtierney.com" class="uri">https://better-vis.njtierney.com</a></p>
+<p><strong>Prerequisites</strong></p>
+<ul>
+<li>Basic R programming experience</li>
+<li>No familiarity with ggplot2 required</li>
+<li>Some dplyr is experience is useful, but we will cover basic usage</li>
+</ul>
+<p><strong>Learning outcomes</strong></p>
+<ul>
+<li>Build a plot from the grammar of graphics, rather than copying an example</li>
+<li>Get your data into the tidy data format ggplot2 needs</li>
+<li>Understand the key ggplot components: geoms, scales, coords, facets</li>
+<li>Understand the impact of comparison in arranging a plot around facets and position</li>
+<li>Make visualisations easier to understand by ordering components effectively</li>
+<li>Make features clearer, and more accessible by using colour and contrast effectively</li>
+<li>Know how to polish a plot with labels, themes, alt text, and captions</li>
+<li>Save high quality images at the resolution you need</li>
+<li>Learn how to critique graphics</li>
+</ul>
+</section>
+<section id="schedule" class="level1">
+<h1>Schedule</h1>
+<section id="anatomy-of-a-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="anatomy-of-a-ggplot">Anatomy of a ggplot</h2>
+<p><em><code>aes()</code>, geoms, layers</em></p>
+<ul>
+<li>Taking a finished plot apart</li>
+<li>The seven pieces of the grammar</li>
+<li>Building a plot up from nothing</li>
+<li>Variables and aesthetics (x, y, colour, shape, size)</li>
+<li>Aesthetics inside <code>aes()</code> versus outside</li>
+<li>Adding layers</li>
+</ul>
+</section>
+<section id="the-shape-of-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-shape-of-your-data">The shape of your data</h2>
+<p><em>tidy data, <code>pivot_longer()</code>, <code>group</code></em></p>
+<ul>
+<li>What shape ggplot2 expects</li>
+<li>Reshaping with <code>pivot_longer()</code> and <code>pivot_wider()</code></li>
+<li>Line graphs, <code>group</code>, and why they come out as a scribble</li>
+<li>Missing values, and the rows ggplot2 quietly drops, with {naniar}</li>
+</ul>
+</section>
+<section id="what-gets-computed" class="level2">
+<h2 class="anchored" data-anchor-id="what-gets-computed">What gets computed</h2>
+<p><em><code>geom_bar()</code> vs <code>geom_col()</code>, binwidths, scales, coords</em></p>
+<ul>
+<li>Geoms that count for you: <code>geom_bar()</code> versus <code>geom_col()</code></li>
+<li>Geoms that bin for you: histograms, binwidths, bins</li>
+<li>Overlaying distributions</li>
+<li>Scales, log scales, and coords</li>
+</ul>
+</section>
+<section id="what-am-i-comparing" class="level2">
+<h2 class="anchored" data-anchor-id="what-am-i-comparing">What am I comparing?</h2>
+<p><em><code>facet_wrap()</code>, <code>facet_grid()</code>, position adjustments</em></p>
+<ul>
+<li>Why a plot can hold all your data and answer nothing</li>
+<li>Small multiples with <code>facet_wrap()</code> and <code>facet_grid()</code></li>
+<li>Proximity: what is adjacent is what gets compared</li>
+<li>Swapping colour for facets, and what that changes</li>
+<li>Position in bar plots (stack, dodge, fill)</li>
+<li>Free scales, and what they cost</li>
+</ul>
+</section>
+<section id="whats-in-the-way" class="level2">
+<h2 class="anchored" data-anchor-id="whats-in-the-way">What’s in the way?</h2>
+<p><em>data:ink, <code>alpha</code>, <code>geom_hex()</code>, gghighlight, raincloud plots</em></p>
+<ul>
+<li>The data:ink ratio, and how far to take it</li>
+<li>Overplotting: <code>alpha</code>, jittering, <code>geom_hex()</code></li>
+<li>Highlighting with gghighlight and labelling with ggrepel</li>
+<li>What summaries hide: Anscombe’s quartet</li>
+<li>Boxplots, and when they mislead</li>
+<li>Showing distribution and data together: half plots, raincloud plots</li>
+</ul>
+</section>
+<section id="where-should-the-eye-go" class="level2">
+<h2 class="anchored" data-anchor-id="where-should-the-eye-go">Where should the eye go?</h2>
+<p><em><code>fct_reorder()</code>, colour palettes, colourblind safety</em></p>
+<ul>
+<li>Visual hierarchy, and what a reader looks at first</li>
+<li>Ordering with <code>fct_reorder()</code>, <code>fct_infreq()</code>, and <code>fct_rev()</code></li>
+<li>Matching the palette to the variable: qualitative, sequential, diverging</li>
+<li>Colourblind-safe colour, with colorspace and viridis</li>
+<li>Aesthetics: <code>fill</code> versus <code>colour</code></li>
+<li>Emphasis by contrast, and direct labelling instead of legends</li>
+</ul>
+</section>
+<section id="making-it-land" class="level2">
+<h2 class="anchored" data-anchor-id="making-it-land">Making it land</h2>
+<p><em><code>labs()</code>, themes, patchwork, <code>ggsave()</code></em></p>
+<ul>
+<li>When to start polishing</li>
+<li>Labels with <code>labs()</code>, and titles that state the finding</li>
+<li>Alt text with <code>labs(alt = )</code></li>
+<li>Customising text with marquee</li>
+<li>Themes, extending them, and writing your own</li>
+<li>Extension themes such as ggthemes and hrbrthemes</li>
+<li>Combining plots with patchwork</li>
+<li>Writing plots to file with <code>ggsave()</code></li>
+<li>Critique: good questions to ask of your plot</li>
+<li>Open practice and Q&amp;A</li>
+</ul>
+</section>
+<section id="appendices" class="level2">
+<h2 class="anchored" data-anchor-id="appendices">Appendices</h2>
+<ul>
+<li>Just enough dplyr</li>
+<li>Interactive graphics: gganimate and ggiraph</li>
+</ul>
+</section>
+</section>
+<section id="packages" class="level1">
+<h1>Packages</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-label="1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-label="2"></a>  <span class="st">"tidyverse"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-label="3"></a>  <span class="st">"naniar"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-label="4"></a>  <span class="st">"colorspace"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-label="5"></a>  <span class="st">"viridis"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-label="6"></a>  <span class="st">"hexbin"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-label="7"></a>  <span class="st">"gghighlight"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-label="8"></a>  <span class="st">"ggrepel"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-label="9"></a>  <span class="st">"ggrain"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-label="10"></a>  <span class="st">"patchwork"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-label="11"></a>  <span class="st">"marquee"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-label="12"></a>  <span class="st">"ggthemes"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-label="13"></a>  <span class="st">"hrbrthemes"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-label="14"></a>  <span class="st">"DAAG"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-label="15"></a>  <span class="st">"gapminder"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-label="16"></a>  <span class="st">"ozbabynames"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-label="17"></a>  <span class="st">"tsibbledata"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-label="18"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Optional, for the appendix:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-label="1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"gganimate"</span>, <span class="st">"ggiraph"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<ul>
+<li><a href="https://ggplot2-book.org/">ggplot2 book</a> by Hadley Wickham</li>
+<li><a href="https://r4ds.hadley.nz/">R for Data Science</a> by Hadley Wickham, Mine Çetinkaya-Rundel and Garrett Grolemund</li>
+<li><a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visualization</a> by Claus Wilke</li>
+<li><a href="https://socviz.co/">Data Visualization: A Practical Introduction</a> by Kieran Healy</li>
+<li><a href="https://r-graph-gallery.com/">R Graph Gallery</a></li>
+<li><a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extension gallery</a></li>
+<li><a href="https://openscapes.org/blog/2020-10-12-tidy-data/">Tidy Data for Reproducibility</a> blog post</li>
+</ul>
 
 
+<section class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="">Links</h2>
+<ul>
+<li><a href="https://better-vis.njtierney.com" class="uri">https://better-vis.njtierney.com</a></li>
+<li><a href="https://ggplot2-book.org/">ggplot2 book</a></li>
+<li><a href="https://r4ds.hadley.nz/">R for Data Science</a></li>
+<li><a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visualization</a></li>
+<li><a href="https://socviz.co/">Data Visualization: A Practical Introduction</a></li>
+<li><a href="https://r-graph-gallery.com/">R Graph Gallery</a></li>
+<li><a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extension gallery</a></li>
+<li><a href="https://openscapes.org/blog/2020-10-12-tidy-data/">Tidy Data for Reproducibility</a></li>
+</ul>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -580,6 +802,15 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./setup.html" class="pagination-link" aria-label="Setup">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -588,7 +819,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2026, Nicholas Tierney</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://https://github.com/njtierney/better-vis/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://https://github.com/njtierney/better-vis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/njtierney/bettervis/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/njtierney/bettervis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
