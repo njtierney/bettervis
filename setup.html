@@ -188,7 +188,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#if-something-will-not-install" id="toc-if-something-will-not-install" class="nav-link" data-scroll-target="#if-something-will-not-install">If something will not install</a></li>
   </ul></li>
   <li><a href="#what-to-bring" id="toc-what-to-bring" class="nav-link" data-scroll-target="#what-to-bring"><span class="header-section-number">1.3</span> What to bring</a></li>
-  <li><a href="#sec-rbp-exercises" id="toc-sec-rbp-exercises" class="nav-link" data-scroll-target="#sec-rbp-exercises"><span class="header-section-number">1.4</span> Get course exercise materials on your machine</a></li>
   <li>Links</li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/njtierney/bettervis/edit/main/setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/njtierney/bettervis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -338,7 +337,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>This book</strong> - <a href="https://better-vis.njtierney.com" class="uri">https://better-vis.njtierney.com</a>, and there is a PDF download in the sidebar if you would rather print it or annotate it.</li>
 <li><strong>The book’s source</strong> - <a href="https://github.com/njtierney/bettervis" class="uri">https://github.com/njtierney/bettervis</a>. Every page has an “Edit this page” link, which goes straight to the file that made it.</li>
-<li><strong>The books exercises</strong> - <a href="https://github.com/njtierney/mbg-exercises" class="uri">https://github.com/njtierney/mbg-exercises</a>. We will discuss how to “automagically” open this in the course</li>
 </ul>
 <p><strong>If you find a mistake, please tell me.</strong> Every page has a link to open an issue, or you can email me. Errors in teaching material are worth more than errors in almost anything else I write, because thirty people hit them at once. Finding one is a favour, not a complaint.</p>
 <!-- Download link and where to put it. Every chapter's Your Turn points here. -->
@@ -454,31 +452,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-to-bring" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="what-to-bring"><span class="header-section-number">1.3</span> What to bring</h2>
 <p>One thing that isn’t software: <strong>something to draw on, and something to draw with.</strong></p>
-<p>Paper and a pen is perfect. There is nothing to buy.</p>
-<p>We draw plots by hand a few times during the day, before we build them in ggplot2. I want you to have a picture of what you are aiming at before you start typing, and the quickest way to get one is to draw it badly on a bit of paper.</p>
-<p>The sketches are rough on purpose. Mine certainly are, and you will see a few of them in this book.</p>
-<p>A tablet works too if you would rather. I draw on a reMarkable for class, but I always keep an A2 art sketch pad on my desk for sketches.</p>
-</section>
-<section id="sec-rbp-exercises" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="sec-rbp-exercises"><span class="header-section-number">1.4</span> Get course exercise materials on your machine</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Your Turn">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Let’s download the course exercise - try running this code:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a><span class="fu">use_course</span>(<span class="st">"njtierney/mbg-exercises"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Which will prompt you to download the repository, <a href="https://github.com/njtierney/mbg-exercises" class="uri">https://github.com/njtierney/mbg-exercises</a>, and then open it in an RStudio project.</p>
-</div>
-</div>
-<p>If you have troubles with this (sometimes firewalls can stop you) you can download it from the github page <a href="https://github.com/njtierney/mbg-exercises" class="uri">https://github.com/njtierney/mbg-exercises</a>.</p>
+<p>Paper and a pen is perfect.</p>
+<p>We draw plots by hand a few times during lessons, before we build them in ggplot2. I want you to have a picture of what you are aiming at before you start typing, and I have found sketching on paper to be a really effective way to understand what you want in a graphic, and also for you to get a sense of the components of data visualisation. Also, it’s fun!</p>
+<p>The sketches are rough on purpose. Mine certainly are! A tablet works too if you would rather. I draw on a reMarkable for class, but I always keep an A2 art sketch pad on my desk for sketches.</p>
+<!-- ## Get course exercise materials on your machine {#sec-rbp-exercises} -->
+<!-- :::{.callout-note title="Your Turn"} -->
+<!-- Let's download the course exercise - try running this code: -->
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- use_course("njtierney/mbg-exercises") -->
+<!-- ``` -->
+<!-- Which will prompt you to download the repository, <https://github.com/njtierney/mbg-exercises>, and then open it in an RStudio project. -->
+<!-- ::: -->
+<!-- If you have troubles with this (sometimes firewalls can stop you) you can download it from the github page <https://github.com/njtierney/mbg-exercises>. -->
 
 
 </section>
@@ -489,7 +475,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://quarto.org/docs/authoring/callouts.html">Quarto: callout blocks</a></li>
 <li><a href="https://better-vis.njtierney.com" class="uri">https://better-vis.njtierney.com</a></li>
 <li><a href="https://github.com/njtierney/bettervis" class="uri">https://github.com/njtierney/bettervis</a></li>
-<li><a href="https://github.com/njtierney/mbg-exercises" class="uri">https://github.com/njtierney/mbg-exercises</a></li>
 <li><a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
 <li><a href="https://posit.co/download/rstudio-desktop/">RStudio</a></li>
 <li><a href="https://positron.posit.co/">Positron</a></li>
