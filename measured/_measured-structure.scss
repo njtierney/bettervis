@@ -301,6 +301,36 @@ pre { line-height: 1.5; }
 .callout .callout-body            { padding: 0.9rem; }
 
 
+// ── Countdown timers in callouts ─────────────────────────────
+// {countdown} ships `.countdown { position: absolute }` with `right: 0;
+// bottom: 0`. That is right for slides and wrong here: nothing between
+// the timer and the page is positioned, so an absolute timer skips the
+// callout it was written in and pins itself to the corner of the
+// viewport.
+//
+// This is the same thing countdown's own `.inline` class does, applied
+// to every timer in a callout so a chapter can just call
+// `countdown(minutes = 5)`. Two classes against countdown's one, so it
+// wins on specificity whichever stylesheet loads first.
+//
+// `width: max-content` is not optional. Without it the timer stretches
+// the full width of the callout body and the digits swim in the middle
+// of a very wide green box.
+//
+// The `right`/`bottom` countdown writes into the element's own `style`
+// survive this and are harmless: on a relative box they are offsets of
+// zero, and no stylesheet can beat an inline style anyway.
+.callout .countdown {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+
+  // countdown reads this with a 3rem fallback, which is sized for a
+  // slide seen from the back of a room, not a paragraph.
+  --countdown-font-size: 2rem;
+}
+
+
 // ── Short blocks are not numbered ────────────────────────────
 // On a one or two line block the number is decoration. The value of
 // numbering is being able to say "look at line 12", which needs enough

@@ -74,13 +74,13 @@
 - Extension themes such as ggthemes and hrbrthemes
 - Combining plots with patchwork
 - Writing plots to file with `ggsave()`
-- Critique: the four questions
+- Critique: good questions to ask of your plot
 - Open practice and Q&A
 
 ## Appendices
 
 - Just enough dplyr
-- Beyond the static plot: gganimate and ggiraph
+- Interactive graphics: gganimate and ggiraph
 
 # Packages
 

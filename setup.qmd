@@ -1,9 +1,10 @@
 # Setup {#sec-setup}
 
-Two things before we start: 
+Three things before we start:
 
-1. How this book is put together, and 
-2. What to install. 
+1. How this book is put together,
+2. What to install, and
+3. What to bring.
 
 The first part takes two minutes to read and will make the rest of the course easier to follow.
 
@@ -180,19 +181,24 @@ It might will take a few minutes:
 ```r
 install.packages(c(
   "tidyverse",
-  "here",
-  "marquee",
-  "lintr",
-  "styler",
-  "spelling",
   "usethis",
-  "reprex",
-  "goodpractice",
-  "sf",
-  "pak",
-  "sp"
+  "naniar",
+  "visdat",
+  "colorspace",
+  "viridis",
+  "hexbin",
+  "gghighlight",
+  "ggrepel",
+  "ggrain",
+  "patchwork",
+  "marquee",
+  "ggthemes",
+  "hrbrthemes",
+  "DAAG",
+  "gapminder",
+  "ozbabynames",
+  "tsibbledata"
 ))
-
 ```
 
 ### Checking it all worked
@@ -201,9 +207,11 @@ Run this in R. It should print `TRUE` for everything.
 
 ```r
 pkgs <- c(
-  "tidyverse", "here", "lintr", "styler",
-  "spelling", "usethis", "reprex",
-  "flir", "goodpractice", "sf", "sp"
+  "tidyverse", "usethis", "naniar", "visdat",
+  "colorspace", "viridis", "hexbin", "gghighlight",
+  "ggrepel", "ggrain", "patchwork", "marquee",
+  "ggthemes", "hrbrthemes", "DAAG", "gapminder",
+  "ozbabynames", "tsibbledata"
 )
 
 sapply(pkgs, requireNamespace, quietly = TRUE)
@@ -216,6 +224,18 @@ If both of those look right, you are set.
 Please do send me an email before the session rather than fighting with it on your own.
 
 Installation problems are almost always specific to one machine, and they are much faster to solve with two people looking at them. They are also, genuinely, not a reflection on you. Every one of us has lost an afternoon to a package that would not build. Ask me for some horror stories.
+
+## What to bring
+
+One thing that isn't software: **something to draw on, and something to draw with.**
+
+Paper and a pen is perfect. There is nothing to buy.
+
+We draw plots by hand a few times during the day, before we build them in ggplot2. I want you to have a picture of what you are aiming at before you start typing, and the quickest way to get one is to draw it badly on a bit of paper.
+
+The sketches are rough on purpose. Mine certainly are, and you will see a few of them in this book.
+
+A tablet works too if you would rather. I draw on a reMarkable for class, but I always keep an A2 art sketch pad on my desk for sketches.
 
 ## Get course exercise materials on your machine {#sec-rbp-exercises}
 
@@ -233,4 +253,4 @@ Which will prompt you to download the repository, <https://github.com/njtierney/
 
 :::
 
-If you have troubles with this (sometimes firewalls can stop you) you can download it from the github page <https://github.com/njtierney/mgp-exercises>.
+If you have troubles with this (sometimes firewalls can stop you) you can download it from the github page <https://github.com/njtierney/mbg-exercises>.

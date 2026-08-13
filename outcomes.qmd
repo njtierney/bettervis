@@ -4,15 +4,16 @@
 
 - Basic R programming experience
 - No familiarity with ggplot2 required
-- Some dplyr is handy, but there is an appendix if you want it
+- Some dplyr is experience is useful, but we will cover basic usage
 
 **Learning outcomes**
 
 - Build a plot from the grammar of graphics, rather than copying an example
-- Get your data into the shape ggplot2 needs, and diagnose a plot that came out wrong
-- Know what a geom computes before it draws, and control it with scales and coords
-- Arrange a plot around the comparison you actually care about, using facets and position
-- Strip out what is in the way, and know what your summary is hiding
-- Direct a reader's attention with order, colour, and contrast, in a way that works for colourblind readers
-- Polish a plot with labels, themes, and alt text, and save it so it looks the same outside RStudio
-- Critique any graph, including your own, with four questions
+- Get your data into the tidy data format ggplot2 needs
+- Understand the key ggplot components: geoms, scales, coords, facets
+- Understand the impact of comparison in arranging a plot around facets and position
+- Make visualisations easier to understand by ordering components effectively
+- Make features clearer, and more accessible by using colour and contrast effectively
+- Know how to polish a plot with labels, themes, alt text, and captions
+- Save high quality images at the resolution you need
+- Learn how to critique graphics
