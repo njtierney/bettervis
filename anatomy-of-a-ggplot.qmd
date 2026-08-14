@@ -2,11 +2,13 @@
 
 ![](images/sketches/sketch-anatomy.png)
 
+This chapter is about the underlying features of ggplot2. 
+
 You can get really far with ggplot2 by copying an example, changing the variable names, and a bit of use of an LLM.
 
-One of the challenges with this, is that you might not have internalised the mental model of how ggplot plots are built. The system is rich, and built on a great foundation of theory that help you think about both how to build your data for data analysis, and how to then present it in a plot. 
+One of the challenges with this, is that you might not have internalised the mental model of how ggplot plots are built. The interface to ggplot2 helps you think about your data, build plots quickly for exploration, but also present finely made graphics.
 
-This chapter is about the underlying features of ggplot2. We will take plots, tease them apart, and put them back together.
+In this chapter we will take plots, tease them apart, and put them back together.
 
 ::: {.overview}
 
@@ -19,8 +21,8 @@ This chapter is about the underlying features of ggplot2. We will take plots, te
 <!-- These map onto the sections below, in order. If you move a section, move its question. -->
 
 - What is this plot telling me, and what is it made of?
-- What are the seven pieces of a ggplot?
-- How do I build one up from nothing?
+- What are the pieces of a ggplot?
+- How do I build a plot up?
 - How do I map a variable onto colour, shape, or size?
 - Why does `colour` inside `aes()` do something different to `colour` outside it?
 - How do I add a second layer?
@@ -28,14 +30,14 @@ This chapter is about the underlying features of ggplot2. We will take plots, te
 **What you need this session**
 
 - A session of RStudio open
-- naniar package installed
-- tidyverse package installed
+- The following packages installed: tidyverse, naniar.
 - Something to draw on, and something to draw with
 
 ```{r}
 #| label: setup
 #| message: false
 #| output: false
+library(countdown)
 library(ggplot2)
 library(naniar)
 library(dplyr)
@@ -47,7 +49,7 @@ library(tidyr)
 
 ## The data
 
-We will be looking at some data from the `naniar` R package: `oceanbuoys` the helpfile tells us the following:
+We will be looking at some data from the `naniar` R package: `oceanbuoys`. The helpfile tells us:
 
 ```r
 ?oceanbuoys
@@ -66,46 +68,211 @@ The data look like the following
   knitr::kable()
 ```
 
-Each row represents recordings for a single oceanbuoy, recording:
+Each row represents recordings for a single oceanbuoy:
 
- - the year it was taken
+ - The year it was taken
  - Latitude and longitude
- - temperature (sea temp and air temp, celcius)
- - humidity (relative humidity)
- - wind (east-west and north-south. Positive indicates blowing towards the former, negative the latter. E.g., positive values in `wind_ew` mean the wind is blowing towards the east, in metres per second).
+ - Temperature (sea temp and air temp, celcius)
+ - Humidity (relative humidity)
+ - Wind (east-west and north-south. Positive indicates blowing towards the former, negative the latter. E.g., positive values in `wind_ew` mean the wind is blowing towards the east, in metres per second).
+ 
 
-## A nice enough plot
+## Practice sketching your plots
+
+I think this is almost always a useful exercise, but it is especially really useful when you are starting out with crafting data visualisations, and especially so with ggplot2.
+
+Doing these kinds of sketches is something that [Nicola Rennie](https://nrennie.rbind.io/) promotes in her book, [The art of data visualisation with ggplot2](https://nrennie.rbind.io/art-of-viz/). It is free to read online, and is a great read, and goes into more advanced concepts than this book.
+
+The sketches don't have to be perfect! They can just represent your intentions. I also find it really useful because it gets you to focus on how your graphic links back to your data.
+
+It also reminds me of the feeling of asking a "good question" in research. Spend time thinking about a good question, and you'll do good work.
+
+Have a vision of what you want to create, then you know what you want to work towards!
+
+Let's practice doing some sketches of data based on a few snippets of data.
+
+I'll show my drawings of a couple of these, and you can then practice on some other data.
+
+
+::: {.callout-note title="Your Turn: Sketching plots"}
+
+Here are 6 rows of `oceanbuoys`, and three of its columns.
+
+```{r}
+#| label: sketch-scatter-data
+#| echo: false
+set.seed(2026-08-13)
+oceanbuoys |>
+  drop_na() |> 
+  group_by(year) |> 
+  slice_sample(n = 3) |> 
+  select(air_temp_c, sea_temp_c) |> 
+  knitr::kable()
+```
+
+I want you to practice drawing this out as a scatterplot:
+
+- For the `oceanbuoys` data
+- air temp on the x axis
+- sea temp on the y axis
+- mark each point by year
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+:::
+
+::: {.callout-note title="My sketching process" collapse="true"}
+
+
+Here's what I do:
+
+- Draw two axes 
+- Label each axis: 
+  - air temperature on the x axis
+  - sea temperature on the y axis. 
+- Sketch the data values as circles on the page.
+
+![My sketch of that data.](images/sketches/sketch-scatter.png){#fig-sketch-scatter fig-alt="A hand-drawn sketch of a scatterplot. Two axes are labelled, air temperature across the bottom and sea temperature up the side."}
+
+:::
+
+Sketching your data isn't the prettiest thing, but the point is that you practice visualising what is in your head, and putting it on the page.
+
+There is something special about this. The better you are at putting these on the page, the easiest it will be to see them in your code. 
+
+## Use ggplot2 to make a plot
 
 > Here's one I prepared earlier.
 
-I've created a data visualisation of this data using ggplot2, let's look at it:
+I've created a data visualisation of this data using ggplot2:
 
 ```{r}
 #| label: fig-elnino
 #| warning: false
+#| echo: false
 #| fig-alt: |
 #|   Scatterplot of sea temperature against air temperature. The points form
-#|   two separate clusters. The 1993 readings sit between 22 and 25 degrees,
-#|   and the 1997 readings sit between 26 and 30 degrees.
+#|   two separate clusters.
 
 ggplot(
   oceanbuoys,
   aes(
     x = air_temp_c,
-    y = sea_temp_c,
-    colour = factor(year)
+    y = sea_temp_c
   )
 ) +
-  geom_point(alpha = 0.6)
+  geom_point()
 ```
 
 Each point is a reading from a buoy floating in the tropical Pacific. 
 
 - The **X axis (horizontal)** is the air temperature
 - the **Y axis (vertical)** is the temperature of the sea underneath it
-- the **colour** is the year the reading was taken. 
 
-Notice two clouds of data points.
+::: {.callout-note title="Your Turn: What do you see?"}
+
+Take a couple of minutes to assess what you see in the plot above.
+
+Answer these questions:
+
+1. How is this different to your sketch?
+2. What do see in the data - what is the story?
+3. Is there something in here that you would want to explore?
+
+:::
+
+## Creating plots in ggplot
+
+OK, let's walk through how to create the plot using ggplot2. Here is the code that produced the above plot:
+
+```{r}
+#| warning: false
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = sea_temp_c)) + 
+  geom_point()
+```
+
+### What is it made of?
+
+Let's take @fig-elnino apart, and take another look at the code
+
+1. We see **data**, `oceanbuoys`, which is from the {naniar} package.
+2. There is a set of instructions saying which column goes where. `air_temp_c`
+across, `sea_temp_c` up, Those live inside `aes()`.
+3. And there is a `+` between them, which is how you glue the parts together.
+4. There is something saying **draw a point for each row**: is `geom_point()`.
+
+```{r}
+library(naniar)
+library(ggplot2)
+ggplot(
+  data = oceanbuoys,      # <1>
+  aes(                    # <2>
+    x = air_temp_c,       # <2>
+    y = sea_temp_c,       # <2>
+  )
+) +                       # <3>
+  geom_point(alpha = 0.6) # <4>
+```
+
+
+::: {.callout-note title="Your Turn"}
+
+Look at @fig-elnino and answer these without running any code.
+
+1. How many rows do you think `oceanbuoys` has? Have a guess, then check with
+   `nrow(oceanbuoys)`.
+2. If you mapped `humidity` onto the y axis instead of `sea_temp_c`,
+   which part of the code would change?
+3. If you wanted crosses instead of dots, which part would change?
+
+:::
+
+
+Get them to replicate this plot.
+
+Then, get them to change air temp to humidity
+
+```{r}
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = humidity)) + 
+  geom_point()
+```
+
+
+Then get them to draw the same plot, but adding colour:
+
+```{r}
+oceanbuoys |>
+  drop_na() |> 
+  group_by(year) |> 
+  slice_sample(n = 3) |> 
+  select(year, air_temp_c, sea_temp_c) |> 
+  knitr::kable()
+```
+
+- Draw the axis
+- air temp
+- sea temp
+- colour by year
+
+Now show them the ggplot with colour. Notice two clouds of data points?
+
+```{r}
+#| warning: false
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = sea_temp_c,
+           colour = as.factor(year))) + 
+  geom_point()
+```
+
 
 1. One between 20-25C
 2. One up between 26-29C
@@ -122,50 +289,16 @@ oceanbuoys |>
   )
 ```
 
-It is a big jump - nearly five degrees celcius, in the same patch of ocean, four years apart. This is the result of
+It is a big jump - nearly five degrees celcius! That is a lot - especially for it being in the same patch of ocean, four years apart. This is the result of
 [El Niño](https://en.wikipedia.org/wiki/El_Ni%C3%B1o), and the 1997 to 1998
 event was one of the strongest on record.
 
-I think that is a lovely thing to be able to see in a plain scatterplot.
+This is a really interesting thing to be able to see in a plain scatterplot.
 
-Notice now when we remove the colour, the story isn't as clear?
-
-```{r}
-#| label: fig-elnino-nocolour
-#| warning: false
-#| fig-alt: |
-#|   The same scatterplot without colour. The points now read as one elongated
-#|   cloud with a gap in the middle.
-#| fig-cap: "The same readings, with the year removed."
-ggplot(
-  oceanbuoys,
-  aes(
-    x = air_temp_c,
-    y = sea_temp_c
-  )
-) +
-  geom_point(alpha = 0.6)
-```
-
-We still see this gap in the data, but we don't know it is related to year.
-
-By mapping the variable "year" onto "colour", this was made clear.
-
-A big question when showing data is to think:
-
-> What is the right plot to use
-
-Which is a good question.
-
-But now I think we can also add to this:
-
-> What do I want the plot to tell me? And what have I left out?
 
 ### What is it made of?
 
-Let's take @fig-elnino a part.
-
-Let's take another look at the code
+Let's take @fig-elnino apart, and take another look at the code
 
 1. We see **data**, `oceanbuoys`, which is from the {naniar} package.
 2. There is a set of instructions saying which column goes where. `air_temp_c`
@@ -187,182 +320,6 @@ ggplot(
   geom_point(alpha = 0.6) # <4>
 ```
 
-
-::: {.callout-note title="Your Turn"}
-
-Look at @fig-elnino and answer these without running any code.
-
-1. How many rows do you think `oceanbuoys` has? Have a guess, then check with
-   `nrow(oceanbuoys)`.
-2. If you mapped `humidity` onto the y axis instead of `sea_temp_c`,
-   which part of the code would change?
-3. If you wanted crosses instead of dots, which part would change?
-
-:::
-
-## Practice sketching your plots
-
-I think this is almost always a useful exercise, but it is especially really useful when you are starting out with crafting data visualisations, and especially so with ggplot2.
-
-Doing these kinds of sketches is something that [Nicola Rennie](https://nrennie.rbind.io/) promotes in her book, [The art of data visualisation with ggplot2](https://nrennie.rbind.io/art-of-viz/). It is free to read online, and is a great read, and goes into more advanced concepts than this book.
-
-The sketches don't have to be perfect! They can just represent your intentions. I also find it really useful because it gets you to focus on how your graphic links back to your data.
-
-It also reminds me of the feeling of asking a "good question" in research. Spend time thinking about a good question, and you'll do good work.
-
-Have a vision of what you want to create, then you know what you want to work towards!
-
-Let's practice doing some sketches of data based on a few snippets of data.
-
-I'll show my drawings of a couple of these, and you can then practice on some other data.
-
-### Sketching out data based on feel
-
-Here are six rows of `oceanbuoys`, and two of its columns.
-
-```{r}
-#| label: sketch-scatter-data
-#| echo: false
-set.seed(2026-08-13)
-oceanbuoys |>
-  drop_na() |> 
-  slice_sample(n = 6) |> 
-  select(air_temp_c, sea_temp_c) |> 
-  knitr::kable()
-```
-
-Have a look at those numbers before you read on. Where does each row go?
-
-Here's what I do. I draw two axes and label them, air temperature across and
-sea temperature up. Then having a look at the numbers, I just do a rough sketch of the kind of plot I want to draw.
-
-![My sketch of that data.](images/sketches/sketch-scatter.png){#fig-sketch-scatter fig-alt="A hand-drawn sketch of a scatterplot. Two axes are labelled, air temperature across the bottom and sea temperature up the side."}
-
-It took about thirty seconds. I like it. It isn't the prettiest, but I know what I want to draw:
-
-- air temperature on x axis
-- sea temp on y axis
-- one mark per row. 
-
-That's data, aesthetics, and a geom.
-
-The code says the same thing:
-
-```{r}
-#| label: fig-sketch-scatter-code
-#| warning: false
-#| fig-alt: |
-#|   Scatterplot of sea temperature against air temperature, with all 736
-#|   readings drawn as black points in two clusters.
-#| fig-cap: "The same sketch, with all 736 rows instead of six."
-ggplot(
-  oceanbuoys,
-  aes(
-    x = air_temp_c,
-    y = sea_temp_c
-  )
-) +
-  geom_point()
-```
-
-I sketched the rows and ggplot2 drew all of them, so the plot is a lot denser. But the two clumps I drew are in the plot, and I found them by hand before I wrote a
-line of code.
-
-That's the bit I want you to notice.
-
-### One column, and a lot of rows
-
-Now a different snippet. One column this time.
-
-```{r}
-#| label: sketch-hist-data
-#| echo: false
-oceanbuoys |>
-  slice(1:8) |>
-  select(humidity) |>
-  knitr::kable()
-```
-
-How would you draw this? What would you draw? What do you call this? You can't draw a scatterplot!
-
-So the mark has to change. Instead of drawing each row, I draw the shape of
-them, which means how many readings land in each slice of the range.
-
-![My sketch of the humidity readings.](images/sketches/sketch-histogram.png){#fig-sketch-histogram fig-alt="A hand-drawn sketch of a histogram. Humidity runs along the bottom axis from about 75 to about 80, count runs up the side, and a row of bars of uneven height sits on the axis forming a single hump."}
-
-I don't know the heights. That's fine, I am not trying to know the heights.
-
-Here's the plot:
-
-```{r}
-#| label: fig-sketch-hist-code
-#| message: false
-#| warning: false
-#| fig-alt: |
-#|   Histogram of humidity. The bars run from about 72 to about 95, with a
-#|   single peak around 87 and a long tail to the left.
-#| fig-cap: "Humidity for all 736 readings."
-ggplot(
-  oceanbuoys,
-  aes(x = humidity)
-) +
-  geom_histogram()
-```
-
-My sketch got the mark right and the axis wrong.
-
-The eight rows I looked at all sit between 75 and 80, so that's the range I
-drew. The full data runs from 71.6 up to 94.8, and it piles up near 87, which
-is off the end of my sketch entirely.
-
-I like that this happened, and I have left the drawing as it was. A snippet tells
-you what kind of plot you want. It does not tell you the range, and it will
-happily mislead you about it if you let it.
-
-::: {.callout-note title="Your Turn"}
-
-Three snippets. Sketch each one before you write any code, then write the code
-and see how close you got.
-
-**1.** Sea temperature, and the latitude of the buoy that recorded it.
-
-```{r}
-#| label: turn-lat-data
-#| echo: false
-oceanbuoys |>
-  slice(1, 150, 300, 420, 560, 700) |>
-  select(latitude, sea_temp_c) |>
-  knitr::kable()
-```
-
-**2.** The two wind columns, and the year.
-
-```{r}
-#| label: turn-wind-data
-#| echo: false
-oceanbuoys |>
-  slice(1, 150, 300, 420, 560, 700) |>
-  select(wind_ew, wind_ns, year) |>
-  knitr::kable()
-```
-
-**3.** Four numeric columns, and you have two axes.
-
-```{r}
-#| label: turn-four-data
-#| echo: false
-oceanbuoys |>
-  slice(1, 150, 300, 420, 560, 700) |>
-  select(air_temp_c, sea_temp_c, humidity, wind_ew) |>
-  knitr::kable()
-```
-
-Which two columns go on the axes, and what happens to the other two? There's no
-right answer here. But whatever you leave out, you are deciding it doesn't
-matter for the question you are asking, so it is worth knowing what the
-question is.
-
-:::
 
 ## The components of the grammar of graphics
 
@@ -454,8 +411,6 @@ ggplot(pen_short,
         geom_point(size = 5)
 
 ```
-
-(I totally fluked getting the colours the same)
 
 ::: {.callout-note title="Your Turn"}
 
@@ -561,11 +516,26 @@ ggplot(
 ```
 
 
+## add colour
+
+```{r}
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c,
+    colour = year
+  )
+) +
+  geom_point()
+```
+
+
 :::
 
 ### A small (but worthwhile) digression into missing data
 
-You might have noticed a warning:
+You might have noticed a warning in the recent plots:
 
 ```
 Removed 81 rows containing missing values or values outside the scale range
@@ -593,45 +563,6 @@ vis_miss(oceanbuoys)
 This shows the overall missingness in the dataset.
 
 We come back to missing data properly in @sec-shape, where we draw those rows instead of throwing them away. For now, just know that they are missing.
-
-### Colour
-
-```{r}
-#| label: fig-rebuilt
-#| warning: false
-#| fig-alt: |
-#|   The scatterplot with points coloured by year, showing two separate
-#|   clusters for 1993 and 1997.
-#| fig-cap: "Mapping year onto colour. The gap becomes a story."
-fig_ob_col <- ggplot(
-  oceanbuoys,
-  aes(
-    x = air_temp_c,
-    y = sea_temp_c,
-    colour = factor(year)
-  )
-) +
-  geom_point(alpha = 0.6)
-
-fig_ob_col
-```
-
-I think it's pretty significant! You can change one aesthetic, and now you can tell a much clearer story: there is a difference in the years!
-
-::: {.callout-note title="Your Turn"}
-
-Build a plot up the same way, one piece at a time. Run each line before you add
-the next, so you can see what each part contributes.
-
-1. `ggplot(oceanbuoys)`
-2. Add `aes(x = humidity, y = air_temp_c)`
-3. Add `geom_point()`
-4. Now add `colour = factor(year)` to the `aes()`
-
-What does the year do to this plot? Is it as dramatic as it was for sea
-temperature?
-
-:::
 
 ## Mapping more variables
 
@@ -840,7 +771,7 @@ Unexpected legends and colours can be clues for this kind of error!
 
 ## Layers
 
-The `+` is doing real work, and it's worth being explicit about what.
+The `+` is doing a lot! It is worth being explicit about what.
 
 Each thing you add with `+` is a **layer**, and layers draw on top of each other
 in the order you write them. So let's add a second one.
@@ -930,6 +861,43 @@ Next up is the shape of your data, which is where most of the remaining
 surprises come from.
 
 
+## attic
+
+
+Notice when we remove the colour, the story isn't as clear?
+
+```{r}
+#| label: fig-elnino-nocolour
+#| warning: false
+#| fig-alt: |
+#|   The same scatterplot without colour. The points now read as one elongated
+#|   cloud with a gap in the middle.
+#| fig-cap: "The same readings, with the year removed."
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point(alpha = 0.6)
+```
+
+We still see this gap in the data, but we don't know it is related to year.
+
+By mapping the variable "year" onto "colour", this was made clear.
+
+A big question when showing data is to think:
+
+> What is the right plot to use
+
+Which is a good question.
+
+But now I think we can also add to this:
+
+> What do I want the plot to tell me? And what have I left out?
+
+
 ```{r}
 #| echo: false
 #| eval: false
@@ -978,4 +946,3 @@ ggplot(
   theme(legend.position = "none",
         aspect.ratio = 1/1.618)
 ```
-

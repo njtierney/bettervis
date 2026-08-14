@@ -1,0 +1,89 @@
+# What gets computed {#sec-computed}
+
+Some geoms draw exactly what you expect: `geom_point()`, `geom_line()`.
+
+Others need to do some computation! `geom_histogram()`, `geom_density()`, `geom_bar()`
+
+This chapter is about everything that happens between your data and the marks on
+the page. 
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** 40 minutes
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- When do I want `geom_bar()`, and when do I want `geom_col()`?
+- How do I choose a binwidth?
+- How do I compare two distributions on one plot?
+- What do scales and coords actually do?
+
+:::
+
+## Geoms that count for you
+
+<!-- geom_bar() on pedestrian gives a flat wall of identical bars. It counted
+     the rows, one per hour per day. geom_col() on the summarised data gives
+     the Melbourne commuter rhythm, 8am spike, bigger 5pm spike, lunch bump.
+
+     The wrong plot is visibly wrong, which is what makes this example worth
+     using. The memorised rule becomes a question they can answer: is my data
+     already summarised? -->
+
+::: {.callout-note title="Your Turn"}
+
+<!-- 1. TODO: exercise for this section. -->
+
+:::
+
+## Geoms that bin for you
+
+<!-- Histograms, binwidth, and the fact that the default is a placeholder that
+     ggplot2 tells you to replace. -->
+
+::: {.callout-note title="Your Turn"}
+
+<!-- 1. TODO: exercise for this section. -->
+
+:::
+
+## Overlaying distributions
+
+<!-- Comparing two distributions on one plot. position = "identity" with alpha,
+     and geom_density() as the alternative.
+
+     Flag forward: @sec-in-the-way does this job better with violins and
+     raincloud plots. This section is about what the stat is doing. -->
+
+::: {.callout-note title="Your Turn"}
+
+<!-- 1. TODO: exercise for this section. -->
+
+:::
+
+## Scales and coords
+
+<!-- The other two pieces promised in @sec-anatomy.
+
+     Log scales first. Pedestrian counts run 0 to 11,000 and are badly skewed,
+     so this is genuinely wanted rather than an exercise.
+
+     Then coord_cartesian(ylim = ) versus scale_y_continuous(limits = ). One
+     zooms, the other throws data away and changes your smooth. A silent
+     data loss trap and it deserves the callout. -->
+
+::: {.callout-important title="This will bite you"}
+
+<!-- TODO: `scale_y_continuous(limits = )` drops data. `coord_cartesian(ylim = )` zooms. -->
+
+:::
+
+::: {.callout-note title="Your Turn"}
+
+<!-- 1. TODO: exercise for this section. -->
+
+:::

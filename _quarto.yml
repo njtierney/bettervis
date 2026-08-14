@@ -28,9 +28,9 @@ book:
     # named for a design question. Those four questions are the critique
     # checklist the course hands over at the end, so their order and their
     # wording are load bearing.
-    # - "anatomy-of-a-ggplot.qmd"
-    # - "shape-of-your-data.qmd"
-    # - "what-gets-computed.qmd"
+    - "anatomy-of-a-ggplot.qmd"
+    - "shape-of-your-data.qmd"
+    - "what-gets-computed.qmd"
     # - "what-am-i-comparing.qmd"
     # - "whats-in-the-way.qmd"
     # - "where-should-the-eye-go.qmd"

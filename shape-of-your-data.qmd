@@ -1,0 +1,444 @@
+# The shape of your data {#sec-shape}
+
+<!-- Claude: "shape" is the wrong word here - it should be "tidy data" - the key is "tidy". Make sure to update other references to "shape" here. -->
+
+In my experience, a lot of my ggplot problems were actually problems with my 
+data, and how I had it formatted. I found this was especially so early on, when 
+I was learning how to use ggplot.
+
+I believe these data problems are somewhat solved by making sure your data 
+is in a format called "tidy data". We will talk about what that means, and 
+how to spot data that isn't "tidy", and fix it.
+
+We also come back to those missing observations in the oceanbuoys data we look at in @sec-anatomy.
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** 40 minutes
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- What does ggplot2 expect my data to look like?
+- How do I make sure the spreadsheet was actually given is "tidy data"?
+- Why did my line graph come out as a scribble?
+- What happened to the rows with missing values?
+
+:::
+
+```{r}
+#| label: pkgs
+library(dplyr)
+library(tidyr)
+```
+
+
+## What ggplot2 expects: Tidy Data
+
+The `ggplot2` package expects data in a specific format, called "Tidy Data".
+Tidy Data is defined as:
+
+1. Every variable has it's own column
+2. Every observation must have it's own row
+3. Each cell must have its own cell
+
+Let's explore this definition by breaking some of the rules. We will look again at the `pen_short` data:
+
+```{r}
+#| echo: false
+pen_short <- penguins |> 
+        as_tibble() |> 
+        select(species, year, bill_len, bill_dep) |> 
+        drop_na() |> 
+        group_by(species, year) |> 
+        slice(1) |> 
+        ungroup()
+```
+
+This is the data in **tidy data form**
+
+```{r}
+pen_short
+```
+
+Think back to the plot of `pen_short` that we had in the previous chapter:
+
+```{r}
+library(ggplot2)
+ggplot(pen_short,
+       aes(x = bill_len,
+           y = bill_dep,
+           colour = species)) + 
+        geom_point(size = 5)
+```
+
+Notice how each of the columns map onto an argument inside `aes()` ?
+
+Here it is as messy - notice the variables don't form columns - they are in the rows:
+
+```{r}
+#| echo: false
+pen_long_bill <- pen_short |> 
+        pivot_longer(
+                cols = c(bill_len, bill_dep),
+                names_to = "bill_variable",
+                values_to = "measurement"
+        )
+pen_long_bill
+```
+
+Here it is as another flavour of messy - each individual cell contains two values:
+
+```{r}
+#| echo: false
+pen_two_val <- pen_short |> 
+        mutate(bill_ratio = paste0(bill_len,"/",bill_dep)) |> 
+        select(-bill_len,
+               -bill_dep)
+
+pen_two_val
+```
+
+And yet another messy - this time the year variable is for each column. These each contain measurements of bill depth, and bill length, respectively:
+
+```{r}
+#| echo: false
+# bill_dep
+pen_year_bill_dep <- pen_short |> 
+        select(-bill_len) |> 
+        pivot_wider(
+                names_from = year,
+                values_from = bill_dep
+        )
+
+pen_year_bill_dep
+
+# bill_len
+pen_year_bill_len <- pen_short |> 
+        select(-bill_dep) |> 
+        pivot_wider(
+                names_from = year,
+                values_from = bill_len
+        )
+
+pen_year_bill_len
+```
+
+Now let's go back to the tidy data of penguins:
+
+```{r}
+pen_short
+```
+
+And go back again to our ggplot:
+
+```{r}
+library(ggplot2)
+ggplot(pen_short,
+       aes(x = bill_len,
+           y = bill_dep,
+           colour = species)) + 
+        geom_point(size = 5)
+```
+
+Before, each of the columns map onto an argument inside `aes()`.
+
+Now, think about how to do this for a messy dataset:
+
+```{r}
+pen_long_bill
+```
+
+How can we plot "bill depth vs bill length"?
+
+And when there are two values in each cell, how do we plot those?
+
+```{r}
+pen_two_val
+```
+
+And for the separate years? What do we call these?
+
+```{r}
+pen_year_bill_len
+```
+
+I'm not saying you can't plot data from this data. I am saying it is hard to do it. It doesn't fit into the tool usage.
+
+But when the data is in a standard, "Tidy" form, then this becomes much easier:
+
+```{r}
+pen_short
+```
+
+
+I am not sure if I can overstate the impact of the concept of "Tidy Data" on
+the R programming world, and statistics in general. 
+
+## Making data tidy
+
+To make this a bit easier to learn, we have our reference set of tidy data, that each of these will convert back to:
+
+```{r}
+pen_short
+```
+
+To do the data tidying, we will be looking at two functions:
+
+1. `pivot_wider()`: To make our data have more columns, and fewer rows
+2. `pivot_longer()`: To make our data have fewer columns, and more rows.
+
+The problem with `pen_long_bill` here is that all the "bill" related variables are in a single column. 
+
+```{r}
+pen_long_bill
+```
+
+We want to have one variable per column, so we want: "bill_variable" and "measurement" turned into two variables:
+
+- "bill_len"
+- "bill_dep"
+
+Where their observations form rows - the values of bill length, and bill depth, respectively.
+
+To make this happen we use `pivot_wider()`, and use the `names_from` and `values_from` arguments:
+
+```{r}
+pen_long_bill |> 
+        pivot_wider(
+                names_from = bill_variable,
+                values_from = measurement
+        )
+```
+
+- `names_from`: Here we want to create more columns, to make them wider, and we want the **names** of those columns to come **from** `bill_variable`
+- `values_from`: We need the **values** for our new columns to come **from** `measurement` 
+
+The way I internalise this when I am using the `pivot_wider()` or `pivot_longer()` functions, is to always think of:
+
+- Names: What are my tidy columns
+- Values: What are my values
+
+
+::: {.callout-note title="Your Turn"}
+
+Run the code below to create the `hi_score` dataset:
+
+```{r}
+hi_score <- tibble::tribble(
+  ~score, ~variable, ~values,
+  11000,  "game",    "pacman",
+  11000,  "person",  "James",
+  9100,   "game",    "asteroids",
+  9100,   "person",  "James",
+  18000,  "game",    "pacman",
+  18000,  "person",  "Sarida",
+  1200,   "game",    "asteroids",
+  1200,   "person",  "Sarida",
+)
+
+hi_score
+```
+
+Now, tidy this using `pivot_wider()`
+
+<details>
+<summary>Answer code below</summary>
+
+<details>
+<summary>Only really click on this if you've actually had a go at doing it!</summary>
+
+```{r}
+hi_score |> 
+        pivot_wider(
+                names_from = variable,
+                values_from = values
+        ) |> 
+        # use dplyr::relocate
+        relocate(
+                person, game, score
+        )
+```
+
+</details>
+
+</details>
+
+Now try using `pivot_wider()` with a different dataset: `fish_encounters` - which contains (type `?fish_encounters` to get details) information about fish swimming down a river.
+
+```{r}
+fish_encounters
+```
+
+Tidy this using `pivot_wider()`:
+
+<details>
+<summary>Answer code below</summary>
+
+<details>
+<summary>Only really click on this if you've actually had a go at doing it!</summary>
+
+```{r}
+fish_encounters |> 
+        pivot_wider(
+                names_from = station,
+                values_from = seen
+        )
+```
+
+
+</details>
+</details>
+
+What do you notice about this data? If there are missing values, should we do something about them? See the argument `values_fill` for options here.
+
+<details>
+<summary>Answer code below</summary>
+
+```{r}
+fish_encounters |> 
+        pivot_wider(
+                names_from = station,
+                values_from = seen,
+                values_fill = 0
+        )
+```
+
+</details>
+
+:::
+
+## Using `pivot_longer()`
+
+Let's look at using `pivot_longer()` with `pen_year_bill_dep`
+
+```{r}
+pen_year_bill_dep
+```
+
+Similar to `pivot_wider()`, there `name` and `value` arguments - this time, we have `names_to`, `values_to`, and `cols`:
+
+
+```{r}
+pen_year_bill_dep |> 
+        pivot_longer(
+                cols = c(`2007`, `2008`, `2009`),
+                names_to = "year",
+                values_to = "bill_dep"
+        )
+```
+
+- `cols`: We use `cols` as we need to tell `pivot_longer()` which columns to be acting on. We didn't need to do that with `pivot_wider()` as we told it already which columns were being acted on. Note that we need to wrap the years in back ticks (``), as they start with numbers. See below for a workaround.
+- `names_to`: We specify "years" in quotes as this is the name of the column we are creating
+- `values_to`: we specify "bill_dep"
+
+It is worth explaining some workarounds for `cols` - you don't always want to be specifying every single column name.  We can be a little bit crafty and use `-species`, which says: every column but species.
+
+```{r}
+pen_year_bill_dep |> 
+        pivot_longer(
+                cols = -species,
+                names_to = "year",
+                values_to = "bill_dep"
+        )
+```
+
+We can also do `` `2007`:`2009` `` to indicate all columns between 2007 and 2009. 
+
+```{r}
+pen_year_bill_dep |> 
+        pivot_longer(
+                cols = `2007`:`2009`,
+                names_to = "year",
+                values_to = "bill_dep"
+        )
+```
+
+Note that you cannot do this with just the bare numbers, as it will assume you are referring to column positions by number, not name:
+
+```{r}
+#| error: true
+pen_year_bill_dep |> 
+        pivot_longer(
+                cols = c(2007, 2008, 2009),
+                names_to = "year",
+                values_to = "bill_dep"
+        )
+```
+
+See `help("tidyr_tidy_select")` for more information on specifying column names.
+
+::: {.callout-note title="Your Turn"}
+
+Now try using `pivot_longer()` with a different dataset: `relig_income`, which comes bundled inside `tidyr`. This is a dataset that contains religion and income ranges.
+
+```{r}
+relig_income
+```
+
+:::
+
+## Separating columns to make them tidy
+
+When values are combined together, you can use the `separate_wider_delim()` function to separate them out: 
+
+```{r}
+pen_two_val |> 
+        separate_wider_delim(
+                cols = bill_ratio,
+                delim = "/",
+                names = c("bill_dep", "bill_len")
+                )
+
+```
+
+
+::: {.callout-note title="Your Turn"}
+
+Now try with ...
+
+:::
+
+<!-- The same pedestrian data with the four sensors as four columns, which is
+     exactly how it arrives from anyone's Excel file. pivot_longer() to fix it,
+     pivot_wider() as the way back. -->
+
+
+## The scribble
+
+<!-- geom_line() across four sensors with no group. Comes out as a solid black
+     mess. Both `group` and `colour` fix it, and the difference between them is
+     worth two minutes. -->
+
+::: {.callout-note title="Your Turn"}
+
+1. TODO: exercise for this section.
+
+:::
+
+## Missing Data
+
+<!-- Back to oceanbuoys and the `Removed 81 rows` warning from @sec-anatomy.
+     vis_miss() and geom_miss_point(), which draws the dropped rows instead of
+     discarding them.
+
+     It belongs in this chapter because missingness is a property of the data
+     you have, not of what the plot computes. And the payoff lands on the same
+     data that raised the question. -->
+
+::: {.callout-note title="Your Turn"}
+
+1. TODO: exercise for this section.
+
+:::
+
+## Extension exercise
+
+Now, look at the `us_rent_income` dataset
+
+```{r}
+us_rent_income
+```
