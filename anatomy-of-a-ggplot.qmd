@@ -228,6 +228,13 @@ Take a couple of minutes to assess what you see in the plot above, and answer th
 2. What do you see in the data - what is the story?
 3. Is there something in here you would want to explore?
 
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 2)
+```
+
+
 :::
 
 ## Creating plots in ggplot
@@ -329,6 +336,15 @@ Look at @fig-elnino and answer these without running any code.
    which part of the code would change?
 3. Can you draw this plot, with `humidity` on the y axis?
 
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
+```
+
+
+
 :::
 
 ::: {.callout-note title="Your Turn"}
@@ -347,7 +363,15 @@ oceanbuoys |>
 - Draw the axis
 - air temp
 - sea temp
-- **Colour the points by year**
+- **Colour/shade the points by year**
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
+```
+
+
 
 :::
 
@@ -584,7 +608,6 @@ Let's take 5 minutes to do this - I'll draw this too.
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
-library(countdown)
 countdown(minutes = 5)
 ```
 
@@ -614,7 +637,18 @@ ggplot(pen_short,
 - Did you notice the extra steps for drawing a legend?
 - The steps for determining the x and y axis?
 
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
+```
+
+
 There are many decisions you need to make when making a plot. I think ggplot really does a great job of breaking down those components in a way that make you think about the data, at the right level of detail.
+
+
+
+
 
 :::
 
@@ -811,7 +845,7 @@ Hmm? I don't love it. There is variation in size, but a lot of the points cover 
 
 So, while it is possible, mapping to aesthetics like **shape** and **size** aren't always the best choices.
 
-We come back to this properly in @sec-eye, where we discuss choosing between different aesthetic mappings.
+We come back to this properly later in the course, where we discuss choosing between different aesthetic mappings.
 
 ::: {.callout-note title="Your Turn"}
 
@@ -844,6 +878,13 @@ ggplot(oceanbuoys,
            y = wind_ns,
            colour = year)) +
   geom_point()
+```
+
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
 ```
 
 
@@ -929,6 +970,13 @@ Unexpected legends and colours can be clues for this kind of error!
 3. `size = 3` and `alpha = 0.5` follow exactly the same rule. Try setting each
    of them in both places.
 
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+
 :::
 
 ## Layers
@@ -998,6 +1046,13 @@ Those two plots say quite different things, and the only difference is where the
 2. Swap the order of `geom_point()` and `geom_smooth()`. Can you see the
    difference? Look closely at where the lines and points overlap.
 3. Try `geom_smooth(se = FALSE)`. What went away?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
 
 :::
 

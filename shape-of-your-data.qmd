@@ -49,13 +49,91 @@ library(tidyr)
 ## What ggplot2 expects: Tidy Data
 
 The `ggplot2` package expects data in a specific format, called "Tidy Data".
-Tidy Data is defined as:
 
-1. Every variable has it's own column
-2. Every observation must have it's own row
-3. Each cell must have its own cell
+Tidy data is three rules:
 
-Let's explore this definition by breaking some of the rules. We will look again at the `pen_short` data:
+1. Every variable has its own column
+2. Every observation has its own row
+3. Every value has its own cell
+
+I find it easier to check those rules by writing them down or filling in the blanks, something like:
+
+> - The variables in the data are: ___
+> - Each row (observation) represents: ___
+> - Each cell (value) contains: ___
+
+For `pen_short`, that gives us:
+
+> - **The variables in the data are:** species, year, bill_len, bill_dep
+> - **Each row (observation) represents:** one penguin, measured in that year
+> - **Each cell (value) contains:** a single value
+
+This is a similar thing we made in @sec-anatomy, run in the other direction. There
+we said the plot in a sentence before we drew it. Here we say the data in a
+sentence before we plot it.
+
+If I'm having a hard time working out what the data should look like, I'll even sketch a table:
+
+![](images/sketches/sketch-data-tbl.png)
+
+As you get more comfortable with R, you can even start to create what the data should look like as a data.frame from scratch - saying out aloud: 
+
+> - our variables are...
+> - each row contains ...
+> - each cell contains...
+
+```{r}
+example <- data.frame(
+  species = c("gentoo", "chinstrap", "adelie"),
+  year = c(2007, 2008, 2009),
+  bill_len = c(44.2, 43.5, 58.6),
+  bill_dep = c(13.1,17.15, 21.5)
+)
+
+example
+```
+
+I find using `tibble::tribble()` can be nice for this, as the data format is more human-readable. It doesn't scale super well for hand writing out data, though:
+
+:::{.panel-tabset}
+
+## data.frame / tibble
+
+```{r}
+tibble(
+  species = c("gentoo", "chinstrap", "adelie"),
+  year = c(2007, 2008, 2009),
+  bill_len = c(44.2, 43.5, 58.6),
+  bill_dep = c(13.1,17.15, 21.5)
+)
+```
+
+
+## tibble::tribble
+
+```{r}
+tibble::tribble(
+  ~species,     ~year, ~bill_len, ~bill_dep,
+   "gentoo",    2007,   44.2,      13.1,
+   "chinstrap", 2008,   43.5,      17.15,
+   "adelie",     2009,   58.6,      21.5
+)
+```
+
+
+:::
+
+
+If you can sketch the plot you want, you can work backwards to the data you need.
+
+This is the benefits of tidy data, and ggplot: your data links to the plot, and the plot links to the data.
+
+Your sketch has air temp on one axis and sea temp on the other: 
+ - those are two variables, so those are two columns.
+
+And if you can't fill in the blanks, it might be a sign your data isn't tidy yet.
+
+Let's explore this by breaking each of the rules. We will look again at the `pen_short` data:
 
 ```{r}
 #| echo: false
