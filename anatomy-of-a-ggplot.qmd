@@ -182,6 +182,7 @@ I want you to practice drawing this out as a scatterplot:
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 5)
 ```
 
@@ -231,6 +232,7 @@ Take a couple of minutes to assess what you see in the plot above, and answer th
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 2)
 ```
 
@@ -340,6 +342,7 @@ Look at @fig-elnino and answer these without running any code.
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 3)
 ```
 
@@ -368,6 +371,7 @@ oceanbuoys |>
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 3)
 ```
 
@@ -608,6 +612,7 @@ Let's take 5 minutes to do this - I'll draw this too.
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 5)
 ```
 
@@ -640,6 +645,7 @@ ggplot(pen_short,
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 3)
 ```
 
@@ -756,7 +762,7 @@ vis_miss(oceanbuoys)
 
 This shows the overall missingness in the dataset.
 
-We come back to missing data properly in @sec-shape, where we draw those rows instead of throwing them away. For now, just know that they are missing.
+We come back to missing data properly later in the course, where we draw those rows instead of throwing them away. For now, just know that they are missing.
 
 :::
 
@@ -884,6 +890,7 @@ ggplot(oceanbuoys,
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 5)
 ```
 
@@ -973,6 +980,7 @@ Unexpected legends and colours can be clues for this kind of error!
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 5)
 ```
 
@@ -1050,6 +1058,7 @@ Those two plots say quite different things, and the only difference is where the
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
+library(countdown)
 countdown(minutes = 5)
 ```
 

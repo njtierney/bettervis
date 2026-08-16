@@ -23,7 +23,7 @@ We also come back to those missing observations in the oceanbuoys data we look a
 <!-- These map onto the sections below, in order. If you move a section, move its question. -->
 
 - What does ggplot2 expect my data to look like?
-- How do I make sure the spreadsheet was actually given is "tidy data"?
+- How do I make sure the data given is indeed "tidy data"?
 - Why did my line graph come out as a scribble?
 - What happened to the rows with missing values?
 
@@ -40,7 +40,16 @@ We also come back to those missing observations in the oceanbuoys data we look a
 #| output: false
 library(dplyr)
 library(tidyr)
+library(naniar)
+library(visdat)
 ```
+
+```{r}
+#| label: pkgs-extra
+#| output: false
+library(countdown)
+```
+
 
 :::
 
@@ -68,7 +77,7 @@ For `pen_short`, that gives us:
 > - **Each row (observation) represents:** one penguin, measured in that year
 > - **Each cell (value) contains:** a single value
 
-This is a similar thing we made in @sec-anatomy, run in the other direction. There
+This is a similar to what we did in @sec-anatomy, but in the other direction. There
 we said the plot in a sentence before we drew it. Here we say the data in a
 sentence before we plot it.
 
@@ -126,7 +135,7 @@ tibble::tribble(
 
 If you can sketch the plot you want, you can work backwards to the data you need.
 
-This is the benefits of tidy data, and ggplot: your data links to the plot, and the plot links to the data.
+These are the benefits of tidy data, and ggplot: your data links to the plot, and the plot links to the data.
 
 Your sketch has air temp on one axis and sea temp on the other: 
  - those are two variables, so those are two columns.
@@ -313,6 +322,13 @@ The way I internalise this when I am using the `pivot_wider()` or `pivot_longer(
 
 ::: {.callout-note title="Your Turn"}
 
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+library(countdown)
+countdown(minutes = 5)
+```
+
 Run the code below to create the `hi_score` dataset:
 
 ```{r}
@@ -461,6 +477,12 @@ See `help("tidyr_tidy_select")` for more information on specifying column names.
 
 ::: {.callout-note title="Your Turn"}
 
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
 Now try using `pivot_longer()` with a different dataset: `relig_income`, which comes bundled inside `tidyr`. This is a dataset that contains religion and income ranges.
 
 ```{r}
@@ -486,7 +508,24 @@ pen_two_val |>
 
 ::: {.callout-note title="Your Turn"}
 
-Now try with ...
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+Now try with this data:
+
+```{r}
+dat_fish <- tibble(
+  id = c("handfish", "rainbow trout", "galaxiids"),
+  values = c("m-3", "f-1100", "m-300")
+)
+
+dat_fish
+```
+
 
 :::
 
@@ -495,15 +534,77 @@ Now try with ...
      pivot_wider() as the way back. -->
 
 
-## The scribble
+## The scribble aka "sawtoothing"
 
-<!-- geom_line() across four sensors with no group. Comes out as a solid black
-     mess. Both `group` and `colour` fix it, and the difference between them is
-     worth two minutes. -->
+<!-- Uses pen_short rather than the pedestrian sensors: it is already in the
+     chapter, it needs no extra package, and at 9 rows a reader can trace the
+     path by hand and see exactly why it zigzags. -->
+
+Here's a plot I have made by accident more times than I would like to admit^[1: I wrote a blog post about it](https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/)
+
+We have bill length, measured over three years, for three species. So let's
+draw a line.
+
+```{r}
+pen_short <- penguins |> 
+        as_tibble() |> 
+        select(species, year, bill_len, bill_dep) |> 
+        drop_na() |> 
+        group_by(species, year) |> 
+        slice(1) |> 
+        ungroup()
+
+pen_short
+```
+
+
+```{r}
+#| label: fig-scribble
+#| fig-alt: |
+#|   A line plot of bill length against year. Instead of three separate lines
+#|   there is a single line zigzagging steeply up and down between every point.
+ggplot(pen_short,
+       aes(x = year,
+           y = bill_len)) +
+  geom_line()
+```
+
+That is one line - a bit messy!
+
+`geom_line()` connects the points in the order it meets them. It has no idea
+that a species is a thing, so it joins Adelie to Chinstrap to Gentoo and then
+jumps back down to the next year.
+
+`group = species` tells it where one line stops and the next one starts.
+`colour = species` does the same job, and also tells the reader which line is
+which, which is why I nearly always reach for `colour` instead.
+
+This is the same behaviour we saw in @sec-anatomy, where a colour mapping split
+`geom_smooth()` into one line per year. A colour mapping implies a grouping.
 
 ::: {.callout-note title="Your Turn"}
 
-1. TODO: exercise for this section.
+1. Look at `pen_short` again and trace the line with your finger, in the order
+   the rows appear. Why does it zigzag?
+
+```{r}
+pen_short <- penguins |> 
+        as_tibble() |> 
+        select(species, year, bill_len, bill_dep) |> 
+        drop_na() |> 
+        group_by(species, year) |> 
+        slice(1) |> 
+        ungroup()
+
+pen_short
+```
+
+2. Add `group = species` inside `aes()`. What happened?
+
+3. Now use `colour = species` instead of `group = species`. What did that fix
+   that `group` didn't?
+
+4. Which of those two would you use, and when?
 
 :::
 
@@ -515,18 +616,20 @@ Now try with ...
 
      It belongs in this chapter because missingness is a property of the data
      you have, not of what the plot computes. And the payoff lands on the same
-     data that raised the question. -->
+     data that raised the question.
+
+     Prose still to write. The Your Turn below stands on its own in the
+     meantime, and is the shape the section will take. -->
 
 ::: {.callout-note title="Your Turn"}
 
-1. TODO: exercise for this section.
+Back in @sec-anatomy, ggplot2 told us it had dropped 81 rows.
+
+1. Run `vis_miss(oceanbuoys)`. Which variables are missing, and how much?
+
+2. Now swap `geom_point()` for `geom_miss_point()` on the air temperature and
+   sea temperature scatterplot. Where do the dropped rows go?
+
+3. Does seeing them change what you think the plot says?
 
 :::
-
-## Extension exercise
-
-Now, look at the `us_rent_income` dataset
-
-```{r}
-us_rent_income
-```
