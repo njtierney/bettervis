@@ -27,13 +27,23 @@ We also come back to those missing observations in the oceanbuoys data we look a
 - Why did my line graph come out as a scribble?
 - What happened to the rows with missing values?
 
-:::
+
+**What you need this session**
+
+- A session of RStudio open
+- Something to draw on, and something to draw with
+- The following packages installed
+
 
 ```{r}
 #| label: pkgs
+#| output: false
 library(dplyr)
 library(tidyr)
 ```
+
+:::
+
 
 
 ## What ggplot2 expects: Tidy Data
