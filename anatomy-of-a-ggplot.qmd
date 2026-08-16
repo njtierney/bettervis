@@ -105,7 +105,7 @@ This is the standard of sketch I am wanting you to think about doing:
 
 ## barplot
 
-![](images/sketches/simple-scatter.png)
+![](images/sketches/simple-bar.png)
 
 ## boxplot
 
@@ -146,6 +146,10 @@ Here's what I do:
 ## Sketch the data
 
 ![](images/sketches/demo-scatter.png)
+
+## Say it in a sentence
+
+>  Plot the **oceanbuoys** data, mapping **air_temp_c** to the **x axis** and **sea_temp_c** to the **y axis**. Display using **points**.
 
 :::
 
@@ -228,12 +232,21 @@ Take a couple of minutes to assess what you see in the plot above, and answer th
 
 ## Creating plots in ggplot
 
-OK, let's walk through how to create the plot using ggplot2. Here is the code that produced the above plot:
+OK, let's walk through how to create the plot using ggplot2. I like to use this template:
+
+```
+ggplot(data = <<DATA>>,
+       mapping = aes(x = <<X AXIS VARIABLE>>,
+           y = <<Y AXIS VARIABLE>>)) +
+  geom_<<GEOM>>(<<OPTIONS>>)
+```
+
+Here is the code that produced the above plot, with that template:
 
 ```{r}
 #| warning: false
-ggplot(oceanbuoys,
-       aes(x = air_temp_c,
+ggplot(data = oceanbuoys,
+       mapping = aes(x = air_temp_c,
            y = sea_temp_c)) + 
   geom_point()
 ```
@@ -247,7 +260,7 @@ library(naniar)
 library(ggplot2)
 ggplot(
   data = oceanbuoys,      # <1>
-  aes(                    # <2>
+  mapping = aes(                    # <2>
     x = air_temp_c,       # <2>
     y = sea_temp_c,       # <2>
   )
@@ -257,7 +270,7 @@ ggplot(
 
 
 1. We see **data**, `oceanbuoys`, which is from the {naniar} package.
-2. There is a set of instructions saying which column goes where - Those live inside `aes()`: `air_temp_c` across the x axis, `sea_temp_c` up the axis
+2. There is a set of instructions **mapping** which column goes where - Those live inside `aes()`: `air_temp_c` across the x axis, `sea_temp_c` up the axis
 3. There is a `+` between them, which is how you glue the parts together.
 4. There is something saying **draw a point for each row**: is `geom_point()`.
 
@@ -383,7 +396,7 @@ There is more detail to the differences between Wilkinson's grammar of graphics,
 
 There are seven parts to the grammar of graphics as implemented in ggplot. I don't know them off by heart, and I don't expect you to. But they do provide a useful outline for the different features we will discuss in this course:
 
-**Data**: Data frame you are plotting (this chapter, next chapter)
+### **Data**: Data frame you are plotting 
 
 ```{r}
 #| echo: false
@@ -392,7 +405,7 @@ oceanbuoys |>
   knitr::kable()
 ```
 
-**Aesthetics**: How columns map onto visual features (this chapter)
+###  **Aesthetics**: How columns map onto visual features 
 
 :::: {.columns}
 
@@ -428,10 +441,12 @@ ggplot(oceanbuoys,
 ::::
 
 
-**Geoms**: The mark drawn
+###  **Geoms**: The mark drawn
 
 ```{r}
 #| layout-ncol: 2
+#| echo: false
+#| warning: false
 ggplot(oceanbuoys,
        aes(x = air_temp_c,
            y = sea_temp_c,
@@ -447,10 +462,12 @@ ggplot(oceanbuoys,
 ```
 
 
-**Stats**: The computations that happen before drawing
+###  **Stats**: The computations that happen before drawing
 
 ```{r}
 #| layout-ncol: 2
+#| echo: false
+#| warning: false
 ggplot(oceanbuoys,
        aes(x = air_temp_c)) + 
   geom_histogram()
@@ -461,10 +478,12 @@ ggplot(oceanbuoys,
   geom_boxplot()
 ```
 
-**Scales**: How data values change into different positions, and colours (@sec-computed)
+### **Scales**: How data values change into different positions, and colours 
 
 ```{r}
 #| layout-ncol: 2
+#| echo: false
+#| warning: false
 ggplot(oceanbuoys,
        aes(x = air_temp_c,
            y = humidity,
@@ -480,10 +499,12 @@ ggplot(oceanbuoys,
                       name = "Year")
 ```
 
-**Coords**: The coordinate system that the marks (geom) are placed 
+### **Coords**: The coordinate system that the marks (geom) are placed 
 
 ```{r}
 #| layout-ncol: 2
+#| echo: false
+#| warning: false
 ggplot(oceanbuoys,
        aes(x = air_temp_c,
            y = humidity)) + 
@@ -493,14 +514,15 @@ ggplot(oceanbuoys,
        aes(x = air_temp_c,
            y = humidity)) + 
   geom_point() + 
-  coord_equal()
+  coord_polar()
 ```
 
-
-**Facets**: How the plot is split into smaller subplots 
+### **Facets**: How the plot is split into smaller subplots 
 
 ```{r}
 #| layout-ncol: 2
+#| echo: false
+#| warning: false
 ggplot(oceanbuoys,
        aes(x = air_temp_c,
            y = humidity)) + 
@@ -510,7 +532,7 @@ ggplot(oceanbuoys,
        aes(x = air_temp_c,
            y = humidity)) + 
   geom_point() + 
-  facet_wrap(~year)
+  facet_wrap(~year, ncol = 1)
 ```
 
 
@@ -596,11 +618,13 @@ There are many decisions you need to make when making a plot. I think ggplot rea
 
 :::
 
-## Building a plot back up
+## Building the plot back up
 
-We took a plot apart before. Let's build one up again.
+Let's show the data and the plots alongside ach other again, so you can see the impact of colour:
 
-Start with nothing but the data.
+:::{.panel-tabset}
+
+## data
 
 ```{r}
 #| label: fig-blank
@@ -609,11 +633,7 @@ Start with nothing but the data.
 ggplot(data = oceanbuoys)
 ```
 
-This isn't super inspiring, but it is worth thinking about. I told ggplot2
-what data to use, and absolutely nothing else. It does not know what to put on
-the axes, and it does not know what to draw. It gives you a panel and waits.
-
-Now let's say which columns go where, by specifying how they map onto an axes:
+## axes
 
 ```{r}
 #| label: fig-axes
@@ -630,7 +650,7 @@ ggplot(
 )
 ```
 
-Now we get axes! These correspond to the range of the data. But we haven't said what data to put on there. We specify that with **A geom**.
+## geom
 
 ```{r}
 #| label: fig-points
@@ -649,50 +669,15 @@ ggplot(
   geom_point()
 ```
 
-A plot!
-
-Three lines, three pieces. Data, aesthetics, geom.
-
-Let's show this as a set of panel tabs, to get a bit more of a sense of the plot being built up.
-
-
-:::{.panel-tabset}
-
-## grey
+## colour
 
 ```{r}
-ggplot(oceanbuoys)
-```
-
-## axes
-
-```{r}
-ggplot(
-  oceanbuoys,
-  aes(
-    x = air_temp_c,
-    y = sea_temp_c
-  )
-)
-```
-
-## geom
-
-```{r}
-ggplot(
-  oceanbuoys,
-  aes(
-    x = air_temp_c,
-    y = sea_temp_c
-  )
-) +
-  geom_point()
-```
-
-
-## add colour
-
-```{r}
+#| label: fig-colour
+#| warning: false
+#| fig-alt: |
+#|   The scatterplot with black points, forming one elongated cloud with a gap
+#|   in the middle.
+#| fig-cap: "And now a geom. This is a plot."
 fig_ob_col <- ggplot(
   oceanbuoys,
   aes(
@@ -705,7 +690,6 @@ fig_ob_col <- ggplot(
 
 fig_ob_col
 ```
-
 
 :::
 
