@@ -277,6 +277,51 @@ the R programming world, and statistics in general.
 
 ## Making data tidy
 
+::: {.callout-tip title="The code that made those messy datasets" collapse="true"}
+
+I kept the code above hidden so the messy data lands on its own, without
+`pivot_longer()` and `pivot_wider()` giving away the ending.
+
+From here on we run code against those objects, so you need them in your own
+session. Run this and you will have all four.
+
+```{r}
+#| eval: false
+pen_short <- penguins |>
+  as_tibble() |>
+  select(species, year, bill_len, bill_dep) |>
+  drop_na() |>
+  group_by(species, year) |>
+  slice(1) |>
+  ungroup()
+
+# variables sitting in the rows instead of forming columns
+pen_long_bill <- pen_short |>
+  pivot_longer(
+    cols = c(bill_len, bill_dep),
+    names_to = "bill_variable",
+    values_to = "measurement"
+  )
+
+# two values jammed into one cell
+pen_two_val <- pen_short |>
+  mutate(bill_ratio = paste0(bill_len, "/", bill_dep)) |>
+  select(-bill_len, -bill_dep)
+
+# year spread across the column names
+pen_year_bill_dep <- pen_short |>
+  select(-bill_len) |>
+  pivot_wider(names_from = year, values_from = bill_dep)
+
+pen_year_bill_len <- pen_short |>
+  select(-bill_dep) |>
+  pivot_wider(names_from = year, values_from = bill_len)
+```
+
+If any of that is unfamiliar, that is fine. It is the rest of this section.
+
+:::
+
 To make this a bit easier to learn, we have our reference set of tidy data, that each of these will convert back to:
 
 ```{r}
@@ -540,7 +585,7 @@ dat_fish
      chapter, it needs no extra package, and at 9 rows a reader can trace the
      path by hand and see exactly why it zigzags. -->
 
-Here's a plot I have made by accident more times than I would like to admit^[1: I wrote a blog post about it](https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/)
+Here's a plot I have made by accident more times than I would like to admit.^[I wrote a blog post about this one: <https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/>]
 
 We have bill length, measured over three years, for three species. So let's
 draw a line.
@@ -588,14 +633,6 @@ This is the same behaviour we saw in @sec-anatomy, where a colour mapping split
    the rows appear. Why does it zigzag?
 
 ```{r}
-pen_short <- penguins |> 
-        as_tibble() |> 
-        select(species, year, bill_len, bill_dep) |> 
-        drop_na() |> 
-        group_by(species, year) |> 
-        slice(1) |> 
-        ungroup()
-
 pen_short
 ```
 
