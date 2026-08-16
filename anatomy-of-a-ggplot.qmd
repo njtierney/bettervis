@@ -1,6 +1,6 @@
 # Anatomy of a ggplot {#sec-anatomy}
 
-![](images/sketches/sketch-anatomy.png)
+![](images/sketches/anatomy-marked-up.png)
 
 This chapter is about the underlying features of ggplot2. 
 
@@ -30,8 +30,8 @@ In this chapter we will take plots, tease them apart, and put them back together
 **What you need this session**
 
 - A session of RStudio open
-- The following packages installed: tidyverse, naniar.
 - Something to draw on, and something to draw with
+- The following packages installed
 
 ```{r}
 #| label: setup
@@ -46,6 +46,10 @@ library(tidyr)
 
 :::
 
+## Motivation {.unnumbered}
+
+![From https://www.research.autodesk.com/publications/same-stats-different-graphs](gifs/data-saurus-gif.gif){width=100%}
+
 
 ## The data
 
@@ -54,6 +58,8 @@ We will be looking at some data from the `naniar` R package: `oceanbuoys`. The h
 ```r
 ?oceanbuoys
 ```
+
+<!-- TODO: Have a drawing of the oceanbuoys, where they are in the map in the world. -->
 
 > Real-time data from moored ocean buoys for improved detection, understanding and prediction of El Ni'o and La Ni'a. The data is collected by the Tropical Atmosphere Ocean project (https://www.pmel.noaa.gov/gtmba/pmel-theme/pacific-ocean-tao).
 
@@ -74,24 +80,77 @@ Each row represents recordings for a single oceanbuoy:
  - Latitude and longitude
  - Temperature (sea temp and air temp, celcius)
  - Humidity (relative humidity)
- - Wind (east-west and north-south. Positive indicates blowing towards the former, negative the latter. E.g., positive values in `wind_ew` mean the wind is blowing towards the east, in metres per second).
+ - Wind (east-west and north-south).
  
 
 ## Practice sketching your plots
 
-I think this is almost always a useful exercise, but it is especially really useful when you are starting out with crafting data visualisations, and especially so with ggplot2.
+I think sketching out your plots is a really useful first step. Especially so when you are starting out with crafting data visualisations.
 
 Doing these kinds of sketches is something that [Nicola Rennie](https://nrennie.rbind.io/) promotes in her book, [The art of data visualisation with ggplot2](https://nrennie.rbind.io/art-of-viz/). It is free to read online, and is a great read, and goes into more advanced concepts than this book.
 
-The sketches don't have to be perfect! They can just represent your intentions. I also find it really useful because it gets you to focus on how your graphic links back to your data.
+The sketches don't have to be perfect! They can just represent your intentions for what you want to explore in the data. I find if I can draw the general shape of your plot, then it becomes easier to imagine other extensions. What is also particularly useful about this is that it doesn't require code. So, if you don't know how to code something up, your limitation is what  you can draw.
 
-It also reminds me of the feeling of asking a "good question" in research. Spend time thinking about a good question, and you'll do good work.
+This is the standard of sketch I am wanting you to think about doing:
+
+:::{.panel-tabset}
+
+## Scatterplot
+
+![](images/sketches/simple-scatter.png)
+
+## Line plot
+
+![](images/sketches/simple-line.png)
+
+## barplot
+
+![](images/sketches/simple-scatter.png)
+
+## boxplot
+
+![](images/sketches/simple-boxplot.png)
+
+## facet/subplot
+
+![](images/sketches/simple-facet.png)
+
+
+:::
+
+Once you are comfortable identifying the parts you need to draw, it will be easier to link these back to a plotting system like ggplot2. Which, in turn forces you to think about how your data correspond to the plot.
+
+It also reminds me of the feeling of asking a "good question" in research: Spend time thinking about a good question, and you'll do good work. 
 
 Have a vision of what you want to create, then you know what you want to work towards!
 
 Let's practice doing some sketches of data based on a few snippets of data.
 
 I'll show my drawings of a couple of these, and you can then practice on some other data.
+
+
+::: {.callout-note title="My sketching process"}
+
+Here's what I do:
+
+:::{.panel-tabset}
+
+## Draw axis
+
+![](images/sketches/demo-axes.png)
+
+## Label axis
+
+![](images/sketches/demo-labels.png)
+
+## Sketch the data
+
+![](images/sketches/demo-scatter.png)
+
+:::
+
+:::
+
 
 
 ::: {.callout-note title="Your Turn: Sketching plots"}
@@ -115,28 +174,12 @@ I want you to practice drawing this out as a scatterplot:
 - For the `oceanbuoys` data
 - air temp on the x axis
 - sea temp on the y axis
-- mark each point by year
 
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
 countdown(minutes = 5)
 ```
-
-:::
-
-::: {.callout-note title="My sketching process" collapse="true"}
-
-
-Here's what I do:
-
-- Draw two axes 
-- Label each axis: 
-  - air temperature on the x axis
-  - sea temperature on the y axis. 
-- Sketch the data values as circles on the page.
-
-![My sketch of that data.](images/sketches/sketch-scatter.png){#fig-sketch-scatter fig-alt="A hand-drawn sketch of a scatterplot. Two axes are labelled, air temperature across the bottom and sea temperature up the side."}
 
 :::
 
@@ -175,13 +218,11 @@ Each point is a reading from a buoy floating in the tropical Pacific.
 
 ::: {.callout-note title="Your Turn: What do you see?"}
 
-Take a couple of minutes to assess what you see in the plot above.
+Take a couple of minutes to assess what you see in the plot above, and answer these questions:
 
-Answer these questions:
-
-1. How is this different to your sketch?
-2. What do see in the data - what is the story?
-3. Is there something in here that you would want to explore?
+1. How is the ggplot different to your sketch?
+2. What do you see in the data - what is the story?
+3. Is there something in here you would want to explore?
 
 :::
 
@@ -199,13 +240,7 @@ ggplot(oceanbuoys,
 
 ### What is it made of?
 
-Let's take @fig-elnino apart, and take another look at the code
-
-1. We see **data**, `oceanbuoys`, which is from the {naniar} package.
-2. There is a set of instructions saying which column goes where. `air_temp_c`
-across, `sea_temp_c` up, Those live inside `aes()`.
-3. And there is a `+` between them, which is how you glue the parts together.
-4. There is something saying **draw a point for each row**: is `geom_point()`.
+Let's take another look at the code that creates @fig-elnino:
 
 ```{r}
 library(naniar)
@@ -217,8 +252,58 @@ ggplot(
     y = sea_temp_c,       # <2>
   )
 ) +                       # <3>
-  geom_point(alpha = 0.6) # <4>
+  geom_point() # <4>
 ```
+
+
+1. We see **data**, `oceanbuoys`, which is from the {naniar} package.
+2. There is a set of instructions saying which column goes where - Those live inside `aes()`: `air_temp_c` across the x axis, `sea_temp_c` up the axis
+3. There is a `+` between them, which is how you glue the parts together.
+4. There is something saying **draw a point for each row**: is `geom_point()`.
+
+
+## Building it back up
+
+
+Three lines, three pieces. Data, aesthetics, geom.
+
+Let's show this as a set of panel tabs, to get a bit more of a sense of the plot being built up.
+
+
+:::{.panel-tabset}
+
+## grey
+
+```{r}
+ggplot(oceanbuoys)
+```
+
+## axes
+
+```{r}
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+)
+```
+
+## geom
+
+```{r}
+ggplot(
+  oceanbuoys,
+  aes(
+    x = air_temp_c,
+    y = sea_temp_c
+  )
+) +
+  geom_point()
+```
+
+:::
 
 
 ::: {.callout-note title="Your Turn"}
@@ -229,24 +314,13 @@ Look at @fig-elnino and answer these without running any code.
    `nrow(oceanbuoys)`.
 2. If you mapped `humidity` onto the y axis instead of `sea_temp_c`,
    which part of the code would change?
-3. If you wanted crosses instead of dots, which part would change?
+3. Can you draw this plot, with `humidity` on the y axis?
 
 :::
 
+::: {.callout-note title="Your Turn"}
 
-Get them to replicate this plot.
-
-Then, get them to change air temp to humidity
-
-```{r}
-ggplot(oceanbuoys,
-       aes(x = air_temp_c,
-           y = humidity)) + 
-  geom_point()
-```
-
-
-Then get them to draw the same plot, but adding colour:
+Let's talk about adding colour - draw a scatterplot of this data:
 
 ```{r}
 oceanbuoys |>
@@ -260,12 +334,15 @@ oceanbuoys |>
 - Draw the axis
 - air temp
 - sea temp
-- colour by year
+- **Colour the points by year**
 
-Now show them the ggplot with colour. Notice two clouds of data points?
+:::
+
+Here it is in ggplot:
 
 ```{r}
 #| warning: false
+#| echo: false
 ggplot(oceanbuoys,
        aes(x = air_temp_c,
            y = sea_temp_c,
@@ -273,52 +350,27 @@ ggplot(oceanbuoys,
   geom_point()
 ```
 
-
-1. One between 20-25C
-2. One up between 26-29C
-
-So what happened between 1993 and 1997? Let's take a look with dplyr:
+- What do you notice?
+- How would you explore differences between years? 
+- What would you search for?
 
 ```{r}
 #| label: mean-temps
+#| echo: false
 library(dplyr)
-oceanbuoys |> 
+ocean_sum <- oceanbuoys |> 
   group_by(year) |> 
   summarise(
     mean_sea_temp_c = mean(sea_temp_c, na.rm = TRUE)
   )
 ```
 
-It is a big jump - nearly five degrees celcius! That is a lot - especially for it being in the same patch of ocean, four years apart. This is the result of
-[El Niño](https://en.wikipedia.org/wiki/El_Ni%C3%B1o), and the 1997 to 1998
-event was one of the strongest on record.
+<!-- It is a big jump - nearly five degrees celcius! That is a lot - especially for it being in the same patch of ocean, four years apart. This is the result of -->
+<!-- [El Niño](https://en.wikipedia.org/wiki/El_Ni%C3%B1o), and the 1997 to 1998 -->
+<!-- event was one of the strongest on record. -->
 
-This is a really interesting thing to be able to see in a plain scatterplot.
+<!-- This is a really interesting thing to be able to see in a plain scatterplot. -->
 
-
-### What is it made of?
-
-Let's take @fig-elnino apart, and take another look at the code
-
-1. We see **data**, `oceanbuoys`, which is from the {naniar} package.
-2. There is a set of instructions saying which column goes where. `air_temp_c`
-across, `sea_temp_c` up, `year` onto colour. Those live inside `aes()`.
-3. And there is a `+` between them, which is how you glue the parts together.
-4. There is something saying **draw a point for each row**: is `geom_point()`.
-
-```{r}
-library(naniar)
-library(ggplot2)
-ggplot(
-  data = oceanbuoys,      # <1>
-  aes(                    # <2>
-    x = air_temp_c,       # <2>
-    y = sea_temp_c,       # <2>
-    color = factor(year)  # <2>
-  )
-) +                       # <3>
-  geom_point(alpha = 0.6) # <4>
-```
 
 
 ## The components of the grammar of graphics
@@ -331,17 +383,140 @@ There is more detail to the differences between Wilkinson's grammar of graphics,
 
 There are seven parts to the grammar of graphics as implemented in ggplot. I don't know them off by heart, and I don't expect you to. But they do provide a useful outline for the different features we will discuss in this course:
 
-1. Data: Data frame you are plotting (@sec-shape)
-2. Aesthetics: How columns map onto visual features (this chapter)
-3. Geoms: The mark drawn (this chapter)
-4. Stats: The computations that happen before drawing (@sec-compuated)
-5. Scales: How data values change into different positions, and colours (@sec-computed)
-6. Coords: The coordinate system that the marks (geom) are placed (@sec-computed)
-7. Facets: How the plot is split into smaller subplots (@sec-comparing)
+**Data**: Data frame you are plotting (this chapter, next chapter)
 
-In this chapter we focus on: Data, aesthetics, and geoms.
+```{r}
+#| echo: false
+oceanbuoys |> 
+  head() |> 
+  knitr::kable()
+```
 
-We will come back to this table as we go in the course. But I find that knowing the names of these features of the plot provide useful features of a mental model to focus on and understand.
+**Aesthetics**: How columns map onto visual features (this chapter)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| eval: false
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = sea_temp_c,
+           colour = factor(year))) + 
+  geom_point()
+```
+
+:::
+
+:::{ .column width = "10%"}
+:::
+
+:::{ .column width = "40%"}
+```{r}
+#| echo: false
+#| warning: false
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = sea_temp_c,
+           colour = factor(year))) + 
+  geom_point()
+```
+
+:::
+
+::::
+
+
+**Geoms**: The mark drawn
+
+```{r}
+#| layout-ncol: 2
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = sea_temp_c,
+           colour = factor(year))) + 
+  geom_point() + 
+  geom_rug()
+
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = sea_temp_c,
+           colour = factor(year))) + 
+  geom_line()
+```
+
+
+**Stats**: The computations that happen before drawing
+
+```{r}
+#| layout-ncol: 2
+ggplot(oceanbuoys,
+       aes(x = air_temp_c)) + 
+  geom_histogram()
+
+ggplot(oceanbuoys,
+       aes(x = factor(year),
+           y = sea_temp_c)) +
+  geom_boxplot()
+```
+
+**Scales**: How data values change into different positions, and colours (@sec-computed)
+
+```{r}
+#| layout-ncol: 2
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = humidity,
+           colour = year)) + 
+  geom_point() 
+
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = humidity,
+           colour = factor(year))) + 
+  geom_point() +
+  scale_colour_brewer(palette = "Dark2",
+                      name = "Year")
+```
+
+**Coords**: The coordinate system that the marks (geom) are placed 
+
+```{r}
+#| layout-ncol: 2
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = humidity)) + 
+  geom_point() 
+
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = humidity)) + 
+  geom_point() + 
+  coord_equal()
+```
+
+
+**Facets**: How the plot is split into smaller subplots 
+
+```{r}
+#| layout-ncol: 2
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = humidity)) + 
+  geom_point() 
+
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = humidity)) + 
+  geom_point() + 
+  facet_wrap(~year)
+```
+
+
+In this chapter we focus on: **Data, aesthetics, and geoms.**
+
+We will come back to these components as we go in the course. But I find knowing the names of these features of the plot provide useful features of a mental model to focus on and understand.
 
 To give you a visceral sense of some of these features, I would like you to explore plotting another dataset. There are only 9 values, so you should be able to draw these. 
 
@@ -357,7 +532,6 @@ pen_short <- penguins |>
 
 knitr::kable(pen_short)
 ```
-
 
 ::: {.callout-note title="Your Turn"}
 
@@ -519,7 +693,7 @@ ggplot(
 ## add colour
 
 ```{r}
-ggplot(
+fig_ob_col <- ggplot(
   oceanbuoys,
   aes(
     x = air_temp_c,
@@ -528,12 +702,14 @@ ggplot(
   )
 ) +
   geom_point()
+
+fig_ob_col
 ```
 
 
 :::
 
-### A small (but worthwhile) digression into missing data
+:::{.callout-tip title="A digression into missing data" collapse="true"}
 
 You might have noticed a warning in the recent plots:
 
@@ -564,6 +740,8 @@ This shows the overall missingness in the dataset.
 
 We come back to missing data properly in @sec-shape, where we draw those rows instead of throwing them away. For now, just know that they are missing.
 
+:::
+
 ## Mapping more variables
 
 We have mapped x and y axis to data columns, and then demonstrated how colour changes the impact of the story.
@@ -589,7 +767,7 @@ fig_ob_shp <- ggplot(
     shape = factor(year)
   )
 ) +
-  geom_point(alpha = 0.6)
+  geom_point()
 
 fig_ob_shp
 ```
@@ -622,7 +800,7 @@ ggplot(
     size = year
   )
 ) +
-  geom_point(alpha = 0.4)
+  geom_point()
 ```
 
 While more obvious than shape, I do not thinkg this is a great usage of size. We can try mapping size to another variable, such as "humidity":
@@ -861,88 +1039,3 @@ Next up is the shape of your data, which is where most of the remaining
 surprises come from.
 
 
-## attic
-
-
-Notice when we remove the colour, the story isn't as clear?
-
-```{r}
-#| label: fig-elnino-nocolour
-#| warning: false
-#| fig-alt: |
-#|   The same scatterplot without colour. The points now read as one elongated
-#|   cloud with a gap in the middle.
-#| fig-cap: "The same readings, with the year removed."
-ggplot(
-  oceanbuoys,
-  aes(
-    x = air_temp_c,
-    y = sea_temp_c
-  )
-) +
-  geom_point(alpha = 0.6)
-```
-
-We still see this gap in the data, but we don't know it is related to year.
-
-By mapping the variable "year" onto "colour", this was made clear.
-
-A big question when showing data is to think:
-
-> What is the right plot to use
-
-Which is a good question.
-
-But now I think we can also add to this:
-
-> What do I want the plot to tell me? And what have I left out?
-
-
-```{r}
-#| echo: false
-#| eval: false
-# example nicer last plot
-library(marquee)
-
-# RColorBrewer::brewer.pal(name = "Dark2", n = 3) |> scales::show_col()
-plot_cols <- RColorBrewer::brewer.pal(name = "Dark2", n = 3) |> 
-  as.list() |>
-  setNames(c("green", "orange", "purple"))
-
-ggplot(
-  oceanbuoys,
-  aes(
-    x = air_temp_c,
-    y = sea_temp_c,
-    colour = factor(year)
-  )
-) +
-  geom_point(alpha = 0.6) +
-  scale_colour_brewer(palette = "Dark2") +
-  labs(
-    title = "Sea and air temperature from buoys in the tropical Pacific",
-    x = "Air Temp (C)",
-    y = "Sea Temp (C)",
-    colour = "Year"
-  ) +
-  annotate(
-    x = 24.5,
-    y = 22.5,
-    geom = "text",
-    colour = plot_cols$green,
-    size = 15,
-    label = "1997",
-    size.unit = "pt"
-  ) +
-  annotate(
-    x = 26.5,
-    y = 29.5,
-    geom = "text",
-    colour = plot_cols$orange,
-    size = 15,
-    label = "1993",
-    size.unit = "pt"
-  ) +
-  theme(legend.position = "none",
-        aspect.ratio = 1/1.618)
-```
