@@ -336,7 +336,7 @@ Look at @fig-elnino and answer these without running any code.
    `nrow(oceanbuoys)`.
 2. If you mapped `humidity` onto the y axis instead of `sea_temp_c`,
    which part of the code would change?
-3. Can you draw this plot, with `humidity` on the y axis?
+3. Using ggplot, can you draw this plot, with `humidity` on the y axis? See the above code for a template.
 
 
 ```{r}

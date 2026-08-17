@@ -30,7 +30,7 @@ book:
     # wording are load bearing.
     - "anatomy-of-a-ggplot.qmd"
     - "shape-of-your-data.qmd"
-    # - "what-gets-computed.qmd"
+    - "what-gets-computed.qmd"
     # - "what-am-i-comparing.qmd"
     # - "whats-in-the-way.qmd"
     # - "where-should-the-eye-go.qmd"

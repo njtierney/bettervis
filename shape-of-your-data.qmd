@@ -71,6 +71,21 @@ I find it easier to check those rules by writing them down or filling in the bla
 > - Each row (observation) represents: ___
 > - Each cell (value) contains: ___
 
+
+```{r}
+#| echo: true
+pen_short <- penguins |> 
+        as_tibble() |> 
+        select(species, year, bill_len, bill_dep) |> 
+        drop_na() |> 
+        group_by(species, year) |> 
+        slice(1) |> 
+        ungroup()
+
+pen_short
+```
+
+
 For `pen_short`, that gives us:
 
 > - **The variables in the data are:** species, year, bill_len, bill_dep
