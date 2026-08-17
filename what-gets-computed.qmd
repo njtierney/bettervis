@@ -110,7 +110,9 @@ Take your pen and paper, and draw the chart you would like to see to explore:
 You don't need exact number on the axes. I am just curious on the **shape**. You can use bars, dots, lines, other summaries, whatever you want!
 
 ```{r}
-countdown(margin = 3)
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
 ```
 
 
@@ -233,6 +235,8 @@ How would you plot it? What do you expect?
 Let's take a couple of minutes to explore this, draw some sketches, imagine the types of data summary we might see as tables, as plots!
 
 ```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
 countdown(minutes = 5)
 ```
 
@@ -324,6 +328,8 @@ Sketch out the data as a table for the summary we want - which is:
 Sketch it out!
 
 ```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
 countdown(minutes = 2)
 ```
 
