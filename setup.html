@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Setup – Making Better Graphs</title>
+<title>Setup – Making Better Graphs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./anatomy-of-a-ggplot.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -81,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-b45b7b0fa9169e986df15f1ef60a279c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e0b6b96b77ec8933f411bc2e1c5b7ba7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ef2c35dd9f25d028974ee0b6d1133cf6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./setup.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./setup.html">Setup</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -159,7 +160,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./setup.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup</span></span></a>
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anatomy-of-a-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a ggplot</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./shape-of-your-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></a>
   </div>
 </li>
     </ul>
@@ -172,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-this-book-works" id="toc-how-this-book-works" class="nav-link active" data-scroll-target="#how-this-book-works"><span class="header-section-number">1.1</span> How this book works</a>
+  <li><a href="#how-this-book-works" id="toc-how-this-book-works" class="nav-link active" data-scroll-target="#how-this-book-works">How this book works</a>
   <ul class="collapse">
   <li><a href="#the-book-is-longer-than-the-course" id="toc-the-book-is-longer-than-the-course" class="nav-link" data-scroll-target="#the-book-is-longer-than-the-course">The book is longer than the course</a></li>
   <li><a href="#how-we-will-work" id="toc-how-we-will-work" class="nav-link" data-scroll-target="#how-we-will-work">How we will work</a></li>
@@ -180,14 +193,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-code" id="toc-the-code" class="nav-link" data-scroll-target="#the-code">The code</a></li>
   <li><a href="#where-everything-lives" id="toc-where-everything-lives" class="nav-link" data-scroll-target="#where-everything-lives">Where everything lives</a></li>
   </ul></li>
-  <li><a href="#what-to-install" id="toc-what-to-install" class="nav-link" data-scroll-target="#what-to-install"><span class="header-section-number">1.2</span> What to install</a>
+  <li><a href="#what-to-install" id="toc-what-to-install" class="nav-link" data-scroll-target="#what-to-install">What to install</a>
   <ul class="collapse">
   <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
   <li><a href="#the-r-packages" id="toc-the-r-packages" class="nav-link" data-scroll-target="#the-r-packages">The R packages</a></li>
   <li><a href="#checking-it-all-worked" id="toc-checking-it-all-worked" class="nav-link" data-scroll-target="#checking-it-all-worked">Checking it all worked</a></li>
   <li><a href="#if-something-will-not-install" id="toc-if-something-will-not-install" class="nav-link" data-scroll-target="#if-something-will-not-install">If something will not install</a></li>
   </ul></li>
-  <li><a href="#what-to-bring" id="toc-what-to-bring" class="nav-link" data-scroll-target="#what-to-bring"><span class="header-section-number">1.3</span> What to bring</a></li>
+  <li><a href="#what-to-bring" id="toc-what-to-bring" class="nav-link" data-scroll-target="#what-to-bring">What to bring</a></li>
   <li>Links</li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/njtierney/bettervis/edit/main/setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/njtierney/bettervis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -197,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-setup" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup</span></span></h1>
+<h1 class="title"><span id="sec-setup" class="quarto-section-identifier">Setup</span></h1>
 </div>
 
 
@@ -221,8 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>What to bring.</li>
 </ol>
 <p>The first part takes two minutes to read and will make the rest of the course easier to follow.</p>
-<section id="how-this-book-works" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="how-this-book-works"><span class="header-section-number">1.1</span> How this book works</h2>
+<section id="how-this-book-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-book-works">How this book works</h2>
 <section id="the-book-is-longer-than-the-course" class="level3">
 <h3 class="anchored" data-anchor-id="the-book-is-longer-than-the-course">The book is longer than the course</h3>
 <p>The course is six hours. The book has more in it than six hours can cover, and that is on purpose.</p>
@@ -342,8 +355,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- Download link and where to put it. Every chapter's Your Turn points here. -->
 </section>
 </section>
-<section id="what-to-install" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="what-to-install"><span class="header-section-number">1.2</span> What to install</h2>
+<section id="what-to-install" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-install">What to install</h2>
 <p>If you can, it is worthwhile to install the below before the first session.</p>
 <p>We have time on the day, and I would much rather spend ten minutes helping you get set up than have you sit out an exercise. So work through what you can, and bring the rest along.</p>
 <section id="r" class="level3">
@@ -449,8 +462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Installation problems are almost always specific to one machine, and they are much faster to solve with two people looking at them. They are also, genuinely, not a reflection on you. Every one of us has lost an afternoon to a package that would not build. Ask me for some horror stories.</p>
 </section>
 </section>
-<section id="what-to-bring" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="what-to-bring"><span class="header-section-number">1.3</span> What to bring</h2>
+<section id="what-to-bring" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-bring">What to bring</h2>
 <p>One thing that isn’t software: <strong>something to draw on, and something to draw with.</strong></p>
 <p>Paper and a pen is perfect.</p>
 <p>We draw plots by hand a few times during lessons, before we build them in ggplot2. I want you to have a picture of what you are aiming at before you start typing, and I have found sketching on paper to be a really effective way to understand what you want in a graphic, and also for you to get a sense of the components of data visualisation. Also, it’s fun!</p>
@@ -892,6 +905,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./anatomy-of-a-ggplot.html" class="pagination-link" aria-label="Anatomy of a ggplot">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a ggplot</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
