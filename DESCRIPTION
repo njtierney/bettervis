@@ -23,6 +23,8 @@ Imports:
   rmarkdown,
   spelling,
   tidyverse,
-  viridis
+  viridis,
+  visdat,
+  naniar
 URL: https://github.com/njtierney/bettervis
 BugReports: https://github.com/njtierney/bettervis/issues
