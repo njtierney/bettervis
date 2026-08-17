@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./what-gets-computed.html" rel="next">
 <link href="./anatomy-of-a-ggplot.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -176,6 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./what-gets-computed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">What gets computed</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -267,6 +274,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Each cell (value) contains: ___</li>
 </ul>
 </blockquote>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-label="2"></a>        <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-label="3"></a>        <span class="fu">select</span>(species, year, bill_len, bill_dep) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-label="4"></a>        <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-label="5"></a>        <span class="fu">group_by</span>(species, year) <span class="sc">|&gt;</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-label="6"></a>        <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-label="7"></a>        <span class="fu">ungroup</span>()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-label="8"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-label="9"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+  species    year bill_len bill_dep
+  &lt;fct&gt;     &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 Adelie     2007     39.1     18.7
+2 Adelie     2008     39.6     17.7
+3 Adelie     2009     35       17.9
+4 Chinstrap  2007     46.5     17.9
+5 Chinstrap  2008     50.5     18.4
+6 Chinstrap  2009     50.9     17.9
+7 Gentoo     2007     46.1     13.2
+8 Gentoo     2008     49.1     14.8
+9 Gentoo     2009     49.1     14.5</code></pre>
+</div>
+</div>
 <p>For <code>pen_short</code>, that gives us:</p>
 <blockquote class="blockquote">
 <ul>
@@ -287,14 +319,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </blockquote>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-label="1"></a>example <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-label="2"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"gentoo"</span>, <span class="st">"chinstrap"</span>, <span class="st">"adelie"</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-label="3"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">2008</span>, <span class="dv">2009</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-label="4"></a>  <span class="at">bill_len =</span> <span class="fu">c</span>(<span class="fl">44.2</span>, <span class="fl">43.5</span>, <span class="fl">58.6</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-label="5"></a>  <span class="at">bill_dep =</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">17.15</span>, <span class="fl">21.5</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-label="6"></a>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-label="7"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-label="8"></a>example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-label="1"></a>example <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-label="2"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"gentoo"</span>, <span class="st">"chinstrap"</span>, <span class="st">"adelie"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-label="3"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">2008</span>, <span class="dv">2009</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-label="4"></a>  <span class="at">bill_len =</span> <span class="fu">c</span>(<span class="fl">44.2</span>, <span class="fl">43.5</span>, <span class="fl">58.6</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-label="5"></a>  <span class="at">bill_dep =</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">17.15</span>, <span class="fl">21.5</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-label="6"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-label="7"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-label="8"></a>example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    species year bill_len bill_dep
 1    gentoo 2007     44.2    13.10
@@ -308,12 +340,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-label="1"></a><span class="fu">tibble</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-label="2"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"gentoo"</span>, <span class="st">"chinstrap"</span>, <span class="st">"adelie"</span>),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-label="3"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">2008</span>, <span class="dv">2009</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-label="4"></a>  <span class="at">bill_len =</span> <span class="fu">c</span>(<span class="fl">44.2</span>, <span class="fl">43.5</span>, <span class="fl">58.6</span>),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-label="5"></a>  <span class="at">bill_dep =</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">17.15</span>, <span class="fl">21.5</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a><span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-label="2"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"gentoo"</span>, <span class="st">"chinstrap"</span>, <span class="st">"adelie"</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">2008</span>, <span class="dv">2009</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>  <span class="at">bill_len =</span> <span class="fu">c</span>(<span class="fl">44.2</span>, <span class="fl">43.5</span>, <span class="fl">58.6</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-label="5"></a>  <span class="at">bill_dep =</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">17.15</span>, <span class="fl">21.5</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   species    year bill_len bill_dep
@@ -326,12 +358,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a>tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-label="2"></a>  <span class="sc">~</span>species,     <span class="sc">~</span>year, <span class="sc">~</span>bill_len, <span class="sc">~</span>bill_dep,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>   <span class="st">"gentoo"</span>,    <span class="dv">2007</span>,   <span class="fl">44.2</span>,      <span class="fl">13.1</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>   <span class="st">"chinstrap"</span>, <span class="dv">2008</span>,   <span class="fl">43.5</span>,      <span class="fl">17.15</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-label="5"></a>   <span class="st">"adelie"</span>,     <span class="dv">2009</span>,   <span class="fl">58.6</span>,      <span class="fl">21.5</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a>tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a>  <span class="sc">~</span>species,     <span class="sc">~</span>year, <span class="sc">~</span>bill_len, <span class="sc">~</span>bill_dep,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>   <span class="st">"gentoo"</span>,    <span class="dv">2007</span>,   <span class="fl">44.2</span>,      <span class="fl">13.1</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-label="4"></a>   <span class="st">"chinstrap"</span>, <span class="dv">2008</span>,   <span class="fl">43.5</span>,      <span class="fl">17.15</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-label="5"></a>   <span class="st">"adelie"</span>,     <span class="dv">2009</span>,   <span class="fl">58.6</span>,      <span class="fl">21.5</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   species    year bill_len bill_dep
@@ -351,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s explore this by breaking each of the rules. We will look again at the <code>pen_short</code> data:</p>
 <p>This is the data in <strong>tidy data form</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_len bill_dep
@@ -369,16 +401,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Think back to the plot of <code>pen_short</code> that we had in the previous chapter:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a><span class="fu">ggplot</span>(pen_short,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-label="3"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_len,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-label="4"></a>           <span class="at">y =</span> bill_dep,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-label="5"></a>           <span class="at">colour =</span> species)) <span class="sc">+</span> </span>
-<span id="cb11-6"><a href="#cb11-6" aria-label="6"></a>        <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-label="2"></a><span class="fu">ggplot</span>(pen_short,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-label="3"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_len,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-label="4"></a>           <span class="at">y =</span> bill_dep,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-label="5"></a>           <span class="at">colour =</span> species)) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-label="6"></a>        <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -448,7 +480,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now let’s go back to the tidy data of penguins:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_len bill_dep
@@ -466,16 +498,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>And go back again to our ggplot:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a><span class="fu">ggplot</span>(pen_short,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_len,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>           <span class="at">y =</span> bill_dep,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-label="5"></a>           <span class="at">colour =</span> species)) <span class="sc">+</span> </span>
-<span id="cb18-6"><a href="#cb18-6" aria-label="6"></a>        <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-label="2"></a><span class="fu">ggplot</span>(pen_short,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-label="3"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_len,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-label="4"></a>           <span class="at">y =</span> bill_dep,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-label="5"></a>           <span class="at">colour =</span> species)) <span class="sc">+</span> </span>
+<span id="cb20-6"><a href="#cb20-6" aria-label="6"></a>        <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -483,7 +515,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Before, each of the columns map onto an argument inside <code>aes()</code>.</p>
 <p>Now, think about how to do this for a messy dataset:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a>pen_long_bill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a>pen_long_bill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 18 × 4
    species    year bill_variable measurement
@@ -511,7 +543,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>How can we plot “bill depth vs bill length”?</p>
 <p>And when there are two values in each cell, how do we plot those?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a>pen_two_val</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a>pen_two_val</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   species    year bill_ratio
@@ -529,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>And for the separate years? What do we call these?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a>pen_year_bill_len</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a>pen_year_bill_len</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   species   `2007` `2008` `2009`
@@ -542,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I’m not saying you can’t plot data from this data. I am saying it is hard to do it. It doesn’t fit into the tool usage.</p>
 <p>But when the data is in a standard, “Tidy” form, then this becomes much easier:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_len bill_dep
@@ -577,35 +609,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I kept the code above hidden so the messy data lands on its own, without <code>pivot_longer()</code> and <code>pivot_wider()</code> giving away the ending.</p>
 <p>From here on we run code against those objects, so you need them in your own session. Run this and you will have all four.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-label="2"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-label="3"></a>  <span class="fu">select</span>(species, year, bill_len, bill_dep) <span class="sc">|&gt;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-label="4"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-label="5"></a>  <span class="fu">group_by</span>(species, year) <span class="sc">|&gt;</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-label="6"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-label="7"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb27-8"><a href="#cb27-8" aria-label="8"></a></span>
-<span id="cb27-9"><a href="#cb27-9" aria-label="9"></a><span class="co"># variables sitting in the rows instead of forming columns</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-label="10"></a>pen_long_bill <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-label="11"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb27-12"><a href="#cb27-12" aria-label="12"></a>    <span class="at">cols =</span> <span class="fu">c</span>(bill_len, bill_dep),</span>
-<span id="cb27-13"><a href="#cb27-13" aria-label="13"></a>    <span class="at">names_to =</span> <span class="st">"bill_variable"</span>,</span>
-<span id="cb27-14"><a href="#cb27-14" aria-label="14"></a>    <span class="at">values_to =</span> <span class="st">"measurement"</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-label="15"></a>  )</span>
-<span id="cb27-16"><a href="#cb27-16" aria-label="16"></a></span>
-<span id="cb27-17"><a href="#cb27-17" aria-label="17"></a><span class="co"># two values jammed into one cell</span></span>
-<span id="cb27-18"><a href="#cb27-18" aria-label="18"></a>pen_two_val <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-label="19"></a>  <span class="fu">mutate</span>(<span class="at">bill_ratio =</span> <span class="fu">paste0</span>(bill_len, <span class="st">"/"</span>, bill_dep)) <span class="sc">|&gt;</span></span>
-<span id="cb27-20"><a href="#cb27-20" aria-label="20"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_len, <span class="sc">-</span>bill_dep)</span>
-<span id="cb27-21"><a href="#cb27-21" aria-label="21"></a></span>
-<span id="cb27-22"><a href="#cb27-22" aria-label="22"></a><span class="co"># year spread across the column names</span></span>
-<span id="cb27-23"><a href="#cb27-23" aria-label="23"></a>pen_year_bill_dep <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb27-24"><a href="#cb27-24" aria-label="24"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_len) <span class="sc">|&gt;</span></span>
-<span id="cb27-25"><a href="#cb27-25" aria-label="25"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> bill_dep)</span>
-<span id="cb27-26"><a href="#cb27-26" aria-label="26"></a></span>
-<span id="cb27-27"><a href="#cb27-27" aria-label="27"></a>pen_year_bill_len <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb27-28"><a href="#cb27-28" aria-label="28"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_dep) <span class="sc">|&gt;</span></span>
-<span id="cb27-29"><a href="#cb27-29" aria-label="29"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a>  <span class="fu">select</span>(species, year, bill_len, bill_dep) <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-label="4"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-label="5"></a>  <span class="fu">group_by</span>(species, year) <span class="sc">|&gt;</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-label="6"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb29-8"><a href="#cb29-8" aria-label="8"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-label="9"></a><span class="co"># variables sitting in the rows instead of forming columns</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-label="10"></a>pen_long_bill <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-label="11"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb29-12"><a href="#cb29-12" aria-label="12"></a>    <span class="at">cols =</span> <span class="fu">c</span>(bill_len, bill_dep),</span>
+<span id="cb29-13"><a href="#cb29-13" aria-label="13"></a>    <span class="at">names_to =</span> <span class="st">"bill_variable"</span>,</span>
+<span id="cb29-14"><a href="#cb29-14" aria-label="14"></a>    <span class="at">values_to =</span> <span class="st">"measurement"</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-label="15"></a>  )</span>
+<span id="cb29-16"><a href="#cb29-16" aria-label="16"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-label="17"></a><span class="co"># two values jammed into one cell</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-label="18"></a>pen_two_val <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-label="19"></a>  <span class="fu">mutate</span>(<span class="at">bill_ratio =</span> <span class="fu">paste0</span>(bill_len, <span class="st">"/"</span>, bill_dep)) <span class="sc">|&gt;</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-label="20"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_len, <span class="sc">-</span>bill_dep)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-label="21"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-label="22"></a><span class="co"># year spread across the column names</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-label="23"></a>pen_year_bill_dep <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-label="24"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_len) <span class="sc">|&gt;</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-label="25"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> bill_dep)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-label="26"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-label="27"></a>pen_year_bill_len <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-label="28"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_dep) <span class="sc">|&gt;</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-label="29"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If any of that is unfamiliar, that is fine. It is the rest of this section.</p>
 </div>
@@ -613,7 +645,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>To make this a bit easier to learn, we have our reference set of tidy data, that each of these will convert back to:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_len bill_dep
@@ -636,7 +668,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>The problem with <code>pen_long_bill</code> here is that all the “bill” related variables are in a single column.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-label="1"></a>pen_long_bill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-label="1"></a>pen_long_bill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 18 × 4
    species    year bill_variable measurement
@@ -669,11 +701,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Where their observations form rows - the values of bill length, and bill depth, respectively.</p>
 <p>To make this happen we use <code>pivot_wider()</code>, and use the <code>names_from</code> and <code>values_from</code> arguments:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-label="1"></a>pen_long_bill <span class="sc">|&gt;</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
-<span id="cb32-3"><a href="#cb32-3" aria-label="3"></a>                <span class="at">names_from =</span> bill_variable,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-label="4"></a>                <span class="at">values_from =</span> measurement</span>
-<span id="cb32-5"><a href="#cb32-5" aria-label="5"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-label="1"></a>pen_long_bill <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-label="3"></a>                <span class="at">names_from =</span> bill_variable,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-label="4"></a>                <span class="at">values_from =</span> measurement</span>
+<span id="cb34-5"><a href="#cb34-5" aria-label="5"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_len bill_dep
@@ -710,24 +742,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_d408f150" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_0317d1af" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Run the code below to create the <code>hi_score</code> dataset:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-label="1"></a>hi_score <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb34-2"><a href="#cb34-2" aria-label="2"></a>  <span class="sc">~</span>score, <span class="sc">~</span>variable, <span class="sc">~</span>values,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-label="3"></a>  <span class="dv">11000</span>,  <span class="st">"game"</span>,    <span class="st">"pacman"</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-label="4"></a>  <span class="dv">11000</span>,  <span class="st">"person"</span>,  <span class="st">"James"</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-label="5"></a>  <span class="dv">9100</span>,   <span class="st">"game"</span>,    <span class="st">"asteroids"</span>,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-label="6"></a>  <span class="dv">9100</span>,   <span class="st">"person"</span>,  <span class="st">"James"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-label="7"></a>  <span class="dv">18000</span>,  <span class="st">"game"</span>,    <span class="st">"pacman"</span>,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-label="8"></a>  <span class="dv">18000</span>,  <span class="st">"person"</span>,  <span class="st">"Sarida"</span>,</span>
-<span id="cb34-9"><a href="#cb34-9" aria-label="9"></a>  <span class="dv">1200</span>,   <span class="st">"game"</span>,    <span class="st">"asteroids"</span>,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-label="10"></a>  <span class="dv">1200</span>,   <span class="st">"person"</span>,  <span class="st">"Sarida"</span>,</span>
-<span id="cb34-11"><a href="#cb34-11" aria-label="11"></a>)</span>
-<span id="cb34-12"><a href="#cb34-12" aria-label="12"></a></span>
-<span id="cb34-13"><a href="#cb34-13" aria-label="13"></a>hi_score</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-label="1"></a>hi_score <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-label="2"></a>  <span class="sc">~</span>score, <span class="sc">~</span>variable, <span class="sc">~</span>values,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-label="3"></a>  <span class="dv">11000</span>,  <span class="st">"game"</span>,    <span class="st">"pacman"</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-label="4"></a>  <span class="dv">11000</span>,  <span class="st">"person"</span>,  <span class="st">"James"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-label="5"></a>  <span class="dv">9100</span>,   <span class="st">"game"</span>,    <span class="st">"asteroids"</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-label="6"></a>  <span class="dv">9100</span>,   <span class="st">"person"</span>,  <span class="st">"James"</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-label="7"></a>  <span class="dv">18000</span>,  <span class="st">"game"</span>,    <span class="st">"pacman"</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-label="8"></a>  <span class="dv">18000</span>,  <span class="st">"person"</span>,  <span class="st">"Sarida"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-label="9"></a>  <span class="dv">1200</span>,   <span class="st">"game"</span>,    <span class="st">"asteroids"</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-label="10"></a>  <span class="dv">1200</span>,   <span class="st">"person"</span>,  <span class="st">"Sarida"</span>,</span>
+<span id="cb36-11"><a href="#cb36-11" aria-label="11"></a>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-label="12"></a></span>
+<span id="cb36-13"><a href="#cb36-13" aria-label="13"></a>hi_score</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 3
   score variable values   
@@ -752,15 +784,15 @@ Answer code below
 Only really click on this if you’ve actually had a go at doing it!
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-label="1"></a>hi_score <span class="sc">|&gt;</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
-<span id="cb36-3"><a href="#cb36-3" aria-label="3"></a>                <span class="at">names_from =</span> variable,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-label="4"></a>                <span class="at">values_from =</span> values</span>
-<span id="cb36-5"><a href="#cb36-5" aria-label="5"></a>        ) <span class="sc">|&gt;</span> </span>
-<span id="cb36-6"><a href="#cb36-6" aria-label="6"></a>        <span class="co"># use dplyr::relocate</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-label="7"></a>        <span class="fu">relocate</span>(</span>
-<span id="cb36-8"><a href="#cb36-8" aria-label="8"></a>                person, game, score</span>
-<span id="cb36-9"><a href="#cb36-9" aria-label="9"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-label="1"></a>hi_score <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-label="3"></a>                <span class="at">names_from =</span> variable,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-label="4"></a>                <span class="at">values_from =</span> values</span>
+<span id="cb38-5"><a href="#cb38-5" aria-label="5"></a>        ) <span class="sc">|&gt;</span> </span>
+<span id="cb38-6"><a href="#cb38-6" aria-label="6"></a>        <span class="co"># use dplyr::relocate</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-label="7"></a>        <span class="fu">relocate</span>(</span>
+<span id="cb38-8"><a href="#cb38-8" aria-label="8"></a>                person, game, score</span>
+<span id="cb38-9"><a href="#cb38-9" aria-label="9"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   person game      score
@@ -775,7 +807,7 @@ Only really click on this if you’ve actually had a go at doing it!
 </details>
 <p>Now try using <code>pivot_wider()</code> with a different dataset: <code>fish_encounters</code> - which contains (type <code>?fish_encounters</code> to get details) information about fish swimming down a river.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-label="1"></a>fish_encounters</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-label="1"></a>fish_encounters</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 114 × 3
    fish  station  seen
@@ -803,11 +835,11 @@ Answer code below
 Only really click on this if you’ve actually had a go at doing it!
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-label="1"></a>fish_encounters <span class="sc">|&gt;</span> </span>
-<span id="cb40-2"><a href="#cb40-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
-<span id="cb40-3"><a href="#cb40-3" aria-label="3"></a>                <span class="at">names_from =</span> station,</span>
-<span id="cb40-4"><a href="#cb40-4" aria-label="4"></a>                <span class="at">values_from =</span> seen</span>
-<span id="cb40-5"><a href="#cb40-5" aria-label="5"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-label="1"></a>fish_encounters <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-label="3"></a>                <span class="at">names_from =</span> station,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-label="4"></a>                <span class="at">values_from =</span> seen</span>
+<span id="cb42-5"><a href="#cb42-5" aria-label="5"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 19 × 12
    fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE   MAW
@@ -841,12 +873,12 @@ Only really click on this if you’ve actually had a go at doing it!
 Answer code below
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-label="1"></a>fish_encounters <span class="sc">|&gt;</span> </span>
-<span id="cb42-2"><a href="#cb42-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
-<span id="cb42-3"><a href="#cb42-3" aria-label="3"></a>                <span class="at">names_from =</span> station,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-label="4"></a>                <span class="at">values_from =</span> seen,</span>
-<span id="cb42-5"><a href="#cb42-5" aria-label="5"></a>                <span class="at">values_fill =</span> <span class="dv">0</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-label="1"></a>fish_encounters <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-label="2"></a>        <span class="fu">pivot_wider</span>(</span>
+<span id="cb44-3"><a href="#cb44-3" aria-label="3"></a>                <span class="at">names_from =</span> station,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-label="4"></a>                <span class="at">values_from =</span> seen,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-label="5"></a>                <span class="at">values_fill =</span> <span class="dv">0</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 19 × 12
    fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE   MAW
@@ -880,7 +912,7 @@ Answer code below
 <h2 data-number="2.3" class="anchored" data-anchor-id="using-pivot_longer"><span class="header-section-number">2.3</span> Using <code>pivot_longer()</code></h2>
 <p>Let’s look at using <code>pivot_longer()</code> with <code>pen_year_bill_dep</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-label="1"></a>pen_year_bill_dep</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-label="1"></a>pen_year_bill_dep</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   species   `2007` `2008` `2009`
@@ -892,12 +924,12 @@ Answer code below
 </div>
 <p>Similar to <code>pivot_wider()</code>, there <code>name</code> and <code>value</code> arguments - this time, we have <code>names_to</code>, <code>values_to</code>, and <code>cols</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-label="1"></a>pen_year_bill_dep <span class="sc">|&gt;</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-label="2"></a>        <span class="fu">pivot_longer</span>(</span>
-<span id="cb46-3"><a href="#cb46-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2007</span><span class="st">`</span>, <span class="st">`</span><span class="at">2008</span><span class="st">`</span>, <span class="st">`</span><span class="at">2009</span><span class="st">`</span>),</span>
-<span id="cb46-4"><a href="#cb46-4" aria-label="4"></a>                <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
-<span id="cb46-5"><a href="#cb46-5" aria-label="5"></a>                <span class="at">values_to =</span> <span class="st">"bill_dep"</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-label="1"></a>pen_year_bill_dep <span class="sc">|&gt;</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-label="2"></a>        <span class="fu">pivot_longer</span>(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2007</span><span class="st">`</span>, <span class="st">`</span><span class="at">2008</span><span class="st">`</span>, <span class="st">`</span><span class="at">2009</span><span class="st">`</span>),</span>
+<span id="cb48-4"><a href="#cb48-4" aria-label="4"></a>                <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb48-5"><a href="#cb48-5" aria-label="5"></a>                <span class="at">values_to =</span> <span class="st">"bill_dep"</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   species   year  bill_dep
@@ -920,32 +952,9 @@ Answer code below
 </ul>
 <p>It is worth explaining some workarounds for <code>cols</code> - you don’t always want to be specifying every single column name. We can be a little bit crafty and use <code>-species</code>, which says: every column but species.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-label="1"></a>pen_year_bill_dep <span class="sc">|&gt;</span> </span>
-<span id="cb48-2"><a href="#cb48-2" aria-label="2"></a>        <span class="fu">pivot_longer</span>(</span>
-<span id="cb48-3"><a href="#cb48-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="sc">-</span>species,</span>
-<span id="cb48-4"><a href="#cb48-4" aria-label="4"></a>                <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
-<span id="cb48-5"><a href="#cb48-5" aria-label="5"></a>                <span class="at">values_to =</span> <span class="st">"bill_dep"</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9 × 3
-  species   year  bill_dep
-  &lt;fct&gt;     &lt;chr&gt;    &lt;dbl&gt;
-1 Adelie    2007      18.7
-2 Adelie    2008      17.7
-3 Adelie    2009      17.9
-4 Chinstrap 2007      17.9
-5 Chinstrap 2008      18.4
-6 Chinstrap 2009      17.9
-7 Gentoo    2007      13.2
-8 Gentoo    2008      14.8
-9 Gentoo    2009      14.5</code></pre>
-</div>
-</div>
-<p>We can also do <code>`2007`:`2009`</code> to indicate all columns between 2007 and 2009.</p>
-<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-label="1"></a>pen_year_bill_dep <span class="sc">|&gt;</span> </span>
 <span id="cb50-2"><a href="#cb50-2" aria-label="2"></a>        <span class="fu">pivot_longer</span>(</span>
-<span id="cb50-3"><a href="#cb50-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="st">`</span><span class="at">2007</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2009</span><span class="st">`</span>,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="sc">-</span>species,</span>
 <span id="cb50-4"><a href="#cb50-4" aria-label="4"></a>                <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
 <span id="cb50-5"><a href="#cb50-5" aria-label="5"></a>                <span class="at">values_to =</span> <span class="st">"bill_dep"</span></span>
 <span id="cb50-6"><a href="#cb50-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -964,14 +973,37 @@ Answer code below
 9 Gentoo    2009      14.5</code></pre>
 </div>
 </div>
-<p>Note that you cannot do this with just the bare numbers, as it will assume you are referring to column positions by number, not name:</p>
+<p>We can also do <code>`2007`:`2009`</code> to indicate all columns between 2007 and 2009.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-label="1"></a>pen_year_bill_dep <span class="sc">|&gt;</span> </span>
 <span id="cb52-2"><a href="#cb52-2" aria-label="2"></a>        <span class="fu">pivot_longer</span>(</span>
-<span id="cb52-3"><a href="#cb52-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">2008</span>, <span class="dv">2009</span>),</span>
+<span id="cb52-3"><a href="#cb52-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="st">`</span><span class="at">2007</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2009</span><span class="st">`</span>,</span>
 <span id="cb52-4"><a href="#cb52-4" aria-label="4"></a>                <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
 <span id="cb52-5"><a href="#cb52-5" aria-label="5"></a>                <span class="at">values_to =</span> <span class="st">"bill_dep"</span></span>
 <span id="cb52-6"><a href="#cb52-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  species   year  bill_dep
+  &lt;fct&gt;     &lt;chr&gt;    &lt;dbl&gt;
+1 Adelie    2007      18.7
+2 Adelie    2008      17.7
+3 Adelie    2009      17.9
+4 Chinstrap 2007      17.9
+5 Chinstrap 2008      18.4
+6 Chinstrap 2009      17.9
+7 Gentoo    2007      13.2
+8 Gentoo    2008      14.8
+9 Gentoo    2009      14.5</code></pre>
+</div>
+</div>
+<p>Note that you cannot do this with just the bare numbers, as it will assume you are referring to column positions by number, not name:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-label="1"></a>pen_year_bill_dep <span class="sc">|&gt;</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-label="2"></a>        <span class="fu">pivot_longer</span>(</span>
+<span id="cb54-3"><a href="#cb54-3" aria-label="3"></a>                <span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">2008</span>, <span class="dv">2009</span>),</span>
+<span id="cb54-4"><a href="#cb54-4" aria-label="4"></a>                <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-label="5"></a>                <span class="at">values_to =</span> <span class="st">"bill_dep"</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-label="6"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `pivot_longer()`:
 ! Can't select columns past the end.
@@ -992,12 +1024,12 @@ Answer code below
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_ba5de2f3" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_2338acf8" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Now try using <code>pivot_longer()</code> with a different dataset: <code>relig_income</code>, which comes bundled inside <code>tidyr</code>. This is a dataset that contains religion and income ranges.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-label="1"></a>relig_income</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-label="1"></a>relig_income</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 18 × 11
    religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
@@ -1026,17 +1058,18 @@ Answer code below
 </div>
 </div>
 </div>
+<!-- UP TO HERE on 17-08-2026 -->
 </section>
 <section id="separating-columns-to-make-them-tidy" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="separating-columns-to-make-them-tidy"><span class="header-section-number">2.4</span> Separating columns to make them tidy</h2>
 <p>When values are combined together, you can use the <code>separate_wider_delim()</code> function to separate them out:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-label="1"></a>pen_two_val <span class="sc">|&gt;</span> </span>
-<span id="cb56-2"><a href="#cb56-2" aria-label="2"></a>        <span class="fu">separate_wider_delim</span>(</span>
-<span id="cb56-3"><a href="#cb56-3" aria-label="3"></a>                <span class="at">cols =</span> bill_ratio,</span>
-<span id="cb56-4"><a href="#cb56-4" aria-label="4"></a>                <span class="at">delim =</span> <span class="st">"/"</span>,</span>
-<span id="cb56-5"><a href="#cb56-5" aria-label="5"></a>                <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"bill_dep"</span>, <span class="st">"bill_len"</span>)</span>
-<span id="cb56-6"><a href="#cb56-6" aria-label="6"></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-label="1"></a>pen_two_val <span class="sc">|&gt;</span> </span>
+<span id="cb58-2"><a href="#cb58-2" aria-label="2"></a>        <span class="fu">separate_wider_delim</span>(</span>
+<span id="cb58-3"><a href="#cb58-3" aria-label="3"></a>                <span class="at">cols =</span> bill_ratio,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-label="4"></a>                <span class="at">delim =</span> <span class="st">"/"</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-label="5"></a>                <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"bill_dep"</span>, <span class="st">"bill_len"</span>)</span>
+<span id="cb58-6"><a href="#cb58-6" aria-label="6"></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_dep bill_len
@@ -1064,17 +1097,17 @@ Answer code below
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_05d8c2b4" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_3d4ad9a3" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Now try with this data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-label="1"></a>dat_fish <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb58-2"><a href="#cb58-2" aria-label="2"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="st">"handfish"</span>, <span class="st">"rainbow trout"</span>, <span class="st">"galaxiids"</span>),</span>
-<span id="cb58-3"><a href="#cb58-3" aria-label="3"></a>  <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"m-3"</span>, <span class="st">"f-1100"</span>, <span class="st">"m-300"</span>)</span>
-<span id="cb58-4"><a href="#cb58-4" aria-label="4"></a>)</span>
-<span id="cb58-5"><a href="#cb58-5" aria-label="5"></a></span>
-<span id="cb58-6"><a href="#cb58-6" aria-label="6"></a>dat_fish</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-label="1"></a>dat_fish <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb60-2"><a href="#cb60-2" aria-label="2"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="st">"handfish"</span>, <span class="st">"rainbow trout"</span>, <span class="st">"galaxiids"</span>),</span>
+<span id="cb60-3"><a href="#cb60-3" aria-label="3"></a>  <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"m-3"</span>, <span class="st">"f-1100"</span>, <span class="st">"m-300"</span>)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-label="4"></a>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-label="5"></a></span>
+<span id="cb60-6"><a href="#cb60-6" aria-label="6"></a>dat_fish</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   id            values
@@ -1084,6 +1117,45 @@ Answer code below
 3 galaxiids     m-300 </code></pre>
 </div>
 </div>
+<details>
+<summary>
+Answer code below
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-label="1"></a>dat_fish <span class="sc">|&gt;</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-label="2"></a>  <span class="fu">separate_wider_delim</span>(</span>
+<span id="cb62-3"><a href="#cb62-3" aria-label="3"></a>    <span class="at">cols =</span> values,</span>
+<span id="cb62-4"><a href="#cb62-4" aria-label="4"></a>    <span class="at">delim =</span> <span class="st">"-"</span>,</span>
+<span id="cb62-5"><a href="#cb62-5" aria-label="5"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"count"</span>)</span>
+<span id="cb62-6"><a href="#cb62-6" aria-label="6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  id            sex   count
+  &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;
+1 handfish      m     3    
+2 rainbow trout f     1100 
+3 galaxiids     m     300  </code></pre>
+</div>
+</div>
+<p>Clean up the data types</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-label="1"></a>dat_fish <span class="sc">|&gt;</span> </span>
+<span id="cb64-2"><a href="#cb64-2" aria-label="2"></a>  <span class="fu">separate_wider_delim</span>(</span>
+<span id="cb64-3"><a href="#cb64-3" aria-label="3"></a>    <span class="at">cols =</span> values,</span>
+<span id="cb64-4"><a href="#cb64-4" aria-label="4"></a>    <span class="at">delim =</span> <span class="st">"-"</span>,</span>
+<span id="cb64-5"><a href="#cb64-5" aria-label="5"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"count"</span>)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-label="6"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb64-7"><a href="#cb64-7" aria-label="7"></a>  <span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">as.integer</span>(count))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  id            sex   count
+  &lt;chr&gt;         &lt;chr&gt; &lt;int&gt;
+1 handfish      m         3
+2 rainbow trout f      1100
+3 galaxiids     m       300</code></pre>
+</div>
+</div>
+</details>
 </div>
 </div>
 <!-- The same pedestrian data with the four sensors as four columns, which is
@@ -1098,15 +1170,15 @@ Answer code below
 <p>Here’s a plot I have made by accident more times than I would like to admit.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>We have bill length, measured over three years, for three species. So let’s draw a line.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb60-2"><a href="#cb60-2" aria-label="2"></a>        <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb60-3"><a href="#cb60-3" aria-label="3"></a>        <span class="fu">select</span>(species, year, bill_len, bill_dep) <span class="sc">|&gt;</span> </span>
-<span id="cb60-4"><a href="#cb60-4" aria-label="4"></a>        <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb60-5"><a href="#cb60-5" aria-label="5"></a>        <span class="fu">group_by</span>(species, year) <span class="sc">|&gt;</span> </span>
-<span id="cb60-6"><a href="#cb60-6" aria-label="6"></a>        <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb60-7"><a href="#cb60-7" aria-label="7"></a>        <span class="fu">ungroup</span>()</span>
-<span id="cb60-8"><a href="#cb60-8" aria-label="8"></a></span>
-<span id="cb60-9"><a href="#cb60-9" aria-label="9"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-label="2"></a>        <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb66-3"><a href="#cb66-3" aria-label="3"></a>        <span class="fu">select</span>(species, year, bill_len, bill_dep) <span class="sc">|&gt;</span> </span>
+<span id="cb66-4"><a href="#cb66-4" aria-label="4"></a>        <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb66-5"><a href="#cb66-5" aria-label="5"></a>        <span class="fu">group_by</span>(species, year) <span class="sc">|&gt;</span> </span>
+<span id="cb66-6"><a href="#cb66-6" aria-label="6"></a>        <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb66-7"><a href="#cb66-7" aria-label="7"></a>        <span class="fu">ungroup</span>()</span>
+<span id="cb66-8"><a href="#cb66-8" aria-label="8"></a></span>
+<span id="cb66-9"><a href="#cb66-9" aria-label="9"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_len bill_dep
@@ -1123,12 +1195,12 @@ Answer code below
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-label="1"></a><span class="fu">ggplot</span>(pen_short,</span>
-<span id="cb62-2"><a href="#cb62-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year,</span>
-<span id="cb62-3"><a href="#cb62-3" aria-label="3"></a>           <span class="at">y =</span> bill_len)) <span class="sc">+</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-label="4"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-label="1"></a><span class="fu">ggplot</span>(pen_short,</span>
+<span id="cb68-2"><a href="#cb68-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb68-3"><a href="#cb68-3" aria-label="3"></a>           <span class="at">y =</span> bill_len)) <span class="sc">+</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-label="4"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-scribble" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point." width="672">
+<div id="fig-scribble" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scribble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="shape-of-your-data_files/figure-html/fig-scribble-1.png" id="fig-scribble" class="img-fluid figure-img" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point." width="672">
@@ -1158,7 +1230,7 @@ Figure&nbsp;2.1
 <li>Look at <code>pen_short</code> again and trace the line with your finger, in the order the rows appear. Why does it zigzag?</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-label="1"></a>pen_short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   species    year bill_len bill_dep
@@ -1636,6 +1708,9 @@ Figure&nbsp;2.1
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./what-gets-computed.html" class="pagination-link" aria-label="What gets computed">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">What gets computed</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
