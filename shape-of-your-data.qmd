@@ -551,6 +551,8 @@ relig_income
 
 :::
 
+<!-- UP TO HERE on 17-08-2026 -->
+
 ## Separating columns to make them tidy
 
 When values are combined together, you can use the `separate_wider_delim()` function to separate them out: 
@@ -586,6 +588,32 @@ dat_fish <- tibble(
 dat_fish
 ```
 
+
+<details>
+<summary>Answer code below</summary>
+```{r}
+dat_fish |> 
+  separate_wider_delim(
+    cols = values,
+    delim = "-",
+    names = c("sex", "count")
+  )
+```
+
+Clean up the data types
+
+```{r}
+dat_fish |> 
+  separate_wider_delim(
+    cols = values,
+    delim = "-",
+    names = c("sex", "count")
+  ) |> 
+  mutate(count = as.integer(count))
+```
+
+
+</details>
 
 :::
 

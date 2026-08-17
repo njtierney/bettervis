@@ -2,10 +2,9 @@
 
 Some geoms draw exactly what you expect: `geom_point()`, `geom_line()`.
 
-Others need to do some computation! `geom_histogram()`, `geom_density()`, `geom_bar()`
+Others need to do some computation! `geom_histogram()`, `geom_density()`, `geom_bar()`, and `geom_boxplot()` are all examples of this.
 
-This chapter is about everything that happens between your data and the marks on
-the page. 
+This chapter is what happens between your data and the vis on screen.
 
 ::: {.overview}
 
@@ -17,73 +16,936 @@ the page.
 
 <!-- These map onto the sections below, in order. If you move a section, move its question. -->
 
+- What is a boxplot actually showing me, and what is it hiding?
 - When do I want `geom_bar()`, and when do I want `geom_col()`?
-- How do I choose a binwidth?
-- How do I compare two distributions on one plot?
+- How do I choose a binwidth, and how do I show the raw data too?
 - What do scales and coords actually do?
+
+**What you need this session**
+
+- A session of RStudio open
+- Something to draw on, and something to draw with
+- The following packages installed
+
+```{r}
+#| label: pkgs
+#| message: false
+#| output: false
+library(dplyr)
+library(ggplot2)
+library(naniar)
+```
+
+```{r}
+#| label: pkgs-extra
+#| echo: false
+#| output: false
+library(countdown)
+```
 
 :::
 
-## Geoms that count for you
+## New data: Melbourne pedestrians
 
-<!-- geom_bar() on pedestrian gives a flat wall of identical bars. It counted
-     the rows, one per hour per day. geom_col() on the summarised data gives
-     the Melbourne commuter rhythm, 8am spike, bigger 5pm spike, lunch bump.
+We are changing datasets for this chapter - looking at how people move in a city! The City of Melbourne has sensors that count how many people
+walk past, every hour. A year of that data ships with {naniar}:
 
-     The wrong plot is visibly wrong, which is what makes this example worth
-     using. The memorised rule becomes a question they can answer: is my data
-     already summarised? -->
+```{r}
+#| label: ped-glimpse
+pedestrian
+```
+
+Each row is the number of counts of pedestrians in a one hour period, at a given sensor, for every hour of 2016. There are four sensors.
+
+```{r}
+#| label: ped-sensors
+pedestrian |>
+  distinct(sensor_name)
+```
+
+These are quite different places in Melbourne city:
+
+- **Flagstaff Station** a train station
+- **Birrarung Marr** parkland along the river
+- **Bourke Street Mall** mostly shopping
+- **Spencer St-Collins St** a corner in the middle of the CBD 
+
+This gives us some interesting data to play with.
+
+## Geoms that summarise for you
+
+Let's start with a question: 
+
+> What does a day at Flagstaff Station look like?
+
+Flagstaff is a train station, so before we write anything, have a think about
+what that should look like. Here's a snippet of one day of data for Flagstaff:
+
+```{r}
+flagstaff <- pedestrian |>
+  filter(sensor_name == "Flagstaff Station")
+
+flagstaff_january <- flagstaff |> 
+  filter(
+    month == "January"
+  )
+
+flagstaff_january_1 <- flagstaff_january |> 
+  filter(
+    month_day == 1
+  )
+
+flagstaff_january_1 |> 
+  knitr::kable()
+```
+
+
+::: {.callout-note title="Your Turn: draw it first"}
+
+Take your pen and paper, and draw the chart you would like to see to explore:
+
+- the number of people (hourly_counts)
+- walking by over time (hour)
+
+You don't need exact number on the axes. I am just curious on the **shape**. You can use bars, dots, lines, other summaries, whatever you want!
+
+```{r}
+countdown(margin = 3)
+```
+
+
+- Now, how do you think that chart might change if we focus on:
+  - A given time - like 8am
+  - A given day - like Monday, Friday, Sunday?
+
+How much would they vary? How would you show how they compare?
+
+:::
+
+We have 365 readings for each hour, one per day. A geom that takes all of them
+and draws the spread is `geom_boxplot()`.
+
+Let's look at just flagstaff:
+
+```{r}
+flagstaff
+```
+
+
+And plot it as a boxplot
+
+```{r}
+#| label: fig-box-nogroup
+#| warning: false
+#| fig-alt: |
+#|   A single wide boxplot spanning the whole width of the panel, rather than
+#|   one box per hour.
+#| fig-cap: "One box. Not what I wanted."
+ggplot(flagstaff,
+       aes(x = hour,
+           y = hourly_counts)) +
+  geom_boxplot()
+```
+
+Hmmm - we get a single box - this isn't what we want.
+
+We saw something similar earlier - in @sec-shape, `geom_line()` drew a single scribbling line, because it did now know species was a thing. We even get a few (!) warnings from ggplot2:
+
+```
+Warning messages:
+1: Orientation is not uniquely specified when both the x and y aesthetics are continuous. Picking default
+orientation 'x'. 
+2: Continuous x aesthetic
+ℹ did you forget `aes(group = ...)`? 
+3: Removed 1 row containing non-finite outside the scale range (`stat_boxplot()`).
+```
+
+The one we are interested in here is:
+
+```
+2: Continuous x aesthetic
+ℹ did you forget `aes(group = ...)`? 
+```
+
+`hour` is a number, so ggplot2 treated it as continuous - not something that is a whole number/integer. To get ggplot to treat it as a group, use `group`:
+
+```{r}
+#| label: fig-box-hour
+#| warning: false
+#| fig-alt: |
+#|   Twenty four boxplots, one per hour. Very low flat boxes overnight, a large
+#|   box at 8am spanning roughly 200 to 5100, a moderate bump around midday, and
+#|   a second large box around 5pm.
+#| fig-cap: "A day at Flagstaff Station, with the variation left in."
+ggplot(flagstaff,
+       aes(x = hour,
+           y = hourly_counts,
+           group = hour)) +
+  geom_boxplot()
+```
+
+How does this compare to your drawing.
+
+The commuter shape is there, with a peak at 8am and another around 5pm. But the
+thing I want you to notice is the **8am box** - it has a big range!
+
+### What did it compute?
+
+A boxplot is five numbers, worked out for you from the raw data. We typically call this the "five number summary": min, quartile 1 (25%), median, quartile 3 (75%), max.
+
+<!-- TODO: little history on the boxplot, from tukey, and specifics about a hinge/pivot -->
+
+```{r}
+#| label: five-number
+
+flagstaff_8am <- flagstaff |>
+  filter(hour == 8)
+
+flagstaff_8am |> 
+  summarise(
+    min = min(hourly_counts, na.rm = TRUE),
+    q1 = quantile(hourly_counts, 0.25, na.rm = TRUE),
+    median = median(hourly_counts, na.rm = TRUE),
+    q3 = quantile(hourly_counts, 0.75, na.rm = TRUE),
+    max = max(hourly_counts, na.rm = TRUE)
+  )
+```
+
+Those are the parts of the box: the line is the median, the box edges are the
+quartiles, and the whiskers reach out to 1.5x the interquartile range (IQR) - which is quartile 1  - 3. Things beyond the whiskers are classed as outliers. 
+
+Boxplots actually have a few more calculation options than you might might realise - you can change the methods for how the box width is calculated, and how the outliers are calculated, too. If you want to read more, look up `?geom_boxplot()`, and `boxplot.stats`.
+
+So, `geom_boxplot()` does some computation, to return these summaries, and then draw them. So why is the 8am box so wide? The median is 4910 but the lower quartile is 233, which means at least a quarter of the mornings had almost nobody there.
+
+:::{.callout-note title="Your Turn"}
+
+Why do you think there is so much variation across 8am? How can it be so busy, and so quiet, at 8am?
+
+How would you go about exploring this? 
+
+Would you plot something? Would you do some data summarising? 
+
+What would you look at?
+
+How would you plot it? What do you expect?
+
+Let's take a couple of minutes to explore this, draw some sketches, imagine the types of data summary we might see as tables, as plots!
+
+```{r}
+countdown(minutes = 5)
+```
+
+
+:::
+
+Let's explore this by looking at each weekday:
+
+```{r}
+#| label: eight-am-split
+
+flagstaff_8am |> 
+  group_by(week_day) |>
+  summarise(median_count = median(hourly_counts, na.rm = TRUE))
+```
+
+Nobody catches a train to work on a Sunday, and the boxplot summarised across all weekdays - so it generalised to all weekdays.
+
+We come back to this properly in @sec-in-the-way. For now, notice that the
+computation was correct, even if the the answer was a little misleading.
 
 ::: {.callout-note title="Your Turn"}
 
-<!-- 1. TODO: exercise for this section. -->
+Here is the plot again, so you have something to change:
+
+```{r}
+#| eval: false
+ggplot(flagstaff,
+       aes(x = hour,
+           y = hourly_counts,
+           group = hour)) +
+  geom_boxplot()
+```
+
+1. Swap `group = hour` for `x = factor(hour)`. Do you get the same plot? Which
+   version do you prefer, and what changed on the x axis?
+
+2. Which other hours have suspiciously tall boxes? Can you explain them?
+
+3. We worked out that 8am is really two mornings. Draw it as two boxes - complete the code below:
+
+```{r}
+#| eval: false
+flagstaff_8am_weekend <- flagstaff_8am |> 
+  mutate(
+    day_type = if_else(
+      condition = week_day %in% c(..., ...),
+      true = ...,
+      false = ...
+    )
+  )
+
+flagstaff_8am_weekend
+
+  ggplot(...,
+         aes(x = ...,
+             y = ...)) +
+  geom_boxplot()
+```
+
+Is that a fairer picture of 8am than the one box was?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+:::
+
+Boxplots are a really useful tool for exploring variation. Sometimes the wider variation can have distinct and interesting summaries.
+
+## Geoms that count for you
+
+The boxplot kept all the variation. Sometimes you just want one number per hour, and you want to say which number.
+
+The number of people is in `hourly_counts`, but there's one row per day per
+hour, and I want one number per hour. So I summarise first.
+
+Data summarising is an important skill, so let's take a minute to sketch out what the data summary would look like.
+
+:::{.callout-note title="Your Turn: group_by(), summarise()"}
+
+Sketch out the data as a table for the summary we want - which is:
+
+- One row per hour
+- Each hour has the mean number of counts in that hour
+
+Sketch it out!
+
+```{r}
+countdown(minutes = 2)
+```
+
+
+It should look something like the following:
+
+<details>
+<summary>Answer</summary>
+
+```{r}
+tibble(
+  hour = c("0", "1", "...", "23"),
+  mean_count = c("245", "125", "...", "180")
+)
+```
+
+</details>
+
+
+```{r}
+#| label: flagstaff-hourly
+flagstaff_hourly <- flagstaff |>
+  group_by(hour) |>
+  summarise(mean_count = mean(hourly_counts, na.rm = TRUE))
+
+flagstaff_hourly
+```
+
+Twenty four rows: one row per hour, and a summary.
+
+That is exactly what `geom_col()` wants. You give it an x and a y, and it draws
+a bar that tall.
+
+```{r}
+#| label: fig-flagstaff-col
+#| fig-alt: |
+#|   A bar chart of mean pedestrian count by hour at Flagstaff Station. Two tall
+#|   peaks, one at 8am reaching about 3500 and one around 5pm, with very low
+#|   bars overnight.
+#| fig-cap: "Flagstaff Station. A train station, drawn as a train station."
+ggplot(flagstaff_hourly,
+       aes(x = hour,
+           y = mean_count)) +
+  geom_col()
+```
+
+A spike at 8am, another at 5pm, almost nobody overnight.
+
+It is only describing a single number - not the variation.
+
+This doesn't make `geom_col()` wrong! You've displayed a summary.
+
+::: {.callout-tip title="So what does `geom_bar()` do?" collapse="true"}
+
+There are two bar geoms, and the other one is `geom_bar()`.
+
+The difference is that `geom_col()` needs you to give it a y, and `geom_bar()`
+works one out for itself. What it works out is a **count of rows**.
+
+Watch what happens if I use it on the raw data.
+
+```{r}
+#| label: fig-flat-wall
+#| fig-alt: |
+#|   A bar chart of hour on the x axis. All twenty four bars are the same
+#|   height, about 1570, making a flat wall.
+#| fig-cap: "Every hour is exactly as busy as every other hour. Suspicious."
+ggplot(pedestrian,
+       aes(x = hour)) +
+  geom_bar()
+```
+
+Every hour of the day is equally busy, and Melbourne at 3am is as busy as
+Melbourne at 5pm. Strange?
+
+`geom_bar()` doesn't take a y value, instead it counts how many **rows** landed in
+each value of `hour`, which is this:
+
+```{r}
+#| label: count-hour
+pedestrian |>
+  count(hour)
+```
+
+About 1570 every hour. The plot is drawing my data collection, not my pedestrians - I haven't given it the right info.
+
+So `geom_bar()` is just `count()` and then `geom_col()`, glued together. These
+two are the same plot:
+
+```r
+ggplot(pedestrian, aes(x = hour)) +
+  geom_bar()
+
+pedestrian |>
+  count(hour) |>
+  ggplot(aes(x = hour, y = n)) +
+  geom_col()
+```
+
+That can be a useful thing to do, when rows are the thing you want counted. This would be a useful thing to go to if each row were one person walking past a sensor. Instead, each row here is an hour of recording, so counting rows tells me about the sensor rather than the street.
+
+
+So the two of them, side by side:
+
+> `geom_col()` uses the number you already have.
+>
+> `geom_bar()` counts your rows for you, the same way `count()` does.
+
+Rather than memorising that, I'd ask a question about your data instead:
+
+> Have I already worked out the number I want on the y axis?
+
+If yes, `geom_col()`. If no, and rows are the thing you want counted,
+`geom_bar()`.
+
+:::
+
+
+::: {.callout-note title="Your Turn"}
+
+1. Before you run anything, sketch what you think Birrarung Marr looks like
+   across the day. It's parkland by the river. Where do you think the peak is?
+
+2. Now build it. Fill in the blanks:
+
+```{r}
+#| eval: false
+birrarung_hourly <- pedestrian |>
+  filter(sensor_name == "Birrarung Marr") |>
+  group_by(___) |>
+  summarise(mean_count = mean(___, na.rm = TRUE))
+
+ggplot(birrarung_hourly,
+       aes(x = ___,
+           y = ___)) +
+  geom_col()
+```
+
+   How close was your sketch?
+
+3. Draw the park as a boxplot too, the same way we did for Flagstaff. Does the
+   park have an 8am problem like the station did, or is the mean a fair summary
+   here?
+
+4. Now swap `geom_col()` for `geom_bar()` on `birrarung_hourly`. **You should get an error.** Read it, and see whether you can explain it from what
+   `geom_bar()` is trying to do.
+
+5. What happens if you drop the `na.rm = TRUE` from the `mean()`?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
 
 :::
 
 ## Geoms that bin for you
 
-<!-- Histograms, binwidth, and the fact that the default is a placeholder that
-     ggplot2 tells you to replace. -->
+:::{.callout-note title="Your Turn: Do you know what binning is?"}
 
-::: {.callout-note title="Your Turn"}
+Let's chat about binning! Do you know what a histogram does?
 
-<!-- 1. TODO: exercise for this section. -->
+Let's explore what `hist()` does:
+
+- **demo**
 
 :::
 
-## Overlaying distributions
+::: {.callout-note title="Your Turn: draw it first"}
 
-<!-- Comparing two distributions on one plot. position = "identity" with alpha,
-     and geom_density() as the alternative.
+We are about to look at the spread of `hourly_counts` across all four sensors.
+Every hour of 2016, at four places, as one distribution.
 
-     Flag forward: @sec-in-the-way does this job better with violins and
-     raincloud plots. This section is about what the stat is doing. -->
+Draw the shape you expect:
+
+- Number of people in an hour
+- How often that happens
+
+- Is it symmetric, or lopsided?
+- is the tall part on the left or the right?
+
+:::
+
+Let's look at the spread of `hourly_counts` across all four sensors, using `geom_histogram()`
+
+```{r}
+#| label: fig-hist-default
+#| fig-alt: |
+#|   A histogram of hourly pedestrian counts. One very tall bar at the left
+#|   holding most of the data, and a long thin tail stretching right to about
+#|   11000.
+#| fig-cap: "The default. Note what ggplot2 says about it."
+ggplot(pedestrian,
+       aes(x = hourly_counts)) +
+  geom_histogram()
+```
+
+Two messages came out with that plot, let's read them:
+
+```
+`stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+```
+
+ggplot2 picked 30 bins because it had to pick something, and it is telling you
+that 30 was not a considered choice. It's a placeholder, and it would like you to
+replace it.
+
+The second is our old friend from @sec-anatomy:
+
+```
+Removed 2548 rows containing non-finite outside the scale range
+```
+
+There are 2548 hours where the sensor recorded nothing. We come back to those in
+@sec-in-the-way.
+
+So is 30 bins any good here? With a range of 0 to 11273, thirty bins makes each
+one about 389 people wide, and the first bin alone holds 40% of the data.
+
+So most of the picture ends up as one bar.
+
+Let's try some other widths.
+
+:::{.panel-tabset}
+
+## binwidth = 1000
+
+```{r}
+#| label: fig-bw-1000
+#| warning: false
+#| fig-alt: A histogram with wide bins, showing about eleven bars.
+ggplot(pedestrian, aes(x = hourly_counts)) +
+  geom_histogram(binwidth = 1000)
+```
+
+## binwidth = 100
+
+```{r}
+#| label: fig-bw-100
+#| warning: false
+#| fig-alt: |
+#|   A histogram with narrower bins, showing a smooth decay from a peak near
+#|   zero.
+ggplot(pedestrian, aes(x = hourly_counts)) +
+  geom_histogram(binwidth = 100)
+```
+
+## binwidth = 10
+
+```{r}
+#| label: fig-bw-10
+#| warning: false
+#| fig-alt: |
+#|   A histogram with very narrow bins, spiky and noisy, with a tall cluster
+#|   near zero.
+ggplot(pedestrian, aes(x = hourly_counts)) +
+  geom_histogram(binwidth = 10)
+```
+
+:::
+
+At 1000 you get the shape and nothing else. At 10 you get every wobble and no
+shape. At 100 I can see both, so that's the one I would keep.
+
+How do you choose? It depends! You should explore
+
+The question I find useful is **what is a meaningful unit here?** A binwidth of
+100 people an hour is a number I can describe to somebody. A binwidth of 388.7
+is not a number anybody chose.
+
+### Back to that 8am box
+
+Now we've got a tool that can answer the question the boxplot raised.
+
+The 8am box ran from 233 to 5128, and I said that meant 8am was not one thing.
+A histogram of just those mornings should show us what it actually is.
+
+```{r}
+#| label: fig-hist-8am
+#| fig-alt: |
+#|   A histogram of pedestrian counts at Flagstaff Station at 8am. Two clearly
+#|   separated humps, one near zero and a much larger one around 5000, with an
+#|   almost empty gap between them.
+#| fig-cap: "8am at Flagstaff Station. Two humps, not one."
+
+ggplot(flagstaff_8am,
+       aes(x = hourly_counts)) +
+  geom_histogram(binwidth = 50)
+```
+
+There are the two types of mornings.
+
+One hump down near zero, one hump up around 5000, and almost nothing in
+between.
+
+The boxplot couldn't show you this. A histogram (with good bin size!) has as many humps as the data has, and here the data has two.
+
+### Showing the actual readings with `geom_rug()`
+
+A histogram is still a summary, though. Those bars are counts of things, not the
+things themselves.
+
+`geom_rug()` draws a small tick for every single observation, along the axis. So you
+can put the summary and the raw data on the same plot, which I think is lovely.
+
+```{r}
+#| label: fig-rug
+#| fig-alt: |
+#|   The same 8am histogram with a rug of tick marks along the bottom axis. The
+#|   ticks are dense under each of the two humps and almost absent in the gap
+#|   between them.
+#| fig-cap: "Every one of the 397 mornings, drawn underneath the bins."
+ggplot(flagstaff_8am,
+       aes(x = hourly_counts)) +
+  geom_histogram(binwidth = 50) +
+  geom_rug(alpha = 0.3)
+```
+
+Look along the bottom. Each tick is one morning in 2016, and you can see them
+bunch under the two humps and thin out to nearly nothing across the middle.
+
+I like `geom_rug()` a lot for this - because it costs you one line and it puts
+the evidence next to the summary.
+
+::: {.callout-tip title="Comparing two distributions on one plot" collapse="true"}
+
+The other thing you often want is two distributions side by side. Let's take the
+station and the park.
+
+```{r}
+#| label: two-sensors
+two_sensors <- pedestrian |>
+  filter(sensor_name %in% c("Flagstaff Station", "Birrarung Marr"))
+```
+
+The obvious move is to map the sensor onto `fill`, and make them transparent so
+we can see through one to the other.
+
+```{r}
+#| label: fig-overlay-stacked
+#| warning: false
+#| message: false
+#| fig-alt: |
+#|   A histogram of two sensors with semi transparent fill. The bars sit on top
+#|   of each other rather than overlapping, reaching about 7400 at the tallest.
+#| fig-cap: "Transparent, and still wrong."
+ggplot(two_sensors,
+       aes(x = hourly_counts,
+           fill = sensor_name)) +
+  geom_histogram(binwidth = 100, alpha = 0.5)
+```
+
+That's not two overlapping distributions - the are stacked on top of each other.
+
+`alpha` made them see-through, but see-through was never the problem. The
+problem is **position**. By default `geom_histogram()` stacks, so the second
+sensor's bars start where the first sensor's bars finish.
+
+What we want is for both to start at zero, and that is `position = "identity"`.
+
+```{r}
+#| label: fig-overlay-identity
+#| warning: false
+#| message: false
+#| fig-alt: |
+#|   The same two histograms, now both starting from zero and overlapping, so
+#|   the park's distribution sits inside the station's.
+#| fig-cap: "Both starting from zero. Now they overlap."
+ggplot(two_sensors,
+       aes(x = hourly_counts,
+           fill = sensor_name)) +
+  geom_histogram(binwidth = 100,
+                 alpha = 0.5,
+                 position = "identity")
+```
+
+Now you can read it. Birrarung Marr sits low and tight, because a park is
+quietly busy most of the time. Flagstaff has a long tail out to the right,
+because a train station is empty at 3am and enormous at 8am.
+
+If the overlap still bothers you, `geom_density()` does a related computation and
+draws a smooth curve instead of bars. I like to pair `geom_density()` with `geom_rug()`:
+
+```{r}
+#| label: fig-density
+#| warning: false
+#| fig-alt: |
+#|   Two smooth density curves for the same two sensors, overlapping, with the
+#|   park's curve narrow and the station's curve long tailed.
+#| fig-cap: "The same comparison, as curves."
+ggplot(two_sensors,
+       aes(x = hourly_counts,
+           colour = sensor_name)) +
+  geom_density() +
+  geom_rug(alpha = 0.2)
+```
+
+Be careful with density curves, though. That y axis is no longer a count of
+anything. It is a density, chosen so the area under each curve is one, which is
+what lets you compare two groups of different sizes.
+
+:::
 
 ::: {.callout-note title="Your Turn"}
 
-<!-- 1. TODO: exercise for this section. -->
+1. Draw the 8am histogram for **Birrarung Marr** before you build it. One hump
+   or two? A park doesn't much care what day it is, so what should that mean?
+
+2. Now build it, with a rug:
+
+```{r}
+#| eval: false
+birrarung_8am <- pedestrian |>
+  filter(sensor_name == "Birrarung Marr",
+         hour == ___)
+
+ggplot(birrarung_8am,
+       aes(x = hourly_counts)) +
+  geom_histogram(binwidth = ___) +
+  geom_rug(alpha = ___)
+```
+
+   Were you right? Try a couple of other binwidths while you are there.
+
+3. Go back to `flagstaff_8am` and try `binwidth = 2000`. What happens to the two
+   humps, and what would you have concluded if you had only ever seen that
+   version?
+
+4. `geom_histogram()` bins for you. `geom_freqpoly()` does the same computation
+   and draws a line instead. Swap one for the other on `flagstaff_8am`.
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
 
 :::
 
 ## Scales and coords
 
-<!-- The other two pieces promised in @sec-anatomy.
+### Scales
 
-     Log scales first. Pedestrian counts run 0 to 11,000 and are badly skewed,
-     so this is genuinely wanted rather than an exercise.
+A scale decides how a data value turns into a position on the page.
 
-     Then coord_cartesian(ylim = ) versus scale_y_continuous(limits = ). One
-     zooms, the other throws data away and changes your smooth. A silent
-     data loss trap and it deserves the callout. -->
+Most of the data is squashed into the bottom of every plot we have drawn so far, and a few huge values stretch the axis out.
+
+A log scale can help spread the squish out.
+
+```{r}
+#| label: fig-log
+#| warning: false
+#| message: false
+#| fig-alt: |
+#|   A histogram of hourly counts on a log ten x axis. The long tail is gone and
+#|   the distribution is roughly symmetric.
+#| fig-cap: "The same data, on a log scale."
+ggplot(pedestrian,
+       aes(x = hourly_counts)) +
+  geom_histogram(bins = 30, colour = "white") +
+  scale_x_log10()
+```
+
+Same data, same geom. The only thing that changed is how a number becomes a
+position, and now you can see a shape that was hidden.
 
 ::: {.callout-important title="This will bite you"}
 
-<!-- TODO: `scale_y_continuous(limits = )` drops data. `coord_cartesian(ylim = )` zooms. -->
+Look at the warnings on that plot.
+
+```
+log-10 transformation introduced infinite values.
+Removed 2641 rows containing non-finite outside the scale range
+```
+
+Earlier the histogram dropped 2548 rows, which were the missing values. This one
+dropped 2641.
+
+The extra 93 are the hours where **exactly zero people walked past**. The log of zero is negative infinity, so there is nowhere on the axis to put them.
+
+A quiet hour is not missing data. But on a log scale it disappears just as
+completely, and the only sign is a warning you have to read.
+
+:::
+
+### Coords
+
+Say I want to look at Flagstaff below 2000 people an hour, with a smooth through
+it.
+
+```{r}
+#| label: fig-smooth-base
+#| message: false
+#| warning: false
+#| fig-alt: |
+#|   A scatterplot of pedestrian count against hour at Flagstaff Station with a
+#|   fitted smooth curve, peaking sharply around 8am at about 2500.
+#| fig-cap: "All of it, with a smooth."
+ggplot(flagstaff,
+       aes(x = hour,
+           y = hourly_counts)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth()
+```
+
+There are two ways to limit that y axis, and they look like they do the same
+job.
+
+:::{.panel-tabset}
+
+## `scale_y_continuous(limits = )`
+
+```{r}
+#| label: fig-scale-limits
+#| message: false
+#| warning: false
+#| fig-alt: |
+#|   The same plot limited with scale_y_continuous. The smooth curve is now
+#|   almost flat, peaking around 400.
+ggplot(flagstaff,
+       aes(x = hour,
+           y = hourly_counts)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth() +
+  scale_y_continuous(limits = c(0, 2000))
+```
+
+## `coord_cartesian(ylim = )`
+
+```{r}
+#| label: fig-coord-cartesian
+#| message: false
+#| warning: false
+#| fig-alt: |
+#|   The same plot limited with coord_cartesian. The smooth curve still rises
+#|   steeply to the top of the panel at 8am.
+ggplot(flagstaff,
+       aes(x = hour,
+           y = hourly_counts)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth() +
+  coord_cartesian(ylim = c(0, 2000))
+```
+
+:::
+
+Those are not the same plot, and the difference is not cosmetic.
+
+At 8am the smooth in the original sits at about **2568**. With
+`coord_cartesian()` it is still **2568**, and we just cannot see the top of it.
+With `scale_y_continuous()` it is **420**.
+
+::: {.callout-important title="This will bite you"}
+
+> `scale_y_continuous(limits = )` **throws the data away**, and then computes.
+>
+> `coord_cartesian(ylim = )` computes on everything, and then **zooms**.
+
+Setting the limit on the scale deleted 1316 rows before `geom_smooth()` ever saw
+them. Every one of them was a busy hour, so the line it fitted is a line through a
+quiet day that never happened.
+
+Nothing on the plot says so. The curve looks perfectly reasonable, and it is
+wrong by a factor of six.
+
+If you want to zoom, use the coord. If you genuinely want to drop data, use the
+scale, and know that you did it.
 
 :::
 
 ::: {.callout-note title="Your Turn"}
 
-<!-- 1. TODO: exercise for this section. -->
+1. Run both of the plots above and read the warnings. How many rows did each one
+   remove?
+
+2. Now do the same trick on the x axis. Limit the hours to 6 to 10, both ways,
+   and see whether the smooth changes:
+
+```{r}
+#| eval: false
+# throws data away
+... + scale_x_continuous(limits = c(6, 10))
+
+# zooms
+... + coord_cartesian(xlim = c(6, 10))
+```
+
+3. Add `scale_x_log10()` to the histogram of **all** the pedestrian data, not
+   just Flagstaff. How many rows go, and which ones are they? Flagstaff on its
+   own only ever recorded a single zero hour all year, so you need the full
+   dataset for this one to bite.
+
+4. Sketch what you think the smooth should look like if it only ever saw hours
+   below 2000 people. Then check.
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
 
 :::
+
+## To summarise
+
+Three things to take out of this chapter.
+
+1. **Some geoms compute, and the computation is a choice you can see.** If you
+   didn't give it a y, it made one. If it drew a box, it worked out five numbers
+   and threw the rest away.
+2. **The default binwidth is a placeholder,** and ggplot2 says so out loud. Pick
+   a unit you could describe to somebody, and put a `geom_rug()` under it so you
+   can see what you are summarising.
+3. **Limits on a scale delete data. Limits on a coord zoom.** One of those changes your
+   fitted line and doesn't tell you.
+
+And the habit underneath all three.
+
+When a plot surprises you, ask what got computed between the data and the marks.
+Nearly every surprise in this chapter came from a computation happening exactly
+as documented, on data I hadn't noticed was different to what I thought.
+
+Next up is what you are comparing, which is where we stop asking how a plot is
+built and start asking what it is for.
