@@ -12,19 +12,20 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
   broom,
-  countdown,
   colorspace,
-  ggplot2,
+  countdown,
   here,
+  janitor,
   knitr,
+  naniar,
   palmerpenguins,
   patchwork,
+  prismatic,
   readr,
   rmarkdown,
   spelling,
   tidyverse,
   viridis,
-  visdat,
-  naniar
+  visdat
 URL: https://github.com/njtierney/bettervis
 BugReports: https://github.com/njtierney/bettervis/issues
