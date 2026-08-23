@@ -1,0 +1,738 @@
+# What am I comparing? {#sec-comparing}
+
+Perhaps the most important consideration when plotting is to ask:
+
+> What is the most interesting thing in this graph?
+
+This chapter is about arranging a plot around the comparison you actually care
+about. We will discuss a powerful technique of splitting graphs into small multiples, with facetting, and discuss how to arrange plots by position.
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** 48 minutes
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- Why can I not answer my own question from this plot?
+- How do I split one plot into small multiples?
+- What changes when I swap colour for facets?
+- How do stacking, dodging, and filling change what a bar chart says?
+- When should panels share a scale?
+
+**What you need this session**
+
+- A session of RStudio open
+- Something to draw on, and something to draw with
+- The following packages installed
+
+```{r}
+#| label: pkgs
+#| message: false
+#| output: false
+library(tidyverse)
+library(naniar)
+```
+
+```{r}
+#| label: pkgs-extra
+#| echo: false
+#| output: false
+library(countdown)
+```
+
+:::
+
+## Where is busy on a weekend?
+
+We are using the pedestrian data again in this chapter, and the question for the
+whole chapter is this one:
+
+> Where is busy on a weekend?
+
+### Start with totals
+
+In @sec-computed we used `geom_col()` to draw a column (bar).
+
+For each place, and each kind of day (weekday, weekend), how many people walked past in all of
+2016?
+
+```{r}
+#| label: ped-totals
+#| echo: false
+pedestrian_totals <- pedestrian |>
+        mutate(day_type = if_else(
+                condition = str_starts(week_day, "S"),
+                true = "weekend",
+                false = "weekday"
+                )
+        ) |>
+        group_by(sensor_name, day_type) |>
+        summarise(
+                total = sum(hourly_counts, na.rm = TRUE),
+                .groups = "drop"
+        ) |> 
+  arrange(day_type, sensor_name)
+
+pedestrian_totals
+```
+
+::: {.callout-tip title="Code for this data" collapse="true"}
+
+This contains the parts from from @sec-shape and @sec-computed:
+
+```{r}
+#| ref.label: ["pkgs", "ped-totals"]
+#| eval: false
+#| echo: true
+```
+
+:::
+
+:::{.callout-note title="Your Turn: Sketch"}
+
+I want to explore how arranging the information in a graph changes your interpretation - so we will draw two:
+
+1. Sketch a bar chart to explore: **where is busy on a weekend**.
+
+2. Sketch a bar chart that explores arranging the bars to mean something different.
+
+Two minutes! One minute per chart - just quickly.
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 2)
+```
+
+Let's discuss our sketches.
+
+:::
+
+## Bar charts: stack, dodge, and fill
+
+We can look at the counts per day type, we can do:
+
+```{r}
+ggplot(pedestrian_totals,
+       aes(x = day_type,
+           y = total)) + 
+  geom_col()
+```
+
+And we can make a regular bar chart of the week type and the total count like so:
+
+```{r}
+ggplot(pedestrian_totals,
+       aes(x = sensor_name,
+           y = total)) + 
+  geom_col()
+```
+
+Let's move these sensor names onto the y axis to make them easier to read:
+
+```{r}
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = sensor_name)) + 
+  geom_col()
+```
+
+
+If we want to colour this by the weekday type, you can map one of these variables to `fill`:
+
+```{r}
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = sensor_name,
+           fill = day_type)) + 
+  geom_col()
+```
+
+Notice the bar heights are the same across these two? The position sums up these two numbers. This is called "stacked".
+
+Now, there are a few different ways to position bars - you set this with the `position` argument inside of `geom_col()`: **stack**, **dodge**, and **fill**.
+
+```{r}
+#| eval: false
+#| echo: true
+geom_col(position = "stack")
+geom_col(position = "dodge")
+geom_col(position = "fill")
+```
+
+Let's go through them.
+
+### position = "stack"
+
+This is the default in ggplot2: stacked barplots. You can change set this with `position = "stacked"`, but this is the default:
+
+```{r}
+#| label: fig-bar-stack
+#| fig-alt: |
+#|   A stacked bar chart of total foot traffic per sensor, with weekday and
+#|   weekend stacked on top of each other.
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = sensor_name,
+           fill = day_type)) +
+        geom_col(position = "stack")
+```
+
+These are useful for comparing the total. The comparison of the day types against each other is harder, because the position doesn't line up. We can sense that the weekends are less than the weekdays, which makes sense, but it is harder to see by just how much.
+
+### position = "dodge"
+
+This dodges the bars, so you can compare the fill category directly. You don't get the total of each sensor name, but now you can directly compare the weekday and weekend to each sensor.
+
+```{r}
+#| label: fig-bar-dodge
+#| fig-alt: |
+#|   The same totals as side by side bars, weekday next to weekend for each
+#|   sensor.
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = sensor_name,
+           fill = day_type)) +
+        geom_col(position = "dodge")
+```
+
+### **Filled** 
+
+Makes every bar the same height, so proportion is easy, but you trade off counting the number.
+
+```{r}
+#| label: fig-bar-fill
+#| fig-alt: |
+#|   The same data as proportions, every bar the same height, showing the
+#|   weekend share of traffic at each sensor.
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = sensor_name,
+           fill = day_type)) +
+        geom_col(position = "fill")
+```
+
+So let's get back to our question:
+
+> Where is busy on a weekend?
+
+Which plot helps us answer this?
+
+:::{.panel-tabset}
+
+## stacked
+
+```{r}
+#| ref.label: ["fig-bar-stack"]
+#| echo: true
+```
+
+## dodged
+
+```{r}
+#| ref.label: ["fig-bar-dodge"]
+#| echo: true
+```
+
+## filled
+
+```{r}
+#| ref.label: ["fig-bar-fill"]
+#| echo: true
+```
+
+:::
+
+- The dodged says **Bourke Street Mall**, which has the most weekend foot traffic
+- Filled says **Birrarung Marr**, where a higher percentage of all foot traffic happens on a weekend, compared to Bourke Street Mall.
+
+There isn't a "right" plot, per se - these each answer slightly different questions - one is more about the total count, one is about the proportion.
+
+::: {.callout-tip title="Read more"}
+
+I ran into a similar problem making population pyramids, and wrote it up in 
+[Population Pyramid Plots in
+ggplot2](https://www.njtierney.com/posts/2022-08-09-pyramid-plots-in-ggplot2/).
+
+Plotting raw population counts for Brisbane and Hobart answers "these two cities are different sizes", and the question I actually had was "do these two cities have similar age distributions?" Brisbane drowned out Hobart entirely until I switched to per capita.
+
+:::
+
+::: {.callout-tip title="Starting from here? Run this first" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ped-totals"]
+#| eval: false
+#| echo: true
+```
+
+:::
+
+::: {.callout-note title="Your Turn"}
+
+1. What happens if you use different variables in "fill" - e.g., `fill = sensor_name`? 
+
+2. Try `position = "dodge2"`. What changed?
+
+3. Flagstaff Station is 5% weekend. Which of the three plots makes that easiest
+   to see?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
+```
+
+:::
+
+<!-- TO POLISH LATER.
+
+     1. Axis labels - use `scale_y_continuous(labels = scales::label_comma())`
+     2. Direct labelling + Dropping the legend. Use annotate()/geom_text() +
+        theme(legend.position = "none").
+     3. The sensor name overlap - put them on y axis, or  use one of:
+          scale_x_discrete(guide = guide_axis(check.overlap = TRUE))
+          scale_x_discrete(guide = guide_axis(n.dodge = 2))
+          scale_x_discrete(guide = guide_axis(angle = 45))
+-->
+
+## Looking across the whole day
+
+To explore the whole day now - rather than summarising per day, let's go back to one number per place, per kind of day, per hour.
+
+```{r}
+#| label: ped-hourly
+#| echo: false
+pedestrian_hourly <- pedestrian |>
+        # a weekday/weekend column. The only two days starting with
+        # "S" are the two we want
+        mutate(day_type = if_else(
+                condition = str_starts(week_day, "S"),
+                true = "weekend",
+                false = "weekday"
+                )
+        ) |>
+        group_by(sensor_name, day_type, hour) |>
+        summarise(
+                mean_count = mean(hourly_counts, na.rm = TRUE),
+                .groups = "drop"
+        )
+
+pedestrian_hourly
+```
+
+The average number of people who walked past one of the four sensors, each hour, on a weekday or weekend.
+
+::: {.callout-tip title="How I made this" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ped-hourly"]
+#| eval: false
+#| echo: true
+```
+
+There are 37,700 rows and only 24 hours in a day, so drawing a line straight from `pedestrian` sawtooths: one line running out to hour 23 and back to hour 0, once for every day of the year.
+
+More on that trade off at the end of the chapter.
+
+:::
+
+Now put it all on one plot: for each hour, the average count, for each sensor, and each day type:
+
+```{r}
+#| label: fig-eight-lines
+#| fig-alt: |
+#|   A line plot with eight overlapping lines on one panel, four sensor colours
+#|   crossed with solid and dashed lines for weekday and weekend. The lines
+#|   cross each other repeatedly and it is hard to follow any single one.
+#| fig-cap: "Every sensor, weekday and weekend, on one panel."
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = sensor_name,
+           linetype = day_type)) +
+        geom_line()
+```
+
+It's a bit crowded! 
+
+Answering:
+
+> *where is busy on a weekend* 
+
+means:
+
+- finding the dashed lines
+- matching four colours against a legend,
+- Checking the legend again because you have already forgotten...
+
+It's a bit of work!
+
+Let's split it into pieces. In ggplot2 that is called **facetting**.
+
+::: {.callout-note title="Your Turn: Sketch an improved plot"}
+
+How would you reshape this plot into something better? What gets in the way?
+
+Draw an example better plot.
+
+:::
+
+## `facet_wrap()` and `facet_grid()`
+
+We can use `facet_wrap()` and `facet_grid()` to split the plot into multiple sub-plots using `facet_wrap()` or `facet_grid()`.
+
+Here is the noisy plot from earlier, shown with facets added.
+
+```{r}
+#| label: fig-facet-wrap
+#| fig-alt: |
+#|   Four panels, one per sensor, each showing a solid weekday line and a
+#|   dashed weekend line.
+#| fig-cap: "The same eight lines, split into four panels."
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = sensor_name,
+           linetype = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name))
+```
+
+Same data, same aesthetics, same geom. The only new thing is
+`facet_wrap(vars(sensor_name))`, which says **draw one panel per sensor**.
+
+Now:
+
+> **Where is busy on a weekend?**
+
+We can see clearly now that Birrarung Marr is the only one where it
+sits above the solid line, and you can see that without tracking anything
+across a legend.
+
+When you split plots up like this, you lose some context, as you cannot easily compare plots to each other.
+
+:::{.callout-note title="Your Turn: Can you make facets easier to compare?"}
+
+Is there a way you can do you think you could arrange these plots so you can more easily compare the x and y axes? How would you imagine this?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+<details>
+<summary>Answer</summary>
+
+```{r}
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = sensor_name,
+           linetype = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name),
+                   ncol = 1)
+
+# or
+
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = sensor_name,
+           linetype = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name),
+                   nrow = 1)
+
+```
+
+</details>
+
+:::
+
+
+::: {.callout-tip title="`vars()`, and the `~` you will see elsewhere" collapse="true"}
+
+`vars()` is there because `sensor_name` is a column name. You use `vars()` in a similar way to how you use `aes()`: you refer to columns from the data frame inside of it.
+
+There is an older way of writing this, with a tilde:
+
+```{r}
+#| eval: false
+facet_wrap(~sensor_name)
+```
+
+That is a **formula**, and it does the same job here. You will see it in other people's code and in older blog posts, so it is worth recognising.
+
+I teach `vars()` first because I think it is more consistent with the rest of the tidyverse. The tilde only works in some of those places.
+
+Both are fine, though! Just make sure you are consistent - don't mix `~` and `vars()` usage.
+
+:::
+
+Since each panel now holds exactly one sensor, mapping `sensor_name` to colour
+as well is saying the same thing twice. We can use that colour on something
+else, instead - like `day_type`:
+
+```{r}
+#| label: fig-facet-wrap-daytype
+#| fig-alt: |
+#|   Four panels, one per sensor, with weekday and weekend drawn as two
+#|   coloured lines in each panel.
+#| fig-cap: "Colour freed up for the comparison we actually care about."
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name))
+```
+
+### Two variables, with `facet_grid()`
+
+`facet_wrap()` takes one variable and wraps the panels onto the page.
+`facet_grid()` takes up to two variables, and lays them out as rows and columns.
+
+```{r}
+#| label: fig-facet-grid
+#| fig-alt: |
+#|   An eight panel grid, weekday and weekend as two rows, four sensors as
+#|   four columns.
+#| fig-cap: "Day type down the side, sensor across the top."
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count)) +
+        geom_line() +
+        facet_grid(rows = vars(day_type),
+                   cols = vars(sensor_name))
+```
+
+This gives us eight panels: two day types by four sensors.
+
+Every panel shares its axes with its neighbours, which is what makes a grid
+worth using. Reading down a column compares weekday against weekend for one
+place. Reading across a row compares places for one kind of day.
+
+:::{.callout-note title="Your Turn"}
+
+<details>
+<summary>Data for exercise</summary>
+
+```{r}
+#| ref.label: ["pkgs", "ped-hourly"]
+#| eval: false
+#| echo: true
+```
+
+</details>
+
+1. Which of the three plots above best answers "where is busy on a weekend"?
+   Which best answers "what does Flagstaff do on a weekday"? Are they the same
+   plot?
+
+2. Swap the rows and columns in the grid:
+
+```{r}
+#| eval: false
+facet_grid(rows = vars(sensor_name),
+           cols = vars(day_type))
+```
+
+   Same information. Does it read differently?
+
+3. Try `facet_wrap(vars(sensor_name), ncol = 1)`. What does stacking the panels
+   make easier, and what does it make harder?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
+```
+
+:::
+
+## Change comparisons
+
+Everything above facets by **sensor**. Watch what happens if we facet by **day type** instead, and put sensor on colour.
+
+```{r}
+#| label: fig-swap
+#| fig-alt: |
+#|   Two panels, weekday and weekend, each with four coloured sensor lines.
+#| fig-cap: "The same data, arranged around the other question."
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = sensor_name)) +
+        geom_line() +
+        facet_wrap(vars(day_type))
+```
+
+Now *where is busy on a weekend* is easy: look at the weekend panel and read the
+four lines against each other, all on one set of axes.
+
+And *what does Flagstaff do on a weekday* got harder, because Flagstaff is now
+split across two panels and you have to hold one in your head while you look at
+the other.
+
+Each arrangement is a tradeoff. The question is not:
+
+> "what is the right way to facet this"
+
+It is:
+
+> **what do I want the reader to compare**
+
+:::{.callout-note title="Your Turn: Recreate this plot"}
+
+With only looking at the data, can you reacreate the plot?
+
+
+```{r}
+#| ref.label: ["pkgs", "ped-hourly"]
+#| eval: false
+#| echo: true
+```
+
+
+```{r}
+pedestrian_hourly
+```
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+```{r}
+#| label: fig-ped-hourly-facet
+#| echo: false
+#| eval: true
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name))
+```
+
+
+<details>
+<summary>Answer</summary>
+
+```{r}
+#| ref.label: ["fig-ped-hourly-facet"]
+#| eval: false
+#| echo: true
+```
+
+</details>
+
+:::
+
+## Free scales
+
+Sometimes you want to change the scale for each sub plot - you can do this with `scales = ""` option:
+
+:::{.panel-tabset}
+
+## regular
+
+```{r}
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name))
+```
+
+
+## free_y
+
+```{r}
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name),
+                   scales = "free_y")
+```
+
+:::
+
+The shapes become a bit more legible!
+
+As a general rule, using free scales is best used when the question is about caring about individual shape within each panel, and not about comparing across panels
+
+:::{.callout-note title="Your Turn:"}
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+1. Which question does the free-scale version answer better? Which does it
+   answer worse?
+2. Try `scales = "free_x"` and `scales = "free"`. Do either make sense here?
+
+:::
+
+
+::: {.callout-tip title="Three cures for a sawtooth" collapse="true"}
+
+We have now hit sawtoothing three times, in three chapters, and fixed it three
+different ways. It's worth putting them side by side, because they aren't equivalent and I
+keep having to choose between them.
+
+A sawtooth always means the same thing: **more than one y for each x, inside what ggplot2 thinks is one group.** So the line runs out to the right, comes
+back, and does it again.
+
+**Tell it about the group.** `group = species` in @sec-shape,
+`group = hour` in @sec-computed. Keeps every value you have. Needs a column
+worth grouping by, and few enough groups that you can still see them.
+
+**Summarise.** One number per group per x, which is what we just did to get
+those eight lines. Clean, and you've thrown the variation away. That is
+exactly what the 8am box warned about in @sec-computed: a mean that describes
+no morning that ever happened.
+
+**Take a subset.** Keeps the raw numbers, at the cost of only answering about
+the part you kept. We don't do that in this chapter, and it is worth seeing
+why.
+
+Look at the first week of January at Flagstaff Station, at 8am:
+
+| day | 8am count |
+|---|---|
+| Friday 1 January | 49 |
+| Saturday 2 January | 91 |
+| Sunday 3 January | 74 |
+| Monday 4 January | 2946 |
+| Tuesday 5 January | 3136 |
+| Wednesday 6 January | 3242 |
+| Thursday 7 January | 3435 |
+
+Friday the 1st is a weekday by our definition, and 49 people turned up. It's New Year's Day. Our `day_type` column calls it a working day and the sensor
+disagrees.
+
+Nothing is broken. The subset is just small enough that one public holiday is a fifth of our
+weekdays.
+
+I use all three of these. What I try not to do is pick one without noticing
+that I picked it.
+
+For a longer worked example of hunting one of these down, see [Just Quickly:
+Removing Sawtooth Patterns in Line
+Graphs](https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/).
+
+:::
