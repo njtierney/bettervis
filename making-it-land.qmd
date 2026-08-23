@@ -191,6 +191,16 @@ Every figure in this book has alt text. Look at the source of any of them.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch8-data", "fig-base-plot", "fig-labelled"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Write a title for a plot of your own that states its finding.
 
 2. Add alt text and read it back:
@@ -311,6 +321,16 @@ they're missing.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch8-data", "fig-base-plot", "fig-labelled"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Write your own theme function. Change one thing you always change.
 
 ```{r}
@@ -402,6 +422,16 @@ p_weekday + p_weekend +
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch8-data", "fig-base-plot", "fig-patchwork"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Build `(p_weekday + p_weekend) / p`. What do the brackets do?
 
 2. Collect the legends and move them to the right instead of the bottom.
@@ -476,6 +506,16 @@ Things worth knowing:
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch8-data", "fig-base-plot", "fig-labelled"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Save the same plot at `width = 4` and `width = 12`. Open both. What happened
    to the text?
 
@@ -529,6 +569,16 @@ And a fifth, quieter one we've been doing since @sec-anatomy:
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch8-data"]
+#| eval: false
+#| echo: true
+```
+
+:::
 Run the four questions on a plot you've made before this course.
 
 Then run them on a plot from this book. Mine included: there are plenty in here

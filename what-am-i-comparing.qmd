@@ -49,7 +49,7 @@ library(countdown)
 ## Where is busy on a weekend?
 
 We are using the pedestrian data again in this chapter, and the question for the
-whole chapter is this one:
+chapter is this one:
 
 > Where is busy on a weekend?
 
@@ -94,6 +94,16 @@ This contains the parts from from @sec-shape and @sec-computed:
 
 :::{.callout-note title="Your Turn: Sketch"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ped-totals"]
+#| eval: false
+#| echo: true
+```
+
+:::
 I want to explore how arranging the information in a graph changes your interpretation - so we will draw two:
 
 1. Sketch a bar chart to explore: **where is busy on a weekend**.
@@ -168,7 +178,7 @@ Let's go through them.
 
 ### position = "stack"
 
-This is the default in ggplot2: stacked barplots. You can change set this with `position = "stacked"`, but this is the default:
+This is the default in ggplot2: stacked barplots. You can change set this with `position = "stack"`, but this is the default:
 
 ```{r}
 #| label: fig-bar-stack
@@ -200,39 +210,7 @@ ggplot(pedestrian_totals,
         geom_col(position = "dodge")
 ```
 
-### Order carries meaning too
-
-Notice the sensors are in alphabetical order. That's not a decision anybody
-made, it's just what happens when nobody chooses.
-
-`reorder()` sorts one variable by another, and it works right inside `aes()`:
-
-```{r}
-#| label: fig-bar-reorder
-#| fig-alt: |
-#|   The same dodged bars, now sorted so the busiest sensor is at the top and
-#|   the quietest at the bottom.
-ggplot(pedestrian_totals,
-       aes(x = total,
-           y = reorder(sensor_name, total),
-           fill = day_type)) +
-        geom_col(position = "dodge")
-```
-
-Same data, same geom, one function. The bars now read as a ranking rather than a
-lookup table.
-
-Sort by the thing your message is about:
-
-- `reorder(sensor_name, total)` for busiest overall
-- `reorder(sensor_name, -total)` to flip it
-- alphabetical, when the reader needs to **look something up** rather than
-  compare
-
-We come back to ordering properly in @sec-eye, where it turns out to be the
-cheapest emphasis you can buy.
-
-### **Filled** 
+### position = "fill"
 
 Makes every bar the same height, so proportion is easy, but you trade off counting the number.
 
@@ -306,6 +284,16 @@ Plotting raw population counts for Brisbane and Hobart answers "these two cities
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ped-totals"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. What happens if you use different variables in "fill" - e.g., `fill = sensor_name`? 
 
 2. Try `position = "dodge2"`. What changed?
@@ -331,6 +319,52 @@ countdown(minutes = 3)
           scale_x_discrete(guide = guide_axis(n.dodge = 2))
           scale_x_discrete(guide = guide_axis(angle = 45))
 -->
+
+:::{.callout-tip title="Going deeper: Change order to improve comprehension" collapse="true"}
+
+The sensors are in alphabetical order - it's the default, but we can make it better. Let's use `reorder()`, to sort one variable by another. We place this inside `aes()`:
+
+```{r}
+#| label: fig-bar-reorder
+#| fig-alt: |
+#|   The same dodged bars, now sorted so the busiest sensor is at the top and
+#|   the quietest at the bottom.
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = reorder(sensor_name, total),
+           fill = day_type)) +
+        geom_col(position = "dodge")
+```
+
+The bars now read as a ranking rather than a lookup table.
+
+- `reorder(sensor_name, total)` for busiest overall at the top
+- `reorder(sensor_name, -total)` to flip it - lowest at the top
+- alphabetical, when the reader needs to **look something up** rather than
+  compare
+
+If you want to reorder by a specific variable within that, you can do it manually - you would be best to identify the 
+
+```{r}
+weekend_order <- pedestrian_totals |> 
+  filter(day_type == "weekend") |> 
+  arrange(-total)
+
+weekend_order
+
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = fct_relevel(sensor_name, weekend_order$sensor_name),
+           fill = day_type)) +
+        geom_col(position = "dodge")
+```
+
+
+We come back to ordering properly in @sec-eye.
+
+
+:::
+
 
 ## Looking across the whole day
 
@@ -408,6 +442,16 @@ Let's split it into pieces. In ggplot2 that is called **facetting**.
 
 ::: {.callout-note title="Your Turn: Sketch an improved plot"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ped-hourly"]
+#| eval: false
+#| echo: true
+```
+
+:::
 How would you reshape this plot into something better? What gets in the way?
 
 Draw an example better plot.
@@ -450,6 +494,16 @@ When you split plots up like this, you lose some context, as you cannot easily c
 
 :::{.callout-note title="Your Turn: Can you make facets easier to compare?"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ped-hourly"]
+#| eval: false
+#| echo: true
+```
+
+:::
 Is there a way you can do you think you could arrange these plots so you can more easily compare the x and y axes? How would you imagine this?
 
 ```{r}
@@ -707,6 +761,16 @@ As a general rule, using free scales is best used when the question is about car
 
 :::{.callout-note title="Your Turn:"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ped-hourly"]
+#| eval: false
+#| echo: true
+```
+
+:::
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()

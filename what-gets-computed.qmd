@@ -85,6 +85,7 @@ Flagstaff is a train station, so before we write anything, have a think about
 what that should look like. Here's a snippet of one day of data for Flagstaff:
 
 ```{r}
+#| label: flagstaff-data
 flagstaff <- pedestrian |>
   filter(sensor_name == "Flagstaff Station")
 
@@ -115,6 +116,16 @@ flagstaff_january_1 |>
 
 ::: {.callout-note title="Your Turn: draw it first"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs"]
+#| eval: false
+#| echo: true
+```
+
+:::
 Take your pen and paper, and draw the chart you would like to see to explore:
 
 - the number of people (hourly_counts)
@@ -255,6 +266,16 @@ So, `geom_boxplot()` does some computation, to return these summaries, and then 
 
 :::{.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "flagstaff-data"]
+#| eval: false
+#| echo: true
+```
+
+:::
 Why do you think there is so much variation across 8am? How can it be so busy, and so quiet, at 8am?
 
 How would you go about exploring this? 
@@ -293,6 +314,16 @@ computation was correct, even if the the answer was a little misleading.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "flagstaff-data", "five-number"]
+#| eval: false
+#| echo: true
+```
+
+:::
 Here is the plot again, so you have something to change:
 
 ```{r}
@@ -382,6 +413,16 @@ Data summarising is an important skill, so let's take a minute to sketch out wha
 
 :::{.callout-note title="Your Turn: group_by(), summarise()"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "flagstaff-data", "flagstaff-hourly"]
+#| eval: false
+#| echo: true
+```
+
+:::
 Sketch out the data as a table for the summary we want - which is:
 
 - One row per hour
@@ -512,6 +553,16 @@ If yes, `geom_col()`. If no, and rows are the thing you want counted,
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "flagstaff-data", "flagstaff-hourly"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Before you run anything, sketch what you think Birrarung Marr looks like
    across the day. It's parkland by the river. Where do you think the peak is?
 
@@ -596,6 +647,16 @@ out the number I want on the y axis?**
 
 :::{.callout-note title="Your Turn: Do you know what binning is?"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs"]
+#| eval: false
+#| echo: true
+```
+
+:::
 Let's chat about binning! Do you know what a histogram does?
 
 Let's explore what `hist()` does:
@@ -606,6 +667,16 @@ Let's explore what `hist()` does:
 
 ::: {.callout-note title="Your Turn: draw it first"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs"]
+#| eval: false
+#| echo: true
+```
+
+:::
 We are about to look at the spread of `hourly_counts` across all four sensors.
 Every hour of 2016, at four places, as one distribution.
 
@@ -841,6 +912,16 @@ what lets you compare two groups of different sizes.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "flagstaff-data", "five-number"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Draw the 8am histogram for **Birrarung Marr** before you build it. One hump
    or two? A park doesn't much care what day it is, so what should that mean?
 

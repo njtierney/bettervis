@@ -248,18 +248,26 @@ pre { line-height: 1.5; }
 }
 
 // ── Copy button ──────────────────────────────────────────────
-// Parked out in the margin past the block's right edge, faint until
-// hover. Inside the block it sat on top of long lines and collided with
-// annotation anchors; out here it structurally cannot.
+// Sits in the top right corner INSIDE the code block, invisible until
+// the block is hovered.
+//
+// It used to be parked out in the right margin with a translateX, which
+// kept it clear of long lines. That broke inside callouts: `.callout`
+// sets `overflow: hidden` to clip its own rounded corners, so anything
+// pushed past the block's right edge was clipped away and the button
+// vanished. Keeping it inside the box means it cannot be clipped,
+// wherever the block happens to live.
 #{$measured-scope} .code-copy-outer-scaffold > .code-copy-button {
+  position: absolute;
   top: 2px !important;
-  right: 0 !important;
+  right: 2px !important;
   margin: 0 !important;
-  opacity: 0.35;
-  transform: translateX(calc(100% + var(--copy-gap)));
+  transform: none;
+  opacity: 0;
   transition: opacity 0.18s ease;
 }
-#{$measured-scope} .code-copy-outer-scaffold:hover > .code-copy-button {
+#{$measured-scope} .code-copy-outer-scaffold:hover > .code-copy-button,
+#{$measured-scope} .code-copy-outer-scaffold > .code-copy-button:focus-visible {
   opacity: 1;
 }
 

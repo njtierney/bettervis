@@ -1,13 +1,13 @@
 # What's in the way? {#sec-in-the-way}
 
-You've got the right comparison on the page and it still looks like a mess. Now
-what?
+Once you've got the message clear in your plot, there can still be some clutter in the graphic. 
 
-Three things get between a reader and your data: Decoration, density, and
-summary.
+To structure how to clean up your plot, we will talk about 
 
-This chapter takes them one at a time, and most of the work is deciding what to
-remove.
+- Decoration
+- density, and
+- summary
+
 
 ::: {.overview}
 
@@ -68,8 +68,7 @@ pedestrian_hourly <- pedestrian |>
 
 ## Decoration
 
-> **The idea:** every plot has ink that is data and ink that is not. The
-> not-data ink still costs the reader a look.
+> **The idea:** there is "ink" in every plot - the idea is we want to only keep the ink that is related to the data. This is sometimes referred to as the data:ink ratio
 
 Here is where we left off in @sec-comparing.
 
@@ -89,15 +88,26 @@ p_busy <- ggplot(pedestrian_hourly,
 p_busy
 ```
 
-Eight lines are data. Not data:
+There are two lines per facet - these are representing the data. Not all of the ink on the plot is related to data. Edward Tufte called the useful fraction the **data-ink ratio**. Go through each
+piece and ask: is this helping, or is it just...here?
+
+:::{.callout-note title="Your Turn: Discuss the figure!"}
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+:::
+
+ You could argue that some of these parts of ink that are not data are:
 
 - the grey panel background
 - the white gridlines, major and minor
 - the box around the legend
 - the legend title, which is a column name
 
-Edward Tufte called the useful fraction the **data-ink ratio**. Go through each
-piece and ask: is this helping, or is it just here?
+Let's walk through some ways to improve the data:ink ratio
 
 :::{.panel-tabset}
 
@@ -142,12 +152,11 @@ p_busy +
 
 :::
 
-Each step removed something and nothing was lost. The last one made the panels
-wider too, because the legend was using horizontal space to say two words.
+Each step removed something, but the message was kept. We got some more real estate back for the plots too, by moving the legend.
 
 ### Colour is ink
 
-Colour counts as ink, and it is the piece people most often spend twice.
+Colour counts as ink, and it is sometimes where people double up
 
 ```{r}
 #| label: fig-colour-redundant
@@ -156,8 +165,8 @@ Colour counts as ink, and it is the piece people most often spend twice.
 #|   Four boxplots, each filled with a different colour, with a legend on the
 #|   right repeating the sensor names already on the x axis.
 ggplot(pedestrian,
-       aes(x = sensor_name,
-           y = hourly_counts,
+       aes(x = hourly_counts,
+           y = sensor_name,
            fill = sensor_name)) +
         geom_boxplot()
 ```
@@ -172,32 +181,39 @@ a legend says it a third time.
 #|   The same four boxplots in plain grey, with no legend, and the sensor names
 #|   still labelled on the x axis.
 ggplot(pedestrian,
-       aes(x = sensor_name,
-           y = hourly_counts)) +
+       aes(x = hourly_counts,
+           y = sensor_name)) +
         geom_boxplot()
 ```
 
-Same message, less ink, and the plot got wider.
+We have the same message, but with less ink, and the plot got wider because there isn't a legend.
 
-Colour earns its place when it carries something no other channel is carrying.
-If dropping it costs you nothing, it was decoration.
+We want to use colour carefully - if the position (x or y axis) is already carrying that information, we probably don't need it. Even if it looks nice!
 
 ::: {.callout-tip title="Going deeper: data-ink is a direction, not a target" collapse="true"}
+ 
+We can push this to the limit, and you might end up with something a bit more abstract: no gridlines, no axis, no legend.
 
-Push this to its end and you get a plot with no gridlines, no axis and no
-legend, which is unreadable.
+Gridlines are not data, but they are how a reader gets a number off an axis. 
 
-Gridlines are the case worth arguing about. They are not data, and they are how
-a reader gets a number off an axis. Delete them and you've made the plot cleaner
-and less useful.
+If you delete them, you can make the plot cleaner, but less useful.
 
-So the question is never "how much can I remove". It's "what is this piece for",
-and if you can answer that, it stays.
+So remember, the question is not so much: "how much can I remove", but "what is this piece for" - if you say what each piece is for, that usually means you can keep it.
 
 :::
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch6-data", "fig-before"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Run `p_busy + theme_void()`. What did you lose, and would you ever want that?
 
 2. Try each of these and pick one you'd keep:
@@ -207,9 +223,12 @@ and if you can answer that, it stays.
 p_busy + theme_bw()
 p_busy + theme_classic()
 p_busy + theme_light()
+p_busy + theme_dark()
+p_busy + theme_linedraw()
 ```
 
-3. The legend on `p_busy` is titled `day_type`. Fix it.
+<!-- 3. The legend on `p_busy` is titled `day_type`. Fix it. -->
+<!-- TODO: Add instruction on changing labels/axes -->
 
 ```{r}
 #| echo: false
@@ -225,25 +244,30 @@ Only open this if you've actually had a go.
 the plot. Useful for maps, and for sparklines where the shape is the whole
 message. Rarely anything else.
 
-**3.** `labs(colour = NULL)` drops the title, since "weekday" and "weekend"
-explain themselves. `labs(colour = "Day type")` if you'd rather keep it.
+<!-- **3.** `labs(colour = NULL)` drops the title, since "weekday" and "weekend" -->
+<!-- explain themselves. `labs(colour = "Day type")` if you'd rather keep it. -->
 
 :::
 
 :::
 
-### What to hold onto
+### "Decoration" Take aways
 
-- Removing non-data ink is cheap and usually helps
-- Colour is ink. If dropping it costs nothing, it was decoration
+- Removing non-data ink is cheap, it usually helps
+- Colour is ink. Soemtimes the message doesn't change if you drop it.
 - Data-ink is a direction, not a score. Gridlines usually have a job
 
 ## Density
 
-> **The idea:** when there are more points than pixels, the plot stops being a
-> picture of your data and becomes a black shape.
+> **The idea:** if there are more points than pixels, the plot can lose its interpretation and become more of a blob.
 
 Everything above was 192 summarised rows. Here is the raw data, all 37,700.
+
+```{r}
+pedestrian
+```
+
+And a plot of this
 
 ```{r}
 #| label: fig-overplot
@@ -257,13 +281,13 @@ ggplot(pedestrian,
         geom_point()
 ```
 
-There could be ten points in the middle of that or ten thousand.
+It's hard to say how many points there are, since they are overlapping.
 
-Three moves, in the order I try them:
+When I encounter this, I usually use one of the these three steps:
 
-- **`alpha`**, so overlapping points get darker
-- **`geom_jitter()`**, to spread points that share an x value
-- **a geom that bins**, once there are too many for either to help
+- **`alpha`** - transparency: overlapping points get darker
+- **`geom_jitter()`** - spread points sharing an x/y value
+- **a geom that summarises**, once there are too many for either to help
 
 ```{r}
 #| label: fig-alpha
@@ -277,10 +301,8 @@ ggplot(pedestrian,
         geom_point(alpha = 0.05)
 ```
 
-Now you can see most hours are quiet and the busy ones are rare.
-
 `hour` is a whole number, so every point in a column sits at the same x and we
-are still stacking them. `geom_jitter()` spreads them sideways.
+are still stacking them. `geom_jitter()` spreads them sideways - you can control how much sideways with `width`:
 
 ```{r}
 #| label: fig-jitter
@@ -294,17 +316,30 @@ ggplot(pedestrian,
         geom_jitter(alpha = 0.05, width = 0.3)
 ```
 
-::: {.callout-important title="This will bite you: jitter moves your data"}
+Even jittered, you are still asking the reader to judge density by eye. Put a
+summary on top, like a box plot (made transparent!), and it makes it a bit easier.
 
-A jittered point is in the wrong place on purpose.
+```{r}
+#| label: fig-jitter-box
+#| warning: false
+#| fig-alt: |
+#|   Jittered points for each hour with a boxplot drawn over the top, so the
+#|   median and quartiles sit inside the cloud of raw readings.
+ggplot(pedestrian,
+       aes(x = factor(hour),
+           y = hourly_counts)) +
+        geom_jitter(alpha = 0.02, width = 0.2) +
+        geom_boxplot(outlier.shape = NA, fill = NA)
+```
 
-Fine when you're reading density. Not fine when somebody reads a value off the
-axis, because at `width = 0.3` the 8am readings sit over 7:42 and 8:18.
+The boxplot gives the eye something to anchor on, and the points behind it show
+whether the box deserves to be believed. 
 
-:::
+::: {.callout-tip title="Going deeper: binning in two dimensions" collapse="true"}
 
-`geom_hex()` bins in two dimensions and colours each bin by how many landed in
-it. It's @sec-computed's binning, with one more axis.
+When there really are too many points for jitter and alpha, hand the problem to
+a geom that counts. `geom_hex()` bins in two dimensions and colours each bin by
+how many landed in it. It's @sec-computed's binning with one more axis.
 
 ```{r}
 #| label: fig-hex
@@ -318,47 +353,77 @@ ggplot(pedestrian,
         geom_hex(bins = 30)
 ```
 
-Density is now something you read off a legend, not guess from how black the
-page looks.
+Density becomes something you read off a legend rather than guess from how black
+the page looks. `geom_bin2d()` does the same with squares.
 
 Same trade as `geom_rug()` in @sec-computed: a rug worked on 397 points and
 would be a smear on 35,152.
 
-The other kind of crowding is too many **series**. `gghighlight()` keeps one and
-greys the rest.
+:::
+
+::: {.callout-tip title="Going deeper: too many series, not too many points" collapse="true"}
+
+The other kind of crowding is too many lines rather than too many points.
+`gghighlight()`, from the [gghighlight](https://yutannihilation.github.io/gghighlight/)
+package, keeps one and greys the rest.
 
 ```{r}
 #| label: fig-gghighlight
 #| warning: false
 #| message: false
 #| fig-alt: |
-#|   Four sensor lines with Flagstaff Station in colour and the other three
-#|   greyed out behind it.
-ggplot(pedestrian_hourly,
-       aes(x = hour,
-           y = mean_count,
-           colour = sensor_name)) +
+#|   Weekday foot traffic for four sensors, with Flagstaff Station in colour and
+#|   the other three greyed out behind it.
+pedestrian_hourly |>
+        filter(day_type == "weekday") |>
+        ggplot(aes(x = hour,
+                   y = mean_count,
+                   colour = sensor_name)) +
         geom_line() +
         gghighlight(sensor_name == "Flagstaff Station")
 ```
 
+Note the `filter()`. `pedestrian_hourly` holds a weekday *and* a weekend row for
+every hour, so colouring by sensor alone gives each line two values at every
+hour and it sawtooths straight away, exactly as in @sec-shape. Either filter to
+one kind of day, or add `linetype = day_type` so ggplot2 knows there are eight
+groups and not four.
+
+There's more on this in the Summary section below, where it turns out to be the
+same trick as drawing your whole dataset in grey behind a facet. We come back to
+it as a design principle in @sec-eye.
+
+:::
+
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Try `alpha = 0.01`, then `alpha = 0.3`. Which lets you see the shape?
 
-2. Swap `geom_hex()` for `geom_bin2d()`. What changed?
-
-3. Change the bins:
+2. Change the jitter width:
 
 ```{r}
 #| eval: false
 ggplot(pedestrian,
-       aes(x = hour,
+       aes(x = factor(hour),
            y = hourly_counts)) +
-        geom_hex(bins = ___)
+        geom_jitter(alpha = 0.02, width = ___) +
+        geom_boxplot(outlier.shape = NA, fill = NA)
 ```
 
-   Try 10, then 60. Where have you met this decision before?
+   Try 0.1, then 0.5. At what point does the jitter start lying to you?
+
+3. Take the boxplot off and put it back. Which version would you send to
+   somebody, and which would you use to check your own work?
 
 ```{r}
 #| echo: false
@@ -374,29 +439,28 @@ Only open this if you've actually had a go.
 solid black and you're back where you started. Around `0.05` works here, and the
 right number depends on how many points you have.
 
-**2.** Squares instead of hexagons, same computation. Hexagons don't line up
-into rows and columns, so your eye is less likely to invent a grid.
+**2.** At 0.5 the points from one hour spill into the next, so a reading at 8am
+appears to sit at 8:30. Around 0.2 is honest here.
 
-**3.** It's the binwidth decision from @sec-computed. Too few and the shape goes,
-too many and you're counting individual points again.
-
-:::
+**3.** I'd send the boxplot. I'd check my own work with the points, because
+that's where you find out the box is describing a middle nothing is near.
 
 :::
 
-### What to hold onto
+:::
 
-- `alpha` first, it's free
-- `geom_jitter()` for ties, but it moves your data
-- `geom_hex()` once there are more points than pixels
-- `gghighlight()` when the crowding is series, not points
+### Takeaways
+
+- `alpha` first
+- `geom_jitter()` for ties/overlaps, beware it moves your data
+- Use a summary over top so readers have something to anchor on
+- If more points than pixels, reach for a geom that summarises
 
 ## Summary
 
-> **The idea:** a summary is a claim about the shape of your data. When the
-> shape is wrong, the summary is confidently wrong.
+> **The idea:** a summary shows some shape of your data. But, when the shape is wrong, the summary is confidently wrong.
 
-Four sensors as boxplots.
+Let's show four sensors as boxplots.
 
 ```{r}
 #| label: fig-box-sensors
@@ -422,15 +486,15 @@ pedestrian |>
         count(sensor_name)
 ```
 
-Flagstaff has 663. They're the commute, which is the reason the sensor is there.
+Flagstaff has over 600 outliers!
 
 We know why from @sec-computed: 8am at Flagstaff is two mornings, not one. A
-boxplot assumes one lump. When there are two, it describes a middle that nothing
+boxplot assumes one lump. When there are two (bimodal!), it describes a middle that nothing
 is near and flags the real story as anomalous.
 
 ### Show the data on top of the summary
 
-A violin keeps the shape. Layering the points on top keeps the evidence.
+A violin keeps the shape, using a density. Layering the points on top keeps the evidence.
 
 ```{r}
 #| label: fig-violin-points
@@ -448,7 +512,8 @@ ggplot(pedestrian,
 Two layers, and now the summary has its working shown. Flagstaff's second
 population is a bulge in the violin *and* a band of real points.
 
-`geom_rain()` does the same job with a boxplot, a half violin and the points.
+`geom_rain()`, from the [ggrain](https://www.njudd.com/raincloud-ggrain/)
+package, does all three at once: a boxplot, a half violin, and the points.
 
 ```{r}
 #| label: fig-rain
@@ -466,7 +531,8 @@ ggplot(pedestrian,
 ### Ridgelines
 
 When you have a lot of groups, stack the distributions instead of standing them
-up side by side.
+up side by side. `geom_density_ridges()` comes from the
+[ggridges](https://wilkelab.org/ggridges/) package, by Claus Wilke.
 
 ```{r}
 #| label: fig-ridge-hour
@@ -493,8 +559,7 @@ The classic demonstration that a summary can be confidently wrong is Anscombe's
 quartet: four datasets with identical means, variances, correlations and
 regression lines, and four different pictures.
 
-I worked it through the tidyverse here: [Tidyverse Case Study: Anscombe's
-quartet](https://www.njtierney.com/posts/2020-06-01-tidy-anscombe/).
+I worked it through the tidyverse here: [Tidyverse Case Study: Anscombe's quartet](https://www.njtierney.com/posts/2020-06-01-tidy-anscombe/).
 
 The punchline is in the base R helpfile's own comment:
 
@@ -502,13 +567,14 @@ The punchline is in the base R helpfile's own comment:
 
 :::
 
-::: {.callout-tip title="Going deeper: comparing a panel to everything" collapse="true"}
+::: {.callout-tip title="Going deeper: compared to what?" collapse="true"}
 
 Faceting answers "what does this place look like". It can't answer "compared to
 what", because each panel only holds its own data.
 
-Give one layer its own `data =` with the faceting column removed, and it appears
-in every panel:
+The fix is to draw everything in grey underneath, then that panel's own data on
+top. You can do it by hand, by giving one layer its own `data =` with the
+faceting column removed so it appears in every panel:
 
 ```{r}
 #| label: fig-background
@@ -532,10 +598,49 @@ ggplot(pedestrian,
 
 Every panel now shows its own sensor against the shape of all four.
 
+**This is the same idea as `gghighlight()` above**, and gghighlight will do the
+facet version for you. Add a facet and it redraws the whole dataset in grey
+behind every panel automatically:
+
+```{r}
+#| label: fig-gghighlight-facet
+#| warning: false
+#| message: false
+#| fig-alt: |
+#|   Four panels, one per sensor, each showing its own line in colour with the
+#|   other three greyed out behind it.
+pedestrian_hourly |>
+        filter(day_type == "weekday") |>
+        ggplot(aes(x = hour,
+                   y = mean_count,
+                   colour = sensor_name)) +
+        geom_line() +
+        gghighlight(use_direct_label = FALSE) +
+        facet_wrap(vars(sensor_name))
+```
+
+No `filter()` on a background object, no second `data =` argument. Note there is
+no condition inside `gghighlight()` this time: with a facet, it highlights
+whatever belongs to each panel.
+
+Grey for context, colour for the thing you mean. It's the same move whether you
+write it yourself or let a package do it, and we come back to it as a design
+principle in @sec-eye.
+
 :::
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Sketch a violin of **Birrarung Marr**, given a park doesn't care what day it
    is. Then draw it.
 

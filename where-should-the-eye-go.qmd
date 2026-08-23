@@ -98,6 +98,16 @@ Put your most important variable on a position, every time.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch7-data"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Look back at the `size` and `shape` plots in @sec-anatomy. Given the ranking,
    would you make the same choices now?
 
@@ -190,6 +200,16 @@ A phone book sorted by height would be a nightmare.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch7-data"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Add `fct_rev()` around the `fct_reorder()`. Which direction reads better for
    a horizontal bar chart?
 
@@ -251,14 +271,19 @@ Here's our four sensors in ggplot2's default colours.
 #| fig-alt: |
 #|   Four hourly foot traffic lines, one per sensor, in ggplot2's default red,
 #|   green, blue and purple.
-p_sensors <- ggplot(pedestrian_hourly,
-                    aes(x = hour,
-                        y = mean_count,
-                        colour = sensor_name)) +
+p_sensors <- pedestrian_hourly |>
+        filter(day_type == "weekday") |>
+        ggplot(aes(x = hour,
+                   y = mean_count,
+                   colour = sensor_name)) +
         geom_line()
 
 p_sensors
 ```
+
+Note the `filter()`. `pedestrian_hourly` holds a weekday and a weekend row for
+every hour, so colouring by sensor alone gives each line two values per hour and
+it sawtooths, as in @sec-shape. One kind of day is enough to talk about colour.
 
 Those four are `#F8766D`, `#7CAE00`, `#00BFC4`, `#C77CFF`. Here's what they
 become under deuteranopia, the commonest kind of colour vision deficiency:
@@ -341,6 +366,16 @@ the whole story.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch7-data", "fig-default-cols"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Run `deutan()` on a palette you use at work. Does it survive?
 
 2. Simulate a different brewer palette:
@@ -397,12 +432,15 @@ Grey is not an absence of colour. It's a demotion, and you do it on purpose.
 #| fig-alt: |
 #|   Four hourly lines, three in pale grey and one, Flagstaff Station, in dark
 #|   red.
-ggplot(pedestrian_hourly,
+pedestrian_weekday <- pedestrian_hourly |>
+        filter(day_type == "weekday")
+
+ggplot(pedestrian_weekday,
        aes(x = hour,
            y = mean_count,
            group = sensor_name)) +
         geom_line(colour = "grey80") +
-        geom_line(data = filter(pedestrian_hourly,
+        geom_line(data = filter(pedestrian_weekday,
                                 sensor_name == "Flagstaff Station"),
                   colour = "firebrick")
 ```
@@ -420,6 +458,7 @@ Then get rid of the legend by putting the label on the line.
 #|   The four sensor lines with each name printed at the right hand end of its
 #|   own line, and no legend.
 sensor_labels <- pedestrian_hourly |>
+        filter(day_type == "weekday") |>
         group_by(sensor_name) |>
         slice_max(hour, n = 1)
 
@@ -438,6 +477,16 @@ label sits where the thing is.
 
 ::: {.callout-note title="Your Turn"}
 
+
+::: {.callout-tip title="Setup code" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs", "ch7-data", "fig-default-cols"]
+#| eval: false
+#| echo: true
+```
+
+:::
 1. Run the greyed plot through `deutan()`. Does highlighting survive colour
    vision deficiency better than four categorical hues did?
 
