@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-b45b7b0fa9169e986df15f1ef60a279c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ef2c35dd9f25d028974ee0b6d1133cf6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-020cafe2c5162b14dfdb8f310a12914a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -220,8 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#position-stack" id="toc-position-stack" class="nav-link" data-scroll-target="#position-stack">position = “stack”</a></li>
   <li><a href="#position-dodge" id="toc-position-dodge" class="nav-link" data-scroll-target="#position-dodge">position = “dodge”</a></li>
-  <li><a href="#order-carries-meaning-too" id="toc-order-carries-meaning-too" class="nav-link" data-scroll-target="#order-carries-meaning-too">Order carries meaning too</a></li>
-  <li><a href="#filled" id="toc-filled" class="nav-link" data-scroll-target="#filled"><strong>Filled</strong></a></li>
+  <li><a href="#position-fill" id="toc-position-fill" class="nav-link" data-scroll-target="#position-fill">position = “fill”</a></li>
   </ul></li>
   <li><a href="#looking-across-the-whole-day" id="toc-looking-across-the-whole-day" class="nav-link" data-scroll-target="#looking-across-the-whole-day"><span class="header-section-number">4.3</span> Looking across the whole day</a></li>
   <li><a href="#facet_wrap-and-facet_grid" id="toc-facet_wrap-and-facet_grid" class="nav-link" data-scroll-target="#facet_wrap-and-facet_grid"><span class="header-section-number">4.4</span> <code>facet_wrap()</code> and <code>facet_grid()</code></a>
@@ -285,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="where-is-busy-on-a-weekend" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="where-is-busy-on-a-weekend"><span class="header-section-number">4.1</span> Where is busy on a weekend?</h2>
-<p>We are using the pedestrian data again in this chapter, and the question for the whole chapter is this one:</p>
+<p>We are using the pedestrian data again in this chapter, and the question for the chapter is this one:</p>
 <blockquote class="blockquote">
 <p>Where is busy on a weekend?</p>
 </blockquote>
@@ -353,6 +352,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-label="3"></a>pedestrian_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-label="4"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-label="5"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-label="6"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-label="7"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-label="8"></a>                )</span>
+<span id="cb4-9"><a href="#cb4-9" aria-label="9"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-label="10"></a>        <span class="fu">group_by</span>(sensor_name, day_type) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-label="11"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-label="12"></a>                <span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-label="13"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-label="14"></a>        ) <span class="sc">|&gt;</span> </span>
+<span id="cb4-15"><a href="#cb4-15" aria-label="15"></a>  <span class="fu">arrange</span>(day_type, sensor_name)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-label="16"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-label="17"></a>pedestrian_totals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <p>I want to explore how arranging the information in a graph changes your interpretation - so we will draw two:</p>
 <ol type="1">
 <li><p>Sketch a bar chart to explore: <strong>where is busy on a weekend</strong>.</p></li>
@@ -361,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Two minutes! One minute per chart - just quickly.</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_9144e8f3" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_d39b0184" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Let’s discuss our sketches.</p>
@@ -373,22 +406,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4.2" class="anchored" data-anchor-id="bar-charts-stack-dodge-and-fill"><span class="header-section-number">4.2</span> Bar charts: stack, dodge, and fill</h2>
 <p>We can look at the counts per day type, we can do:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> day_type,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-label="3"></a>           <span class="at">y =</span> total)) <span class="sc">+</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-label="4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>And we can make a regular bar chart of the week type and the total count like so:</p>
-<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> day_type,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-label="3"></a>           <span class="at">y =</span> total)) <span class="sc">+</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-label="4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -399,11 +418,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Let’s move these sensor names onto the y axis to make them easier to read:</p>
+<p>And we can make a regular bar chart of the week type and the total count like so:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name)) <span class="sc">+</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-label="3"></a>           <span class="at">y =</span> total)) <span class="sc">+</span> </span>
 <span id="cb6-4"><a href="#cb6-4" aria-label="4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
@@ -413,13 +432,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>If we want to colour this by the weekday type, you can map one of these variables to <code>fill</code>:</p>
+<p>Let’s move these sensor names onto the y axis to make them easier to read:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-label="5"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name)) <span class="sc">+</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -428,25 +446,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>If we want to colour this by the weekday type, you can map one of these variables to <code>fill</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-label="5"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Notice the bar heights are the same across these two? The position sums up these two numbers. This is called “stacked”.</p>
 <p>Now, there are a few different ways to position bars - you set this with the <code>position</code> argument inside of <code>geom_col()</code>: <strong>stack</strong>, <strong>dodge</strong>, and <strong>fill</strong>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-label="2"></a><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-label="3"></a><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s go through them.</p>
 <section id="position-stack" class="level3">
 <h3 class="anchored" data-anchor-id="position-stack">position = “stack”</h3>
-<p>This is the default in ggplot2: stacked barplots. You can change set this with <code>position = "stacked"</code>, but this is the default:</p>
+<p>This is the default in ggplot2: stacked barplots. You can change set this with <code>position = "stack"</code>, but this is the default:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-bar-stack" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A stacked bar chart of total foot traffic per sensor, with weekday and weekend stacked on top of each other.">
+<div id="fig-bar-stack" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A stacked bar chart of total foot traffic per sensor, with weekday and weekend stacked on top of each other." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bar-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="what-am-i-comparing_files/figure-html/fig-bar-stack-1.png" id="fig-bar-stack" class="img-fluid figure-img" alt="A stacked bar chart of total foot traffic per sensor, with weekday and weekend stacked on top of each other." width="672">
@@ -464,13 +497,13 @@ Figure&nbsp;4.1
 <h3 class="anchored" data-anchor-id="position-dodge">position = “dodge”</h3>
 <p>This dodges the bars, so you can compare the fill category directly. You don’t get the total of each sensor name, but now you can directly compare the weekday and weekend to each sensor.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-bar-dodge" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same totals as side by side bars, weekday next to weekend for each sensor.">
+<div id="fig-bar-dodge" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same totals as side by side bars, weekday next to weekend for each sensor." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bar-dodge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="what-am-i-comparing_files/figure-html/fig-bar-dodge-1.png" id="fig-bar-dodge" class="img-fluid figure-img" alt="The same totals as side by side bars, weekday next to weekend for each sensor." width="672">
@@ -483,40 +516,8 @@ Figure&nbsp;4.2
 </div>
 </div>
 </section>
-<section id="order-carries-meaning-too" class="level3">
-<h3 class="anchored" data-anchor-id="order-carries-meaning-too">Order carries meaning too</h3>
-<p>Notice the sensors are in alphabetical order. That’s not a decision anybody made, it’s just what happens when nobody chooses.</p>
-<p><code>reorder()</code> sorts one variable by another, and it works right inside <code>aes()</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-label="3"></a>           <span class="at">y =</span> <span class="fu">reorder</span>(sensor_name, total),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-bar-reorder" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same dodged bars, now sorted so the busiest sensor is at the top and the quietest at the bottom.">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-bar-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="what-am-i-comparing_files/figure-html/fig-bar-reorder-1.png" id="fig-bar-reorder" class="img-fluid figure-img" alt="The same dodged bars, now sorted so the busiest sensor is at the top and the quietest at the bottom." width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-bar-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.3
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Same data, same geom, one function. The bars now read as a ranking rather than a lookup table.</p>
-<p>Sort by the thing your message is about:</p>
-<ul>
-<li><code>reorder(sensor_name, total)</code> for busiest overall</li>
-<li><code>reorder(sensor_name, -total)</code> to flip it</li>
-<li>alphabetical, when the reader needs to <strong>look something up</strong> rather than compare</li>
-</ul>
-<p>We come back to ordering properly in <a href="where-should-the-eye-go.html" class="quarto-xref"><span>Chapter 6</span></a>, where it turns out to be the cheapest emphasis you can buy.</p>
-</section>
-<section id="filled" class="level3">
-<h3 class="anchored" data-anchor-id="filled"><strong>Filled</strong></h3>
+<section id="position-fill" class="level3">
+<h3 class="anchored" data-anchor-id="position-fill">position = “fill”</h3>
 <p>Makes every bar the same height, so proportion is easy, but you trade off counting the number.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
@@ -525,13 +526,13 @@ Figure&nbsp;4.3
 <span id="cb12-4"><a href="#cb12-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-bar-fill" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same data as proportions, every bar the same height, showing the weekend share of traffic at each sensor.">
+<div id="fig-bar-fill" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same data as proportions, every bar the same height, showing the weekend share of traffic at each sensor." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bar-fill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="what-am-i-comparing_files/figure-html/fig-bar-fill-1.png" id="fig-bar-fill" class="img-fluid figure-img" alt="The same data as proportions, every bar the same height, showing the weekend share of traffic at each sensor." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-bar-fill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.4
+Figure&nbsp;4.3
 </figcaption>
 </figure>
 </div>
@@ -555,7 +556,7 @@ Figure&nbsp;4.4
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -571,7 +572,7 @@ Figure&nbsp;4.4
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -587,7 +588,7 @@ Figure&nbsp;4.4
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -615,7 +616,7 @@ Figure&nbsp;4.4
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Starting from here? Run this first">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -624,7 +625,7 @@ Figure&nbsp;4.4
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -658,6 +659,40 @@ Figure&nbsp;4.4
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-label="3"></a>pedestrian_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-label="4"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-label="5"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-label="6"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-label="7"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-label="8"></a>                )</span>
+<span id="cb17-9"><a href="#cb17-9" aria-label="9"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-label="10"></a>        <span class="fu">group_by</span>(sensor_name, day_type) <span class="sc">|&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-label="11"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb17-12"><a href="#cb17-12" aria-label="12"></a>                <span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-13"><a href="#cb17-13" aria-label="13"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-label="14"></a>        ) <span class="sc">|&gt;</span> </span>
+<span id="cb17-15"><a href="#cb17-15" aria-label="15"></a>  <span class="fu">arrange</span>(day_type, sensor_name)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-label="16"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-label="17"></a>pedestrian_totals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <ol type="1">
 <li><p>What happens if you use different variables in “fill” - e.g., <code>fill = sensor_name</code>?</p></li>
 <li><p>Try <code>position = "dodge2"</code>. What changed?</p></li>
@@ -665,7 +700,7 @@ Figure&nbsp;4.4
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_7aff0441" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_690afb7f" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -680,6 +715,77 @@ Figure&nbsp;4.4
           scale_x_discrete(guide = guide_axis(n.dodge = 2))
           scale_x_discrete(guide = guide_axis(angle = 45))
 -->
+<div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: Change order to improve comprehension">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Going deeper: Change order to improve comprehension
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The sensors are in alphabetical order - it’s the default, but we can make it better. Let’s use <code>reorder()</code>, to sort one variable by another. We place this inside <code>aes()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>           <span class="at">y =</span> <span class="fu">reorder</span>(sensor_name, total),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-bar-reorder" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same dodged bars, now sorted so the busiest sensor is at the top and the quietest at the bottom." width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bar-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="what-am-i-comparing_files/figure-html/fig-bar-reorder-1.png" id="fig-bar-reorder" class="img-fluid figure-img" alt="The same dodged bars, now sorted so the busiest sensor is at the top and the quietest at the bottom." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-bar-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The bars now read as a ranking rather than a lookup table.</p>
+<ul>
+<li><code>reorder(sensor_name, total)</code> for busiest overall at the top</li>
+<li><code>reorder(sensor_name, -total)</code> to flip it - lowest at the top</li>
+<li>alphabetical, when the reader needs to <strong>look something up</strong> rather than compare</li>
+</ul>
+<p>If you want to reorder by a specific variable within that, you can do it manually - you would be best to identify the</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a>weekend_order <span class="ot">&lt;-</span> pedestrian_totals <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-label="2"></a>  <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekend"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-label="3"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>total)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-label="4"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-label="5"></a>weekend_order</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  sensor_name                   day_type   total
+  &lt;chr&gt;                         &lt;chr&gt;      &lt;int&gt;
+1 Bourke Street Mall (South)    weekend  2846277
+2 Birrarung Marr                weekend  1614197
+3 Spencer St-Collins St (South) weekend   472174
+4 Flagstaff Station             weekend   421244</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_totals,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-label="3"></a>           <span class="at">y =</span> <span class="fu">fct_relevel</span>(sensor_name, weekend_order<span class="sc">$</span>sensor_name),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-label="4"></a>           <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-label="5"></a>        <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We come back to ordering properly in <a href="where-should-the-eye-go.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="looking-across-the-whole-day" class="level2" data-number="4.3">
@@ -705,7 +811,7 @@ Figure&nbsp;4.4
 </div>
 <p>The average number of people who walked past one of the four sensors, each hour, on a weekday or weekend.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="How I made this">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -714,27 +820,27 @@ Figure&nbsp;4.4
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
-<span id="cb18-7"><a href="#cb18-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
-<span id="cb18-8"><a href="#cb18-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-label="10"></a>                )</span>
-<span id="cb18-11"><a href="#cb18-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
-<span id="cb18-14"><a href="#cb18-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb18-15"><a href="#cb18-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-label="16"></a>        )</span>
-<span id="cb18-17"><a href="#cb18-17" aria-label="17"></a></span>
-<span id="cb18-18"><a href="#cb18-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-label="10"></a>                )</span>
+<span id="cb23-11"><a href="#cb23-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb23-14"><a href="#cb23-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-15"><a href="#cb23-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-label="16"></a>        )</span>
+<span id="cb23-17"><a href="#cb23-17" aria-label="17"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>There are 37,700 rows and only 24 hours in a day, so drawing a line straight from <code>pedestrian</code> sawtooths: one line running out to hour 23 and back to hour 0, once for every day of the year.</p>
 <p>More on that trade off at the end of the chapter.</p>
@@ -743,12 +849,12 @@ Figure&nbsp;4.4
 </div>
 <p>Now put it all on one plot: for each hour, the average count, for each sensor, and each day type:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-label="5"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-label="6"></a>        <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-label="5"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-label="6"></a>        <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-eight-lines" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A line plot with eight overlapping lines on one panel, four sensor colours crossed with solid and dashed lines for weekday and weekend. The lines cross each other repeatedly and it is hard to follow any single one. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -785,6 +891,41 @@ Figure&nbsp;4.5: Every sensor, weekday and weekend, on one panel.
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb25-7"><a href="#cb25-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-label="10"></a>                )</span>
+<span id="cb25-11"><a href="#cb25-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb25-14"><a href="#cb25-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb25-15"><a href="#cb25-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-label="16"></a>        )</span>
+<span id="cb25-17"><a href="#cb25-17" aria-label="17"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <p>How would you reshape this plot into something better? What gets in the way?</p>
 <p>Draw an example better plot.</p>
 </div>
@@ -795,13 +936,13 @@ Figure&nbsp;4.5: Every sensor, weekday and weekend, on one panel.
 <p>We can use <code>facet_wrap()</code> and <code>facet_grid()</code> to split the plot into multiple sub-plots using <code>facet_wrap()</code> or <code>facet_grid()</code>.</p>
 <p>Here is the noisy plot from earlier, shown with facets added.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-label="5"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-label="7"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-label="5"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-label="7"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-facet-wrap" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels, one per sensor, each showing a solid weekday line and a dashed weekend line. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -832,10 +973,45 @@ Figure&nbsp;4.6: The same eight lines, split into four panels.
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb27-7"><a href="#cb27-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-label="10"></a>                )</span>
+<span id="cb27-11"><a href="#cb27-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb27-14"><a href="#cb27-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb27-15"><a href="#cb27-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-label="16"></a>        )</span>
+<span id="cb27-17"><a href="#cb27-17" aria-label="17"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <p>Is there a way you can do you think you could arrange these plots so you can more easily compare the x and y axes? How would you imagine this?</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_72765e07" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_ea813ea0" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <details>
@@ -843,35 +1019,35 @@ Figure&nbsp;4.6: The same eight lines, split into four panels.
 Answer
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-label="5"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-label="7"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name),</span>
-<span id="cb21-8"><a href="#cb21-8" aria-label="8"></a>                   <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-label="5"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-label="7"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-label="8"></a>                   <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-label="1"></a><span class="co"># or</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-label="2"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-label="3"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-label="4"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-label="5"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-label="6"></a>           <span class="at">colour =</span> sensor_name,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-label="7"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-label="8"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-label="9"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name),</span>
-<span id="cb22-10"><a href="#cb22-10" aria-label="10"></a>                   <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a><span class="co"># or</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-label="4"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-label="5"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-label="6"></a>           <span class="at">colour =</span> sensor_name,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>           <span class="at">linetype =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-label="8"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-label="9"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name),</span>
+<span id="cb29-10"><a href="#cb29-10" aria-label="10"></a>                   <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -880,7 +1056,7 @@ Answer
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="`vars()`, and the `~` you will see elsewhere">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -889,12 +1065,12 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>vars()</code> is there because <code>sensor_name</code> is a column name. You use <code>vars()</code> in a similar way to how you use <code>aes()</code>: you refer to columns from the data frame inside of it.</p>
 <p>There is an older way of writing this, with a tilde:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>sensor_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-label="1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>sensor_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>That is a <strong>formula</strong>, and it does the same job here. You will see it in other people’s code and in older blog posts, so it is worth recognising.</p>
 <p>I teach <code>vars()</code> first because I think it is more consistent with the rest of the tidyverse. The tilde only works in some of those places.</p>
@@ -904,12 +1080,12 @@ Answer
 </div>
 <p>Since each panel now holds exactly one sensor, mapping <code>sensor_name</code> to colour as well is saying the same thing twice. We can use that colour on something else, instead - like <code>day_type</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-facet-wrap-daytype" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels, one per sensor, with weekday and weekend drawn as two coloured lines in each panel. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -927,12 +1103,12 @@ Figure&nbsp;4.7: Colour freed up for the comparison we actually care about.
 <h3 class="anchored" data-anchor-id="two-variables-with-facet_grid">Two variables, with <code>facet_grid()</code></h3>
 <p><code>facet_wrap()</code> takes one variable and wraps the panels onto the page. <code>facet_grid()</code> takes up to two variables, and lays them out as rows and columns.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-label="3"></a>           <span class="at">y =</span> mean_count)) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-label="4"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-label="5"></a>        <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(day_type),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-label="6"></a>                   <span class="at">cols =</span> <span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-label="3"></a>           <span class="at">y =</span> mean_count)) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-label="4"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-label="5"></a>        <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(day_type),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-label="6"></a>                   <span class="at">cols =</span> <span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-facet-grid" class="quarto-float quarto-figure quarto-figure-center anchored" alt="An eight panel grid, weekday and weekend as two rows, four sensors as four columns. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -963,24 +1139,24 @@ Figure&nbsp;4.8: Day type down the side, sensor across the top.
 Data for exercise
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
-<span id="cb26-7"><a href="#cb26-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
-<span id="cb26-8"><a href="#cb26-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
-<span id="cb26-9"><a href="#cb26-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-label="10"></a>                )</span>
-<span id="cb26-11"><a href="#cb26-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
-<span id="cb26-14"><a href="#cb26-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb26-15"><a href="#cb26-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-label="16"></a>        )</span>
-<span id="cb26-17"><a href="#cb26-17" aria-label="17"></a></span>
-<span id="cb26-18"><a href="#cb26-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb33-7"><a href="#cb33-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb33-8"><a href="#cb33-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-label="10"></a>                )</span>
+<span id="cb33-11"><a href="#cb33-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb33-14"><a href="#cb33-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-15"><a href="#cb33-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-label="16"></a>        )</span>
+<span id="cb33-17"><a href="#cb33-17" aria-label="17"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </details>
 <ol type="1">
@@ -988,8 +1164,8 @@ Data for exercise
 <li><p>Swap the rows and columns in the grid:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a><span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(sensor_name),</span>
-<span id="cb27-2"><a href="#cb27-2" aria-label="2"></a>           <span class="at">cols =</span> <span class="fu">vars</span>(day_type))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-label="1"></a><span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(sensor_name),</span>
+<span id="cb34-2"><a href="#cb34-2" aria-label="2"></a>           <span class="at">cols =</span> <span class="fu">vars</span>(day_type))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Same information. Does it read differently?</p>
 <ol start="3" type="1">
@@ -997,7 +1173,7 @@ Data for exercise
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_81bede8d" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_1b3d4e2b" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -1008,12 +1184,12 @@ Data for exercise
 <h2 data-number="4.5" class="anchored" data-anchor-id="change-comparisons"><span class="header-section-number">4.5</span> Change comparisons</h2>
 <p>Everything above facets by <strong>sensor</strong>. Watch what happens if we facet by <strong>day type</strong> instead, and put sensor on colour.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb28-2"><a href="#cb28-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(day_type))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(day_type))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-swap" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two panels, weekday and weekend, each with four coloured sensor lines. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1049,27 +1225,27 @@ Figure&nbsp;4.9: The same data, arranged around the other question.
 <div class="callout-body-container callout-body">
 <p>With only looking at the data, can you reacreate the plot?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
-<span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
-<span id="cb29-8"><a href="#cb29-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
-<span id="cb29-9"><a href="#cb29-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-label="10"></a>                )</span>
-<span id="cb29-11"><a href="#cb29-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
-<span id="cb29-14"><a href="#cb29-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb29-15"><a href="#cb29-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-label="16"></a>        )</span>
-<span id="cb29-17"><a href="#cb29-17" aria-label="17"></a></span>
-<span id="cb29-18"><a href="#cb29-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb36-7"><a href="#cb36-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb36-8"><a href="#cb36-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-label="10"></a>                )</span>
+<span id="cb36-11"><a href="#cb36-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb36-14"><a href="#cb36-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb36-15"><a href="#cb36-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-label="16"></a>        )</span>
+<span id="cb36-17"><a href="#cb36-17" aria-label="17"></a></span>
+<span id="cb36-18"><a href="#cb36-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-label="1"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-label="1"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 192 × 4
    sensor_name    day_type  hour mean_count
@@ -1089,7 +1265,7 @@ Figure&nbsp;4.9: The same data, arranged around the other question.
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_192ff0ff" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_3284037c" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="cell">
@@ -1111,18 +1287,18 @@ Figure&nbsp;4.10
 Answer
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb32-2"><a href="#cb32-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb32-3"><a href="#cb32-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </details>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: free scales">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1131,7 +1307,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Sometimes you want to change the scale for each sub plot - you can do this with <code>scales = ""</code> option:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -1139,16 +1315,16 @@ Answer
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb33-2"><a href="#cb33-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1156,17 +1332,17 @@ Answer
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb34-2"><a href="#cb34-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name),</span>
-<span id="cb34-7"><a href="#cb34-7" aria-label="7"></a>                   <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name),</span>
+<span id="cb41-7"><a href="#cb41-7" aria-label="7"></a>                   <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="what-am-i-comparing_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1186,9 +1362,44 @@ Answer
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-label="3"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-label="4"></a>        <span class="co"># a weekday/weekend column. The only two days starting with</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-label="5"></a>        <span class="co"># "S" are the two we want</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-label="6"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb42-7"><a href="#cb42-7" aria-label="7"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb42-8"><a href="#cb42-8" aria-label="8"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb42-9"><a href="#cb42-9" aria-label="9"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-label="10"></a>                )</span>
+<span id="cb42-11"><a href="#cb42-11" aria-label="11"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-label="12"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-label="13"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb42-14"><a href="#cb42-14" aria-label="14"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb42-15"><a href="#cb42-15" aria-label="15"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-label="16"></a>        )</span>
+<span id="cb42-17"><a href="#cb42-17" aria-label="17"></a></span>
+<span id="cb42-18"><a href="#cb42-18" aria-label="18"></a>pedestrian_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_63905304" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_69fca051" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <ol type="1">
@@ -1201,7 +1412,7 @@ Answer
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Three cures for a sawtooth">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1210,7 +1421,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We have now hit sawtoothing three times, in three chapters, and fixed it three different ways. It’s worth putting them side by side, because they aren’t equivalent and I keep having to choose between them.</p>
 <p>A sawtooth always means the same thing: <strong>more than one y for each x, inside what ggplot2 thinks is one group.</strong> So the line runs out to the right, comes back, and does it again.</p>

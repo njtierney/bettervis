@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-b45b7b0fa9169e986df15f1ef60a279c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ef2c35dd9f25d028974ee0b6d1133cf6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-020cafe2c5162b14dfdb8f310a12914a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -215,17 +215,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#decoration" id="toc-decoration" class="nav-link" data-scroll-target="#decoration"><span class="header-section-number">5.1</span> Decoration</a>
   <ul class="collapse">
   <li><a href="#colour-is-ink" id="toc-colour-is-ink" class="nav-link" data-scroll-target="#colour-is-ink">Colour is ink</a></li>
-  <li><a href="#what-to-hold-onto" id="toc-what-to-hold-onto" class="nav-link" data-scroll-target="#what-to-hold-onto">What to hold onto</a></li>
+  <li><a href="#decoration-take-aways" id="toc-decoration-take-aways" class="nav-link" data-scroll-target="#decoration-take-aways">“Decoration” Take aways</a></li>
   </ul></li>
   <li><a href="#density" id="toc-density" class="nav-link" data-scroll-target="#density"><span class="header-section-number">5.2</span> Density</a>
   <ul class="collapse">
-  <li><a href="#what-to-hold-onto-1" id="toc-what-to-hold-onto-1" class="nav-link" data-scroll-target="#what-to-hold-onto-1">What to hold onto</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
   </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.3</span> Summary</a>
   <ul class="collapse">
   <li><a href="#show-the-data-on-top-of-the-summary" id="toc-show-the-data-on-top-of-the-summary" class="nav-link" data-scroll-target="#show-the-data-on-top-of-the-summary">Show the data on top of the summary</a></li>
   <li><a href="#ridgelines" id="toc-ridgelines" class="nav-link" data-scroll-target="#ridgelines">Ridgelines</a></li>
-  <li><a href="#what-to-hold-onto-2" id="toc-what-to-hold-onto-2" class="nav-link" data-scroll-target="#what-to-hold-onto-2">What to hold onto</a></li>
+  <li><a href="#what-to-hold-onto" id="toc-what-to-hold-onto" class="nav-link" data-scroll-target="#what-to-hold-onto">What to hold onto</a></li>
   </ul></li>
   <li><a href="#to-summarise" id="toc-to-summarise" class="nav-link" data-scroll-target="#to-summarise"><span class="header-section-number">5.4</span> To summarise</a></li>
   <li>Links</li>
@@ -254,9 +254,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>You’ve got the right comparison on the page and it still looks like a mess. Now what?</p>
-<p>Three things get between a reader and your data: Decoration, density, and summary.</p>
-<p>This chapter takes them one at a time, and most of the work is deciding what to remove.</p>
+<p>Once you’ve got the message clear in your plot, there can still be some clutter in the graphic.</p>
+<p>To structure how to clean up your plot, we will talk about</p>
+<ul>
+<li>Decoration</li>
+<li>density, and</li>
+<li>summary</li>
+</ul>
 <section id="overview" class="level2 unnumbered overview">
 <h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
 <p><strong>Duration</strong> 49 minutes</p>
@@ -298,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="decoration" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="decoration"><span class="header-section-number">5.1</span> Decoration</h2>
 <blockquote class="blockquote">
-<p><strong>The idea:</strong> every plot has ink that is data and ink that is not. The not-data ink still costs the reader a look.</p>
+<p><strong>The idea:</strong> there is “ink” in every plot - the idea is we want to only keep the ink that is related to the data. This is sometimes referred to as the data:ink ratio</p>
 </blockquote>
 <p>Here is where we left off in <a href="what-am-i-comparing.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
 <div class="cell">
@@ -311,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-label="7"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-label="8"></a>p_busy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-before" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels, one per sensor, each with a weekday and a weekend line, on ggplot2's default grey background with white gridlines and a legend on the right." width="672">
+<div id="fig-before" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels, one per sensor, each with a weekday and a weekend line, on ggplot2's default grey background with white gridlines and a legend on the right.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-before-1.png" id="fig-before" class="img-fluid figure-img" alt="Four panels, one per sensor, each with a weekday and a weekend line, on ggplot2's default grey background with white gridlines and a legend on the right." width="672">
@@ -323,14 +327,32 @@ Figure&nbsp;5.1
 </div>
 </div>
 </div>
-<p>Eight lines are data. Not data:</p>
+<p>There are two lines per facet - these are representing the data. Not all of the ink on the plot is related to data. Edward Tufte called the useful fraction the <strong>data-ink ratio</strong>. Go through each piece and ask: is this helping, or is it just…here?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Your Turn: Discuss the figure!">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Your Turn: Discuss the figure!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<countdown-timer class="countdown" id="timer_f9af0028" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+</div>
+</div>
+</div>
+</div>
+<p>You could argue that some of these parts of ink that are not data are:</p>
 <ul>
 <li>the grey panel background</li>
 <li>the white gridlines, major and minor</li>
 <li>the box around the legend</li>
 <li>the legend title, which is a column name</li>
 </ul>
-<p>Edward Tufte called the useful fraction the <strong>data-ink ratio</strong>. Go through each piece and ask: is this helping, or is it just here?</p>
+<p>Let’s walk through some ways to improve the data:ink ratio</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">default</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">theme_minimal()</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">fewer gridlines</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">legend below</a></li></ul>
 <div class="tab-content">
@@ -338,7 +360,7 @@ Figure&nbsp;5.1
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-label="1"></a>p_busy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-0" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The four panel plot with ggplot2's default grey theme." width="672">
+<div id="fig-strip-0" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The four panel plot with ggplot2's default grey theme.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-0-1.png" id="fig-strip-0" class="img-fluid figure-img" alt="The four panel plot with ggplot2's default grey theme." width="672">
@@ -355,7 +377,7 @@ Figure&nbsp;5.2
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-label="1"></a>p_busy <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same plot with a white background and light grey gridlines." width="672">
+<div id="fig-strip-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot with a white background and light grey gridlines.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-1-1.png" id="fig-strip-1" class="img-fluid figure-img" alt="The same plot with a white background and light grey gridlines." width="672">
@@ -374,7 +396,7 @@ Figure&nbsp;5.3
 <span id="cb6-2"><a href="#cb6-2" aria-label="2"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-label="3"></a>        <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same plot again with the minor gridlines removed." width="672">
+<div id="fig-strip-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot again with the minor gridlines removed.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-2-1.png" id="fig-strip-2" class="img-fluid figure-img" alt="The same plot again with the minor gridlines removed." width="672">
@@ -394,7 +416,7 @@ Figure&nbsp;5.4
 <span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>        <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>              <span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-3" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same plot with the legend moved underneath, giving the panels more width." width="672">
+<div id="fig-strip-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot with the legend moved underneath, giving the panels more width.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-3-1.png" id="fig-strip-3" class="img-fluid figure-img" alt="The same plot with the legend moved underneath, giving the panels more width." width="672">
@@ -409,18 +431,18 @@ Figure&nbsp;5.5
 </div>
 </div>
 </div>
-<p>Each step removed something and nothing was lost. The last one made the panels wider too, because the legend was using horizontal space to say two words.</p>
+<p>Each step removed something, but the message was kept. We got some more real estate back for the plots too, by moving the legend.</p>
 <section id="colour-is-ink" class="level3">
 <h3 class="anchored" data-anchor-id="colour-is-ink">Colour is ink</h3>
-<p>Colour counts as ink, and it is the piece people most often spend twice.</p>
+<p>Colour counts as ink, and it is sometimes where people double up</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-label="4"></a>           <span class="at">fill =</span> sensor_name)) <span class="sc">+</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-label="5"></a>        <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-colour-redundant" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four boxplots, each filled with a different colour, with a legend on the right repeating the sensor names already on the x axis." width="672">
+<div id="fig-colour-redundant" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four boxplots, each filled with a different colour, with a legend on the right repeating the sensor names already on the x axis.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-colour-redundant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-colour-redundant-1.png" id="fig-colour-redundant" class="img-fluid figure-img" alt="Four boxplots, each filled with a different colour, with a legend on the right repeating the sensor names already on the x axis." width="672">
@@ -435,11 +457,11 @@ Figure&nbsp;5.6
 <p>The x axis already says which sensor is which. The fill says it again, and then a legend says it a third time.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name)) <span class="sc">+</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-label="4"></a>        <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-colour-dropped" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same four boxplots in plain grey, with no legend, and the sensor names still labelled on the x axis." width="672">
+<div id="fig-colour-dropped" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same four boxplots in plain grey, with no legend, and the sensor names still labelled on the x axis.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-colour-dropped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-colour-dropped-1.png" id="fig-colour-dropped" class="img-fluid figure-img" alt="The same four boxplots in plain grey, with no legend, and the sensor names still labelled on the x axis." width="672">
@@ -451,10 +473,10 @@ Figure&nbsp;5.7
 </div>
 </div>
 </div>
-<p>Same message, less ink, and the plot got wider.</p>
-<p>Colour earns its place when it carries something no other channel is carrying. If dropping it costs you nothing, it was decoration.</p>
+<p>We have the same message, but with less ink, and the plot got wider because there isn’t a legend.</p>
+<p>We want to use colour carefully - if the position (x or y axis) is already carrying that information, we probably don’t need it. Even if it looks nice!</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: data-ink is a direction, not a target">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -463,11 +485,12 @@ Figure&nbsp;5.7
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Push this to its end and you get a plot with no gridlines, no axis and no legend, which is unreadable.</p>
-<p>Gridlines are the case worth arguing about. They are not data, and they are how a reader gets a number off an axis. Delete them and you’ve made the plot cleaner and less useful.</p>
-<p>So the question is never “how much can I remove”. It’s “what is this piece for”, and if you can answer that, it stays.</p>
+<p>We can push this to the limit, and you might end up with something a bit more abstract: no gridlines, no axis, no legend.</p>
+<p>Gridlines are not data, but they are how a reader gets a number off an axis.</p>
+<p>If you delete them, you can make the plot cleaner, but less useful.</p>
+<p>So remember, the question is not so much: “how much can I remove”, but “what is this piece for” - if you say what each piece is for, that usually means you can keep it.</p>
 </div>
 </div>
 </div>
@@ -481,25 +504,68 @@ Figure&nbsp;5.7
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-label="3"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-label="4"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-label="5"></a><span class="fu">library</span>(ggrain)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-label="6"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-label="7"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-label="8"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-label="9"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-label="10"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-label="11"></a>                )</span>
+<span id="cb10-12"><a href="#cb10-12" aria-label="12"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-label="13"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-label="14"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-label="15"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-16"><a href="#cb10-16" aria-label="16"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-label="17"></a>        )</span>
+<span id="cb10-18"><a href="#cb10-18" aria-label="18"></a>p_busy <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-label="19"></a>                 <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-label="20"></a>                     <span class="at">y =</span> mean_count,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-label="21"></a>                     <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-label="22"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-label="23"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span>
+<span id="cb10-24"><a href="#cb10-24" aria-label="24"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-label="25"></a>p_busy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <ol type="1">
 <li><p>Run <code>p_busy + theme_void()</code>. What did you lose, and would you ever want that?</p></li>
 <li><p>Try each of these and pick one you’d keep:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a>p_busy <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a>p_busy <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb10-3"><a href="#cb10-3" aria-label="3"></a>p_busy <span class="sc">+</span> <span class="fu">theme_light</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a>p_busy <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a>p_busy <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-label="3"></a>p_busy <span class="sc">+</span> <span class="fu">theme_light</span>()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-label="4"></a>p_busy <span class="sc">+</span> <span class="fu">theme_dark</span>()</span>
+<span id="cb11-5"><a href="#cb11-5" aria-label="5"></a>p_busy <span class="sc">+</span> <span class="fu">theme_linedraw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<ol start="3" type="1">
-<li>The legend on <code>p_busy</code> is titled <code>day_type</code>. Fix it.</li>
-</ol>
+<!-- 3. The legend on `p_busy` is titled `day_type`. Fix it. -->
+<!-- TODO: Add instruction on changing labels/axes -->
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_405a31d4" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_9a0c6de5" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -508,22 +574,23 @@ Figure&nbsp;5.7
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Only open this if you’ve actually had a go.</p>
 <p><strong>1.</strong> <code>theme_void()</code> removes the axes too, so you can no longer read a value off the plot. Useful for maps, and for sparklines where the shape is the whole message. Rarely anything else.</p>
-<p><strong>3.</strong> <code>labs(colour = NULL)</code> drops the title, since “weekday” and “weekend” explain themselves. <code>labs(colour = "Day type")</code> if you’d rather keep it.</p>
+<!-- **3.** `labs(colour = NULL)` drops the title, since "weekday" and "weekend" -->
+<!-- explain themselves. `labs(colour = "Day type")` if you'd rather keep it. -->
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="what-to-hold-onto" class="level3">
-<h3 class="anchored" data-anchor-id="what-to-hold-onto">What to hold onto</h3>
+<section id="decoration-take-aways" class="level3">
+<h3 class="anchored" data-anchor-id="decoration-take-aways">“Decoration” Take aways</h3>
 <ul>
-<li>Removing non-data ink is cheap and usually helps</li>
-<li>Colour is ink. If dropping it costs nothing, it was decoration</li>
+<li>Removing non-data ink is cheap, it usually helps</li>
+<li>Colour is ink. Soemtimes the message doesn’t change if you drop it.</li>
 <li>Data-ink is a direction, not a score. Gridlines usually have a job</li>
 </ul>
 </section>
@@ -531,16 +598,37 @@ Figure&nbsp;5.7
 <section id="density" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="density"><span class="header-section-number">5.2</span> Density</h2>
 <blockquote class="blockquote">
-<p><strong>The idea:</strong> when there are more points than pixels, the plot stops being a picture of your data and becomes a black shape.</p>
+<p><strong>The idea:</strong> if there are more points than pixels, the plot can lose its interpretation and become more of a blob.</p>
 </blockquote>
 <p>Everything above was 192 summarised rows. Here is the raw data, all 37,700.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-label="4"></a>        <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-label="1"></a>pedestrian</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 37,700 × 9
+   hourly_counts date_time            year month   month_day week_day  hour
+           &lt;int&gt; &lt;dttm&gt;              &lt;int&gt; &lt;ord&gt;       &lt;int&gt; &lt;ord&gt;    &lt;int&gt;
+ 1           883 2016-01-01 00:00:00  2016 January         1 Friday       0
+ 2           597 2016-01-01 01:00:00  2016 January         1 Friday       1
+ 3           294 2016-01-01 02:00:00  2016 January         1 Friday       2
+ 4           183 2016-01-01 03:00:00  2016 January         1 Friday       3
+ 5           118 2016-01-01 04:00:00  2016 January         1 Friday       4
+ 6            68 2016-01-01 05:00:00  2016 January         1 Friday       5
+ 7            47 2016-01-01 06:00:00  2016 January         1 Friday       6
+ 8            52 2016-01-01 07:00:00  2016 January         1 Friday       7
+ 9           120 2016-01-01 08:00:00  2016 January         1 Friday       8
+10           333 2016-01-01 09:00:00  2016 January         1 Friday       9
+# ℹ 37,690 more rows
+# ℹ 2 more variables: sensor_id &lt;int&gt;, sensor_name &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>And a plot of this</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-label="4"></a>        <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-overplot" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot of pedestrian count against hour, drawn as solid black columns of points with no visible structure." width="672">
+<div id="fig-overplot" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A scatterplot of pedestrian count against hour, drawn as solid black columns of points with no visible structure.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-overplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-overplot-1.png" id="fig-overplot" class="img-fluid figure-img" alt="A scatterplot of pedestrian count against hour, drawn as solid black columns of points with no visible structure." width="672">
@@ -552,20 +640,20 @@ Figure&nbsp;5.8
 </div>
 </div>
 </div>
-<p>There could be ten points in the middle of that or ten thousand.</p>
-<p>Three moves, in the order I try them:</p>
+<p>It’s hard to say how many points there are, since they are overlapping.</p>
+<p>When I encounter this, I usually use one of the these three steps:</p>
 <ul>
-<li><strong><code>alpha</code></strong>, so overlapping points get darker</li>
-<li><strong><code>geom_jitter()</code></strong>, to spread points that share an x value</li>
-<li><strong>a geom that bins</strong>, once there are too many for either to help</li>
+<li><strong><code>alpha</code></strong> - transparency: overlapping points get darker</li>
+<li><strong><code>geom_jitter()</code></strong> - spread points sharing an x/y value</li>
+<li><strong>a geom that summarises</strong>, once there are too many for either to help</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-label="4"></a>        <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-label="4"></a>        <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-alpha" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same scatterplot with very transparent points, so denser regions appear darker and the daily shape emerges." width="672">
+<div id="fig-alpha" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same scatterplot with very transparent points, so denser regions appear darker and the daily shape emerges.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-alpha-1.png" id="fig-alpha" class="img-fluid figure-img" alt="The same scatterplot with very transparent points, so denser regions appear darker and the daily shape emerges." width="672">
@@ -577,15 +665,14 @@ Figure&nbsp;5.9
 </div>
 </div>
 </div>
-<p>Now you can see most hours are quiet and the busy ones are rare.</p>
-<p><code>hour</code> is a whole number, so every point in a column sits at the same x and we are still stacking them. <code>geom_jitter()</code> spreads them sideways.</p>
+<p><code>hour</code> is a whole number, so every point in a column sits at the same x and we are still stacking them. <code>geom_jitter()</code> spreads them sideways - you can control how much sideways with <code>width</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-label="4"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">width =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-label="4"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">width =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-jitter" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same data jittered horizontally, so each hour becomes a cloud rather than a line of points." width="672">
+<div id="fig-jitter" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same data jittered horizontally, so each hour becomes a cloud rather than a line of points.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-jitter-1.png" id="fig-jitter" class="img-fluid figure-img" alt="The same data jittered horizontally, so each hour becomes a cloud rather than a line of points." width="672">
@@ -597,59 +684,99 @@ Figure&nbsp;5.10
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled" title="This will bite you: jitter moves your data">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>This will bite you: jitter moves your data
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A jittered point is in the wrong place on purpose.</p>
-<p>Fine when you’re reading density. Not fine when somebody reads a value off the axis, because at <code>width = 0.3</code> the 8am readings sit over 7:42 and 8:18.</p>
-</div>
-</div>
-<p><code>geom_hex()</code> bins in two dimensions and colours each bin by how many landed in it. It’s <a href="what-gets-computed.html" class="quarto-xref"><span>Chapter 3</span></a>’s binning, with one more axis.</p>
+<p>Even jittered, you are still asking the reader to judge density by eye. Put a summary on top, like a box plot (made transparent!), and it makes it a bit easier.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-label="4"></a>        <span class="fu">geom_hex</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(hour),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-label="4"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-label="5"></a>        <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-hex" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A hexagonal binned plot of the same data, with colour showing how many readings fall in each hexagon." width="672">
+<div id="fig-jitter-box" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Jittered points for each hour with a boxplot drawn over the top, so the median and quartiles sit inside the cloud of raw readings.">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-hex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="whats-in-the-way_files/figure-html/fig-hex-1.png" id="fig-hex" class="img-fluid figure-img" alt="A hexagonal binned plot of the same data, with colour showing how many readings fall in each hexagon." width="672">
+<div aria-describedby="fig-jitter-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="whats-in-the-way_files/figure-html/fig-jitter-box-1.png" id="fig-jitter-box" class="img-fluid figure-img" alt="Jittered points for each hour with a boxplot drawn over the top, so the median and quartiles sit inside the cloud of raw readings." width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-hex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-jitter-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.11
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Density is now something you read off a legend, not guess from how black the page looks.</p>
-<p>Same trade as <code>geom_rug()</code> in <a href="what-gets-computed.html" class="quarto-xref"><span>Chapter 3</span></a>: a rug worked on 397 points and would be a smear on 35,152.</p>
-<p>The other kind of crowding is too many <strong>series</strong>. <code>gghighlight()</code> keeps one and greys the rest.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-label="4"></a>           <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-label="6"></a>        <span class="fu">gghighlight</span>(sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-gghighlight" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four sensor lines with Flagstaff Station in colour and the other three greyed out behind it." width="672">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-gghighlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="whats-in-the-way_files/figure-html/fig-gghighlight-1.png" id="fig-gghighlight" class="img-fluid figure-img" alt="Four sensor lines with Flagstaff Station in colour and the other three greyed out behind it." width="672">
+<p>The boxplot gives the eye something to anchor on, and the points behind it show whether the box deserves to be believed.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: binning in two dimensions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-gghighlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Going deeper: binning in two dimensions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>When there really are too many points for jitter and alpha, hand the problem to a geom that counts. <code>geom_hex()</code> bins in two dimensions and colours each bin by how many landed in it. It’s <a href="what-gets-computed.html" class="quarto-xref"><span>Chapter 3</span></a>’s binning with one more axis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>        <span class="fu">geom_hex</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-hex" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A hexagonal binned plot of the same data, with colour showing how many readings fall in each hexagon.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="whats-in-the-way_files/figure-html/fig-hex-1.png" id="fig-hex" class="img-fluid figure-img" alt="A hexagonal binned plot of the same data, with colour showing how many readings fall in each hexagon." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-hex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.12
 </figcaption>
 </figure>
+</div>
+</div>
+</div>
+<p>Density becomes something you read off a legend rather than guess from how black the page looks. <code>geom_bin2d()</code> does the same with squares.</p>
+<p>Same trade as <code>geom_rug()</code> in <a href="what-gets-computed.html" class="quarto-xref"><span>Chapter 3</span></a>: a rug worked on 397 points and would be a smear on 35,152.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: too many series, not too many points">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Going deeper: too many series, not too many points
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The other kind of crowding is too many lines rather than too many points. <code>gghighlight()</code>, from the <a href="https://yutannihilation.github.io/gghighlight/">gghighlight</a> package, keeps one and greys the rest.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a>pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-label="4"></a>                   <span class="at">y =</span> mean_count,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-label="5"></a>                   <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-label="7"></a>        <span class="fu">gghighlight</span>(sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-gghighlight" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Weekday foot traffic for four sensors, with Flagstaff Station in colour and the other three greyed out behind it.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gghighlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="whats-in-the-way_files/figure-html/fig-gghighlight-1.png" id="fig-gghighlight" class="img-fluid figure-img" alt="Weekday foot traffic for four sensors, with Flagstaff Station in colour and the other three greyed out behind it." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-gghighlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.13
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note the <code>filter()</code>. <code>pedestrian_hourly</code> holds a weekday <em>and</em> a weekend row for every hour, so colouring by sensor alone gives each line two values at every hour and it sawtooths straight away, exactly as in <a href="shape-of-your-data.html" class="quarto-xref"><span>Chapter 2</span></a>. Either filter to one kind of day, or add <code>linetype = day_type</code> so ggplot2 knows there are eight groups and not four.</p>
+<p>There’s more on this in the Summary section below, where it turns out to be the same trick as drawing your whole dataset in grey behind a facet. We come back to it as a design principle in <a href="where-should-the-eye-go.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 </div>
 </div>
 </div>
@@ -663,25 +790,50 @@ Figure&nbsp;5.12
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-label="3"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-label="4"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-label="5"></a><span class="fu">library</span>(ggrain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <ol type="1">
 <li><p>Try <code>alpha = 0.01</code>, then <code>alpha = 0.3</code>. Which lets you see the shape?</p></li>
-<li><p>Swap <code>geom_hex()</code> for <code>geom_bin2d()</code>. What changed?</p></li>
-<li><p>Change the bins:</p></li>
+<li><p>Change the jitter width:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-label="4"></a>        <span class="fu">geom_hex</span>(<span class="at">bins =</span> ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(hour),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-label="4"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>, <span class="at">width =</span> ___) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-label="5"></a>        <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Try 10, then 60. Where have you met this decision before?</p>
+<p>Try 0.1, then 0.5. At what point does the jitter start lying to you?</p>
+<ol start="3" type="1">
+<li>Take the boxplot off and put it back. Which version would you send to somebody, and which would you use to check your own work?</li>
+</ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_3b2fd170" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_72f5f7b0" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -690,46 +842,46 @@ Figure&nbsp;5.12
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Only open this if you’ve actually had a go.</p>
 <p><strong>1.</strong> At <code>0.01</code> almost everything vanishes. At <code>0.3</code> the busy hours saturate to solid black and you’re back where you started. Around <code>0.05</code> works here, and the right number depends on how many points you have.</p>
-<p><strong>2.</strong> Squares instead of hexagons, same computation. Hexagons don’t line up into rows and columns, so your eye is less likely to invent a grid.</p>
-<p><strong>3.</strong> It’s the binwidth decision from <a href="what-gets-computed.html" class="quarto-xref"><span>Chapter 3</span></a>. Too few and the shape goes, too many and you’re counting individual points again.</p>
+<p><strong>2.</strong> At 0.5 the points from one hour spill into the next, so a reading at 8am appears to sit at 8:30. Around 0.2 is honest here.</p>
+<p><strong>3.</strong> I’d send the boxplot. I’d check my own work with the points, because that’s where you find out the box is describing a middle nothing is near.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section id="what-to-hold-onto-1" class="level3">
-<h3 class="anchored" data-anchor-id="what-to-hold-onto-1">What to hold onto</h3>
+<section id="takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways">Takeaways</h3>
 <ul>
-<li><code>alpha</code> first, it’s free</li>
-<li><code>geom_jitter()</code> for ties, but it moves your data</li>
-<li><code>geom_hex()</code> once there are more points than pixels</li>
-<li><code>gghighlight()</code> when the crowding is series, not points</li>
+<li><code>alpha</code> first</li>
+<li><code>geom_jitter()</code> for ties/overlaps, beware it moves your data</li>
+<li>Use a summary over top so readers have something to anchor on</li>
+<li>If more points than pixels, reach for a geom that summarises</li>
 </ul>
 </section>
 </section>
 <section id="summary" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.3</span> Summary</h2>
 <blockquote class="blockquote">
-<p><strong>The idea:</strong> a summary is a claim about the shape of your data. When the shape is wrong, the summary is confidently wrong.</p>
+<p><strong>The idea:</strong> a summary shows some shape of your data. But, when the shape is wrong, the summary is confidently wrong.</p>
 </blockquote>
-<p>Four sensors as boxplots.</p>
+<p>Let’s show four sensors as boxplots.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb17-2"><a href="#cb17-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-label="4"></a>        <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-label="4"></a>        <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-box-sensors" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four boxplots, one per sensor. Each box is squashed near the bottom of the range with a long column of outlier dots above it." width="672">
+<div id="fig-box-sensors" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four boxplots, one per sensor. Each box is squashed near the bottom of the range with a long column of outlier dots above it.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-box-sensors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-box-sensors-1.png" id="fig-box-sensors" class="img-fluid figure-img" alt="Four boxplots, one per sensor. Each box is squashed near the bottom of the range with a long column of outlier dots above it." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-box-sensors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.13
+Figure&nbsp;5.14
 </figcaption>
 </figure>
 </div>
@@ -737,12 +889,12 @@ Figure&nbsp;5.13
 </div>
 <p>Look at the dots above the whiskers. ggplot2 is calling those outliers:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a>pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>        <span class="fu">filter</span>(hourly_counts <span class="sc">&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>                       <span class="fu">quantile</span>(hourly_counts, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-label="5"></a>                       <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-label="6"></a>        <span class="fu">count</span>(sensor_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a>pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-label="2"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-label="3"></a>        <span class="fu">filter</span>(hourly_counts <span class="sc">&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-label="4"></a>                       <span class="fu">quantile</span>(hourly_counts, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-label="5"></a>                       <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-label="6"></a>        <span class="fu">count</span>(sensor_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
 # Groups:   sensor_name [4]
@@ -754,45 +906,45 @@ Figure&nbsp;5.13
 4 Spencer St-Collins St (South)   142</code></pre>
 </div>
 </div>
-<p>Flagstaff has 663. They’re the commute, which is the reason the sensor is there.</p>
-<p>We know why from <a href="what-gets-computed.html" class="quarto-xref"><span>Chapter 3</span></a>: 8am at Flagstaff is two mornings, not one. A boxplot assumes one lump. When there are two, it describes a middle that nothing is near and flags the real story as anomalous.</p>
+<p>Flagstaff has over 600 outliers!</p>
+<p>We know why from <a href="what-gets-computed.html" class="quarto-xref"><span>Chapter 3</span></a>: 8am at Flagstaff is two mornings, not one. A boxplot assumes one lump. When there are two (bimodal!), it describes a middle that nothing is near and flags the real story as anomalous.</p>
 <section id="show-the-data-on-top-of-the-summary" class="level3">
 <h3 class="anchored" data-anchor-id="show-the-data-on-top-of-the-summary">Show the data on top of the summary</h3>
-<p>A violin keeps the shape. Layering the points on top keeps the evidence.</p>
+<p>A violin keeps the shape, using a density. Layering the points on top keeps the evidence.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-label="4"></a>        <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-label="5"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>, <span class="at">width =</span> <span class="fl">0.15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-label="4"></a>        <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-label="5"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>, <span class="at">width =</span> <span class="fl">0.15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-violin-points" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four violin plots with the raw readings jittered over the top, so both the estimated shape and the actual points are visible." width="672">
+<div id="fig-violin-points" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four violin plots with the raw readings jittered over the top, so both the estimated shape and the actual points are visible.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-violin-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-violin-points-1.png" id="fig-violin-points" class="img-fluid figure-img" alt="Four violin plots with the raw readings jittered over the top, so both the estimated shape and the actual points are visible." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-violin-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.14
+Figure&nbsp;5.15
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Two layers, and now the summary has its working shown. Flagstaff’s second population is a bulge in the violin <em>and</em> a band of real points.</p>
-<p><code>geom_rain()</code> does the same job with a boxplot, a half violin and the points.</p>
+<p><code>geom_rain()</code>, from the <a href="https://www.njudd.com/raincloud-ggrain/">ggrain</a> package, does all three at once: a boxplot, a half violin, and the points.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-label="4"></a>        <span class="fu">geom_rain</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-label="4"></a>        <span class="fu">geom_rain</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-rain" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A raincloud plot for each sensor: a half violin, a boxplot, and the raw points scattered below." width="672">
+<div id="fig-rain" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A raincloud plot for each sensor: a half violin, a boxplot, and the raw points scattered below.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-rain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-rain-1.png" id="fig-rain" class="img-fluid figure-img" alt="A raincloud plot for each sensor: a half violin, a boxplot, and the raw points scattered below." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-rain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.15
+Figure&nbsp;5.16
 </figcaption>
 </figure>
 </div>
@@ -801,21 +953,21 @@ Figure&nbsp;5.15
 </section>
 <section id="ridgelines" class="level3">
 <h3 class="anchored" data-anchor-id="ridgelines">Ridgelines</h3>
-<p>When you have a lot of groups, stack the distributions instead of standing them up side by side.</p>
+<p>When you have a lot of groups, stack the distributions instead of standing them up side by side. <code>geom_density_ridges()</code> comes from the <a href="https://wilkelab.org/ggridges/">ggridges</a> package, by Claus Wilke.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-label="1"></a>pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-label="2"></a>        <span class="fu">filter</span>(sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-label="4"></a>                   <span class="at">y =</span> <span class="fu">factor</span>(hour))) <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-label="5"></a>        <span class="fu">geom_density_ridges</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a>pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-label="2"></a>        <span class="fu">filter</span>(sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-label="4"></a>                   <span class="at">y =</span> <span class="fu">factor</span>(hour))) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-label="5"></a>        <span class="fu">geom_density_ridges</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-ridge-hour" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Twenty four density curves stacked vertically, one per hour of the day at Flagstaff Station, showing the two commuter peaks emerging and fading." width="672">
+<div id="fig-ridge-hour" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Twenty four density curves stacked vertically, one per hour of the day at Flagstaff Station, showing the two commuter peaks emerging and fading.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ridge-hour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-ridge-hour-1.png" id="fig-ridge-hour" class="img-fluid figure-img" alt="Twenty four density curves stacked vertically, one per hour of the day at Flagstaff Station, showing the two commuter peaks emerging and fading." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ridge-hour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.16
+Figure&nbsp;5.17
 </figcaption>
 </figure>
 </div>
@@ -841,47 +993,72 @@ Figure&nbsp;5.16
 </blockquote>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: comparing a panel to everything">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: compared to what?">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Going deeper: comparing a panel to everything
+<span class="screen-reader-only">Tip</span>Going deeper: compared to what?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Faceting answers “what does this place look like”. It can’t answer “compared to what”, because each panel only holds its own data.</p>
-<p>Give one layer its own <code>data =</code> with the faceting column removed, and it appears in every panel:</p>
+<p>The fix is to draw everything in grey underneath, then that panel’s own data on top. You can do it by hand, by giving one layer its own <code>data =</code> with the faceting column removed so it appears in every panel:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a>pedestrian_background <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-label="2"></a>        <span class="fu">select</span>(<span class="sc">-</span>sensor_name)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-label="3"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-label="4"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-label="5"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-label="6"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-label="7"></a>        <span class="fu">geom_point</span>(<span class="at">data =</span> pedestrian_background,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-label="8"></a>                   <span class="at">colour =</span> <span class="st">"grey80"</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-label="9"></a>                   <span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-label="10"></a>        <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-label="11"></a>                   <span class="at">colour =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-label="12"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-label="1"></a>pedestrian_background <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-label="2"></a>        <span class="fu">select</span>(<span class="sc">-</span>sensor_name)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-label="3"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-label="4"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-label="5"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-label="6"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-label="7"></a>        <span class="fu">geom_point</span>(<span class="at">data =</span> pedestrian_background,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-label="8"></a>                   <span class="at">colour =</span> <span class="st">"grey80"</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-label="9"></a>                   <span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-label="10"></a>        <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-label="11"></a>                   <span class="at">colour =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-label="12"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-background" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels, each showing all the data in light grey with that panel's own sensor drawn over the top in blue." width="672">
+<div id="fig-background" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels, each showing all the data in light grey with that panel's own sensor drawn over the top in blue.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-background-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-background-1.png" id="fig-background" class="img-fluid figure-img" alt="Four panels, each showing all the data in light grey with that panel's own sensor drawn over the top in blue." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-background-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.17
+Figure&nbsp;5.18
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Every panel now shows its own sensor against the shape of all four.</p>
+<p><strong>This is the same idea as <code>gghighlight()</code> above</strong>, and gghighlight will do the facet version for you. Add a facet and it redraws the whole dataset in grey behind every panel automatically:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a>pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-label="4"></a>                   <span class="at">y =</span> mean_count,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-label="5"></a>                   <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>        <span class="fu">gghighlight</span>(<span class="at">use_direct_label =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-label="8"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-gghighlight-facet" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels, one per sensor, each showing its own line in colour with the other three greyed out behind it.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gghighlight-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="whats-in-the-way_files/figure-html/fig-gghighlight-facet-1.png" id="fig-gghighlight-facet" class="img-fluid figure-img" alt="Four panels, one per sensor, each showing its own line in colour with the other three greyed out behind it." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-gghighlight-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.19
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>No <code>filter()</code> on a background object, no second <code>data =</code> argument. Note there is no condition inside <code>gghighlight()</code> this time: with a facet, it highlights whatever belongs to each panel.</p>
+<p>Grey for context, colour for the thing you mean. It’s the same move whether you write it yourself or let a package do it, and we come back to it as a design principle in <a href="where-should-the-eye-go.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 </div>
 </div>
 </div>
@@ -895,27 +1072,49 @@ Figure&nbsp;5.17
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-label="3"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-label="4"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-label="5"></a><span class="fu">library</span>(ggrain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <ol type="1">
 <li><p>Sketch a violin of <strong>Birrarung Marr</strong>, given a park doesn’t care what day it is. Then draw it.</p></li>
 <li><p>Layer a boxplot inside the violin:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-label="4"></a>        <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-label="5"></a>        <span class="fu">geom_boxplot</span>(<span class="at">width =</span> ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> sensor_name,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-label="4"></a>        <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-label="5"></a>        <span class="fu">geom_boxplot</span>(<span class="at">width =</span> ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="3" type="1">
 <li>Make a ridgeline of the four sensors instead of the hours. Which grouping suits ridgelines better?</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_da6f03c3" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_6475efce" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -924,7 +1123,7 @@ Figure&nbsp;5.17
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Only open this if you’ve actually had a go.</p>
 <p><strong>1.</strong> One lump, low and wide. No commute means no second population, so there’s nothing for the boxplot to hide.</p>
@@ -936,8 +1135,8 @@ Figure&nbsp;5.17
 </div>
 </div>
 </section>
-<section id="what-to-hold-onto-2" class="level3">
-<h3 class="anchored" data-anchor-id="what-to-hold-onto-2">What to hold onto</h3>
+<section id="what-to-hold-onto" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-hold-onto">What to hold onto</h3>
 <ul>
 <li>A boxplot claims your data has one middle</li>
 <li>When that’s false it hides the finding and calls it an outlier</li>
@@ -962,6 +1161,9 @@ Figure&nbsp;5.17
 <section class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="">Links</h2>
 <ul>
+<li><a href="https://yutannihilation.github.io/gghighlight/">gghighlight</a></li>
+<li><a href="https://www.njudd.com/raincloud-ggrain/">ggrain</a></li>
+<li><a href="https://wilkelab.org/ggridges/">ggridges</a></li>
 <li><a href="https://www.njtierney.com/posts/2020-06-01-tidy-anscombe/">Tidyverse Case Study: Anscombe’s quartet</a></li>
 </ul>
 </section>
