@@ -10,6 +10,11 @@ One of the challenges with this, is that you might not have internalised the men
 
 In this chapter we will take plots, tease them apart, and put them back together.
 
+> The greatest value of a picture is when it forces us to notice what we never
+> expected to see.
+>
+> --- John Tukey
+
 ::: {.overview}
 
 ## Overview {.unnumbered}
@@ -545,6 +550,33 @@ ggplot(oceanbuoys,
   coord_polar()
 ```
 
+::: {.callout-caution title="Some history: the most famous polar plot"}
+
+`coord_polar()` looks like a novelty, and one of the most consequential
+statistical graphics ever drawn is a polar bar chart.
+
+Florence Nightingale is remembered as a nurse. She was also a statistician, and
+during the Crimean War she drew what she called a coxcomb: a circle divided into
+months, with the area of each wedge showing how many soldiers died, split by
+cause. The picture made one thing impossible to miss, which is that far more men
+were dying of preventable disease than of their wounds.
+
+She was arguing for sanitary reform, and she reached for a plot because a table
+would not have carried it. She was elected the first woman member of the Royal
+Statistical Society.
+
+A few years earlier, in 1854, John Snow mapped cholera deaths in Soho as marks
+on a street map, and the marks clustered around one water pump on Broad Street.
+Same move: put the data where the thing happened, and the pattern argues for
+you.
+
+If you want to follow the modern thread, Di Cook, Heike Hofmann and Debbie
+Swayne have spent careers on how we read statistical graphics, and there is a
+good starting point in [Di Cook's JSM
+materials](https://github.com/dicook/JSM17).
+
+:::
+
 ### **Facets**: How the plot is split into smaller subplots 
 
 ```{r}
@@ -1062,6 +1094,57 @@ library(countdown)
 countdown(minutes = 5)
 ```
 
+
+:::
+
+## When it doesn't work
+
+You are going to hit errors, and most of them in ggplot2 are one of a small
+number of things. This is the list I actually run through.
+
+**Count your brackets and quotes.** `aes(x = hour, y = mean_count` will not
+run, and neither will `colour = "purple`. Note that `'` and `"` are different
+characters, and they have to match each other.
+
+**Look for a `+` in the console.** If R is showing you a `+` instead of a `>`,
+it is still waiting for you to finish something. Press ESCAPE and start again.
+
+**Check where your `+` signs are.** In ggplot2 the `+` goes at the **end** of a
+line, never the start. This works:
+
+```r
+ggplot(oceanbuoys, aes(x = air_temp_c, y = sea_temp_c)) +
+  geom_point()
+```
+
+and this quietly does not:
+
+```r
+ggplot(oceanbuoys, aes(x = air_temp_c, y = sea_temp_c))
+  + geom_point()
+```
+
+The second one runs the `ggplot()` call on its own, draws a blank panel, and
+then hits the `+` as a separate statement:
+
+```
+Error: Cannot use `+` with a single argument.
+```
+
+Which is true, and gives you no clue that the actual problem is a line break.
+
+**Copy the error message and search it.** All of it, not your description of it.
+Somebody has had it before.
+
+::: {.callout-tip title="Read more"}
+
+The [ggplot2 cheatsheet](https://opensource.posit.co/resources/cheatsheets/) is two pages
+of every geom, scale and theme, laid out visually. It is genuinely the fastest
+way to find the geom you half remember.
+
+There is also the [ggplot2 extension
+gallery](https://exts.ggplot2.tidyverse.org/gallery/) for when base ggplot2 does
+not have the thing you want.
 
 :::
 
