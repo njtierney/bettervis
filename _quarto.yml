@@ -33,7 +33,7 @@ book:
     - "what-gets-computed.qmd"
     - "what-am-i-comparing.qmd"
     - "whats-in-the-way.qmd"
-    # - "where-should-the-eye-go.qmd"
+    - "where-should-the-eye-go.qmd"
     # - "making-it-land.qmd"
   # appendices:
     # - "appendix-just-enough-dplyr.qmd"

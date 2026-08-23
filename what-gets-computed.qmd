@@ -137,7 +137,8 @@ How much would they vary? How would you show how they compare?
 
 :::
 
-We have 365 readings for each hour, one per day. A geom that takes all of them
+We have a reading for each hour of every day, so nearly 400 readings for each
+hour of the day. A geom that takes all of them
 and draws the spread is `geom_boxplot()`.
 
 Let's look at just flagstaff:
@@ -285,7 +286,7 @@ flagstaff_8am |>
   summarise(median_count = median(hourly_counts, na.rm = TRUE))
 ```
 
-Nobody catches a train to work on a Sunday, and the boxplot summarised across all weekdays - so it generalised to all weekdays.
+Nobody catches a train to work on a weekend, and the boxplot summarised across every day at once - so it generalised across both.
 
 We come back to this properly in @sec-in-the-way. For now, notice that the
 computation was correct, even if the the answer was a little misleading.

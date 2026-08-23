@@ -669,7 +669,7 @@ ggplot(pedestrian_hourly,
 
 :::
 
-## Free scales
+:::: {.callout-tip title="Going deeper: free scales" collapse="true"}
 
 Sometimes you want to change the scale for each sub plot - you can do this with `scales = ""` option:
 
@@ -719,6 +719,7 @@ countdown(minutes = 5)
 
 :::
 
+::::
 
 ::: {.callout-tip title="Three cures for a sawtooth" collapse="true"}
 
