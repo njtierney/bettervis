@@ -2,22 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://better-vis.njtierney.com/index.html</loc>
-    <lastmod>2026-08-17T23:55:32.313Z</lastmod>
+    <lastmod>2026-08-23T20:47:23.775Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/setup.html</loc>
-    <lastmod>2026-08-17T23:55:32.315Z</lastmod>
+    <lastmod>2026-08-23T20:47:23.776Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/anatomy-of-a-ggplot.html</loc>
-    <lastmod>2026-08-17T23:55:32.275Z</lastmod>
+    <lastmod>2026-08-23T20:47:23.734Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/shape-of-your-data.html</loc>
-    <lastmod>2026-08-17T23:55:32.315Z</lastmod>
+    <lastmod>2026-08-23T20:47:23.776Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/what-gets-computed.html</loc>
-    <lastmod>2026-08-17T23:55:32.315Z</lastmod>
+    <lastmod>2026-08-23T20:47:23.776Z</lastmod>
+  </url>
+  <url>
+    <loc>https://better-vis.njtierney.com/what-am-i-comparing.html</loc>
+    <lastmod>2026-08-23T20:47:23.776Z</lastmod>
+  </url>
+  <url>
+    <loc>https://better-vis.njtierney.com/whats-in-the-way.html</loc>
+    <lastmod>2026-08-23T20:47:23.776Z</lastmod>
+  </url>
+  <url>
+    <loc>https://better-vis.njtierney.com/where-should-the-eye-go.html</loc>
+    <lastmod>2026-08-23T20:47:23.776Z</lastmod>
   </url>
 </urlset>

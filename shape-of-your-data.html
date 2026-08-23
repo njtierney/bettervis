@@ -183,6 +183,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">What gets computed</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -198,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#making-data-tidy" id="toc-making-data-tidy" class="nav-link" data-scroll-target="#making-data-tidy"><span class="header-section-number">2.2</span> Making data tidy</a></li>
   <li><a href="#using-pivot_longer" id="toc-using-pivot_longer" class="nav-link" data-scroll-target="#using-pivot_longer"><span class="header-section-number">2.3</span> Using <code>pivot_longer()</code></a></li>
   <li><a href="#separating-columns-to-make-them-tidy" id="toc-separating-columns-to-make-them-tidy" class="nav-link" data-scroll-target="#separating-columns-to-make-them-tidy"><span class="header-section-number">2.4</span> Separating columns to make them tidy</a></li>
-  <li><a href="#the-scribble-aka-sawtoothing" id="toc-the-scribble-aka-sawtoothing" class="nav-link" data-scroll-target="#the-scribble-aka-sawtoothing"><span class="header-section-number">2.5</span> The scribble aka “sawtoothing”</a></li>
+  <li><a href="#sawtoothing" id="toc-sawtoothing" class="nav-link" data-scroll-target="#sawtoothing"><span class="header-section-number">2.5</span> Sawtoothing</a></li>
   <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">2.6</span> Missing Data</a></li>
   <li>Links</li>
   </ul>
@@ -238,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>What does ggplot2 expect my data to look like?</li>
 <li>How do I make sure the data given is indeed “tidy data”?</li>
-<li>Why did my line graph come out as a scribble?</li>
+<li>Why did my line graph come out as a sawtooth?</li>
 <li>What happened to the rows with missing values?</li>
 </ul>
 <p><strong>What you need this session</strong></p>
@@ -410,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -507,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="shape-of-your-data_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -609,35 +627,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I kept the code above hidden so the messy data lands on its own, without <code>pivot_longer()</code> and <code>pivot_wider()</code> giving away the ending.</p>
 <p>From here on we run code against those objects, so you need them in your own session. Run this and you will have all four.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a>  <span class="fu">select</span>(species, year, bill_len, bill_dep) <span class="sc">|&gt;</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-label="4"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-label="5"></a>  <span class="fu">group_by</span>(species, year) <span class="sc">|&gt;</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-label="6"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb29-8"><a href="#cb29-8" aria-label="8"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-label="9"></a><span class="co"># variables sitting in the rows instead of forming columns</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-label="10"></a>pen_long_bill <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-label="11"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb29-12"><a href="#cb29-12" aria-label="12"></a>    <span class="at">cols =</span> <span class="fu">c</span>(bill_len, bill_dep),</span>
-<span id="cb29-13"><a href="#cb29-13" aria-label="13"></a>    <span class="at">names_to =</span> <span class="st">"bill_variable"</span>,</span>
-<span id="cb29-14"><a href="#cb29-14" aria-label="14"></a>    <span class="at">values_to =</span> <span class="st">"measurement"</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-label="15"></a>  )</span>
-<span id="cb29-16"><a href="#cb29-16" aria-label="16"></a></span>
-<span id="cb29-17"><a href="#cb29-17" aria-label="17"></a><span class="co"># two values jammed into one cell</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-label="18"></a>pen_two_val <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-label="19"></a>  <span class="fu">mutate</span>(<span class="at">bill_ratio =</span> <span class="fu">paste0</span>(bill_len, <span class="st">"/"</span>, bill_dep)) <span class="sc">|&gt;</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-label="20"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_len, <span class="sc">-</span>bill_dep)</span>
-<span id="cb29-21"><a href="#cb29-21" aria-label="21"></a></span>
-<span id="cb29-22"><a href="#cb29-22" aria-label="22"></a><span class="co"># year spread across the column names</span></span>
-<span id="cb29-23"><a href="#cb29-23" aria-label="23"></a>pen_year_bill_dep <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb29-24"><a href="#cb29-24" aria-label="24"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_len) <span class="sc">|&gt;</span></span>
-<span id="cb29-25"><a href="#cb29-25" aria-label="25"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> bill_dep)</span>
-<span id="cb29-26"><a href="#cb29-26" aria-label="26"></a></span>
-<span id="cb29-27"><a href="#cb29-27" aria-label="27"></a>pen_year_bill_len <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span></span>
-<span id="cb29-28"><a href="#cb29-28" aria-label="28"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_dep) <span class="sc">|&gt;</span></span>
-<span id="cb29-29"><a href="#cb29-29" aria-label="29"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> bill_len)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a>        <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a>        <span class="fu">select</span>(species, year, bill_len, bill_dep) <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-label="4"></a>        <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-label="5"></a>        <span class="fu">group_by</span>(species, year) <span class="sc">|&gt;</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-label="6"></a>        <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>        <span class="fu">ungroup</span>()</span>
+<span id="cb29-8"><a href="#cb29-8" aria-label="8"></a>pen_long_bill <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span> </span>
+<span id="cb29-9"><a href="#cb29-9" aria-label="9"></a>        <span class="fu">pivot_longer</span>(</span>
+<span id="cb29-10"><a href="#cb29-10" aria-label="10"></a>                <span class="at">cols =</span> <span class="fu">c</span>(bill_len, bill_dep),</span>
+<span id="cb29-11"><a href="#cb29-11" aria-label="11"></a>                <span class="at">names_to =</span> <span class="st">"bill_variable"</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-label="12"></a>                <span class="at">values_to =</span> <span class="st">"measurement"</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-label="13"></a>        )</span>
+<span id="cb29-14"><a href="#cb29-14" aria-label="14"></a>pen_long_bill</span>
+<span id="cb29-15"><a href="#cb29-15" aria-label="15"></a>pen_two_val <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span> </span>
+<span id="cb29-16"><a href="#cb29-16" aria-label="16"></a>        <span class="fu">mutate</span>(<span class="at">bill_ratio =</span> <span class="fu">paste0</span>(bill_len,<span class="st">"/"</span>,bill_dep)) <span class="sc">|&gt;</span> </span>
+<span id="cb29-17"><a href="#cb29-17" aria-label="17"></a>        <span class="fu">select</span>(<span class="sc">-</span>bill_len,</span>
+<span id="cb29-18"><a href="#cb29-18" aria-label="18"></a>               <span class="sc">-</span>bill_dep)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-label="19"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-label="20"></a>pen_two_val</span>
+<span id="cb29-21"><a href="#cb29-21" aria-label="21"></a><span class="co"># bill_dep</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-label="22"></a>pen_year_bill_dep <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span> </span>
+<span id="cb29-23"><a href="#cb29-23" aria-label="23"></a>        <span class="fu">select</span>(<span class="sc">-</span>bill_len) <span class="sc">|&gt;</span> </span>
+<span id="cb29-24"><a href="#cb29-24" aria-label="24"></a>        <span class="fu">pivot_wider</span>(</span>
+<span id="cb29-25"><a href="#cb29-25" aria-label="25"></a>                <span class="at">names_from =</span> year,</span>
+<span id="cb29-26"><a href="#cb29-26" aria-label="26"></a>                <span class="at">values_from =</span> bill_dep</span>
+<span id="cb29-27"><a href="#cb29-27" aria-label="27"></a>        )</span>
+<span id="cb29-28"><a href="#cb29-28" aria-label="28"></a></span>
+<span id="cb29-29"><a href="#cb29-29" aria-label="29"></a>pen_year_bill_dep</span>
+<span id="cb29-30"><a href="#cb29-30" aria-label="30"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-label="31"></a><span class="co"># bill_len</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-label="32"></a>pen_year_bill_len <span class="ot">&lt;-</span> pen_short <span class="sc">|&gt;</span> </span>
+<span id="cb29-33"><a href="#cb29-33" aria-label="33"></a>        <span class="fu">select</span>(<span class="sc">-</span>bill_dep) <span class="sc">|&gt;</span> </span>
+<span id="cb29-34"><a href="#cb29-34" aria-label="34"></a>        <span class="fu">pivot_wider</span>(</span>
+<span id="cb29-35"><a href="#cb29-35" aria-label="35"></a>                <span class="at">names_from =</span> year,</span>
+<span id="cb29-36"><a href="#cb29-36" aria-label="36"></a>                <span class="at">values_from =</span> bill_len</span>
+<span id="cb29-37"><a href="#cb29-37" aria-label="37"></a>        )</span>
+<span id="cb29-38"><a href="#cb29-38" aria-label="38"></a></span>
+<span id="cb29-39"><a href="#cb29-39" aria-label="39"></a>pen_year_bill_len</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If any of that is unfamiliar, that is fine. It is the rest of this section.</p>
 </div>
@@ -742,7 +770,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_67c3ea46" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_227128cd" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Run the code below to create the <code>hi_score</code> dataset:</p>
@@ -1024,7 +1052,7 @@ Answer code below
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_51987140" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_8131039f" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Now try using <code>pivot_longer()</code> with a different dataset: <code>relig_income</code>, which comes bundled inside <code>tidyr</code>. This is a dataset that contains religion and income ranges.</p>
@@ -1097,7 +1125,7 @@ Answer code below
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_6ffd8fcc" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_364bfd81" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Now try with this data:</p>
@@ -1162,12 +1190,26 @@ Answer code below
      exactly how it arrives from anyone's Excel file. pivot_longer() to fix it,
      pivot_wider() as the way back. -->
 </section>
-<section id="the-scribble-aka-sawtoothing" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="the-scribble-aka-sawtoothing"><span class="header-section-number">2.5</span> The scribble aka “sawtoothing”</h2>
+<section id="sawtoothing" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sawtoothing"><span class="header-section-number">2.5</span> Sawtoothing</h2>
 <!-- Uses pen_short rather than the pedestrian sensors: it is already in the
      chapter, it needs no extra package, and at 9 rows a reader can trace the
      path by hand and see exactly why it zigzags. -->
-<p>Here’s a plot I have made by accident more times than I would like to admit.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Here’s a plot I have made by accident more times than I would like to admit.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Read more">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Read more
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I wrote this one up on my blog, on baby name data rather than penguins: <a href="https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/">Just Quickly: Removing Sawtooth Patterns in Line Graphs</a>.</p>
+<p>It covers a third way this bites you, which we don’t get to here: when your x axis is a factor, ggplot2 quietly groups by x, and <code>group = 1</code> gives you a zigzag that looks plausible and is wrong.</p>
+</div>
+</div>
 <p>We have bill length, measured over three years, for three species. So let’s draw a line.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-label="1"></a>pen_short <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
@@ -1200,12 +1242,12 @@ Answer code below
 <span id="cb68-3"><a href="#cb68-3" aria-label="3"></a>           <span class="at">y =</span> bill_len)) <span class="sc">+</span></span>
 <span id="cb68-4"><a href="#cb68-4" aria-label="4"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-scribble" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point." width="672">
+<div id="fig-sawtooth" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point.">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-scribble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="shape-of-your-data_files/figure-html/fig-scribble-1.png" id="fig-scribble" class="img-fluid figure-img" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point." width="672">
+<div aria-describedby="fig-sawtooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="shape-of-your-data_files/figure-html/fig-sawtooth-1.png" id="fig-sawtooth" class="img-fluid figure-img" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point." width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-scribble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-sawtooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.1
 </figcaption>
 </figure>
@@ -1290,14 +1332,8 @@ Figure&nbsp;2.1
 <section class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="">Links</h2>
 <ul>
-<li><a href="https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/" class="uri">https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/</a></li>
+<li><a href="https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/">Just Quickly: Removing Sawtooth Patterns in Line Graphs</a></li>
 </ul>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>I wrote a blog post about this one: <a href="https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/" class="uri">https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->

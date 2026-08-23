@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./what-am-i-comparing.html" rel="next">
 <link href="./shape-of-your-data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -182,6 +183,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">What gets computed</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -197,6 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#geoms-that-summarise-for-you" id="toc-geoms-that-summarise-for-you" class="nav-link" data-scroll-target="#geoms-that-summarise-for-you"><span class="header-section-number">3.2</span> Geoms that summarise for you</a>
   <ul class="collapse">
   <li><a href="#what-did-it-compute" id="toc-what-did-it-compute" class="nav-link" data-scroll-target="#what-did-it-compute">What did it compute?</a></li>
+  <li><a href="#what-to-hold-onto" id="toc-what-to-hold-onto" class="nav-link" data-scroll-target="#what-to-hold-onto">What to hold onto</a></li>
   </ul></li>
   <li><a href="#geoms-that-count-for-you" id="toc-geoms-that-count-for-you" class="nav-link" data-scroll-target="#geoms-that-count-for-you"><span class="header-section-number">3.3</span> Geoms that count for you</a></li>
   </ul>
@@ -236,7 +256,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>What is a boxplot actually showing me, and what is it hiding?</li>
 <li>When do I want <code>geom_bar()</code>, and when do I want <code>geom_col()</code>?</li>
 <li>How do I choose a binwidth, and how do I show the raw data too?</li>
-<li>What do scales and coords actually do?</li>
 </ul>
 <p><strong>What you need this session</strong></p>
 <ul>
@@ -298,6 +317,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="geoms-that-summarise-for-you" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="geoms-that-summarise-for-you"><span class="header-section-number">3.2</span> Geoms that summarise for you</h2>
+<blockquote class="blockquote">
+<p><strong>The idea:</strong> a geom can take all your raw numbers and hand back a few. That is useful, and it means the plot is showing you a decision somebody made, not the data itself.</p>
+</blockquote>
 <p>Let’s start with a question:</p>
 <blockquote class="blockquote">
 <p>What does a day at Flagstaff Station look like?</p>
@@ -614,6 +636,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Starting from here? Run this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Starting from here? Run this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-label="2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a><span class="fu">library</span>(naniar)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="Your Turn: draw it first">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -632,7 +674,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You don’t need exact number on the axes. I am just curious on the <strong>shape</strong>. You can use bars, dots, lines, other summaries, whatever you want!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_35b9d60a" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_7c2c61ca" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <ul>
@@ -645,10 +687,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>How much would they vary? How would you show how they compare?</p>
 </div>
 </div>
-<p>We have 365 readings for each hour, one per day. A geom that takes all of them and draws the spread is <code>geom_boxplot()</code>.</p>
+<p>We have a reading for each hour of every day, so nearly 400 readings for each hour of the day. A geom that takes all of them and draws the spread is <code>geom_boxplot()</code>.</p>
 <p>Let’s look at just flagstaff:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a>flagstaff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a>flagstaff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9,527 × 9
    hourly_counts date_time            year month   month_day week_day  hour
@@ -669,10 +711,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>And plot it as a boxplot</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-label="4"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-label="4"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-box-nogroup" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A single wide boxplot spanning the whole width of the panel, rather than one box per hour. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -687,7 +729,7 @@ Figure&nbsp;3.1: One box. Not what I wanted.
 </div>
 </div>
 <p>Hmmm - we get a single box - this isn’t what we want.</p>
-<p>We saw something similar earlier - in <a href="shape-of-your-data.html" class="quarto-xref"><span>Chapter 2</span></a>, <code>geom_line()</code> drew a single scribbling line, because it did now know species was a thing. We even get a few (!) warnings from ggplot2:</p>
+<p>We saw something similar earlier - in <a href="shape-of-your-data.html" class="quarto-xref"><span>Chapter 2</span></a>, <code>geom_line()</code> sawtoothed across the whole plot, because it did not know species was a thing. We even get a few (!) warnings from ggplot2:</p>
 <pre><code>Warning messages:
 1: Orientation is not uniquely specified when both the x and y aesthetics are continuous. Picking default
 orientation 'x'. 
@@ -699,11 +741,11 @@ orientation 'x'.
 ℹ did you forget `aes(group = ...)`? </code></pre>
 <p><code>hour</code> is a number, so ggplot2 treated it as continuous - not something that is a whole number/integer. To get ggplot to treat it as a group, use <code>group</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-label="4"></a>           <span class="at">group =</span> hour)) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-label="5"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-label="4"></a>           <span class="at">group =</span> hour)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-label="5"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-box-hour" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Twenty four boxplots, one per hour. Very low flat boxes overnight, a large box at 8am spanning roughly 200 to 5100, a moderate bump around midday, and a second large box around 5pm. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -722,19 +764,36 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <section id="what-did-it-compute" class="level3">
 <h3 class="anchored" data-anchor-id="what-did-it-compute">What did it compute?</h3>
 <p>A boxplot is five numbers, worked out for you from the raw data. We typically call this the “five number summary”: min, quartile 1 (25%), median, quartile 3 (75%), max.</p>
-<!-- TODO: little history on the boxplot, from tukey, and specifics about a hinge/pivot -->
+<div class="callout callout-style-default callout-caution callout-titled" title="Some history: where the boxplot came from">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Some history: where the boxplot came from
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The boxplot is John Tukey’s, from his 1977 book <em>Exploratory Data Analysis</em>, and it was designed to be drawn <strong>by hand</strong>, quickly, on paper. That is why it is five numbers and not fifty: five is what you can work out and draw in a minute.</p>
+<p>Tukey called the box edges <strong>hinges</strong> rather than quartiles. They are almost the same thing and not quite, which is why <code>?geom_boxplot</code> and <code>boxplot.stats</code> both hedge slightly about how the box is computed.</p>
+<p>He is also the reason we say “bit” and “software”. He coined both.</p>
+</div>
+</div>
+</div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-label="1"></a>flagstaff_8am <span class="ot">&lt;-</span> flagstaff <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-label="2"></a>  <span class="fu">filter</span>(hour <span class="sc">==</span> <span class="dv">8</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-label="3"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-label="4"></a>flagstaff_8am <span class="sc">|&gt;</span> </span>
-<span id="cb13-5"><a href="#cb13-5" aria-label="5"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb13-6"><a href="#cb13-6" aria-label="6"></a>    <span class="at">min =</span> <span class="fu">min</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb13-7"><a href="#cb13-7" aria-label="7"></a>    <span class="at">q1 =</span> <span class="fu">quantile</span>(hourly_counts, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb13-8"><a href="#cb13-8" aria-label="8"></a>    <span class="at">median =</span> <span class="fu">median</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb13-9"><a href="#cb13-9" aria-label="9"></a>    <span class="at">q3 =</span> <span class="fu">quantile</span>(hourly_counts, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb13-10"><a href="#cb13-10" aria-label="10"></a>    <span class="at">max =</span> <span class="fu">max</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-label="11"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a>flagstaff_8am <span class="ot">&lt;-</span> flagstaff <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-label="2"></a>  <span class="fu">filter</span>(hour <span class="sc">==</span> <span class="dv">8</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-label="3"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-label="4"></a>flagstaff_8am <span class="sc">|&gt;</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-label="5"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-label="6"></a>    <span class="at">min =</span> <span class="fu">min</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-label="7"></a>    <span class="at">q1 =</span> <span class="fu">quantile</span>(hourly_counts, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-label="8"></a>    <span class="at">median =</span> <span class="fu">median</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-label="9"></a>    <span class="at">q3 =</span> <span class="fu">quantile</span>(hourly_counts, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-label="10"></a>    <span class="at">max =</span> <span class="fu">max</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-label="11"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
     min    q1 median    q3   max
@@ -743,7 +802,23 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 </div>
 </div>
 <p>Those are the parts of the box: the line is the median, the box edges are the quartiles, and the whiskers reach out to 1.5x the interquartile range (IQR) - which is quartile 1 - 3. Things beyond the whiskers are classed as outliers.</p>
-<p>Boxplots actually have a few more calculation options than you might might realise - you can change the methods for how the box width is calculated, and how the outliers are calculated, too. If you want to read more, look up <code>?geom_boxplot()</code>, and <code>boxplot.stats</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: the box is more adjustable than it looks">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Going deeper: the box is more adjustable than it looks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Boxplots have more calculation options than you might realise. You can change how the box width is computed, and how outliers are decided.</p>
+<p>If you want to read more, look up <code>?geom_boxplot()</code> and <code>boxplot.stats</code>.</p>
+</div>
+</div>
+</div>
 <p>So, <code>geom_boxplot()</code> does some computation, to return these summaries, and then draw them. So why is the 8am box so wide? The median is 4910 but the lower quartile is 233, which means at least a quarter of the mornings had almost nobody there.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Your Turn">
 <div class="callout-header d-flex align-content-center">
@@ -763,16 +838,16 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Let’s take a couple of minutes to explore this, draw some sketches, imagine the types of data summary we might see as tables, as plots!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_4f3bcc65" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_532ce7ce" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
 </div>
 <p>Let’s explore this by looking at each weekday:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-label="1"></a>flagstaff_8am <span class="sc">|&gt;</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-label="2"></a>  <span class="fu">group_by</span>(week_day) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">median_count =</span> <span class="fu">median</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a>flagstaff_8am <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-label="2"></a>  <span class="fu">group_by</span>(week_day) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">median_count =</span> <span class="fu">median</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 2
   week_day  median_count
@@ -786,8 +861,8 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 7 Saturday          228.</code></pre>
 </div>
 </div>
-<p>Nobody catches a train to work on a Sunday, and the boxplot summarised across all weekdays - so it generalised to all weekdays.</p>
-<p>We come back to this properly in <span class="quarto-unresolved-ref">?sec-in-the-way</span>. For now, notice that the computation was correct, even if the the answer was a little misleading.</p>
+<p>Nobody catches a train to work on a weekend, and the boxplot summarised across every day at once - so it generalised across both.</p>
+<p>We come back to this properly in <a href="whats-in-the-way.html" class="quarto-xref"><span>Chapter 5</span></a>. For now, notice that the computation was correct, even if the the answer was a little misleading.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Your Turn">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -800,11 +875,11 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <div class="callout-body-container callout-body">
 <p>Here is the plot again, so you have something to change:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
-<span id="cb17-2"><a href="#cb17-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-label="4"></a>           <span class="at">group =</span> hour)) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-label="5"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>           <span class="at">group =</span> hour)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-label="5"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
 <li><p>Swap <code>group = hour</code> for <code>x = factor(hour)</code>. Do you get the same plot? Which version do you prefer, and what changed on the x axis?</p></li>
@@ -812,35 +887,62 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <li><p>We worked out that 8am is really two mornings. Draw it as two boxes - complete the code below:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a>flagstaff_8am_weekend <span class="ot">&lt;-</span> flagstaff_8am <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>    <span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>      <span class="at">condition =</span> week_day <span class="sc">%in%</span> <span class="fu">c</span>(..., ...),</span>
-<span id="cb18-5"><a href="#cb18-5" aria-label="5"></a>      <span class="at">true =</span> ...,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-label="6"></a>      <span class="at">false =</span> ...</span>
-<span id="cb18-7"><a href="#cb18-7" aria-label="7"></a>    )</span>
-<span id="cb18-8"><a href="#cb18-8" aria-label="8"></a>  )</span>
-<span id="cb18-9"><a href="#cb18-9" aria-label="9"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-label="10"></a>flagstaff_8am_weekend</span>
-<span id="cb18-11"><a href="#cb18-11" aria-label="11"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-label="12"></a>  <span class="fu">ggplot</span>(...,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-label="13"></a>         <span class="fu">aes</span>(<span class="at">x =</span> ...,</span>
-<span id="cb18-14"><a href="#cb18-14" aria-label="14"></a>             <span class="at">y =</span> ...)) <span class="sc">+</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-label="15"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a>flagstaff_8am_weekend <span class="ot">&lt;-</span> flagstaff_8am <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-label="2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-label="3"></a>    <span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-label="4"></a>      <span class="at">condition =</span> week_day <span class="sc">%in%</span> <span class="fu">c</span>(..., ...),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-label="5"></a>      <span class="at">true =</span> ...,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-label="6"></a>      <span class="at">false =</span> ...</span>
+<span id="cb19-7"><a href="#cb19-7" aria-label="7"></a>    )</span>
+<span id="cb19-8"><a href="#cb19-8" aria-label="8"></a>  )</span>
+<span id="cb19-9"><a href="#cb19-9" aria-label="9"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-label="10"></a>flagstaff_8am_weekend</span>
+<span id="cb19-11"><a href="#cb19-11" aria-label="11"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-label="12"></a>  <span class="fu">ggplot</span>(...,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-label="13"></a>         <span class="fu">aes</span>(<span class="at">x =</span> ...,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-label="14"></a>             <span class="at">y =</span> ...)) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-label="15"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Is that a fairer picture of 8am than the one box was?</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_1f3c721e" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_1201f77c" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only open this if you have actually had a go.</p>
+<p><strong>1.</strong> Same boxes. The difference is the x axis: <code>group = hour</code> keeps it a number, so the boxes sit at 0, 1, 2 and the spacing is real. <code>factor(hour)</code> makes it a category, so they are evenly spaced and every hour gets a label. For hours I prefer <code>group</code>, because the axis still means something.</p>
+<p><strong>2.</strong> The four widest boxes are hours 8, 17, 9 and 7, which is the morning and evening commute. Those are the hours where weekday and weekend differ most, so those are the hours where one box is hiding two populations.</p>
+<p><strong>3.</strong> Much fairer. Two boxes, each describing a kind of morning that actually happens.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <p>Boxplots are a really useful tool for exploring variation. Sometimes the wider variation can have distinct and interesting summaries.</p>
 </section>
+<section id="what-to-hold-onto" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-hold-onto">What to hold onto</h3>
+<p>A boxplot turns however many numbers you have into five, and draws those.</p>
+<p>That is a good trade when the data has one lump in it. When it has two, the five numbers describe a middle that nothing is near.</p>
+</section>
 </section>
 <section id="geoms-that-count-for-you" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="geoms-that-count-for-you"><span class="header-section-number">3.3</span> Geoms that count for you</h2>
+<blockquote class="blockquote">
+<p><strong>The idea:</strong> some geoms draw the number you give them. Others work a number out for you. If you do not know which kind you have, you will get a plot of something you did not ask for.</p>
+</blockquote>
 <p>The boxplot kept all the variation. Sometimes you just want one number per hour, and you want to say which number.</p>
 <p>The number of people is in <code>hourly_counts</code>, but there’s one row per day per hour, and I want one number per hour. So I summarise first.</p>
 <p>Data summarising is an important skill, so let’s take a minute to sketch out what the data summary would look like.</p>
@@ -862,7 +964,7 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Sketch it out!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_101ace9f" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_27112931" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>It should look something like the following:</p>
@@ -871,10 +973,10 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 Answer
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a><span class="fu">tibble</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-label="2"></a>  <span class="at">hour =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"..."</span>, <span class="st">"23"</span>),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-label="3"></a>  <span class="at">mean_count =</span> <span class="fu">c</span>(<span class="st">"245"</span>, <span class="st">"125"</span>, <span class="st">"..."</span>, <span class="st">"180"</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-label="1"></a><span class="fu">tibble</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-label="2"></a>  <span class="at">hour =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"..."</span>, <span class="st">"23"</span>),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-label="3"></a>  <span class="at">mean_count =</span> <span class="fu">c</span>(<span class="st">"245"</span>, <span class="st">"125"</span>, <span class="st">"..."</span>, <span class="st">"180"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   hour  mean_count
@@ -887,11 +989,11 @@ Answer
 </div>
 </details>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a>flagstaff_hourly <span class="ot">&lt;-</span> flagstaff <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-label="2"></a>  <span class="fu">group_by</span>(hour) <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-label="4"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-label="5"></a>flagstaff_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-label="1"></a>flagstaff_hourly <span class="ot">&lt;-</span> flagstaff <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-label="2"></a>  <span class="fu">group_by</span>(hour) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-label="4"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-label="5"></a>flagstaff_hourly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 24 × 2
     hour mean_count
@@ -912,10 +1014,10 @@ Answer
 <p>Twenty four rows: one row per hour, and a summary.</p>
 <p>That is exactly what <code>geom_col()</code> wants. You give it an x and a y, and it draws a bar that tall.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff_hourly,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-label="3"></a>           <span class="at">y =</span> mean_count)) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-label="4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff_hourly,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-label="3"></a>           <span class="at">y =</span> mean_count)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-label="4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-flagstaff-col" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A bar chart of mean pedestrian count by hour at Flagstaff Station. Two tall peaks, one at 8am reaching about 3500 and one around 5pm, with very low bars overnight. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -933,7 +1035,7 @@ Figure&nbsp;3.3: Flagstaff Station. A train station, drawn as a train station.
 <p>It is only describing a single number - not the variation.</p>
 <p>This doesn’t make <code>geom_col()</code> wrong! You’ve displayed a summary.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="So what does `geom_bar()` do?">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -942,15 +1044,15 @@ Figure&nbsp;3.3: Flagstaff Station. A train station, drawn as a train station.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are two bar geoms, and the other one is <code>geom_bar()</code>.</p>
 <p>The difference is that <code>geom_col()</code> needs you to give it a y, and <code>geom_bar()</code> works one out for itself. What it works out is a <strong>count of rows</strong>.</p>
 <p>Watch what happens if I use it on the raw data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour)) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-label="3"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-label="3"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-flat-wall" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A bar chart of hour on the x axis. All twenty four bars are the same height, about 1570, making a flat wall. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -967,8 +1069,8 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 <p>Every hour of the day is equally busy, and Melbourne at 3am is as busy as Melbourne at 5pm. Strange?</p>
 <p><code>geom_bar()</code> doesn’t take a y value, instead it counts how many <strong>rows</strong> landed in each value of <code>hour</code>, which is this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a>pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-label="2"></a>  <span class="fu">count</span>(hour)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-label="1"></a>pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-label="2"></a>  <span class="fu">count</span>(hour)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 24 × 2
     hour     n
@@ -988,13 +1090,13 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <p>About 1570 every hour. The plot is drawing my data collection, not my pedestrians - I haven’t given it the right info.</p>
 <p>So <code>geom_bar()</code> is just <code>count()</code> and then <code>geom_col()</code>, glued together. These two are the same plot:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hour)) <span class="sc">+</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-label="2"></a>  <span class="fu">geom_bar</span>()</span>
-<span id="cb27-3"><a href="#cb27-3" aria-label="3"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-label="4"></a>pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-label="5"></a>  <span class="fu">count</span>(hour) <span class="sc">|&gt;</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-label="6"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-label="7"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hour)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-label="2"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-label="3"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-label="4"></a>pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-label="5"></a>  <span class="fu">count</span>(hour) <span class="sc">|&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-label="6"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-label="7"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>That can be a useful thing to do, when rows are the thing you want counted. This would be a useful thing to go to if each row were one person walking past a sensor. Instead, each row here is an hour of recording, so counting rows tells me about the sensor rather than the street.</p>
 <p>So the two of them, side by side:</p>
 <blockquote class="blockquote">
@@ -1024,15 +1126,15 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 <li><p>Now build it. Fill in the blanks:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-label="1"></a>birrarung_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-label="2"></a>  <span class="fu">filter</span>(sensor_name <span class="sc">==</span> <span class="st">"Birrarung Marr"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-label="3"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-label="4"></a>  <span class="fu">summarise</span>(<span class="at">mean_count =</span> <span class="fu">mean</span>(___, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb28-5"><a href="#cb28-5" aria-label="5"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-label="6"></a><span class="fu">ggplot</span>(birrarung_hourly,</span>
-<span id="cb28-7"><a href="#cb28-7" aria-label="7"></a>       <span class="fu">aes</span>(<span class="at">x =</span> ___,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-label="8"></a>           <span class="at">y =</span> ___)) <span class="sc">+</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-label="9"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a>birrarung_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a>  <span class="fu">filter</span>(sensor_name <span class="sc">==</span> <span class="st">"Birrarung Marr"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-label="4"></a>  <span class="fu">summarise</span>(<span class="at">mean_count =</span> <span class="fu">mean</span>(___, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb29-5"><a href="#cb29-5" aria-label="5"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-label="6"></a><span class="fu">ggplot</span>(birrarung_hourly,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>       <span class="fu">aes</span>(<span class="at">x =</span> ___,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-label="8"></a>           <span class="at">y =</span> ___)) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-label="9"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>How close was your sketch?</p>
 <ol start="3" type="1">
@@ -1042,13 +1144,52 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_aa27d7b4" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_1af35c21" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only open this if you have actually had a go.</p>
+<p><strong>2.</strong> The park peaks at 5pm, not 8am. People walk by the river after work, not on the way to it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-label="1"></a>birrarung_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-label="2"></a>  <span class="fu">filter</span>(sensor_name <span class="sc">==</span> <span class="st">"Birrarung Marr"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-label="3"></a>  <span class="fu">group_by</span>(hour) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-label="4"></a>  <span class="fu">summarise</span>(<span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-label="5"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-label="6"></a><span class="fu">ggplot</span>(birrarung_hourly,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-label="7"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-label="8"></a>           <span class="at">y =</span> mean_count)) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-label="9"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>3.</strong> No 8am problem. A park does not care what day it is, so the mean is a fairer summary here than it was at Flagstaff.</p>
+<p><strong>4.</strong> You get <code>Problem while computing stat.</code> <code>geom_bar()</code> wants to count rows and work out <code>y</code> itself, and you have already given it a <code>y</code>. It cannot do both.</p>
+<p><strong>5.</strong> Every hour comes back <code>NA</code>, all 24 of them. One missing reading anywhere in an hour is enough to poison the whole mean.</p>
 </div>
 </div>
 </div>
 </div>
+</div>
+<section id="what-to-hold-onto-1" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-hold-onto-1">What to hold onto</h3>
+<p><code>geom_col()</code> draws the number you give it. <code>geom_bar()</code> counts your rows and draws that.</p>
+<p>So the question is not “which function is right”, it is <strong>have I already worked out the number I want on the y axis?</strong></p>
+</section>
 <section id="geoms-that-bin-for-you" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="geoms-that-bin-for-you"><span class="header-section-number">3.4</span> Geoms that bin for you</h2>
+<blockquote class="blockquote">
+<p><strong>The idea:</strong> a histogram chops a continuous variable into bins and counts what lands in each. The bin width is your choice, and it decides what shape you see.</p>
+</blockquote>
 <div class="callout callout-style-default callout-note callout-titled" title="Your Turn: Do you know what binning is?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1088,9 +1229,9 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <p>Let’s look at the spread of <code>hourly_counts</code> across all four sensors, using <code>geom_histogram()</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb29-2"><a href="#cb29-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-label="3"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-label="3"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
@@ -1116,7 +1257,7 @@ Figure&nbsp;3.5: The default. Note what ggplot2 says about it.
 <p>ggplot2 picked 30 bins because it had to pick something, and it is telling you that 30 was not a considered choice. It’s a placeholder, and it would like you to replace it.</p>
 <p>The second is our old friend from <a href="anatomy-of-a-ggplot.html" class="quarto-xref"><span>Chapter 1</span></a>:</p>
 <pre><code>Removed 2548 rows containing non-finite outside the scale range</code></pre>
-<p>There are 2548 hours where the sensor recorded nothing. We come back to those in <span class="quarto-unresolved-ref">?sec-in-the-way</span>.</p>
+<p>There are 2548 hours where the sensor recorded nothing. We come back to those in <a href="whats-in-the-way.html" class="quarto-xref"><span>Chapter 5</span></a>.</p>
 <p>So is 30 bins any good here? With a range of 0 to 11273, thirty bins makes each one about 389 people wide, and the first bin alone holds 40% of the data.</p>
 <p>So most of the picture ends up as one bar.</p>
 <p>Let’s try some other widths.</p>
@@ -1125,8 +1266,8 @@ Figure&nbsp;3.5: The default. Note what ggplot2 says about it.
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-bw-1000" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A histogram with wide bins, showing about eleven bars.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1143,8 +1284,8 @@ Figure&nbsp;3.6
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-bw-100" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A histogram with narrower bins, showing a smooth decay from a peak near zero.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1161,8 +1302,8 @@ Figure&nbsp;3.7
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-bw-10" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A histogram with very narrow bins, spiky and noisy, with a tall cluster near zero.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1187,9 +1328,9 @@ Figure&nbsp;3.8
 <p>Now we’ve got a tool that can answer the question the boxplot raised.</p>
 <p>The 8am box ran from 233 to 5128, and I said that meant 8am was not one thing. A histogram of just those mornings should show us what it actually is.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff_8am,</span>
-<span id="cb37-2"><a href="#cb37-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-label="3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff_8am,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-label="3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-hist-8am" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A histogram of pedestrian counts at Flagstaff Station at 8am. Two clearly separated humps, one near zero and a much larger one around 5000, with an almost empty gap between them. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1212,10 +1353,10 @@ Figure&nbsp;3.9: 8am at Flagstaff Station. Two humps, not one.
 <p>A histogram is still a summary, though. Those bars are counts of things, not the things themselves.</p>
 <p><code>geom_rug()</code> draws a small tick for every single observation, along the axis. So you can put the summary and the raw data on the same plot, which I think is lovely.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff_8am,</span>
-<span id="cb38-2"><a href="#cb38-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-label="3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-label="4"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff_8am,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-label="3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-label="4"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-rug" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same 8am histogram with a rug of tick marks along the bottom axis. The ticks are dense under each of the two humps and almost absent in the gap between them. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1232,7 +1373,7 @@ Figure&nbsp;3.10: Every one of the 397 mornings, drawn underneath the bins.
 <p>Look along the bottom. Each tick is one morning in 2016, and you can see them bunch under the two humps and thin out to nearly nothing across the middle.</p>
 <p>I like <code>geom_rug()</code> a lot for this - because it costs you one line and it puts the evidence next to the summary.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Comparing two distributions on one plot">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1241,19 +1382,19 @@ Figure&nbsp;3.10: Every one of the 397 mornings, drawn underneath the bins.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The other thing you often want is two distributions side by side. Let’s take the station and the park.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-label="1"></a>two_sensors <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-label="2"></a>  <span class="fu">filter</span>(sensor_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Flagstaff Station"</span>, <span class="st">"Birrarung Marr"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-label="1"></a>two_sensors <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-label="2"></a>  <span class="fu">filter</span>(sensor_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Flagstaff Station"</span>, <span class="st">"Birrarung Marr"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The obvious move is to map the sensor onto <code>fill</code>, and make them transparent so we can see through one to the other.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-label="1"></a><span class="fu">ggplot</span>(two_sensors,</span>
-<span id="cb40-2"><a href="#cb40-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
-<span id="cb40-3"><a href="#cb40-3" aria-label="3"></a>           <span class="at">fill =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-label="4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">100</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-label="1"></a><span class="fu">ggplot</span>(two_sensors,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-label="3"></a>           <span class="at">fill =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-label="4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">100</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-overlay-stacked" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A histogram of two sensors with semi transparent fill. The bars sit on top of each other rather than overlapping, reaching about 7400 at the tallest. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1271,12 +1412,12 @@ Figure&nbsp;3.11: Transparent, and still wrong.
 <p><code>alpha</code> made them see-through, but see-through was never the problem. The problem is <strong>position</strong>. By default <code>geom_histogram()</code> stacks, so the second sensor’s bars start where the first sensor’s bars finish.</p>
 <p>What we want is for both to start at zero, and that is <code>position = "identity"</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-label="1"></a><span class="fu">ggplot</span>(two_sensors,</span>
-<span id="cb41-2"><a href="#cb41-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
-<span id="cb41-3"><a href="#cb41-3" aria-label="3"></a>           <span class="at">fill =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-label="4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">100</span>,</span>
-<span id="cb41-5"><a href="#cb41-5" aria-label="5"></a>                 <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
-<span id="cb41-6"><a href="#cb41-6" aria-label="6"></a>                 <span class="at">position =</span> <span class="st">"identity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-label="1"></a><span class="fu">ggplot</span>(two_sensors,</span>
+<span id="cb43-2"><a href="#cb43-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
+<span id="cb43-3"><a href="#cb43-3" aria-label="3"></a>           <span class="at">fill =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-label="4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">100</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-label="5"></a>                 <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-label="6"></a>                 <span class="at">position =</span> <span class="st">"identity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-overlay-identity" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same two histograms, now both starting from zero and overlapping, so the park's distribution sits inside the station's. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1293,11 +1434,11 @@ Figure&nbsp;3.12: Both starting from zero. Now they overlap.
 <p>Now you can read it. Birrarung Marr sits low and tight, because a park is quietly busy most of the time. Flagstaff has a long tail out to the right, because a train station is empty at 3am and enormous at 8am.</p>
 <p>If the overlap still bothers you, <code>geom_density()</code> does a related computation and draws a smooth curve instead of bars. I like to pair <code>geom_density()</code> with <code>geom_rug()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-label="1"></a><span class="fu">ggplot</span>(two_sensors,</span>
-<span id="cb42-2"><a href="#cb42-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-label="3"></a>           <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-label="4"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-label="5"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-label="1"></a><span class="fu">ggplot</span>(two_sensors,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-label="3"></a>           <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-label="4"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-label="5"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-density" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two smooth density curves for the same two sensors, overlapping, with the park's curve narrow and the station's curve long tailed. ">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1330,208 +1471,60 @@ Figure&nbsp;3.13: The same comparison, as curves.
 <li><p>Now build it, with a rug:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-label="1"></a>birrarung_8am <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-label="2"></a>  <span class="fu">filter</span>(sensor_name <span class="sc">==</span> <span class="st">"Birrarung Marr"</span>,</span>
-<span id="cb43-3"><a href="#cb43-3" aria-label="3"></a>         hour <span class="sc">==</span> ___)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-label="4"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-label="5"></a><span class="fu">ggplot</span>(birrarung_8am,</span>
-<span id="cb43-6"><a href="#cb43-6" aria-label="6"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-label="7"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___) <span class="sc">+</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-label="8"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-label="1"></a>birrarung_8am <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-label="2"></a>  <span class="fu">filter</span>(sensor_name <span class="sc">==</span> <span class="st">"Birrarung Marr"</span>,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-label="3"></a>         hour <span class="sc">==</span> ___)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-label="4"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-label="5"></a><span class="fu">ggplot</span>(birrarung_8am,</span>
+<span id="cb45-6"><a href="#cb45-6" aria-label="6"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-label="7"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___) <span class="sc">+</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-label="8"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Were you right? Try a couple of other binwidths while you are there.</p>
 <ol start="3" type="1">
 <li><p>Go back to <code>flagstaff_8am</code> and try <code>binwidth = 2000</code>. What happens to the two humps, and what would you have concluded if you had only ever seen that version?</p></li>
 <li><p><code>geom_histogram()</code> bins for you. <code>geom_freqpoly()</code> does the same computation and draws a line instead. Swap one for the other on <code>flagstaff_8am</code>.</p></li>
 </ol>
-<div class="cell">
-<div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_165d6bc8" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="scales-and-coords" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="scales-and-coords"><span class="header-section-number">3.5</span> Scales and coords</h2>
-<section id="scales" class="level3">
-<h3 class="anchored" data-anchor-id="scales">Scales</h3>
-<p>A scale decides how a data value turns into a position on the page.</p>
-<p>Most of the data is squashed into the bottom of every plot we have drawn so far, and a few huge values stretch the axis out.</p>
-<p>A log scale can help spread the squish out.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian,</span>
-<span id="cb44-2"><a href="#cb44-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-label="3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-label="4"></a>  <span class="fu">scale_x_log10</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-log" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A histogram of hourly counts on a log ten x axis. The long tail is gone and the distribution is roughly symmetric. ">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="what-gets-computed_files/figure-html/fig-log-1.png" class="img-fluid figure-img" alt="A histogram of hourly counts on a log ten x axis. The long tail is gone and the distribution is roughly symmetric. " width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.14: The same data, on a log scale.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Same data, same geom. The only thing that changed is how a number becomes a position, and now you can see a shape that was hidden.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="This will bite you">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>This will bite you
+<span class="screen-reader-only">Tip</span>Answer
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Look at the warnings on that plot.</p>
-<pre><code>log-10 transformation introduced infinite values.
-Removed 2641 rows containing non-finite outside the scale range</code></pre>
-<p>Earlier the histogram dropped 2548 rows, which were the missing values. This one dropped 2641.</p>
-<p>The extra 93 are the hours where <strong>exactly zero people walked past</strong>. The log of zero is negative infinity, so there is nowhere on the axis to put them.</p>
-<p>A quiet hour is not missing data. But on a log scale it disappears just as completely, and the only sign is a warning you have to read.</p>
-</div>
-</div>
-</section>
-<section id="coords" class="level3">
-<h3 class="anchored" data-anchor-id="coords">Coords</h3>
-<p>Say I want to look at Flagstaff below 2000 people an hour, with a smooth through it.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
-<span id="cb46-2"><a href="#cb46-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb46-3"><a href="#cb46-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-label="4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-label="5"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-smooth-base" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot of pedestrian count against hour at Flagstaff Station with a fitted smooth curve, peaking sharply around 8am at about 2500. ">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-smooth-base-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="what-gets-computed_files/figure-html/fig-smooth-base-1.png" class="img-fluid figure-img" alt="A scatterplot of pedestrian count against hour at Flagstaff Station with a fitted smooth curve, peaking sharply around 8am at about 2500. " width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-smooth-base-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.15: All of it, with a smooth.
-</figcaption>
-</figure>
+<p>Only open this if you have actually had a go.</p>
+<p><strong>1 and 2.</strong> One hump. Birrarung Marr at 8am runs from 95 to 7218 with no gap in the middle, because a park does not care what day it is. No commute means no second population.</p>
+<p><strong>3.</strong> At <code>binwidth = 2000</code> you get four bars, and the two humps merge into one. You would conclude 8am at Flagstaff is a single busy-ish morning, which is exactly backwards.</p>
+<p><strong>4.</strong> Same computation, different mark. <code>geom_freqpoly()</code> is easier to overlay two of, and harder to read a single count off.</p>
 </div>
 </div>
 </div>
-<p>There are two ways to limit that y axis, and they look like they do the same job.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href=""><code>scale_y_continuous(limits = )</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href=""><code>coord_cartesian(ylim = )</code></a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
-<span id="cb47-2"><a href="#cb47-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb47-3"><a href="#cb47-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-label="4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-label="5"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-label="6"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-scale-limits" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot limited with scale_y_continuous. The smooth curve is now almost flat, peaking around 400.">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-scale-limits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="what-gets-computed_files/figure-html/fig-scale-limits-1.png" id="fig-scale-limits" class="img-fluid figure-img" alt="The same plot limited with scale_y_continuous. The smooth curve is now almost flat, peaking around 400." width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-scale-limits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.16
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff,</span>
-<span id="cb48-2"><a href="#cb48-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb48-3"><a href="#cb48-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-label="4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-label="5"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-label="6"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-coord-cartesian" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot limited with coord_cartesian. The smooth curve still rises steeply to the top of the panel at 8am.">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-coord-cartesian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="what-gets-computed_files/figure-html/fig-coord-cartesian-1.png" id="fig-coord-cartesian" class="img-fluid figure-img" alt="The same plot limited with coord_cartesian. The smooth curve still rises steeply to the top of the panel at 8am." width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-coord-cartesian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.17
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>Those are not the same plot, and the difference is not cosmetic.</p>
-<p>At 8am the smooth in the original sits at about <strong>2568</strong>. With <code>coord_cartesian()</code> it is still <strong>2568</strong>, and we just cannot see the top of it. With <code>scale_y_continuous()</code> it is <strong>420</strong>.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="This will bite you">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>This will bite you
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<blockquote class="blockquote">
-<p><code>scale_y_continuous(limits = )</code> <strong>throws the data away</strong>, and then computes.</p>
-<p><code>coord_cartesian(ylim = )</code> computes on everything, and then <strong>zooms</strong>.</p>
-</blockquote>
-<p>Setting the limit on the scale deleted 1316 rows before <code>geom_smooth()</code> ever saw them. Every one of them was a busy hour, so the line it fitted is a line through a quiet day that never happened.</p>
-<p>Nothing on the plot says so. The curve looks perfectly reasonable, and it is wrong by a factor of six.</p>
-<p>If you want to zoom, use the coord. If you genuinely want to drop data, use the scale, and know that you did it.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Your Turn">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>Run both of the plots above and read the warnings. How many rows did each one remove?</p></li>
-<li><p>Now do the same trick on the x axis. Limit the hours to 6 to 10, both ways, and see whether the smooth changes:</p></li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-label="1"></a><span class="co"># throws data away</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-label="2"></a>... <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">10</span>))</span>
-<span id="cb49-3"><a href="#cb49-3" aria-label="3"></a></span>
-<span id="cb49-4"><a href="#cb49-4" aria-label="4"></a><span class="co"># zooms</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-label="5"></a>... <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<ol start="3" type="1">
-<li><p>Add <code>scale_x_log10()</code> to the histogram of <strong>all</strong> the pedestrian data, not just Flagstaff. How many rows go, and which ones are they? Flagstaff on its own only ever recorded a single zero hour all year, so you need the full dataset for this one to bite.</p></li>
-<li><p>Sketch what you think the smooth should look like if it only ever saw hours below 2000 people. Then check.</p></li>
-</ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_e98a7fc0" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_dbbbea28" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
 </div>
 </section>
+<section id="what-to-hold-onto-2" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-hold-onto-2">What to hold onto</h3>
+<p>The default binwidth is a placeholder, and ggplot2 says so out loud. Pick a number you could describe to somebody.</p>
+<p>A histogram is still a summary, so put a <code>geom_rug()</code> under it when there are few enough points to see them.</p>
 </section>
-<section id="to-summarise" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="to-summarise"><span class="header-section-number">3.6</span> To summarise</h2>
+</section>
+<section id="to-summarise" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="to-summarise"><span class="header-section-number">3.5</span> To summarise</h2>
 <p>Three things to take out of this chapter.</p>
 <ol type="1">
 <li><strong>Some geoms compute, and the computation is a choice you can see.</strong> If you didn’t give it a y, it made one. If it drew a box, it worked out five numbers and threw the rest away.</li>
 <li><strong>The default binwidth is a placeholder,</strong> and ggplot2 says so out loud. Pick a unit you could describe to somebody, and put a <code>geom_rug()</code> under it so you can see what you are summarising.</li>
-<li><strong>Limits on a scale delete data. Limits on a coord zoom.</strong> One of those changes your fitted line and doesn’t tell you.</li>
+<li><strong>A summary is a choice, not a fact.</strong> The boxplot’s five numbers, the mean in a bar, the height of a bin. Each one throws something away, and it is worth knowing what.</li>
 </ol>
 <p>And the habit underneath all three.</p>
 <p>When a plot surprises you, ask what got computed between the data and the marks. Nearly every surprise in this chapter came from a computation happening exactly as documented, on data I hadn’t noticed was different to what I thought.</p>
@@ -1951,6 +1944,9 @@ Figure&nbsp;3.17
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./what-am-i-comparing.html" class="pagination-link" aria-label="What am I comparing?">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

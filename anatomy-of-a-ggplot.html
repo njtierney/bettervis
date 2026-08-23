@@ -183,6 +183,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">What gets computed</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -217,7 +235,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#mapping-more-variables" id="toc-mapping-more-variables" class="nav-link" data-scroll-target="#mapping-more-variables"><span class="header-section-number">1.8</span> Mapping more variables</a></li>
   <li><a href="#using-aes-inside-and-outside" id="toc-using-aes-inside-and-outside" class="nav-link" data-scroll-target="#using-aes-inside-and-outside"><span class="header-section-number">1.9</span> Using <code>aes</code> inside and outside</a></li>
   <li><a href="#layers" id="toc-layers" class="nav-link" data-scroll-target="#layers"><span class="header-section-number">1.10</span> Layers</a></li>
-  <li><a href="#to-summarise" id="toc-to-summarise" class="nav-link" data-scroll-target="#to-summarise"><span class="header-section-number">1.11</span> To summarise</a></li>
+  <li><a href="#when-it-doesnt-work" id="toc-when-it-doesnt-work" class="nav-link" data-scroll-target="#when-it-doesnt-work"><span class="header-section-number">1.11</span> When it doesn’t work</a></li>
+  <li><a href="#to-summarise" id="toc-to-summarise" class="nav-link" data-scroll-target="#to-summarise"><span class="header-section-number">1.12</span> To summarise</a></li>
   <li>Links</li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/njtierney/bettervis/edit/main/anatomy-of-a-ggplot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/njtierney/bettervis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -249,6 +268,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can get really far with ggplot2 by copying an example, changing the variable names, and a bit of use of an LLM.</p>
 <p>One of the challenges with this, is that you might not have internalised the mental model of how ggplot plots are built. The interface to ggplot2 helps you think about your data, build plots quickly for exploration, but also present finely made graphics.</p>
 <p>In this chapter we will take plots, tease them apart, and put them back together.</p>
+<blockquote class="blockquote">
+<p>The greatest value of a picture is when it forces us to notice what we never expected to see.</p>
+<p>— John Tukey</p>
+</blockquote>
 <section id="overview" class="level2 unnumbered overview">
 <h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
 <p><strong>Duration</strong> 45 minutes</p>
@@ -524,7 +547,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_cb9cb3a5" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_61df8ccc" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -540,7 +563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I’ve created a data visualisation of this data using ggplot2:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-elnino" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Scatterplot of sea temperature against air temperature. The points form two separate clusters.">
+<div id="fig-elnino" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot of sea temperature against air temperature. The points form two separate clusters." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-elnino-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="anatomy-of-a-ggplot_files/figure-html/fig-elnino-1.png" id="fig-elnino" class="img-fluid figure-img" alt="Scatterplot of sea temperature against air temperature. The points form two separate clusters." width="672">
@@ -575,7 +598,7 @@ Figure&nbsp;1.1
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_beffdb81" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_e6dfe8a3" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -726,7 +749,7 @@ Figure&nbsp;1.1
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_eedbdc7f" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_f1bc3fda" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -801,7 +824,7 @@ Figure&nbsp;1.1
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_3066601b" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_fdd3abf7" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -1001,6 +1024,23 @@ Figure&nbsp;1.1
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Some history: the most famous polar plot">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Some history: the most famous polar plot
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>coord_polar()</code> looks like a novelty, and one of the most consequential statistical graphics ever drawn is a polar bar chart.</p>
+<p>Florence Nightingale is remembered as a nurse. She was also a statistician, and during the Crimean War she drew what she called a coxcomb: a circle divided into months, with the area of each wedge showing how many soldiers died, split by cause. The picture made one thing impossible to miss, which is that far more men were dying of preventable disease than of their wounds.</p>
+<p>She was arguing for sanitary reform, and she reached for a plot because a table would not have carried it. She was elected the first woman member of the Royal Statistical Society.</p>
+<p>A few years earlier, in 1854, John Snow mapped cholera deaths in Soho as marks on a street map, and the marks clustered around one water pump on Broad Street. Same move: put the data where the thing happened, and the pattern argues for you.</p>
+<p>If you want to follow the modern thread, Di Cook, Heike Hofmann and Debbie Swayne have spent careers on how we read statistical graphics, and there is a good starting point in <a href="https://github.com/dicook/JSM17">Di Cook’s JSM materials</a>.</p>
+</div>
+</div>
 </section>
 <section id="facets-how-the-plot-is-split-into-smaller-subplots" class="level3">
 <h3 class="anchored" data-anchor-id="facets-how-the-plot-is-split-into-smaller-subplots"><strong>Facets</strong>: How the plot is split into smaller subplots</h3>
@@ -1134,14 +1174,14 @@ Figure&nbsp;1.1
 <p>Let’s take 5 minutes to do this - I’ll draw this too.</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_0342352e" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_41747d7d" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
 </div>
 <p>Here’s one I prepared earlier:</p>
 <div class="callout callout-style-default callout-note callout-titled" title="My plot">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1150,7 +1190,7 @@ Figure&nbsp;1.1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><img src="images/sketches/sketch-colour-penguins.png" class="img-fluid"></p>
 </div>
@@ -1189,7 +1229,7 @@ Figure&nbsp;1.1
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_ee6b5b87" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_dd325496" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>There are many decisions you need to make when making a plot. I think ggplot really does a great job of breaking down those components in a way that make you think about the data, at the right level of detail.</p>
@@ -1297,7 +1337,7 @@ Figure&nbsp;1.5: And now a geom. This is a plot.
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="A digression into missing data">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1306,7 +1346,7 @@ Figure&nbsp;1.5: And now a geom. This is a plot.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You might have noticed a warning in the recent plots:</p>
 <pre><code>Removed 81 rows containing missing values or values outside the scale range</code></pre>
@@ -1497,7 +1537,7 @@ Figure&nbsp;1.8: Humidity mapped onto size. This is not a good plot.
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_ba921131" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_218bcf4f" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -1602,7 +1642,7 @@ Figure&nbsp;1.10: Setting the colour instead of mapping it.
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_e196086e" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_542662f6" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -1681,14 +1721,44 @@ Figure&nbsp;1.12: Overriding the inherited mapping for one layer only.
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_d41301df" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_acad6450" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="to-summarise" class="level2" data-number="1.11">
-<h2 data-number="1.11" class="anchored" data-anchor-id="to-summarise"><span class="header-section-number">1.11</span> To summarise</h2>
+<section id="when-it-doesnt-work" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="when-it-doesnt-work"><span class="header-section-number">1.11</span> When it doesn’t work</h2>
+<p>You are going to hit errors, and most of them in ggplot2 are one of a small number of things. This is the list I actually run through.</p>
+<p><strong>Count your brackets and quotes.</strong> <code>aes(x = hour, y = mean_count</code> will not run, and neither will <code>colour = "purple</code>. Note that <code>'</code> and <code>"</code> are different characters, and they have to match each other.</p>
+<p><strong>Look for a <code>+</code> in the console.</strong> If R is showing you a <code>+</code> instead of a <code>&gt;</code>, it is still waiting for you to finish something. Press ESCAPE and start again.</p>
+<p><strong>Check where your <code>+</code> signs are.</strong> In ggplot2 the <code>+</code> goes at the <strong>end</strong> of a line, never the start. This works:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-label="1"></a><span class="fu">ggplot</span>(oceanbuoys, <span class="fu">aes</span>(<span class="at">x =</span> air_temp_c, <span class="at">y =</span> sea_temp_c)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-label="2"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and this quietly does not:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-label="1"></a><span class="fu">ggplot</span>(oceanbuoys, <span class="fu">aes</span>(<span class="at">x =</span> air_temp_c, <span class="at">y =</span> sea_temp_c))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-label="2"></a>  <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The second one runs the <code>ggplot()</code> call on its own, draws a blank panel, and then hits the <code>+</code> as a separate statement:</p>
+<pre><code>Error: Cannot use `+` with a single argument.</code></pre>
+<p>Which is true, and gives you no clue that the actual problem is a line break.</p>
+<p><strong>Copy the error message and search it.</strong> All of it, not your description of it. Somebody has had it before.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Read more">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Read more
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <a href="https://opensource.posit.co/resources/cheatsheets/">ggplot2 cheatsheet</a> is two pages of every geom, scale and theme, laid out visually. It is genuinely the fastest way to find the geom you half remember.</p>
+<p>There is also the <a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extension gallery</a> for when base ggplot2 does not have the thing you want.</p>
+</div>
+</div>
+</section>
+<section id="to-summarise" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="to-summarise"><span class="header-section-number">1.12</span> To summarise</h2>
 <p>Three things to take out of this chapter.</p>
 <ol type="1">
 <li><strong>A ggplot is data, aesthetics, and a geom, glued together with <code>+</code>.</strong> Everything else is detail hanging off those three.</li>
@@ -1711,8 +1781,11 @@ Figure&nbsp;1.12: Overriding the inherited mapping for one layer only.
 <li><a href="https://hadley.nz/">Hadley Wickham</a></li>
 <li><a href="https://ggplot2-book.org/">ggplot2 book</a></li>
 <li><a href="http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf">Hadley Wickham’s PhD thesis</a></li>
+<li><a href="https://github.com/dicook/JSM17">Di Cook’s JSM materials</a></li>
 <li><a href="https://docs.ropensci.org/visdat/">{visdat}</a></li>
 <li><a href="https://naniar.njtierney.com/">{naniar}</a></li>
+<li><a href="https://opensource.posit.co/resources/cheatsheets/">ggplot2 cheatsheet</a></li>
+<li><a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extension gallery</a></li>
 </ul>
 </section>
 
