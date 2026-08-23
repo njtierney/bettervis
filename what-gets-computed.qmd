@@ -19,7 +19,6 @@ This chapter is what happens between your data and the vis on screen.
 - What is a boxplot actually showing me, and what is it hiding?
 - When do I want `geom_bar()`, and when do I want `geom_col()`?
 - How do I choose a binwidth, and how do I show the raw data too?
-- What do scales and coords actually do?
 
 **What you need this session**
 
@@ -74,6 +73,10 @@ This gives us some interesting data to play with.
 
 ## Geoms that summarise for you
 
+> **The idea:** a geom can take all your raw numbers and hand back a few. That
+> is useful, and it means the plot is showing you a decision somebody made, not
+> the data itself.
+
 Let's start with a question: 
 
 > What does a day at Flagstaff Station look like?
@@ -99,6 +102,16 @@ flagstaff_january_1 |>
   knitr::kable()
 ```
 
+
+::: {.callout-tip title="Starting from here? Run this first" collapse="true"}
+
+```{r}
+#| ref.label: ["pkgs"]
+#| eval: false
+#| echo: true
+```
+
+:::
 
 ::: {.callout-note title="Your Turn: draw it first"}
 
@@ -151,7 +164,7 @@ ggplot(flagstaff,
 
 Hmmm - we get a single box - this isn't what we want.
 
-We saw something similar earlier - in @sec-shape, `geom_line()` drew a single scribbling line, because it did now know species was a thing. We even get a few (!) warnings from ggplot2:
+We saw something similar earlier - in @sec-shape, `geom_line()` sawtoothed across the whole plot, because it did not know species was a thing. We even get a few (!) warnings from ggplot2:
 
 ```
 Warning messages:
@@ -195,7 +208,19 @@ thing I want you to notice is the **8am box** - it has a big range!
 
 A boxplot is five numbers, worked out for you from the raw data. We typically call this the "five number summary": min, quartile 1 (25%), median, quartile 3 (75%), max.
 
-<!-- TODO: little history on the boxplot, from tukey, and specifics about a hinge/pivot -->
+::: {.callout-caution title="Some history: where the boxplot came from" collapse="true"}
+
+The boxplot is John Tukey's, from his 1977 book *Exploratory Data Analysis*, and
+it was designed to be drawn **by hand**, quickly, on paper. That is why it is
+five numbers and not fifty: five is what you can work out and draw in a minute.
+
+Tukey called the box edges **hinges** rather than quartiles. They are almost the
+same thing and not quite, which is why `?geom_boxplot` and `boxplot.stats` both
+hedge slightly about how the box is computed.
+
+He is also the reason we say "bit" and "software". He coined both.
+
+:::
 
 ```{r}
 #| label: five-number
@@ -216,7 +241,14 @@ flagstaff_8am |>
 Those are the parts of the box: the line is the median, the box edges are the
 quartiles, and the whiskers reach out to 1.5x the interquartile range (IQR) - which is quartile 1  - 3. Things beyond the whiskers are classed as outliers. 
 
-Boxplots actually have a few more calculation options than you might might realise - you can change the methods for how the box width is calculated, and how the outliers are calculated, too. If you want to read more, look up `?geom_boxplot()`, and `boxplot.stats`.
+::: {.callout-tip title="Going deeper: the box is more adjustable than it looks" collapse="true"}
+
+Boxplots have more calculation options than you might realise. You can change
+how the box width is computed, and how outliers are decided.
+
+If you want to read more, look up `?geom_boxplot()` and `boxplot.stats`.
+
+:::
 
 So, `geom_boxplot()` does some computation, to return these summaries, and then draw them. So why is the 8am box so wide? The median is 4910 but the lower quartile is 233, which means at least a quarter of the mornings had almost nobody there.
 
@@ -305,11 +337,40 @@ Is that a fairer picture of 8am than the one box was?
 countdown(minutes = 5)
 ```
 
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you have actually had a go.
+
+**1.** Same boxes. The difference is the x axis: `group = hour` keeps it a
+number, so the boxes sit at 0, 1, 2 and the spacing is real. `factor(hour)`
+makes it a category, so they are evenly spaced and every hour gets a label. For
+hours I prefer `group`, because the axis still means something.
+
+**2.** The four widest boxes are hours 8, 17, 9 and 7, which is the morning and
+evening commute. Those are the hours where weekday and weekend differ most, so
+those are the hours where one box is hiding two populations.
+
+**3.** Much fairer. Two boxes, each describing a kind of morning that actually
+happens.
+
+:::
+
 :::
 
 Boxplots are a really useful tool for exploring variation. Sometimes the wider variation can have distinct and interesting summaries.
 
+### What to hold onto
+
+A boxplot turns however many numbers you have into five, and draws those.
+
+That is a good trade when the data has one lump in it. When it has two, the five
+numbers describe a middle that nothing is near.
+
 ## Geoms that count for you
+
+> **The idea:** some geoms draw the number you give them. Others work a number
+> out for you. If you do not know which kind you have, you will get a plot of
+> something you did not ask for.
 
 The boxplot kept all the variation. Sometimes you just want one number per hour, and you want to say which number.
 
@@ -485,9 +546,52 @@ ggplot(birrarung_hourly,
 countdown(minutes = 5)
 ```
 
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you have actually had a go.
+
+**2.** The park peaks at 5pm, not 8am. People walk by the river after work,
+not on the way to it.
+
+```{r}
+#| eval: false
+birrarung_hourly <- pedestrian |>
+  filter(sensor_name == "Birrarung Marr") |>
+  group_by(hour) |>
+  summarise(mean_count = mean(hourly_counts, na.rm = TRUE))
+
+ggplot(birrarung_hourly,
+       aes(x = hour,
+           y = mean_count)) +
+  geom_col()
+```
+
+**3.** No 8am problem. A park does not care what day it is, so the mean is a
+fairer summary here than it was at Flagstaff.
+
+**4.** You get `Problem while computing stat.` `geom_bar()` wants to count rows
+and work out `y` itself, and you have already given it a `y`. It cannot do both.
+
+**5.** Every hour comes back `NA`, all 24 of them. One missing reading anywhere
+in an hour is enough to poison the whole mean.
+
 :::
 
+:::
+
+### What to hold onto
+
+`geom_col()` draws the number you give it. `geom_bar()` counts your rows and
+draws that.
+
+So the question is not "which function is right", it is **have I already worked
+out the number I want on the y axis?**
+
 ## Geoms that bin for you
+
+> **The idea:** a histogram chops a continuous variable into bins and counts
+> what lands in each. The bin width is your choice, and it decides what shape
+> you see.
 
 :::{.callout-note title="Your Turn: Do you know what binning is?"}
 
@@ -762,6 +866,23 @@ ggplot(birrarung_8am,
 4. `geom_histogram()` bins for you. `geom_freqpoly()` does the same computation
    and draws a line instead. Swap one for the other on `flagstaff_8am`.
 
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you have actually had a go.
+
+**1 and 2.** One hump. Birrarung Marr at 8am runs from 95 to 7218 with no gap in
+the middle, because a park does not care what day it is. No commute means no
+second population.
+
+**3.** At `binwidth = 2000` you get four bars, and the two humps merge into one.
+You would conclude 8am at Flagstaff is a single busy-ish morning, which is
+exactly backwards.
+
+**4.** Same computation, different mark. `geom_freqpoly()` is easier to overlay
+two of, and harder to read a single count off.
+
+:::
+
 ```{r}
 #| echo: false
 #| eval: !expr knitr::is_html_output()
@@ -770,169 +891,13 @@ countdown(minutes = 5)
 
 :::
 
-## Scales and coords
+### What to hold onto
 
-### Scales
+The default binwidth is a placeholder, and ggplot2 says so out loud. Pick a
+number you could describe to somebody.
 
-A scale decides how a data value turns into a position on the page.
-
-Most of the data is squashed into the bottom of every plot we have drawn so far, and a few huge values stretch the axis out.
-
-A log scale can help spread the squish out.
-
-```{r}
-#| label: fig-log
-#| warning: false
-#| message: false
-#| fig-alt: |
-#|   A histogram of hourly counts on a log ten x axis. The long tail is gone and
-#|   the distribution is roughly symmetric.
-#| fig-cap: "The same data, on a log scale."
-ggplot(pedestrian,
-       aes(x = hourly_counts)) +
-  geom_histogram(bins = 30, colour = "white") +
-  scale_x_log10()
-```
-
-Same data, same geom. The only thing that changed is how a number becomes a
-position, and now you can see a shape that was hidden.
-
-::: {.callout-important title="This will bite you"}
-
-Look at the warnings on that plot.
-
-```
-log-10 transformation introduced infinite values.
-Removed 2641 rows containing non-finite outside the scale range
-```
-
-Earlier the histogram dropped 2548 rows, which were the missing values. This one
-dropped 2641.
-
-The extra 93 are the hours where **exactly zero people walked past**. The log of zero is negative infinity, so there is nowhere on the axis to put them.
-
-A quiet hour is not missing data. But on a log scale it disappears just as
-completely, and the only sign is a warning you have to read.
-
-:::
-
-### Coords
-
-Say I want to look at Flagstaff below 2000 people an hour, with a smooth through
-it.
-
-```{r}
-#| label: fig-smooth-base
-#| message: false
-#| warning: false
-#| fig-alt: |
-#|   A scatterplot of pedestrian count against hour at Flagstaff Station with a
-#|   fitted smooth curve, peaking sharply around 8am at about 2500.
-#| fig-cap: "All of it, with a smooth."
-ggplot(flagstaff,
-       aes(x = hour,
-           y = hourly_counts)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth()
-```
-
-There are two ways to limit that y axis, and they look like they do the same
-job.
-
-:::{.panel-tabset}
-
-## `scale_y_continuous(limits = )`
-
-```{r}
-#| label: fig-scale-limits
-#| message: false
-#| warning: false
-#| fig-alt: |
-#|   The same plot limited with scale_y_continuous. The smooth curve is now
-#|   almost flat, peaking around 400.
-ggplot(flagstaff,
-       aes(x = hour,
-           y = hourly_counts)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth() +
-  scale_y_continuous(limits = c(0, 2000))
-```
-
-## `coord_cartesian(ylim = )`
-
-```{r}
-#| label: fig-coord-cartesian
-#| message: false
-#| warning: false
-#| fig-alt: |
-#|   The same plot limited with coord_cartesian. The smooth curve still rises
-#|   steeply to the top of the panel at 8am.
-ggplot(flagstaff,
-       aes(x = hour,
-           y = hourly_counts)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth() +
-  coord_cartesian(ylim = c(0, 2000))
-```
-
-:::
-
-Those are not the same plot, and the difference is not cosmetic.
-
-At 8am the smooth in the original sits at about **2568**. With
-`coord_cartesian()` it is still **2568**, and we just cannot see the top of it.
-With `scale_y_continuous()` it is **420**.
-
-::: {.callout-important title="This will bite you"}
-
-> `scale_y_continuous(limits = )` **throws the data away**, and then computes.
->
-> `coord_cartesian(ylim = )` computes on everything, and then **zooms**.
-
-Setting the limit on the scale deleted 1316 rows before `geom_smooth()` ever saw
-them. Every one of them was a busy hour, so the line it fitted is a line through a
-quiet day that never happened.
-
-Nothing on the plot says so. The curve looks perfectly reasonable, and it is
-wrong by a factor of six.
-
-If you want to zoom, use the coord. If you genuinely want to drop data, use the
-scale, and know that you did it.
-
-:::
-
-::: {.callout-note title="Your Turn"}
-
-1. Run both of the plots above and read the warnings. How many rows did each one
-   remove?
-
-2. Now do the same trick on the x axis. Limit the hours to 6 to 10, both ways,
-   and see whether the smooth changes:
-
-```{r}
-#| eval: false
-# throws data away
-... + scale_x_continuous(limits = c(6, 10))
-
-# zooms
-... + coord_cartesian(xlim = c(6, 10))
-```
-
-3. Add `scale_x_log10()` to the histogram of **all** the pedestrian data, not
-   just Flagstaff. How many rows go, and which ones are they? Flagstaff on its
-   own only ever recorded a single zero hour all year, so you need the full
-   dataset for this one to bite.
-
-4. Sketch what you think the smooth should look like if it only ever saw hours
-   below 2000 people. Then check.
-
-```{r}
-#| echo: false
-#| eval: !expr knitr::is_html_output()
-countdown(minutes = 5)
-```
-
-:::
+A histogram is still a summary, so put a `geom_rug()` under it when there are
+few enough points to see them.
 
 ## To summarise
 
@@ -944,8 +909,9 @@ Three things to take out of this chapter.
 2. **The default binwidth is a placeholder,** and ggplot2 says so out loud. Pick
    a unit you could describe to somebody, and put a `geom_rug()` under it so you
    can see what you are summarising.
-3. **Limits on a scale delete data. Limits on a coord zoom.** One of those changes your
-   fitted line and doesn't tell you.
+3. **A summary is a choice, not a fact.** The boxplot's five numbers, the mean
+   in a bar, the height of a bin. Each one throws something away, and it is
+   worth knowing what.
 
 And the habit underneath all three.
 

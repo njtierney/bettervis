@@ -81,35 +81,59 @@ library(janitor)
 pen_year_janitored <- pen_year_bill_dep |> clean_names()
 
 pen_year_bill_dep |>
-    pivot_longer(
-        cols = c(`2007`, `2008`, `2009`),
-        names_to = "year",
-        values_to = "bill_dep"
-    )
+  pivot_longer(
+    cols = c(`2007`, `2008`, `2009`),
+    names_to = "year",
+    values_to = "bill_dep"
+  )
 
 pen_year_bill_dep |>
-    pivot_longer(
-        cols = -species,
-        names_to = "year",
-        values_to = "bill_dep"
-    )
+  pivot_longer(
+    cols = -species,
+    names_to = "year",
+    values_to = "bill_dep"
+  )
 
 pen_year_bill_dep |>
-    select(
-        stars_with()
-    )
+  select(
+    stars_with()
+  )
 
 # tidyselect helper
 # starts_with, ends_with, contains(), etc
 # see ?
 pen_year_bill_dep |>
-    pivot_longer(
-        cols = -species,
-        names_to = "year",
-        values_to = "bill_dep"
-    )
+  pivot_longer(
+    cols = -species,
+    names_to = "year",
+    values_to = "bill_dep"
+  )
 
 pen_year_janitored$x2009
 
 
-relig_income
+relig_tidy <- relig_income |>
+  pivot_longer(
+    cols = -religion,
+    names_to = "income_bracket",
+    values_to = "number_respondees"
+  )
+
+relig_tidy |>
+  mutate(
+    income_fct = factor(
+      income_bracket
+    )
+  ) |>
+  pull(income_fct) |>
+  levels()
+
+relig_tidy |>
+  mutate(
+    income_fct = factor(
+      income_bracket
+    ),
+    income_fct = fct_relevel(income_fct, )
+  )
+
+ggplot(relig_tidy, aes(x))

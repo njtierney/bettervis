@@ -1,0 +1,548 @@
+# Making it land {#sec-land}
+
+Your plot is right. Now it has to survive leaving your screen, and end up in a
+paper, a slide, or a report where nobody's there to explain it.
+
+This chapter is the last mile: labels, themes, combining plots, and getting a
+file out that looks the way it did in RStudio.
+
+We finish by turning the course into a checklist you can run on anything.
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** 41 minutes
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- When should I start polishing?
+- What should the title say?
+- How do I make every plot in a report match?
+- How do I combine several plots?
+- Why does the saved file look different to my screen?
+- How do I critique a plot, including my own?
+
+**What you need this session**
+
+- A session of RStudio open
+- The following packages installed
+
+```{r}
+#| label: pkgs
+#| message: false
+#| output: false
+library(tidyverse)
+library(naniar)
+library(patchwork)
+```
+
+```{r}
+#| label: pkgs-extra
+#| echo: false
+#| output: false
+library(countdown)
+```
+
+```{r}
+#| label: ch8-data
+#| message: false
+pedestrian_hourly <- pedestrian |>
+        mutate(day_type = if_else(
+                condition = str_starts(week_day, "S"),
+                true = "weekend",
+                false = "weekday"
+                )
+        ) |>
+        group_by(sensor_name, day_type, hour) |>
+        summarise(
+                mean_count = mean(hourly_counts, na.rm = TRUE),
+                .groups = "drop"
+        )
+```
+
+:::
+
+## Polish last
+
+> **The idea:** polishing a plot you're going to throw away is the most common
+> way to waste an afternoon.
+
+Everything here comes **after** @sec-comparing, @sec-in-the-way and @sec-eye
+have been answered. The order I work in:
+
+1. `labs()`
+2. colours with `scale_colour_*()`
+3. a theme
+4. move or remove the legend
+5. `ggsave()`
+
+Each step is cheaper to redo than the one before it.
+
+Save the plot to an object first. Small habit, and from here everything is
+`p + one thing`.
+
+```{r}
+#| label: fig-base-plot
+#| fig-alt: |
+#|   Four panels of hourly foot traffic, one per sensor, with weekday and
+#|   weekend lines, and default axis labels.
+p <- ggplot(pedestrian_hourly,
+            aes(x = hour,
+                y = mean_count,
+                colour = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name))
+
+p
+```
+
+## Say the finding, not the variables
+
+> **The idea:** the title is the loudest thing on the plot. Spend it on what you
+> found, not on what the columns were called.
+
+Default labels are your column names. `mean_count` is not a sentence.
+
+```{r}
+#| label: fig-labelled
+#| fig-alt: |
+#|   The same four panels with a title reading "Only the park gets busier on a
+#|   weekend", a subtitle, and readable axis labels.
+p_labelled <- p +
+        labs(
+                title = "Only the park gets busier on a weekend",
+                subtitle = "Average hourly foot traffic, Melbourne, 2016",
+                x = "Hour of the day",
+                y = "People per hour",
+                colour = NULL,
+                caption = "Data: City of Melbourne, via the naniar package"
+        )
+
+p_labelled
+```
+
+Compare "Only the park gets busier on a weekend" with "mean_count by hour". One
+of those tells you what you're looking at.
+
+If you can't write that sentence, that's worth knowing **before** you spend an
+hour on themes.
+
+### Axes a human can read
+
+The axis is text too, and the defaults are safe rather than readable.
+
+- **Breaks.** ggplot2 picks `0 5 10 15 20` for hours, because it doesn't know
+  they're hours. Nobody thinks in five hour blocks.
+- **Big numbers.** Totals print as `2500000`.
+- **Labels that collide.** Long category names overlap.
+
+```{r}
+#| label: fig-breaks
+#| fig-alt: |
+#|   The same plot with the x axis labelled midnight, 6am, noon and 6pm instead
+#|   of 0, 5, 10, 15, 20.
+p_labelled +
+        scale_x_continuous(
+                breaks = c(0, 6, 12, 18),
+                labels = c("midnight", "6am", "noon", "6pm")
+        )
+```
+
+For the other two:
+
+```{r}
+#| eval: false
+# 2500000 becomes 2,500,000
+scale_y_continuous(labels = scales::label_comma())
+
+# drop labels that would collide, as the plot resizes
+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))
+
+# or stagger them onto two rows
+scale_x_discrete(guide = guide_axis(n.dodge = 2))
+```
+
+`check.overlap` is the one worth knowing, because it thins labels automatically
+when the same figure goes into a slide and a paper at different widths.
+
+### Alt text
+
+`labs(alt = )` sets what a screen reader says.
+
+```{r}
+#| label: alt-text
+p_alt <- p_labelled +
+        labs(alt = "Four line charts of average hourly foot traffic in
+             Melbourne in 2016. Flagstaff Station and Spencer St have large
+             weekday commuter peaks that vanish at the weekend. Bourke Street
+             Mall is the same on both. Birrarung Marr is the only sensor
+             busier at the weekend.")
+
+get_alt_text(p_alt)
+```
+
+Say the finding, then the shape, then the axes. Not "a line chart of x against
+y", which tells a screen reader user nothing they couldn't guess.
+
+Every figure in this book has alt text. Look at the source of any of them.
+
+::: {.callout-note title="Your Turn"}
+
+1. Write a title for a plot of your own that states its finding.
+
+2. Add alt text and read it back:
+
+```{r}
+#| eval: false
+my_plot <- my_plot +
+        labs(alt = "___")
+
+get_alt_text(my_plot)
+```
+
+3. Put comma separators on a y axis running into the millions.
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you've actually had a go.
+
+**1.** If you can't write it, the plot probably isn't finished. That's the
+useful outcome, not a failure.
+
+**3.** `scale_y_continuous(labels = scales::label_comma())`.
+
+:::
+
+:::
+
+### What to hold onto
+
+- The title is the loudest element. Spend it on the finding
+- If you can't state the finding, stop polishing and go back to the plot
+- Alt text says the finding first, not the chart type
+
+## Themes, and making one yours
+
+> **The idea:** a theme is every non-data decision in one place. Wrap it in a
+> function and every plot in the report matches.
+
+:::{.panel-tabset}
+
+## minimal
+
+```{r}
+#| label: fig-theme-minimal
+#| fig-alt: The labelled plot with theme_minimal applied.
+p_labelled + theme_minimal()
+```
+
+## bw
+
+```{r}
+#| label: fig-theme-bw
+#| fig-alt: The labelled plot with theme_bw applied.
+p_labelled + theme_bw()
+```
+
+## classic
+
+```{r}
+#| label: fig-theme-classic
+#| fig-alt: The labelled plot with theme_classic applied.
+p_labelled + theme_classic()
+```
+
+## light
+
+```{r}
+#| label: fig-theme-light
+#| fig-alt: The labelled plot with theme_light applied.
+p_labelled + theme_light()
+```
+
+:::
+
+Then `theme()` for the details, and wrap the lot in a function:
+
+```{r}
+#| label: fig-theme-fn
+#| fig-alt: |
+#|   The labelled plot with a custom theme: minimal base, legend at the bottom,
+#|   no minor gridlines, title aligned to the left edge.
+theme_pedestrian <- function(...) {
+        theme_minimal(...) +
+                theme(
+                        legend.position = "bottom",
+                        plot.title.position = "plot",
+                        panel.grid.minor = element_blank()
+                )
+}
+
+p_labelled + theme_pedestrian()
+```
+
+Change the function once and every figure in the paper changes.
+
+`theme_set(theme_pedestrian())` at the top of a document does it for everything
+without you typing it each time.
+
+::: {.callout-tip title="Going deeper: other people's themes" collapse="true"}
+
+`ggthemes` and `hrbrthemes` ship dozens of ready made themes, including
+deliberate imitations of the Economist, FiveThirtyEight and the Wall Street
+Journal.
+
+They're fun and worth ten minutes of play. The skill transfers either way,
+because they're all just `theme()` calls somebody else wrote.
+
+One catch: `hrbrthemes` wants specific fonts installed and complains loudly when
+they're missing.
+
+:::
+
+::: {.callout-note title="Your Turn"}
+
+1. Write your own theme function. Change one thing you always change.
+
+```{r}
+#| eval: false
+theme_mine <- function(...) {
+        theme_minimal(...) +
+                theme(___)
+}
+```
+
+2. Try `theme_minimal(base_size = 16)`. Where does the `...` in your function
+   send that?
+
+3. Run `theme_set(theme_mine())`, then draw any plot. What happened?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you've actually had a go.
+
+**2.** Straight through to `theme_minimal()`, which is why the `...` is there.
+Without it your function would silently ignore every argument.
+
+**3.** Every plot afterwards uses it, with no `+ theme_mine()` needed. Handy for
+a report, confusing in a script somebody else reads.
+
+:::
+
+:::
+
+### What to hold onto
+
+- A theme is every non-data decision in one place
+- Wrapping it in a function is what makes a report look like one document
+- `theme_set()` when you don't want to type it at all
+
+## Combining plots
+
+> **The idea:** patchwork combines finished plots with the operators you'd
+> guess.
+
+```{r}
+#| label: fig-patchwork
+#| fig-alt: |
+#|   Two line charts side by side, one for weekdays and one for weekends, each
+#|   with four coloured sensor lines.
+p_weekday <- pedestrian_hourly |>
+        filter(day_type == "weekday") |>
+        ggplot(aes(x = hour, y = mean_count, colour = sensor_name)) +
+        geom_line() +
+        labs(title = "Weekday")
+
+p_weekend <- pedestrian_hourly |>
+        filter(day_type == "weekend") |>
+        ggplot(aes(x = hour, y = mean_count, colour = sensor_name)) +
+        geom_line() +
+        labs(title = "Weekend")
+
+p_weekday + p_weekend
+```
+
+- `p1 + p2` side by side
+- `p1 / p2` stacked
+- `(p1 + p2) / p3` nested
+
+Two legends saying the same thing is the decoration @sec-in-the-way was about.
+`plot_layout(guides = "collect")` fixes it.
+
+```{r}
+#| label: fig-patchwork-collect
+#| fig-alt: |
+#|   The same two charts with a single shared legend underneath and panel tags
+#|   A and B.
+p_weekday + p_weekend +
+        plot_layout(guides = "collect") +
+        plot_annotation(
+                title = "Only the park gets busier on a weekend",
+                tag_levels = "A"
+        ) &
+        theme(legend.position = "bottom")
+```
+
+`tag_levels = "A"` labels the panels, which is what a journal will ask for.
+
+::: {.callout-note title="Your Turn"}
+
+1. Build `(p_weekday + p_weekend) / p`. What do the brackets do?
+
+2. Collect the legends and move them to the right instead of the bottom.
+
+3. Rebuild the four sensor story from @sec-comparing as one figure.
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you've actually had a go.
+
+**1.** The brackets group the two plots so they share a row, and the third sits
+underneath across the full width. Without them you get three in a row.
+
+**2.** Change `legend.position` to `"right"` in the `&` line. The `&` applies
+the theme to every plot in the patchwork, rather than just the last one, which
+is the bit that catches people.
+
+:::
+
+:::
+
+### What to hold onto
+
+- `+` for side by side, `/` for stacked, brackets to group
+- `plot_layout(guides = "collect")` for one legend instead of three
+- `&` applies a theme to the whole patchwork, `+` only to the last plot
+
+## Getting it out
+
+> **The idea:** the saved file does not look like the RStudio pane, and knowing
+> why saves you an afternoon.
+
+```{r}
+#| eval: false
+ggsave(
+        filename = "pedestrian-weekend.png",
+        plot = p_labelled,
+        width = 8,
+        height = 5,
+        dpi = 300
+)
+```
+
+Text does not scale with the plot. Make the canvas bigger and the text stays the
+same physical size, so it gets proportionally smaller.
+
+```{r}
+#| eval: false
+# same plot, same dpi, same code
+ggsave("narrow.png", p_labelled, width = 4, height = 3)
+ggsave("wide.png", p_labelled, width = 12, height = 9)
+```
+
+Open both. The wide one has tiny text and nothing about the code changed.
+
+Things worth knowing:
+
+- `ggsave()` defaults to the **last plot drawn**, which bites once you've moved
+  on. Pass `plot =` explicitly
+- `width` and `height` are inches unless you set `units =`
+- `dpi = 300` for print, and it does nothing for a vector format
+- the file extension picks the device
+- vector (`.pdf`, `.svg`) for line art, raster (`.png`) for anything with
+  thousands of overplotted points. A hex plot from @sec-in-the-way is small as a
+  PDF; 35,152 points is not
+
+::: {.callout-note title="Your Turn"}
+
+1. Save the same plot at `width = 4` and `width = 12`. Open both. What happened
+   to the text?
+
+2. Save one as `.png` and one as `.pdf`. Compare the file sizes.
+
+3. You need a figure for a journal: one column wide, 300 dpi. What do you pass?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
+```
+
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you've actually had a go.
+
+**3.** Something like `ggsave("fig1.pdf", plot = p, width = 3.5, height = 3,
+dpi = 300)`. One column is usually about 3.5 inches. Check the journal's guide,
+they all publish one.
+
+:::
+
+:::
+
+### What to hold onto
+
+- Text doesn't scale with the canvas, so size the canvas to its final home
+- Always pass `plot =`
+- Vector for line art, raster for dense point clouds
+
+## Four questions
+
+The chapter titles of this course are a checklist. That was deliberate.
+
+> **What am I comparing?** (@sec-comparing)
+> Is the thing I want compared next to the thing I want it compared to?
+>
+> **What's in the way?** (@sec-in-the-way)
+> How much of this is not data, and can I see the data through it?
+>
+> **Where should the eye go?** (@sec-eye)
+> What does a reader meet first, and did I choose it?
+>
+> **Does it say its finding?** (this chapter)
+> If somebody reads only the title, do they get the point?
+
+And a fifth, quieter one we've been doing since @sec-anatomy:
+
+> **Did I draw it first?**
+
+::: {.callout-note title="Your Turn"}
+
+Run the four questions on a plot you've made before this course.
+
+Then run them on a plot from this book. Mine included: there are plenty in here
+that would not survive all four.
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 10)
+```
+
+:::
+
+## Open practice and questions
+
+Bring a plot you're working on, or pick something from the [ggplot2 extension
+gallery](https://exts.ggplot2.tidyverse.org/gallery/) you'd like to try.

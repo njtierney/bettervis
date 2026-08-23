@@ -24,7 +24,7 @@ We also come back to those missing observations in the oceanbuoys data we look a
 
 - What does ggplot2 expect my data to look like?
 - How do I make sure the data given is indeed "tidy data"?
-- Why did my line graph come out as a scribble?
+- Why did my line graph come out as a sawtooth?
 - What happened to the rows with missing values?
 
 
@@ -160,6 +160,7 @@ And if you can't fill in the blanks, it might be a sign your data isn't tidy yet
 Let's explore this by breaking each of the rules. We will look again at the `pen_short` data:
 
 ```{r}
+#| label: pen-short-hidden
 #| echo: false
 pen_short <- penguins |> 
         as_tibble() |> 
@@ -192,6 +193,7 @@ Notice how each of the columns map onto an argument inside `aes()` ?
 Here it is as messy - notice the variables don't form columns - they are in the rows:
 
 ```{r}
+#| label: pen-long-bill
 #| echo: false
 pen_long_bill <- pen_short |> 
         pivot_longer(
@@ -205,6 +207,7 @@ pen_long_bill
 Here it is as another flavour of messy - each individual cell contains two values:
 
 ```{r}
+#| label: pen-two-val
 #| echo: false
 pen_two_val <- pen_short |> 
         mutate(bill_ratio = paste0(bill_len,"/",bill_dep)) |> 
@@ -217,6 +220,7 @@ pen_two_val
 And yet another messy - this time the year variable is for each column. These each contain measurements of bill depth, and bill length, respectively:
 
 ```{r}
+#| label: pen-year-wide
 #| echo: false
 # bill_dep
 pen_year_bill_dep <- pen_short |> 
@@ -301,36 +305,9 @@ From here on we run code against those objects, so you need them in your own
 session. Run this and you will have all four.
 
 ```{r}
+#| ref.label: ["pen-short-hidden", "pen-long-bill", "pen-two-val", "pen-year-wide"]
 #| eval: false
-pen_short <- penguins |>
-  as_tibble() |>
-  select(species, year, bill_len, bill_dep) |>
-  drop_na() |>
-  group_by(species, year) |>
-  slice(1) |>
-  ungroup()
-
-# variables sitting in the rows instead of forming columns
-pen_long_bill <- pen_short |>
-  pivot_longer(
-    cols = c(bill_len, bill_dep),
-    names_to = "bill_variable",
-    values_to = "measurement"
-  )
-
-# two values jammed into one cell
-pen_two_val <- pen_short |>
-  mutate(bill_ratio = paste0(bill_len, "/", bill_dep)) |>
-  select(-bill_len, -bill_dep)
-
-# year spread across the column names
-pen_year_bill_dep <- pen_short |>
-  select(-bill_len) |>
-  pivot_wider(names_from = year, values_from = bill_dep)
-
-pen_year_bill_len <- pen_short |>
-  select(-bill_dep) |>
-  pivot_wider(names_from = year, values_from = bill_len)
+#| echo: true
 ```
 
 If any of that is unfamiliar, that is fine. It is the rest of this section.
@@ -622,13 +599,25 @@ dat_fish |>
      pivot_wider() as the way back. -->
 
 
-## The scribble aka "sawtoothing"
+## Sawtoothing
 
 <!-- Uses pen_short rather than the pedestrian sensors: it is already in the
      chapter, it needs no extra package, and at 9 rows a reader can trace the
      path by hand and see exactly why it zigzags. -->
 
-Here's a plot I have made by accident more times than I would like to admit.^[I wrote a blog post about this one: <https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/>]
+Here's a plot I have made by accident more times than I would like to admit.
+
+::: {.callout-tip title="Read more"}
+
+I wrote this one up on my blog, on baby name data rather than penguins:
+[Just Quickly: Removing Sawtooth Patterns in Line
+Graphs](https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/).
+
+It covers a third way this bites you, which we don't get to here: when your x
+axis is a factor, ggplot2 quietly groups by x, and `group = 1` gives you a
+zigzag that looks plausible and is wrong.
+
+:::
 
 We have bill length, measured over three years, for three species. So let's
 draw a line.
@@ -647,7 +636,7 @@ pen_short
 
 
 ```{r}
-#| label: fig-scribble
+#| label: fig-sawtooth
 #| fig-alt: |
 #|   A line plot of bill length against year. Instead of three separate lines
 #|   there is a single line zigzagging steeply up and down between every point.

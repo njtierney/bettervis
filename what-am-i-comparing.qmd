@@ -200,6 +200,38 @@ ggplot(pedestrian_totals,
         geom_col(position = "dodge")
 ```
 
+### Order carries meaning too
+
+Notice the sensors are in alphabetical order. That's not a decision anybody
+made, it's just what happens when nobody chooses.
+
+`reorder()` sorts one variable by another, and it works right inside `aes()`:
+
+```{r}
+#| label: fig-bar-reorder
+#| fig-alt: |
+#|   The same dodged bars, now sorted so the busiest sensor is at the top and
+#|   the quietest at the bottom.
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = reorder(sensor_name, total),
+           fill = day_type)) +
+        geom_col(position = "dodge")
+```
+
+Same data, same geom, one function. The bars now read as a ranking rather than a
+lookup table.
+
+Sort by the thing your message is about:
+
+- `reorder(sensor_name, total)` for busiest overall
+- `reorder(sensor_name, -total)` to flip it
+- alphabetical, when the reader needs to **look something up** rather than
+  compare
+
+We come back to ordering properly in @sec-eye, where it turns out to be the
+cheapest emphasis you can buy.
+
 ### **Filled** 
 
 Makes every bar the same height, so proportion is easy, but you trade off counting the number.

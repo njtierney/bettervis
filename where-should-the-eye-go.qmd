@@ -1,0 +1,500 @@
+# Where should the eye go? {#sec-eye}
+
+@sec-in-the-way was about taking things out. This chapter is about what's left,
+and which part of it a reader meets first.
+
+A plot where everything has equal weight has no first, second or third, so the
+reader has to do the ranking themselves.
+
+You're spending their attention whether you decide to or not.
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** 50 minutes
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- What does a reader look at first?
+- How do I get emphasis for free?
+- How do I choose colours that every reader can tell apart?
+- How do I make one group stand out against the others?
+
+**What you need this session**
+
+- A session of RStudio open
+- Something to draw on, and something to draw with
+- The following packages installed
+
+```{r}
+#| label: pkgs
+#| message: false
+#| output: false
+library(tidyverse)
+library(naniar)
+library(colorspace)
+library(gghighlight)
+library(ggrepel)
+```
+
+```{r}
+#| label: pkgs-extra
+#| echo: false
+#| output: false
+library(countdown)
+```
+
+```{r}
+#| label: ch7-data
+#| message: false
+pedestrian_hourly <- pedestrian |>
+        mutate(day_type = if_else(
+                condition = str_starts(week_day, "S"),
+                true = "weekend",
+                false = "weekday"
+                )
+        ) |>
+        group_by(sensor_name, day_type, hour) |>
+        summarise(
+                mean_count = mean(hourly_counts, na.rm = TRUE),
+                .groups = "drop"
+        )
+
+sensor_totals <- pedestrian |>
+        group_by(sensor_name) |>
+        summarise(total = sum(hourly_counts, na.rm = TRUE))
+```
+
+:::
+
+## Readers don't scan evenly
+
+> **The idea:** the channels you map data onto are not equally easy to read.
+> Some are precise, some are rough, and the order is known.
+
+Back in @sec-anatomy I said position beats colour beats shape beats size, and
+asked you to take it on trust.
+
+Here's where that comes from. Cleveland and McGill ran experiments in 1984 on
+how accurately people read each channel, and got a ranking:
+
+1. position on a common scale
+2. position on non-aligned scales
+3. length
+4. angle
+5. area
+6. colour saturation
+
+Which is why:
+
+- a bar chart is easier to read than a pie chart, because length beats angle
+- mapping something important to `size` is usually a mistake
+- facets cost you accuracy, because each panel is its own scale
+
+Put your most important variable on a position, every time.
+
+::: {.callout-note title="Your Turn"}
+
+1. Look back at the `size` and `shape` plots in @sec-anatomy. Given the ranking,
+   would you make the same choices now?
+
+2. Which channel is doing the most work in the last plot you made at work?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 3)
+```
+
+:::
+
+### What to hold onto
+
+- Position is the most accurate channel, colour and area are among the worst
+- The most important variable goes on a position
+- Everything after that is a compromise you're choosing on purpose
+
+## Order is free emphasis
+
+> **The idea:** the order of your categories is a decision. If you don't make
+> it, the alphabet makes it for you.
+
+Our four sensors have been alphabetical since @sec-comparing.
+
+```{r}
+#| label: sensor-totals-print
+sensor_totals |>
+        arrange(desc(total))
+```
+
+Alphabetical order puts the third busiest first and the busiest second. The
+letter B is doing work that traffic should be doing.
+
+:::{.panel-tabset}
+
+## alphabetical
+
+```{r}
+#| label: fig-alpha-order
+#| fig-alt: |
+#|   A bar chart of total foot traffic per sensor, in alphabetical order, so the
+#|   bar lengths jump up and down with no pattern.
+ggplot(sensor_totals,
+       aes(x = total,
+           y = sensor_name)) +
+        geom_col()
+```
+
+## sorted
+
+```{r}
+#| label: fig-sorted
+#| fig-alt: |
+#|   The same bar chart sorted by total, so the bars form a clean descending
+#|   staircase.
+ggplot(sensor_totals,
+       aes(x = total,
+           y = fct_reorder(sensor_name, total))) +
+        geom_col()
+```
+
+:::
+
+One function, and the plot went from a lookup table to a ranking.
+
+The same works on facets, so the panels read in order:
+
+```{r}
+#| label: fig-facet-sorted
+#| fig-alt: |
+#|   Four panels of hourly foot traffic, ordered from busiest sensor to
+#|   quietest rather than alphabetically.
+pedestrian_hourly |>
+        mutate(sensor_name = fct_reorder(sensor_name, -mean_count, .fun = max)) |>
+        ggplot(aes(x = hour,
+                   y = mean_count,
+                   colour = day_type)) +
+        geom_line() +
+        facet_wrap(vars(sensor_name))
+```
+
+Sorting is usually a good idea. Not always:
+
+- **sort** when the reader is comparing
+- **don't sort** when the reader is looking something up
+
+A phone book sorted by height would be a nightmare.
+
+::: {.callout-note title="Your Turn"}
+
+1. Add `fct_rev()` around the `fct_reorder()`. Which direction reads better for
+   a horizontal bar chart?
+
+2. Sort the facets by **weekend** traffic instead of overall traffic:
+
+```{r}
+#| eval: false
+pedestrian_hourly |>
+        filter(day_type == "___") |>
+        mutate(sensor_name = fct_reorder(sensor_name, ___))
+```
+
+   Does the story change?
+
+3. `fct_infreq()` sorts by how often a value appears. When would you want that
+   instead of `fct_reorder()`?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you've actually had a go.
+
+**1.** `fct_rev()` puts the biggest at the top. For a horizontal bar chart I
+prefer that, because English readers start top left and the most important bar
+is the first thing they meet.
+
+**2.** `filter(day_type == "weekend")` then `fct_reorder(sensor_name,
+mean_count)`. The order changes: Birrarung Marr climbs, because a park is a
+weekend place.
+
+**3.** `fct_infreq()` counts rows, so use it when the thing you care about *is*
+how often a category turns up. Bar charts of raw counts, mostly.
+
+:::
+
+:::
+
+### What to hold onto
+
+- Alphabetical is not an order, it's the absence of one
+- `fct_reorder()` on a variable your reader cares about is the cheapest
+  emphasis available
+- Sort for comparison, don't sort for lookup
+
+## Colour that carries meaning
+
+> **The idea:** colour is the channel most likely to fail silently. It can look
+> fine to you and be unreadable to one reader in twelve.
+
+Here's our four sensors in ggplot2's default colours.
+
+```{r}
+#| label: fig-default-cols
+#| fig-alt: |
+#|   Four hourly foot traffic lines, one per sensor, in ggplot2's default red,
+#|   green, blue and purple.
+p_sensors <- ggplot(pedestrian_hourly,
+                    aes(x = hour,
+                        y = mean_count,
+                        colour = sensor_name)) +
+        geom_line()
+
+p_sensors
+```
+
+Those four are `#F8766D`, `#7CAE00`, `#00BFC4`, `#C77CFF`. Here's what they
+become under deuteranopia, the commonest kind of colour vision deficiency:
+
+```{r}
+#| label: cvd-default
+deutan(scales::hue_pal()(4))
+```
+
+Two olives and two blues. And on the plot:
+
+```{r}
+#| label: fig-cvd-sim
+#| fig-alt: |
+#|   The same four lines with the colours simulated for deuteranopia, where two
+#|   pairs are now nearly identical.
+p_sensors +
+        scale_colour_manual(values = deutan(scales::hue_pal()(4)))
+```
+
+Half the information is gone. This is roughly 8% of men of northern European
+descent, and about 0.5% of women.
+
+**And the palette you were about to reach for has the same problem.** Dark2 is
+the one everyone uses:
+
+```{r}
+#| label: cvd-dark2
+deutan(RColorBrewer::brewer.pal(4, "Dark2"))
+```
+
+The first and fourth are near identical greys.
+
+Viridis survives, because it varies **lightness** as well as hue:
+
+```{r}
+#| label: cvd-viridis
+deutan(viridisLite::viridis(4))
+```
+
+Dark to light, still in order.
+
+```{r}
+#| label: fig-viridis
+#| fig-alt: |
+#|   The same four lines in the viridis palette, which runs dark purple through
+#|   green to yellow.
+p_sensors + scale_colour_viridis_d()
+```
+
+### Match the palette to the variable
+
+Most bad colour is a type mismatch:
+
+- **qualitative** for unordered categories, like our four sensors
+- **sequential** for magnitude, like a count
+- **diverging** for distance from a midpoint, like above and below average
+
+::: {.callout-tip title="Read more"}
+
+Two tools for checking a palette before you commit to it:
+[Quickly Assessing Colour
+Palettes](https://www.njtierney.com/posts/2020-10-15-assess-colour/).
+
+`prismatic::check_color_blindness()` simulates a set of hex codes under each
+kind of deficiency, and `colorspace::demoplot()` paints a palette into a fake
+plot so you can judge it without going through your own data.
+
+:::
+
+::: {.callout-tip title="Going deeper: hour is cyclic" collapse="true"}
+
+`hour` is none of the three types. Midnight is next to 23:00, so a sequential
+palette puts the two closest hours at opposite ends of the scale.
+
+There's no good default for this. The three way taxonomy is useful and it isn't
+the whole story.
+
+:::
+
+::: {.callout-note title="Your Turn"}
+
+1. Run `deutan()` on a palette you use at work. Does it survive?
+
+2. Simulate a different brewer palette:
+
+```{r}
+#| eval: false
+p_sensors +
+        scale_colour_manual(
+                values = deutan(RColorBrewer::brewer.pal(4, "___"))
+        )
+```
+
+   Try `"Set1"` and `"Set2"`. Better or worse than Dark2?
+
+3. Colour the plot by `mean_count` instead of `sensor_name`. Which kind of
+   palette does ggplot2 give you, and is it the right kind?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you've actually had a go.
+
+**2.** Set1 holds up better than Dark2 because its colours differ in lightness
+as well as hue. Set2 is pastel and collapses badly.
+
+**3.** A continuous, sequential palette, because `mean_count` is a number. That
+is the right *kind*, and it's still the wrong choice here: you have four
+distinct places, not a magnitude.
+
+:::
+
+:::
+
+### What to hold onto
+
+- The default palette fails under colour vision deficiency, and so does Dark2
+- Palettes that vary lightness survive, which is why viridis is the safe default
+- Simulate it with `deutan()` rather than guessing
+
+## Emphasis by contrast
+
+> **The idea:** four colours asks the reader to rank four things. Usually you
+> want them to look at one.
+
+Grey is not an absence of colour. It's a demotion, and you do it on purpose.
+
+```{r}
+#| label: fig-demote
+#| fig-alt: |
+#|   Four hourly lines, three in pale grey and one, Flagstaff Station, in dark
+#|   red.
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           group = sensor_name)) +
+        geom_line(colour = "grey80") +
+        geom_line(data = filter(pedestrian_hourly,
+                                sensor_name == "Flagstaff Station"),
+                  colour = "firebrick")
+```
+
+Two `geom_line()` calls, one of them filtered. `gghighlight()` from
+@sec-in-the-way does the same job in one line, and it's worth having seen the
+manual version so it isn't magic.
+
+Then get rid of the legend by putting the label on the line.
+
+```{r}
+#| label: fig-direct-label
+#| warning: false
+#| fig-alt: |
+#|   The four sensor lines with each name printed at the right hand end of its
+#|   own line, and no legend.
+sensor_labels <- pedestrian_hourly |>
+        group_by(sensor_name) |>
+        slice_max(hour, n = 1)
+
+p_sensors +
+        geom_text_repel(data = sensor_labels,
+                        aes(label = sensor_name),
+                        hjust = 0,
+                        direction = "y",
+                        nudge_x = 1) +
+        theme(legend.position = "none") +
+        coord_cartesian(xlim = c(0, 32))
+```
+
+A legend makes the eye bounce between the key and the plot, once per series. A
+label sits where the thing is.
+
+::: {.callout-note title="Your Turn"}
+
+1. Run the greyed plot through `deutan()`. Does highlighting survive colour
+   vision deficiency better than four categorical hues did?
+
+2. Highlight a different sensor:
+
+```{r}
+#| eval: false
+ggplot(pedestrian_hourly,
+       aes(x = hour, y = mean_count, colour = sensor_name)) +
+        geom_line() +
+        gghighlight(sensor_name == "___")
+```
+
+3. If the question were "where is busy on a weekend", which sensor would you
+   highlight? Is that the same answer you gave in @sec-comparing?
+
+```{r}
+#| echo: false
+#| eval: !expr knitr::is_html_output()
+countdown(minutes = 5)
+```
+
+::: {.callout-tip title="Answer" collapse="true"}
+
+Only open this if you've actually had a go.
+
+**1.** Yes. Grey against one colour is a lightness difference, and lightness is
+the thing that survives. This is the strongest argument for highlighting over
+four hues.
+
+**3.** Birrarung Marr, because it's the only sensor where the weekend beats the
+weekday. Same answer as @sec-comparing, which is a good sign: the emphasis
+should follow the finding, not replace it.
+
+:::
+
+:::
+
+### What to hold onto
+
+- Grey is a decision, not a default
+- Highlight one series rather than colouring four
+- A direct label beats a legend, because the reader stops travelling
+
+## To summarise
+
+Three things to take out of this chapter.
+
+1. **Position is the most accurate channel.** Spend it on what matters, and
+   treat colour and area as rough.
+2. **Order is free emphasis.** `fct_reorder()` costs one function and turns a
+   lookup table into a ranking.
+3. **Colour fails silently.** Simulate it, and prefer palettes that vary
+   lightness.
+
+And the habit: before you style anything, decide what you want the reader to see
+first. Then make that the loudest thing on the page and demote everything else.
+
+Next up is making it land, which is the last mile: labels, themes, and getting a
+file out that looks the way it did on your screen.
