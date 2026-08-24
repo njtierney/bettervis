@@ -121,7 +121,7 @@ countdown(minutes = 3)
 
 :::
 
-### What to hold onto
+### Takehomes
 
 - Position is the most accurate channel, colour and area are among the worst
 - The most important variable goes on a position
@@ -252,7 +252,7 @@ how often a category turns up. Bar charts of raw counts, mostly.
 
 :::
 
-### What to hold onto
+### Takehomes
 
 - Alphabetical is not an order, it's the absence of one
 - `fct_reorder()` on a variable your reader cares about is the cheapest
@@ -414,7 +414,7 @@ distinct places, not a magnitude.
 
 :::
 
-### What to hold onto
+### Takehomes
 
 - The default palette fails under colour vision deficiency, and so does Dark2
 - Palettes that vary lightness survive, which is why viridis is the safe default
@@ -525,7 +525,7 @@ should follow the finding, not replace it.
 
 :::
 
-### What to hold onto
+### Takehomes
 
 - Grey is a decision, not a default
 - Highlight one series rather than colouring four
