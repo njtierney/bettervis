@@ -18,7 +18,6 @@ You're spending their attention whether you decide to or not.
 
 <!-- These map onto the sections below, in order. If you move a section, move its question. -->
 
-- What does a reader look at first?
 - How do I get emphasis for free?
 - How do I choose colours that every reader can tell apart?
 - How do I make one group stand out against the others?
@@ -69,63 +68,6 @@ sensor_totals <- pedestrian |>
 ```
 
 :::
-
-## Readers don't scan evenly
-
-> **The idea:** the channels you map data onto are not equally easy to read.
-> Some are precise, some are rough, and the order is known.
-
-Back in @sec-anatomy I said position beats colour beats shape beats size, and
-asked you to take it on trust.
-
-Here's where that comes from. Cleveland and McGill ran experiments in 1984 on
-how accurately people read each channel, and got a ranking:
-
-1. position on a common scale
-2. position on non-aligned scales
-3. length
-4. angle
-5. area
-6. colour saturation
-
-Which is why:
-
-- a bar chart is easier to read than a pie chart, because length beats angle
-- mapping something important to `size` is usually a mistake
-- facets cost you accuracy, because each panel is its own scale
-
-Put your most important variable on a position, every time.
-
-::: {.callout-note title="Your Turn"}
-
-
-::: {.callout-tip title="Setup code" collapse="true"}
-
-```{r}
-#| ref.label: ["pkgs", "ch7-data"]
-#| eval: false
-#| echo: true
-```
-
-:::
-1. Look back at the `size` and `shape` plots in @sec-anatomy. Given the ranking,
-   would you make the same choices now?
-
-2. Which channel is doing the most work in the last plot you made at work?
-
-```{r}
-#| echo: false
-#| eval: !expr knitr::is_html_output()
-countdown(minutes = 3)
-```
-
-:::
-
-### Takehomes
-
-- Position is the most accurate channel, colour and area are among the worst
-- The most important variable goes on a position
-- Everything after that is a compromise you're choosing on purpose
 
 ## Order is free emphasis
 
@@ -252,7 +194,7 @@ how often a category turns up. Bar charts of raw counts, mostly.
 
 :::
 
-### Takehomes
+### Takeaways
 
 - Alphabetical is not an order, it's the absence of one
 - `fct_reorder()` on a variable your reader cares about is the cheapest
@@ -283,17 +225,34 @@ p_sensors
 
 Note the `filter()`. `pedestrian_hourly` holds a weekday and a weekend row for
 every hour, so colouring by sensor alone gives each line two values per hour and
-it sawtooths, as in @sec-shape. One kind of day is enough to talk about colour.
-
-Those four are `#F8766D`, `#7CAE00`, `#00BFC4`, `#C77CFF`. Here's what they
-become under deuteranopia, the commonest kind of colour vision deficiency:
+it sawtooths, as in @sec-shape. One kind of day is enough to talk about colour,
+so keep those rows in their own object. Everything from here uses it:
 
 ```{r}
-#| label: cvd-default
-deutan(scales::hue_pal()(4))
+#| label: ch7-weekday
+pedestrian_weekday <- pedestrian_hourly |>
+        filter(day_type == "weekday")
 ```
 
-Two olives and two blues. And on the plot:
+Those four colours arrived for free, so it's worth looking at them properly.
+`swatchplot()` from colorspace draws a palette as blocks of colour, and
+`cvd = TRUE` adds a row for each kind of colour vision deficiency, plus a
+desaturated row for anyone reading a black and white printout.
+
+```{r}
+#| label: fig-swatch-default
+#| fig-height: 3
+#| fig-alt: |
+#|   The four default ggplot2 colours drawn as blocks, with rows underneath
+#|   simulating deuteranopia, protanopia, tritanopia and desaturation.
+swatchplot("ggplot2 default" = scales::hue_pal()(4), cvd = TRUE)
+```
+
+Read down a column to see what one colour turns into. Read across the
+**Deuteranope** row, the commonest kind, and the first two blocks are both
+olive and the last two are both blue. Four colours went in, two came out.
+
+Here it is on the plot:
 
 ```{r}
 #| label: fig-cvd-sim
@@ -308,23 +267,36 @@ Half the information is gone. This is roughly 8% of men of northern European
 descent, and about 0.5% of women.
 
 **And the palette you were about to reach for has the same problem.** Dark2 is
-the one everyone uses:
+the one everyone moves to next. Put the two of them next to viridis, in one
+grid, and you can see which one survives:
 
 ```{r}
-#| label: cvd-dark2
-deutan(RColorBrewer::brewer.pal(4, "Dark2"))
+#| label: fig-swatch-compare
+#| fig-height: 6.5
+#| fig-alt: |
+#|   Three blocks of swatches, one per palette, each showing the original
+#|   colours and the same colours under three kinds of colour vision
+#|   deficiency and desaturated.
+swatchplot(
+        "ggplot2 default" = scales::hue_pal()(4),
+        "Dark2" = RColorBrewer::brewer.pal(4, "Dark2"),
+        "viridis" = viridisLite::viridis(4),
+        cvd = TRUE
+)
 ```
 
-The first and fourth are near identical greys.
+- **ggplot2 default**: two olives and two blues
+- **Dark2**: the first and fourth collapse to near identical greys
+- **viridis**: four blocks you can still tell apart, in every row
 
-Viridis survives, because it varies **lightness** as well as hue:
+The **Desaturated** row is the quickest test in the grid. Viridis survives it
+because it varies **lightness** as well as hue: on a 0 to 100 lightness scale
+its four colours span 76 points, where the ggplot2 default spans 6 and Dark2
+spans 8.
 
-```{r}
-#| label: cvd-viridis
-deutan(viridisLite::viridis(4))
-```
+A palette that survives a black and white photocopier will survive most eyes.
 
-Dark to light, still in order.
+Our four lines again, in viridis:
 
 ```{r}
 #| label: fig-viridis
@@ -336,21 +308,184 @@ p_sensors + scale_colour_viridis_d()
 
 ### Match the palette to the variable
 
-Most bad colour is a type mismatch:
+Most bad colour is a type mismatch. There are three kinds of palette, and each
+one answers a different kind of question:
 
-- **qualitative** for unordered categories, like our four sensors
-- **sequential** for magnitude, like a count
-- **diverging** for distance from a midpoint, like above and below average
+```{r}
+#| label: fig-swatch-types
+#| fig-height: 2.4
+#| fig-alt: |
+#|   Three rows of colour blocks. The qualitative row changes hue only, the
+#|   sequential row runs dark purple to yellow, and the diverging row runs dark
+#|   blue through near white to dark red.
+swatchplot(
+        Qualitative = qualitative_hcl(5, palette = "Dark 3"),
+        Sequential = sequential_hcl(5, palette = "Viridis"),
+        Diverging = diverging_hcl(5, palette = "Blue-Red 3")
+)
+```
+
+- **qualitative** for unordered categories, like our four sensors. Hue changes,
+  lightness stays put, so no category looks more important than another.
+- **sequential** for magnitude, like a count. Lightness runs one way.
+- **diverging** for distance from a midpoint, like above and below average. Two
+  sequential palettes back to back, meeting at a neutral middle.
+
+The last two want a plot that can carry a magnitude, so here is the same
+weekday data as tiles, one row per sensor and one column per hour:
+
+```{r}
+#| label: ch7-tiles
+p_tiles <- ggplot(pedestrian_weekday,
+                  aes(x = hour,
+                      y = sensor_name,
+                      fill = mean_count)) +
+        geom_tile()
+```
+
+Same data, three questions, three palettes. And a fourth tab for what a
+mismatch looks like.
+
+:::{.panel-tabset}
+
+## qualitative
+
+```{r}
+#| label: fig-pal-qual
+#| fig-alt: |
+#|   The four sensor lines in a qualitative palette, where the four hues are
+#|   equally strong.
+p_sensors + scale_colour_discrete_qualitative(palette = "Dark 3")
+```
+
+**Which sensor is this?** Nothing is ranked, so nothing shouts.
+
+## sequential
+
+```{r}
+#| label: fig-pal-seq
+#| fig-height: 3.2
+#| fig-alt: |
+#|   A tile plot of weekday foot traffic by hour and sensor, in viridis, where
+#|   the busy hours are the dark tiles.
+p_tiles + scale_fill_continuous_sequential(palette = "Viridis")
+```
+
+**How busy?** Dark is more and light is less, so the two commuter peaks at
+Flagstaff Station show up without going to the legend.
+
+## diverging
+
+```{r}
+#| label: fig-pal-div
+#| fig-height: 3.2
+#| fig-alt: |
+#|   The same tile plot showing distance from each sensor's own average, in
+#|   blue through white to red, with Flagstaff Station's 8am tile dark red.
+pedestrian_weekday |>
+        group_by(sensor_name) |>
+        mutate(above_average = mean_count - mean(mean_count)) |>
+        ggplot(aes(x = hour,
+                   y = sensor_name,
+                   fill = above_average)) +
+        geom_tile() +
+        scale_fill_continuous_diverging(palette = "Blue-Red 3")
+```
+
+**Busier or quieter than usual?** White is that sensor's own average, red is
+above it, blue is below. The 8am and 5pm commute at Flagstaff Station is the
+darkest thing on the plot.
+
+## mismatched
+
+```{r}
+#| label: fig-pal-rainbow
+#| fig-height: 3.2
+#| fig-alt: |
+#|   The same tile plot as the sequential tab, coloured with rainbow(), where
+#|   the colours have no readable order.
+p_tiles + scale_fill_gradientn(colours = rainbow(7))
+```
+
+The same magnitude as the sequential tab, in `rainbow()`. Is green more than
+blue? You have to go back to the legend every time, because the colours have no
+order of their own.
+
+:::
+
+::: {.callout-tip title="Going deeper: auditioning a palette with demoplot()" collapse="true"}
+
+A swatch tells you the colours are different. It doesn't tell you how they
+behave once they're spread over a real plot, in small pieces, sitting next to
+each other. `demoplot()` paints a palette into a fake plot so you can judge that
+before you go anywhere near your own data.
+
+```{r}
+#| label: fig-demoplot-types
+#| fig-height: 2.6
+#| fig-alt: |
+#|   Three fake plots: a grouped bar chart in a qualitative palette, a contour
+#|   heatmap in viridis, and a choropleth map in a blue to red diverging
+#|   palette.
+par(mfrow = c(1, 3), mar = c(1, 1, 3, 1))
+
+demoplot(qualitative_hcl(5, palette = "Dark 3"), type = "bar")
+title("qualitative / bar")
+
+demoplot(sequential_hcl(5, palette = "Viridis"), type = "heatmap")
+title("sequential / heatmap")
+
+demoplot(diverging_hcl(5, palette = "Blue-Red 3"), type = "map")
+title("diverging / map")
+```
+
+There are nine types to choose from: `"map"`, `"heatmap"`, `"scatter"`,
+`"spine"`, `"bar"`, `"pie"`, `"perspective"`, `"mosaic"` and `"lines"`. Pick
+whichever is closest to the plot you're actually making.
+
+It pairs with the simulators. Put the palette through `deutan()` or
+`desaturate()` first, and demoplot draws what that reader gets:
+
+```{r}
+#| label: fig-demoplot-cvd
+#| fig-height: 2.6
+#| fig-alt: |
+#|   The same choropleth map three times: in a four colour qualitative palette,
+#|   simulated for deuteranopia where two of the colours drift together, and
+#|   desaturated where the whole map is one grey.
+pal <- qualitative_hcl(4, palette = "Dark 3")
+
+par(mfrow = c(1, 3), mar = c(1, 1, 3, 1))
+
+demoplot(pal, type = "map")
+title("original")
+
+demoplot(deutan(pal), type = "map")
+title("deuteranope")
+
+demoplot(desaturate(pal), type = "map")
+title("desaturated")
+```
+
+Under deuteranopia the pink and the teal both drift towards grey, and
+desaturated the map is one colour. That is what a qualitative palette *is*: hue
+does all the work. These four colours span 4 points of lightness, against
+viridis's 76, so there's nothing left to fall back on.
+
+Which is the argument for the next section. If a reader might print your plot in
+black and white, or you have more than a handful of categories, you're better
+off highlighting one series than colouring all of them.
+
+:::
 
 ::: {.callout-tip title="Read more"}
 
-Two tools for checking a palette before you commit to it:
-[Quickly Assessing Colour
-Palettes](https://www.njtierney.com/posts/2020-10-15-assess-colour/).
+More on checking a palette before you commit to it, in [Quickly Assessing
+Colour Palettes](https://www.njtierney.com/posts/2020-10-15-assess-colour/).
 
-`prismatic::check_color_blindness()` simulates a set of hex codes under each
-kind of deficiency, and `colorspace::demoplot()` paints a palette into a fake
-plot so you can judge it without going through your own data.
+`prismatic::check_color_blindness()` is the same idea as
+`swatchplot(cvd = TRUE)`, from a different package, if you'd rather one call
+than two arguments.
 
 :::
 
@@ -370,28 +505,31 @@ the whole story.
 ::: {.callout-tip title="Setup code" collapse="true"}
 
 ```{r}
-#| ref.label: ["pkgs", "ch7-data", "fig-default-cols"]
+#| ref.label: ["pkgs", "ch7-data", "ch7-weekday", "ch7-tiles"]
 #| eval: false
 #| echo: true
 ```
 
 :::
-1. Run `deutan()` on a palette you use at work. Does it survive?
+1. Put a palette you use at work through `swatchplot(cvd = TRUE)`. Does it
+   survive the **Deuteranope** row? Does it survive the **Desaturated** one?
 
-2. Simulate a different brewer palette:
+2. Compare two more brewer palettes in one grid:
 
 ```{r}
 #| eval: false
-p_sensors +
-        scale_colour_manual(
-                values = deutan(RColorBrewer::brewer.pal(4, "___"))
-        )
+swatchplot(
+        "Set1" = RColorBrewer::brewer.pal(4, "___"),
+        "Set2" = RColorBrewer::brewer.pal(4, "___"),
+        cvd = TRUE
+)
 ```
 
-   Try `"Set1"` and `"Set2"`. Better or worse than Dark2?
+   Better or worse than Dark2?
 
-3. Colour the plot by `mean_count` instead of `sensor_name`. Which kind of
-   palette does ggplot2 give you, and is it the right kind?
+3. Colour `p_tiles` by `mean_count` with a qualitative palette,
+   `scale_fill_discrete_qualitative()`. **You should get an error.** What is
+   ggplot2 telling you about the variable?
 
 ```{r}
 #| echo: false
@@ -403,22 +541,26 @@ countdown(minutes = 5)
 
 Only open this if you've actually had a go.
 
-**2.** Set1 holds up better than Dark2 because its colours differ in lightness
-as well as hue. Set2 is pastel and collapses badly.
+**2.** Set1 holds up better than Dark2, because its colours differ in lightness
+as well as hue: they span 19 points of lightness against Dark2's 8. Set2 is
+pastel, spans 6, and collapses badly.
 
-**3.** A continuous, sequential palette, because `mean_count` is a number. That
-is the right *kind*, and it's still the wrong choice here: you have four
-distinct places, not a magnitude.
+**3.** `Error: Continuous value supplied to a discrete scale.` A discrete scale
+wants a discrete variable, and `mean_count` is a number. This is the one type
+mismatch ggplot2 catches for you. It has nothing to say about `rainbow()`.
 
 :::
 
 :::
 
-### Takehomes
+### Takeaways
 
 - The default palette fails under colour vision deficiency, and so does Dark2
 - Palettes that vary lightness survive, which is why viridis is the safe default
-- Simulate it with `deutan()` rather than guessing
+- Look at a palette with `swatchplot(cvd = TRUE)` rather than guessing from hex
+  codes
+- Qualitative for categories, sequential for magnitude, diverging for distance
+  from a midpoint
 
 ## Emphasis by contrast
 
@@ -432,9 +574,6 @@ Grey is not an absence of colour. It's a demotion, and you do it on purpose.
 #| fig-alt: |
 #|   Four hourly lines, three in pale grey and one, Flagstaff Station, in dark
 #|   red.
-pedestrian_weekday <- pedestrian_hourly |>
-        filter(day_type == "weekday")
-
 ggplot(pedestrian_weekday,
        aes(x = hour,
            y = mean_count,
@@ -481,24 +620,33 @@ label sits where the thing is.
 ::: {.callout-tip title="Setup code" collapse="true"}
 
 ```{r}
-#| ref.label: ["pkgs", "ch7-data", "fig-default-cols"]
+#| ref.label: ["pkgs", "ch7-data", "ch7-weekday", "fig-demote"]
 #| eval: false
 #| echo: true
 ```
 
 :::
-1. Run the greyed plot through `deutan()`. Does highlighting survive colour
-   vision deficiency better than four categorical hues did?
+1. Put the two colours in the greyed plot through the simulator:
+
+```{r}
+#| eval: false
+swatchplot(c("grey80", "firebrick"), cvd = TRUE)
+```
+
+   Does the contrast survive better than four categorical hues did?
 
 2. Highlight a different sensor:
 
 ```{r}
 #| eval: false
-ggplot(pedestrian_hourly,
+ggplot(pedestrian_weekday,
        aes(x = hour, y = mean_count, colour = sensor_name)) +
         geom_line() +
         gghighlight(sensor_name == "___")
 ```
+
+   gghighlight warns about a `group_by()` calculation falling back. The plot is
+   fine.
 
 3. If the question were "where is busy on a weekend", which sensor would you
    highlight? Is that the same answer you gave in @sec-comparing?
@@ -513,9 +661,10 @@ countdown(minutes = 5)
 
 Only open this if you've actually had a go.
 
-**1.** Yes. Grey against one colour is a lightness difference, and lightness is
-the thing that survives. This is the strongest argument for highlighting over
-four hues.
+**1.** Yes. Every row keeps a pale block and a dark one, the desaturated row
+included, because grey against one colour is a lightness difference and
+lightness is what survives. This is the strongest argument there is for
+highlighting one series over colouring four.
 
 **3.** Birrarung Marr, because it's the only sensor where the weekend beats the
 weekday. Same answer as @sec-comparing, which is a good sign: the emphasis
@@ -525,7 +674,7 @@ should follow the finding, not replace it.
 
 :::
 
-### Takehomes
+### Takeaways
 
 - Grey is a decision, not a default
 - Highlight one series rather than colouring four
@@ -535,12 +684,13 @@ should follow the finding, not replace it.
 
 Three things to take out of this chapter.
 
-1. **Position is the most accurate channel.** Spend it on what matters, and
-   treat colour and area as rough.
-2. **Order is free emphasis.** `fct_reorder()` costs one function and turns a
+1. **Order is free emphasis.** `fct_reorder()` costs one function and turns a
    lookup table into a ranking.
-3. **Colour fails silently.** Simulate it, and prefer palettes that vary
-   lightness.
+2. **Colour fails silently.** Look at it with `swatchplot(cvd = TRUE)`, prefer
+   palettes that vary lightness, and match the kind of palette to the kind of
+   variable.
+3. **Grey is a decision.** Highlight the one series you're talking about, demote
+   the rest, and put the label on the line rather than in a legend.
 
 And the habit: before you style anything, decide what you want the reader to see
 first. Then make that the loudest thing on the page and demote everything else.
