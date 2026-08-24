@@ -391,7 +391,7 @@ happens.
 
 Boxplots are a really useful tool for exploring variation. Sometimes the wider variation can have distinct and interesting summaries.
 
-### Takehomes
+### Takeaways
 
 A boxplot turns however many numbers you have into five, and draws those.
 
@@ -631,7 +631,7 @@ in an hour is enough to poison the whole mean.
 
 :::
 
-### Takehomes
+### Takeaways
 
 `geom_col()` draws the number you give it. `geom_bar()` counts your rows and
 draws that.
@@ -973,7 +973,7 @@ countdown(minutes = 5)
 
 :::
 
-### Takehomes
+### Takeaways
 
 The default binwidth is a placeholder, and ggplot2 says so out loud. Pick a
 number you could describe to somebody.

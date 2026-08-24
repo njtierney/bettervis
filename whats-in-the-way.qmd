@@ -682,7 +682,7 @@ side violins are easier to compare.
 
 :::
 
-### Takehomes
+### Takeaways
 
 - A boxplot claims your data has one middle
 - When that's false it hides the finding and calls it an outlier
