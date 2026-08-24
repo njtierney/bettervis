@@ -218,24 +218,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#readers-dont-scan-evenly" id="toc-readers-dont-scan-evenly" class="nav-link" data-scroll-target="#readers-dont-scan-evenly"><span class="header-section-number">6.1</span> Readers don’t scan evenly</a>
+  <li><a href="#order-is-free-emphasis" id="toc-order-is-free-emphasis" class="nav-link" data-scroll-target="#order-is-free-emphasis"><span class="header-section-number">6.1</span> Order is free emphasis</a>
   <ul class="collapse">
-  <li><a href="#what-to-hold-onto" id="toc-what-to-hold-onto" class="nav-link" data-scroll-target="#what-to-hold-onto">What to hold onto</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
   </ul></li>
-  <li><a href="#order-is-free-emphasis" id="toc-order-is-free-emphasis" class="nav-link" data-scroll-target="#order-is-free-emphasis"><span class="header-section-number">6.2</span> Order is free emphasis</a>
-  <ul class="collapse">
-  <li><a href="#what-to-hold-onto-1" id="toc-what-to-hold-onto-1" class="nav-link" data-scroll-target="#what-to-hold-onto-1">What to hold onto</a></li>
-  </ul></li>
-  <li><a href="#colour-that-carries-meaning" id="toc-colour-that-carries-meaning" class="nav-link" data-scroll-target="#colour-that-carries-meaning"><span class="header-section-number">6.3</span> Colour that carries meaning</a>
+  <li><a href="#colour-that-carries-meaning" id="toc-colour-that-carries-meaning" class="nav-link" data-scroll-target="#colour-that-carries-meaning"><span class="header-section-number">6.2</span> Colour that carries meaning</a>
   <ul class="collapse">
   <li><a href="#match-the-palette-to-the-variable" id="toc-match-the-palette-to-the-variable" class="nav-link" data-scroll-target="#match-the-palette-to-the-variable">Match the palette to the variable</a></li>
-  <li><a href="#what-to-hold-onto-2" id="toc-what-to-hold-onto-2" class="nav-link" data-scroll-target="#what-to-hold-onto-2">What to hold onto</a></li>
+  <li><a href="#takeaways-1" id="toc-takeaways-1" class="nav-link" data-scroll-target="#takeaways-1">Takeaways</a></li>
   </ul></li>
-  <li><a href="#emphasis-by-contrast" id="toc-emphasis-by-contrast" class="nav-link" data-scroll-target="#emphasis-by-contrast"><span class="header-section-number">6.4</span> Emphasis by contrast</a>
+  <li><a href="#emphasis-by-contrast" id="toc-emphasis-by-contrast" class="nav-link" data-scroll-target="#emphasis-by-contrast"><span class="header-section-number">6.3</span> Emphasis by contrast</a>
   <ul class="collapse">
-  <li><a href="#what-to-hold-onto-3" id="toc-what-to-hold-onto-3" class="nav-link" data-scroll-target="#what-to-hold-onto-3">What to hold onto</a></li>
+  <li><a href="#takeaways-2" id="toc-takeaways-2" class="nav-link" data-scroll-target="#takeaways-2">Takeaways</a></li>
   </ul></li>
-  <li><a href="#to-summarise" id="toc-to-summarise" class="nav-link" data-scroll-target="#to-summarise"><span class="header-section-number">6.5</span> To summarise</a></li>
+  <li><a href="#to-summarise" id="toc-to-summarise" class="nav-link" data-scroll-target="#to-summarise"><span class="header-section-number">6.4</span> To summarise</a></li>
   <li>Links</li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/njtierney/bettervis/edit/main/where-should-the-eye-go.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/njtierney/bettervis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -271,7 +267,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Questions</strong></p>
 <!-- These map onto the sections below, in order. If you move a section, move its question. -->
 <ul>
-<li>What does a reader look at first?</li>
 <li>How do I get emphasis for free?</li>
 <li>How do I choose colours that every reader can tell apart?</li>
 <li>How do I make one group stand out against the others?</li>
@@ -308,105 +303,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-label="16"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="readers-dont-scan-evenly" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="readers-dont-scan-evenly"><span class="header-section-number">6.1</span> Readers don’t scan evenly</h2>
-<blockquote class="blockquote">
-<p><strong>The idea:</strong> the channels you map data onto are not equally easy to read. Some are precise, some are rough, and the order is known.</p>
-</blockquote>
-<p>Back in <a href="anatomy-of-a-ggplot.html" class="quarto-xref"><span>Chapter 1</span></a> I said position beats colour beats shape beats size, and asked you to take it on trust.</p>
-<p>Here’s where that comes from. Cleveland and McGill ran experiments in 1984 on how accurately people read each channel, and got a ranking:</p>
-<ol type="1">
-<li>position on a common scale</li>
-<li>position on non-aligned scales</li>
-<li>length</li>
-<li>angle</li>
-<li>area</li>
-<li>colour saturation</li>
-</ol>
-<p>Which is why:</p>
-<ul>
-<li>a bar chart is easier to read than a pie chart, because length beats angle</li>
-<li>mapping something important to <code>size</code> is usually a mistake</li>
-<li>facets cost you accuracy, because each panel is its own scale</li>
-</ul>
-<p>Put your most important variable on a position, every time.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Your Turn">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Setup code
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-label="3"></a><span class="fu">library</span>(colorspace)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-label="4"></a><span class="fu">library</span>(gghighlight)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-label="5"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-label="6"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-label="7"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
-<span id="cb3-8"><a href="#cb3-8" aria-label="8"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-label="9"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-label="10"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-label="11"></a>                )</span>
-<span id="cb3-12"><a href="#cb3-12" aria-label="12"></a>        ) <span class="sc">|&gt;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-label="13"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-label="14"></a>        <span class="fu">summarise</span>(</span>
-<span id="cb3-15"><a href="#cb3-15" aria-label="15"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-16"><a href="#cb3-16" aria-label="16"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-label="17"></a>        )</span>
-<span id="cb3-18"><a href="#cb3-18" aria-label="18"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-label="19"></a>sensor_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-label="20"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-label="21"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-<ol type="1">
-<li><p>Look back at the <code>size</code> and <code>shape</code> plots in <a href="anatomy-of-a-ggplot.html" class="quarto-xref"><span>Chapter 1</span></a>. Given the ranking, would you make the same choices now?</p></li>
-<li><p>Which channel is doing the most work in the last plot you made at work?</p></li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_95ec0cb7" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
-</div>
-</div>
-</div>
-</div>
-<section id="what-to-hold-onto" class="level3">
-<h3 class="anchored" data-anchor-id="what-to-hold-onto">What to hold onto</h3>
-<ul>
-<li>Position is the most accurate channel, colour and area are among the worst</li>
-<li>The most important variable goes on a position</li>
-<li>Everything after that is a compromise you’re choosing on purpose</li>
-</ul>
-</section>
-</section>
-<section id="order-is-free-emphasis" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="order-is-free-emphasis"><span class="header-section-number">6.2</span> Order is free emphasis</h2>
+<section id="order-is-free-emphasis" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="order-is-free-emphasis"><span class="header-section-number">6.1</span> Order is free emphasis</h2>
 <blockquote class="blockquote">
 <p><strong>The idea:</strong> the order of your categories is a decision. If you don’t make it, the alphabet makes it for you.</p>
 </blockquote>
 <p>Our four sensors have been alphabetical since <a href="what-am-i-comparing.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-label="1"></a>sensor_totals <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-label="2"></a>        <span class="fu">arrange</span>(<span class="fu">desc</span>(total))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-label="1"></a>sensor_totals <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-label="2"></a>        <span class="fu">arrange</span>(<span class="fu">desc</span>(total))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   sensor_name                      total
@@ -423,12 +328,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-label="1"></a><span class="fu">ggplot</span>(sensor_totals,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-label="4"></a>        <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-label="1"></a><span class="fu">ggplot</span>(sensor_totals,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-label="4"></a>        <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-alpha-order" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A bar chart of total foot traffic per sensor, in alphabetical order, so the bar lengths jump up and down with no pattern." width="672">
+<div id="fig-alpha-order" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A bar chart of total foot traffic per sensor, in alphabetical order, so the bar lengths jump up and down with no pattern.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-alpha-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-alpha-order-1.png" id="fig-alpha-order" class="img-fluid figure-img" alt="A bar chart of total foot traffic per sensor, in alphabetical order, so the bar lengths jump up and down with no pattern." width="672">
@@ -443,12 +348,12 @@ Figure&nbsp;6.1
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a><span class="fu">ggplot</span>(sensor_totals,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>           <span class="at">y =</span> <span class="fu">fct_reorder</span>(sensor_name, total))) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>        <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-label="1"></a><span class="fu">ggplot</span>(sensor_totals,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> total,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-label="3"></a>           <span class="at">y =</span> <span class="fu">fct_reorder</span>(sensor_name, total))) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-label="4"></a>        <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same bar chart sorted by total, so the bars form a clean descending staircase." width="672">
+<div id="fig-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same bar chart sorted by total, so the bars form a clean descending staircase.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sorted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-sorted-1.png" id="fig-sorted" class="img-fluid figure-img" alt="The same bar chart sorted by total, so the bars form a clean descending staircase." width="672">
@@ -466,15 +371,15 @@ Figure&nbsp;6.2
 <p>One function, and the plot went from a lookup table to a ranking.</p>
 <p>The same works on facets, so the panels read in order:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a>pedestrian_hourly <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-label="2"></a>        <span class="fu">mutate</span>(<span class="at">sensor_name =</span> <span class="fu">fct_reorder</span>(sensor_name, <span class="sc">-</span>mean_count, <span class="at">.fun =</span> max)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-label="4"></a>                   <span class="at">y =</span> mean_count,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-label="5"></a>                   <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-label="7"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a>pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-label="2"></a>        <span class="fu">mutate</span>(<span class="at">sensor_name =</span> <span class="fu">fct_reorder</span>(sensor_name, <span class="sc">-</span>mean_count, <span class="at">.fun =</span> max)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>                   <span class="at">y =</span> mean_count,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-label="5"></a>                   <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-label="7"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-facet-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels of hourly foot traffic, ordered from busiest sensor to quietest rather than alphabetically." width="672">
+<div id="fig-facet-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels of hourly foot traffic, ordered from busiest sensor to quietest rather than alphabetically.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-facet-sorted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-facet-sorted-1.png" id="fig-facet-sorted" class="img-fluid figure-img" alt="Four panels of hourly foot traffic, ordered from busiest sensor to quietest rather than alphabetically." width="672">
@@ -503,7 +408,7 @@ Figure&nbsp;6.3
 </div>
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -512,30 +417,30 @@ Figure&nbsp;6.3
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a><span class="fu">library</span>(colorspace)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-label="4"></a><span class="fu">library</span>(gghighlight)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-label="5"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-label="6"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-label="7"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
-<span id="cb9-8"><a href="#cb9-8" aria-label="8"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
-<span id="cb9-9"><a href="#cb9-9" aria-label="9"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-label="10"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-label="11"></a>                )</span>
-<span id="cb9-12"><a href="#cb9-12" aria-label="12"></a>        ) <span class="sc">|&gt;</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-label="13"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-label="14"></a>        <span class="fu">summarise</span>(</span>
-<span id="cb9-15"><a href="#cb9-15" aria-label="15"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-16"><a href="#cb9-16" aria-label="16"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-label="17"></a>        )</span>
-<span id="cb9-18"><a href="#cb9-18" aria-label="18"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-label="19"></a>sensor_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-label="20"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-label="21"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-label="3"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-label="4"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-label="5"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-label="6"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-label="7"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-label="8"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-label="9"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-label="10"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-label="11"></a>                )</span>
+<span id="cb8-12"><a href="#cb8-12" aria-label="12"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-label="13"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-label="14"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb8-15"><a href="#cb8-15" aria-label="15"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-label="16"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-label="17"></a>        )</span>
+<span id="cb8-18"><a href="#cb8-18" aria-label="18"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-label="19"></a>sensor_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-label="20"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-label="21"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -545,9 +450,9 @@ Figure&nbsp;6.3
 <li><p>Sort the facets by <strong>weekend</strong> traffic instead of overall traffic:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a>pedestrian_hourly <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"___"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-label="3"></a>        <span class="fu">mutate</span>(<span class="at">sensor_name =</span> <span class="fu">fct_reorder</span>(sensor_name, ___))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a>pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"___"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>        <span class="fu">mutate</span>(<span class="at">sensor_name =</span> <span class="fu">fct_reorder</span>(sensor_name, ___))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Does the story change?</p>
 <ol start="3" type="1">
@@ -555,11 +460,11 @@ Figure&nbsp;6.3
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_c01bcac7" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_432b960a" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -568,7 +473,7 @@ Figure&nbsp;6.3
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Only open this if you’ve actually had a go.</p>
 <p><strong>1.</strong> <code>fct_rev()</code> puts the biggest at the top. For a horizontal bar chart I prefer that, because English readers start top left and the most important bar is the first thing they meet.</p>
@@ -579,8 +484,8 @@ Figure&nbsp;6.3
 </div>
 </div>
 </div>
-<section id="what-to-hold-onto-1" class="level3">
-<h3 class="anchored" data-anchor-id="what-to-hold-onto-1">What to hold onto</h3>
+<section id="takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways">Takeaways</h3>
 <ul>
 <li>Alphabetical is not an order, it’s the absence of one</li>
 <li><code>fct_reorder()</code> on a variable your reader cares about is the cheapest emphasis available</li>
@@ -588,23 +493,23 @@ Figure&nbsp;6.3
 </ul>
 </section>
 </section>
-<section id="colour-that-carries-meaning" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="colour-that-carries-meaning"><span class="header-section-number">6.3</span> Colour that carries meaning</h2>
+<section id="colour-that-carries-meaning" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="colour-that-carries-meaning"><span class="header-section-number">6.2</span> Colour that carries meaning</h2>
 <blockquote class="blockquote">
 <p><strong>The idea:</strong> colour is the channel most likely to fail silently. It can look fine to you and be unreadable to one reader in twelve.</p>
 </blockquote>
 <p>Here’s our four sensors in ggplot2’s default colours.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a>p_sensors <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-label="4"></a>                   <span class="at">y =</span> mean_count,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-label="5"></a>                   <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-label="6"></a>        <span class="fu">geom_line</span>()</span>
-<span id="cb11-7"><a href="#cb11-7" aria-label="7"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-label="8"></a>p_sensors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a>p_sensors <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-label="3"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-label="4"></a>                   <span class="at">y =</span> mean_count,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-label="5"></a>                   <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-label="6"></a>        <span class="fu">geom_line</span>()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-label="7"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-label="8"></a>p_sensors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-default-cols" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four hourly foot traffic lines, one per sensor, in ggplot2's default red, green, blue and purple." width="672">
+<div id="fig-default-cols" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four hourly foot traffic lines, one per sensor, in ggplot2's default red, green, blue and purple.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-default-cols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-default-cols-1.png" id="fig-default-cols" class="img-fluid figure-img" alt="Four hourly foot traffic lines, one per sensor, in ggplot2's default red, green, blue and purple." width="672">
@@ -616,58 +521,85 @@ Figure&nbsp;6.4
 </div>
 </div>
 </div>
-<p>Note the <code>filter()</code>. <code>pedestrian_hourly</code> holds a weekday and a weekend row for every hour, so colouring by sensor alone gives each line two values per hour and it sawtooths, as in <a href="shape-of-your-data.html" class="quarto-xref"><span>Chapter 2</span></a>. One kind of day is enough to talk about colour.</p>
-<p>Those four are <code>#F8766D</code>, <code>#7CAE00</code>, <code>#00BFC4</code>, <code>#C77CFF</code>. Here’s what they become under deuteranopia, the commonest kind of colour vision deficiency:</p>
+<p>Note the <code>filter()</code>. <code>pedestrian_hourly</code> holds a weekday and a weekend row for every hour, so colouring by sensor alone gives each line two values per hour and it sawtooths, as in <a href="shape-of-your-data.html" class="quarto-xref"><span>Chapter 2</span></a>. One kind of day is enough to talk about colour, so keep those rows in their own object. Everything from here uses it:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-label="1"></a><span class="fu">deutan</span>(scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "#B6A86A" "#B19E22" "#9AA5C5" "#6E9EFC"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a>pedestrian_weekday <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<p>Two olives and two blues. And on the plot:</p>
+<p>Those four colours arrived for free, so it’s worth looking at them properly. <code>swatchplot()</code> from colorspace draws a palette as blocks of colour, and <code>cvd = TRUE</code> adds a row for each kind of colour vision deficiency, plus a desaturated row for anyone reading a black and white printout.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a>p_sensors <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-label="2"></a>        <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">deutan</span>(scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">4</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-label="1"></a><span class="fu">swatchplot</span>(<span class="st">"ggplot2 default"</span> <span class="ot">=</span> scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">4</span>), <span class="at">cvd =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-cvd-sim" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same four lines with the colours simulated for deuteranopia, where two pairs are now nearly identical." width="672">
+<div id="fig-swatch-default" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The four default ggplot2 colours drawn as blocks, with rows underneath simulating deuteranopia, protanopia, tritanopia and desaturation.">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-cvd-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="where-should-the-eye-go_files/figure-html/fig-cvd-sim-1.png" id="fig-cvd-sim" class="img-fluid figure-img" alt="The same four lines with the colours simulated for deuteranopia, where two pairs are now nearly identical." width="672">
+<div aria-describedby="fig-swatch-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-swatch-default-1.png" id="fig-swatch-default" class="img-fluid figure-img" alt="The four default ggplot2 colours drawn as blocks, with rows underneath simulating deuteranopia, protanopia, tritanopia and desaturation." width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cvd-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-swatch-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6.5
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Half the information is gone. This is roughly 8% of men of northern European descent, and about 0.5% of women.</p>
-<p><strong>And the palette you were about to reach for has the same problem.</strong> Dark2 is the one everyone uses:</p>
+<p>Read down a column to see what one colour turns into. Read across the <strong>Deuteranope</strong> row, the commonest kind, and the first two blocks are both olive and the last two are both blue. Four colours went in, two came out.</p>
+<p>Here it is on the plot:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-label="1"></a><span class="fu">deutan</span>(RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">4</span>, <span class="st">"Dark2"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "#8B877A" "#A08E00" "#5A76B1" "#8A8986"</code></pre>
-</div>
-</div>
-<p>The first and fourth are near identical greys.</p>
-<p>Viridis survives, because it varies <strong>lightness</strong> as well as hue:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-label="1"></a><span class="fu">deutan</span>(viridisLite<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "#042752FF" "#4A5F8DFF" "#A59D7DFF" "#FFE939FF"</code></pre>
-</div>
-</div>
-<p>Dark to light, still in order.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a>p_sensors <span class="sc">+</span> <span class="fu">scale_colour_viridis_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-label="1"></a>p_sensors <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-label="2"></a>        <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">deutan</span>(scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">4</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-viridis" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same four lines in the viridis palette, which runs dark purple through green to yellow." width="672">
+<div id="fig-cvd-sim" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same four lines with the colours simulated for deuteranopia, where two pairs are now nearly identical.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cvd-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-cvd-sim-1.png" id="fig-cvd-sim" class="img-fluid figure-img" alt="The same four lines with the colours simulated for deuteranopia, where two pairs are now nearly identical." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cvd-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.6
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Half the information is gone. This is roughly 8% of men of northern European descent, and about 0.5% of women.</p>
+<p><strong>And the palette you were about to reach for has the same problem.</strong> Dark2 is the one everyone moves to next. Put the two of them next to viridis, in one grid, and you can see which one survives:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a><span class="fu">swatchplot</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-label="2"></a>        <span class="st">"ggplot2 default"</span> <span class="ot">=</span> scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">4</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-label="3"></a>        <span class="st">"Dark2"</span> <span class="ot">=</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">4</span>, <span class="st">"Dark2"</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-label="4"></a>        <span class="st">"viridis"</span> <span class="ot">=</span> viridisLite<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">4</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-label="5"></a>        <span class="at">cvd =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-swatch-compare" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Three blocks of swatches, one per palette, each showing the original colours and the same colours under three kinds of colour vision deficiency and desaturated.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-swatch-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-swatch-compare-1.png" id="fig-swatch-compare" class="img-fluid figure-img" alt="Three blocks of swatches, one per palette, each showing the original colours and the same colours under three kinds of colour vision deficiency and desaturated." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-swatch-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.7
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>ggplot2 default</strong>: two olives and two blues</li>
+<li><strong>Dark2</strong>: the first and fourth collapse to near identical greys</li>
+<li><strong>viridis</strong>: four blocks you can still tell apart, in every row</li>
+</ul>
+<p>The <strong>Desaturated</strong> row is the quickest test in the grid. Viridis survives it because it varies <strong>lightness</strong> as well as hue: on a 0 to 100 lightness scale its four colours span 76 points, where the ggplot2 default spans 6 and Dark2 spans 8.</p>
+<p>A palette that survives a black and white photocopier will survive most eyes.</p>
+<p>Our four lines again, in viridis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-label="1"></a>p_sensors <span class="sc">+</span> <span class="fu">scale_colour_viridis_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-viridis" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same four lines in the viridis palette, which runs dark purple through green to yellow.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-viridis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-viridis-1.png" id="fig-viridis" class="img-fluid figure-img" alt="The same four lines in the viridis palette, which runs dark purple through green to yellow." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-viridis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.6
+Figure&nbsp;6.8
 </figcaption>
 </figure>
 </div>
@@ -675,12 +607,194 @@ Figure&nbsp;6.6
 </div>
 <section id="match-the-palette-to-the-variable" class="level3">
 <h3 class="anchored" data-anchor-id="match-the-palette-to-the-variable">Match the palette to the variable</h3>
-<p>Most bad colour is a type mismatch:</p>
+<p>Most bad colour is a type mismatch. There are three kinds of palette, and each one answers a different kind of question:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a><span class="fu">swatchplot</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-label="2"></a>        <span class="at">Qualitative =</span> <span class="fu">qualitative_hcl</span>(<span class="dv">5</span>, <span class="at">palette =</span> <span class="st">"Dark 3"</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-label="3"></a>        <span class="at">Sequential =</span> <span class="fu">sequential_hcl</span>(<span class="dv">5</span>, <span class="at">palette =</span> <span class="st">"Viridis"</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-label="4"></a>        <span class="at">Diverging =</span> <span class="fu">diverging_hcl</span>(<span class="dv">5</span>, <span class="at">palette =</span> <span class="st">"Blue-Red 3"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-swatch-types" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Three rows of colour blocks. The qualitative row changes hue only, the sequential row runs dark purple to yellow, and the diverging row runs dark blue through near white to dark red.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-swatch-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-swatch-types-1.png" id="fig-swatch-types" class="img-fluid figure-img" alt="Three rows of colour blocks. The qualitative row changes hue only, the sequential row runs dark purple to yellow, and the diverging row runs dark blue through near white to dark red." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-swatch-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.9
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <ul>
-<li><strong>qualitative</strong> for unordered categories, like our four sensors</li>
-<li><strong>sequential</strong> for magnitude, like a count</li>
-<li><strong>diverging</strong> for distance from a midpoint, like above and below average</li>
+<li><strong>qualitative</strong> for unordered categories, like our four sensors. Hue changes, lightness stays put, so no category looks more important than another.</li>
+<li><strong>sequential</strong> for magnitude, like a count. Lightness runs one way.</li>
+<li><strong>diverging</strong> for distance from a midpoint, like above and below average. Two sequential palettes back to back, meeting at a neutral middle.</li>
 </ul>
+<p>The last two want a plot that can carry a magnitude, so here is the same weekday data as tiles, one row per sensor and one column per hour:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-label="1"></a>p_tiles <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pedestrian_weekday,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-label="2"></a>                  <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-label="3"></a>                      <span class="at">y =</span> sensor_name,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-label="4"></a>                      <span class="at">fill =</span> mean_count)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-label="5"></a>        <span class="fu">geom_tile</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Same data, three questions, three palettes. And a fourth tab for what a mismatch looks like.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">qualitative</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">sequential</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">diverging</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false" href="">mismatched</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a>p_sensors <span class="sc">+</span> <span class="fu">scale_colour_discrete_qualitative</span>(<span class="at">palette =</span> <span class="st">"Dark 3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-pal-qual" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The four sensor lines in a qualitative palette, where the four hues are equally strong.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pal-qual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-pal-qual-1.png" id="fig-pal-qual" class="img-fluid figure-img" alt="The four sensor lines in a qualitative palette, where the four hues are equally strong." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pal-qual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.10
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Which sensor is this?</strong> Nothing is ranked, so nothing shouts.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a>p_tiles <span class="sc">+</span> <span class="fu">scale_fill_continuous_sequential</span>(<span class="at">palette =</span> <span class="st">"Viridis"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-pal-seq" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A tile plot of weekday foot traffic by hour and sensor, in viridis, where the busy hours are the dark tiles.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pal-seq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-pal-seq-1.png" id="fig-pal-seq" class="img-fluid figure-img" alt="A tile plot of weekday foot traffic by hour and sensor, in viridis, where the busy hours are the dark tiles." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pal-seq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.11
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>How busy?</strong> Dark is more and light is less, so the two commuter peaks at Flagstaff Station show up without going to the legend.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-label="1"></a>pedestrian_weekday <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-label="2"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-label="3"></a>        <span class="fu">mutate</span>(<span class="at">above_average =</span> mean_count <span class="sc">-</span> <span class="fu">mean</span>(mean_count)) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-label="4"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-label="5"></a>                   <span class="at">y =</span> sensor_name,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-label="6"></a>                   <span class="at">fill =</span> above_average)) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-label="7"></a>        <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-label="8"></a>        <span class="fu">scale_fill_continuous_diverging</span>(<span class="at">palette =</span> <span class="st">"Blue-Red 3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-pal-div" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same tile plot showing distance from each sensor's own average, in blue through white to red, with Flagstaff Station's 8am tile dark red.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pal-div-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-pal-div-1.png" id="fig-pal-div" class="img-fluid figure-img" alt="The same tile plot showing distance from each sensor's own average, in blue through white to red, with Flagstaff Station's 8am tile dark red." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pal-div-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.12
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Busier or quieter than usual?</strong> White is that sensor’s own average, red is above it, blue is below. The 8am and 5pm commute at Flagstaff Station is the darkest thing on the plot.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a>p_tiles <span class="sc">+</span> <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> <span class="fu">rainbow</span>(<span class="dv">7</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-pal-rainbow" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same tile plot as the sequential tab, coloured with rainbow(), where the colours have no readable order.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pal-rainbow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-pal-rainbow-1.png" id="fig-pal-rainbow" class="img-fluid figure-img" alt="The same tile plot as the sequential tab, coloured with rainbow(), where the colours have no readable order." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pal-rainbow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.13
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The same magnitude as the sequential tab, in <code>rainbow()</code>. Is green more than blue? You have to go back to the legend every time, because the colours have no order of their own.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: auditioning a palette with demoplot()">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Going deeper: auditioning a palette with demoplot()
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A swatch tells you the colours are different. It doesn’t tell you how they behave once they’re spread over a real plot, in small pieces, sitting next to each other. <code>demoplot()</code> paints a palette into a fake plot so you can judge that before you go anywhere near your own data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-label="1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-label="2"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-label="3"></a><span class="fu">demoplot</span>(<span class="fu">qualitative_hcl</span>(<span class="dv">5</span>, <span class="at">palette =</span> <span class="st">"Dark 3"</span>), <span class="at">type =</span> <span class="st">"bar"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-label="4"></a><span class="fu">title</span>(<span class="st">"qualitative / bar"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-label="5"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-label="6"></a><span class="fu">demoplot</span>(<span class="fu">sequential_hcl</span>(<span class="dv">5</span>, <span class="at">palette =</span> <span class="st">"Viridis"</span>), <span class="at">type =</span> <span class="st">"heatmap"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-label="7"></a><span class="fu">title</span>(<span class="st">"sequential / heatmap"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-label="8"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-label="9"></a><span class="fu">demoplot</span>(<span class="fu">diverging_hcl</span>(<span class="dv">5</span>, <span class="at">palette =</span> <span class="st">"Blue-Red 3"</span>), <span class="at">type =</span> <span class="st">"map"</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-label="10"></a><span class="fu">title</span>(<span class="st">"diverging / map"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-demoplot-types" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Three fake plots: a grouped bar chart in a qualitative palette, a contour heatmap in viridis, and a choropleth map in a blue to red diverging palette.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-demoplot-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-demoplot-types-1.png" id="fig-demoplot-types" class="img-fluid figure-img" alt="Three fake plots: a grouped bar chart in a qualitative palette, a contour heatmap in viridis, and a choropleth map in a blue to red diverging palette." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-demoplot-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.14
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>There are nine types to choose from: <code>"map"</code>, <code>"heatmap"</code>, <code>"scatter"</code>, <code>"spine"</code>, <code>"bar"</code>, <code>"pie"</code>, <code>"perspective"</code>, <code>"mosaic"</code> and <code>"lines"</code>. Pick whichever is closest to the plot you’re actually making.</p>
+<p>It pairs with the simulators. Put the palette through <code>deutan()</code> or <code>desaturate()</code> first, and demoplot draws what that reader gets:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a>pal <span class="ot">&lt;-</span> <span class="fu">qualitative_hcl</span>(<span class="dv">4</span>, <span class="at">palette =</span> <span class="st">"Dark 3"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-label="2"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-label="3"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-label="4"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-label="5"></a><span class="fu">demoplot</span>(pal, <span class="at">type =</span> <span class="st">"map"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-label="6"></a><span class="fu">title</span>(<span class="st">"original"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-label="7"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-label="8"></a><span class="fu">demoplot</span>(<span class="fu">deutan</span>(pal), <span class="at">type =</span> <span class="st">"map"</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-label="9"></a><span class="fu">title</span>(<span class="st">"deuteranope"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-label="10"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-label="11"></a><span class="fu">demoplot</span>(<span class="fu">desaturate</span>(pal), <span class="at">type =</span> <span class="st">"map"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-label="12"></a><span class="fu">title</span>(<span class="st">"desaturated"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-demoplot-cvd" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same choropleth map three times: in a four colour qualitative palette, simulated for deuteranopia where two of the colours drift together, and desaturated where the whole map is one grey.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-demoplot-cvd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-demoplot-cvd-1.png" id="fig-demoplot-cvd" class="img-fluid figure-img" alt="The same choropleth map three times: in a four colour qualitative palette, simulated for deuteranopia where two of the colours drift together, and desaturated where the whole map is one grey." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-demoplot-cvd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.15
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Under deuteranopia the pink and the teal both drift towards grey, and desaturated the map is one colour. That is what a qualitative palette <em>is</em>: hue does all the work. These four colours span 4 points of lightness, against viridis’s 76, so there’s nothing left to fall back on.</p>
+<p>Which is the argument for the next section. If a reader might print your plot in black and white, or you have more than a handful of categories, you’re better off highlighting one series than colouring all of them.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Read more">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -691,12 +805,12 @@ Figure&nbsp;6.6
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two tools for checking a palette before you commit to it: <a href="https://www.njtierney.com/posts/2020-10-15-assess-colour/">Quickly Assessing Colour Palettes</a>.</p>
-<p><code>prismatic::check_color_blindness()</code> simulates a set of hex codes under each kind of deficiency, and <code>colorspace::demoplot()</code> paints a palette into a fake plot so you can judge it without going through your own data.</p>
+<p>More on checking a palette before you commit to it, in <a href="https://www.njtierney.com/posts/2020-10-15-assess-colour/">Quickly Assessing Colour Palettes</a>.</p>
+<p><code>prismatic::check_color_blindness()</code> is the same idea as <code>swatchplot(cvd = TRUE)</code>, from a different package, if you’d rather one call than two arguments.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Going deeper: hour is cyclic">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -705,7 +819,7 @@ Figure&nbsp;6.6
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>hour</code> is none of the three types. Midnight is next to 23:00, so a sequential palette puts the two closest hours at opposite ends of the scale.</p>
 <p>There’s no good default for this. The three way taxonomy is useful and it isn’t the whole story.</p>
@@ -723,7 +837,7 @@ Figure&nbsp;6.6
 </div>
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -732,173 +846,7 @@ Figure&nbsp;6.6
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-label="3"></a><span class="fu">library</span>(colorspace)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-label="4"></a><span class="fu">library</span>(gghighlight)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-label="5"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-label="6"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-label="7"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
-<span id="cb20-8"><a href="#cb20-8" aria-label="8"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
-<span id="cb20-9"><a href="#cb20-9" aria-label="9"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-label="10"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-label="11"></a>                )</span>
-<span id="cb20-12"><a href="#cb20-12" aria-label="12"></a>        ) <span class="sc">|&gt;</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-label="13"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-label="14"></a>        <span class="fu">summarise</span>(</span>
-<span id="cb20-15"><a href="#cb20-15" aria-label="15"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb20-16"><a href="#cb20-16" aria-label="16"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-label="17"></a>        )</span>
-<span id="cb20-18"><a href="#cb20-18" aria-label="18"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-label="19"></a>sensor_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-label="20"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-label="21"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb20-22"><a href="#cb20-22" aria-label="22"></a>p_sensors <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-label="23"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-label="24"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb20-25"><a href="#cb20-25" aria-label="25"></a>                   <span class="at">y =</span> mean_count,</span>
-<span id="cb20-26"><a href="#cb20-26" aria-label="26"></a>                   <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-label="27"></a>        <span class="fu">geom_line</span>()</span>
-<span id="cb20-28"><a href="#cb20-28" aria-label="28"></a></span>
-<span id="cb20-29"><a href="#cb20-29" aria-label="29"></a>p_sensors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-<ol type="1">
-<li><p>Run <code>deutan()</code> on a palette you use at work. Does it survive?</p></li>
-<li><p>Simulate a different brewer palette:</p></li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-label="1"></a>p_sensors <span class="sc">+</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-label="2"></a>        <span class="fu">scale_colour_manual</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-label="3"></a>                <span class="at">values =</span> <span class="fu">deutan</span>(RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">4</span>, <span class="st">"___"</span>))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-label="4"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Try <code>"Set1"</code> and <code>"Set2"</code>. Better or worse than Dark2?</p>
-<ol start="3" type="1">
-<li>Colour the plot by <code>mean_count</code> instead of <code>sensor_name</code>. Which kind of palette does ggplot2 give you, and is it the right kind?</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_ad424f23" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Only open this if you’ve actually had a go.</p>
-<p><strong>2.</strong> Set1 holds up better than Dark2 because its colours differ in lightness as well as hue. Set2 is pastel and collapses badly.</p>
-<p><strong>3.</strong> A continuous, sequential palette, because <code>mean_count</code> is a number. That is the right <em>kind</em>, and it’s still the wrong choice here: you have four distinct places, not a magnitude.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="what-to-hold-onto-2" class="level3">
-<h3 class="anchored" data-anchor-id="what-to-hold-onto-2">What to hold onto</h3>
-<ul>
-<li>The default palette fails under colour vision deficiency, and so does Dark2</li>
-<li>Palettes that vary lightness survive, which is why viridis is the safe default</li>
-<li>Simulate it with <code>deutan()</code> rather than guessing</li>
-</ul>
-</section>
-</section>
-<section id="emphasis-by-contrast" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="emphasis-by-contrast"><span class="header-section-number">6.4</span> Emphasis by contrast</h2>
-<blockquote class="blockquote">
-<p><strong>The idea:</strong> four colours asks the reader to rank four things. Usually you want them to look at one.</p>
-</blockquote>
-<p>Grey is not an absence of colour. It’s a demotion, and you do it on purpose.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-label="1"></a>pedestrian_weekday <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-label="3"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-label="4"></a><span class="fu">ggplot</span>(pedestrian_weekday,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-label="5"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-label="6"></a>           <span class="at">y =</span> mean_count,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-label="7"></a>           <span class="at">group =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-label="8"></a>        <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey80"</span>) <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-label="9"></a>        <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">filter</span>(pedestrian_weekday,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-label="10"></a>                                sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>),</span>
-<span id="cb22-11"><a href="#cb22-11" aria-label="11"></a>                  <span class="at">colour =</span> <span class="st">"firebrick"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-demote" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four hourly lines, three in pale grey and one, Flagstaff Station, in dark red." width="672">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-demote-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="where-should-the-eye-go_files/figure-html/fig-demote-1.png" id="fig-demote" class="img-fluid figure-img" alt="Four hourly lines, three in pale grey and one, Flagstaff Station, in dark red." width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-demote-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.7
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Two <code>geom_line()</code> calls, one of them filtered. <code>gghighlight()</code> from <a href="whats-in-the-way.html" class="quarto-xref"><span>Chapter 5</span></a> does the same job in one line, and it’s worth having seen the manual version so it isn’t magic.</p>
-<p>Then get rid of the legend by putting the label on the line.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-label="1"></a>sensor_labels <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-label="3"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-label="4"></a>        <span class="fu">slice_max</span>(hour, <span class="at">n =</span> <span class="dv">1</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-label="5"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-label="6"></a>p_sensors <span class="sc">+</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-label="7"></a>        <span class="fu">geom_text_repel</span>(<span class="at">data =</span> sensor_labels,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-label="8"></a>                        <span class="fu">aes</span>(<span class="at">label =</span> sensor_name),</span>
-<span id="cb23-9"><a href="#cb23-9" aria-label="9"></a>                        <span class="at">hjust =</span> <span class="dv">0</span>,</span>
-<span id="cb23-10"><a href="#cb23-10" aria-label="10"></a>                        <span class="at">direction =</span> <span class="st">"y"</span>,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-label="11"></a>                        <span class="at">nudge_x =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-label="12"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-label="13"></a>        <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">32</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-direct-label" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The four sensor lines with each name printed at the right hand end of its own line, and no legend." width="672">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-direct-label-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="where-should-the-eye-go_files/figure-html/fig-direct-label-1.png" id="fig-direct-label" class="img-fluid figure-img" alt="The four sensor lines with each name printed at the right hand end of its own line, and no legend." width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-direct-label-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.8
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A legend makes the eye bounce between the key and the plot, once per series. A label sits where the thing is.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Your Turn">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Setup code
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -922,38 +870,39 @@ Figure&nbsp;6.8
 <span id="cb24-19"><a href="#cb24-19" aria-label="19"></a>sensor_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
 <span id="cb24-20"><a href="#cb24-20" aria-label="20"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
 <span id="cb24-21"><a href="#cb24-21" aria-label="21"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb24-22"><a href="#cb24-22" aria-label="22"></a>p_sensors <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
-<span id="cb24-23"><a href="#cb24-23" aria-label="23"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-label="24"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
-<span id="cb24-25"><a href="#cb24-25" aria-label="25"></a>                   <span class="at">y =</span> mean_count,</span>
-<span id="cb24-26"><a href="#cb24-26" aria-label="26"></a>                   <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-label="27"></a>        <span class="fu">geom_line</span>()</span>
-<span id="cb24-28"><a href="#cb24-28" aria-label="28"></a></span>
-<span id="cb24-29"><a href="#cb24-29" aria-label="29"></a>p_sensors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-22"><a href="#cb24-22" aria-label="22"></a>pedestrian_weekday <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-label="23"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-label="24"></a>p_tiles <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pedestrian_weekday,</span>
+<span id="cb24-25"><a href="#cb24-25" aria-label="25"></a>                  <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb24-26"><a href="#cb24-26" aria-label="26"></a>                      <span class="at">y =</span> sensor_name,</span>
+<span id="cb24-27"><a href="#cb24-27" aria-label="27"></a>                      <span class="at">fill =</span> mean_count)) <span class="sc">+</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-label="28"></a>        <span class="fu">geom_tile</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 <ol type="1">
-<li><p>Run the greyed plot through <code>deutan()</code>. Does highlighting survive colour vision deficiency better than four categorical hues did?</p></li>
-<li><p>Highlight a different sensor:</p></li>
+<li><p>Put a palette you use at work through <code>swatchplot(cvd = TRUE)</code>. Does it survive the <strong>Deuteranope</strong> row? Does it survive the <strong>Desaturated</strong> one?</p></li>
+<li><p>Compare two more brewer palettes in one grid:</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> mean_count, <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-label="3"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-label="4"></a>        <span class="fu">gghighlight</span>(sensor_name <span class="sc">==</span> <span class="st">"___"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-label="1"></a><span class="fu">swatchplot</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-label="2"></a>        <span class="st">"Set1"</span> <span class="ot">=</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">4</span>, <span class="st">"___"</span>),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-label="3"></a>        <span class="st">"Set2"</span> <span class="ot">=</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">4</span>, <span class="st">"___"</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-label="4"></a>        <span class="at">cvd =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Better or worse than Dark2?</p>
 <ol start="3" type="1">
-<li>If the question were “where is busy on a weekend”, which sensor would you highlight? Is that the same answer you gave in <a href="what-am-i-comparing.html" class="quarto-xref"><span>Chapter 4</span></a>?</li>
+<li>Colour <code>p_tiles</code> by <code>mean_count</code> with a qualitative palette, <code>scale_fill_discrete_qualitative()</code>. <strong>You should get an error.</strong> What is ggplot2 telling you about the variable?</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_2e017602" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_ca716669" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -962,18 +911,190 @@ Figure&nbsp;6.8
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Only open this if you’ve actually had a go.</p>
-<p><strong>1.</strong> Yes. Grey against one colour is a lightness difference, and lightness is the thing that survives. This is the strongest argument for highlighting over four hues.</p>
+<p><strong>2.</strong> Set1 holds up better than Dark2, because its colours differ in lightness as well as hue: they span 19 points of lightness against Dark2’s 8. Set2 is pastel, spans 6, and collapses badly.</p>
+<p><strong>3.</strong> <code>Error: Continuous value supplied to a discrete scale.</code> A discrete scale wants a discrete variable, and <code>mean_count</code> is a number. This is the one type mismatch ggplot2 catches for you. It has nothing to say about <code>rainbow()</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="takeaways-1" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways-1">Takeaways</h3>
+<ul>
+<li>The default palette fails under colour vision deficiency, and so does Dark2</li>
+<li>Palettes that vary lightness survive, which is why viridis is the safe default</li>
+<li>Look at a palette with <code>swatchplot(cvd = TRUE)</code> rather than guessing from hex codes</li>
+<li>Qualitative for categories, sequential for magnitude, diverging for distance from a midpoint</li>
+</ul>
+</section>
+</section>
+<section id="emphasis-by-contrast" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="emphasis-by-contrast"><span class="header-section-number">6.3</span> Emphasis by contrast</h2>
+<blockquote class="blockquote">
+<p><strong>The idea:</strong> four colours asks the reader to rank four things. Usually you want them to look at one.</p>
+</blockquote>
+<p>Grey is not an absence of colour. It’s a demotion, and you do it on purpose.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_weekday,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-label="4"></a>           <span class="at">group =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-label="5"></a>        <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey80"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-label="6"></a>        <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">filter</span>(pedestrian_weekday,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-label="7"></a>                                sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-label="8"></a>                  <span class="at">colour =</span> <span class="st">"firebrick"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-demote" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four hourly lines, three in pale grey and one, Flagstaff Station, in dark red.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-demote-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-demote-1.png" id="fig-demote" class="img-fluid figure-img" alt="Four hourly lines, three in pale grey and one, Flagstaff Station, in dark red." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-demote-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.16
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Two <code>geom_line()</code> calls, one of them filtered. <code>gghighlight()</code> from <a href="whats-in-the-way.html" class="quarto-xref"><span>Chapter 5</span></a> does the same job in one line, and it’s worth having seen the manual version so it isn’t magic.</p>
+<p>Then get rid of the legend by putting the label on the line.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a>sensor_labels <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-label="2"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-label="3"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-label="4"></a>        <span class="fu">slice_max</span>(hour, <span class="at">n =</span> <span class="dv">1</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-label="5"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-label="6"></a>p_sensors <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-label="7"></a>        <span class="fu">geom_text_repel</span>(<span class="at">data =</span> sensor_labels,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-label="8"></a>                        <span class="fu">aes</span>(<span class="at">label =</span> sensor_name),</span>
+<span id="cb27-9"><a href="#cb27-9" aria-label="9"></a>                        <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-label="10"></a>                        <span class="at">direction =</span> <span class="st">"y"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-label="11"></a>                        <span class="at">nudge_x =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-label="12"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-label="13"></a>        <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">32</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-direct-label" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The four sensor lines with each name printed at the right hand end of its own line, and no legend.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-direct-label-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="where-should-the-eye-go_files/figure-html/fig-direct-label-1.png" id="fig-direct-label" class="img-fluid figure-img" alt="The four sensor lines with each name printed at the right hand end of its own line, and no legend." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-direct-label-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.17
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A legend makes the eye bounce between the key and the plot, once per series. A label sits where the thing is.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Your Turn">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Your Turn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Setup code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-label="2"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-label="3"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-label="4"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-label="5"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-label="6"></a>pedestrian_hourly <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-label="7"></a>        <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">if_else</span>(</span>
+<span id="cb28-8"><a href="#cb28-8" aria-label="8"></a>                <span class="at">condition =</span> <span class="fu">str_starts</span>(week_day, <span class="st">"S"</span>),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-label="9"></a>                <span class="at">true =</span> <span class="st">"weekend"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-label="10"></a>                <span class="at">false =</span> <span class="st">"weekday"</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-label="11"></a>                )</span>
+<span id="cb28-12"><a href="#cb28-12" aria-label="12"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-label="13"></a>        <span class="fu">group_by</span>(sensor_name, day_type, hour) <span class="sc">|&gt;</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-label="14"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb28-15"><a href="#cb28-15" aria-label="15"></a>                <span class="at">mean_count =</span> <span class="fu">mean</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-16"><a href="#cb28-16" aria-label="16"></a>                <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-label="17"></a>        )</span>
+<span id="cb28-18"><a href="#cb28-18" aria-label="18"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-label="19"></a>sensor_totals <span class="ot">&lt;-</span> pedestrian <span class="sc">|&gt;</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-label="20"></a>        <span class="fu">group_by</span>(sensor_name) <span class="sc">|&gt;</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-label="21"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(hourly_counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb28-22"><a href="#cb28-22" aria-label="22"></a>pedestrian_weekday <span class="ot">&lt;-</span> pedestrian_hourly <span class="sc">|&gt;</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-label="23"></a>        <span class="fu">filter</span>(day_type <span class="sc">==</span> <span class="st">"weekday"</span>)</span>
+<span id="cb28-24"><a href="#cb28-24" aria-label="24"></a><span class="fu">ggplot</span>(pedestrian_weekday,</span>
+<span id="cb28-25"><a href="#cb28-25" aria-label="25"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb28-26"><a href="#cb28-26" aria-label="26"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb28-27"><a href="#cb28-27" aria-label="27"></a>           <span class="at">group =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-label="28"></a>        <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey80"</span>) <span class="sc">+</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-label="29"></a>        <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">filter</span>(pedestrian_weekday,</span>
+<span id="cb28-30"><a href="#cb28-30" aria-label="30"></a>                                sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>),</span>
+<span id="cb28-31"><a href="#cb28-31" aria-label="31"></a>                  <span class="at">colour =</span> <span class="st">"firebrick"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<ol type="1">
+<li>Put the two colours in the greyed plot through the simulator:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-label="1"></a><span class="fu">swatchplot</span>(<span class="fu">c</span>(<span class="st">"grey80"</span>, <span class="st">"firebrick"</span>), <span class="at">cvd =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Does the contrast survive better than four categorical hues did?</p>
+<ol start="2" type="1">
+<li>Highlight a different sensor:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_weekday,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> mean_count, <span class="at">colour =</span> sensor_name)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-label="3"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-label="4"></a>        <span class="fu">gghighlight</span>(sensor_name <span class="sc">==</span> <span class="st">"___"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>gghighlight warns about a <code>group_by()</code> calculation falling back. The plot is fine.</p>
+<ol start="3" type="1">
+<li>If the question were “where is busy on a weekend”, which sensor would you highlight? Is that the same answer you gave in <a href="what-am-i-comparing.html" class="quarto-xref"><span>Chapter 4</span></a>?</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<countdown-timer class="countdown" id="timer_b30522ce" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only open this if you’ve actually had a go.</p>
+<p><strong>1.</strong> Yes. Every row keeps a pale block and a dark one, the desaturated row included, because grey against one colour is a lightness difference and lightness is what survives. This is the strongest argument there is for highlighting one series over colouring four.</p>
 <p><strong>3.</strong> Birrarung Marr, because it’s the only sensor where the weekend beats the weekday. Same answer as <a href="what-am-i-comparing.html" class="quarto-xref"><span>Chapter 4</span></a>, which is a good sign: the emphasis should follow the finding, not replace it.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section id="what-to-hold-onto-3" class="level3">
-<h3 class="anchored" data-anchor-id="what-to-hold-onto-3">What to hold onto</h3>
+<section id="takeaways-2" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways-2">Takeaways</h3>
 <ul>
 <li>Grey is a decision, not a default</li>
 <li>Highlight one series rather than colouring four</li>
@@ -981,13 +1102,13 @@ Figure&nbsp;6.8
 </ul>
 </section>
 </section>
-<section id="to-summarise" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="to-summarise"><span class="header-section-number">6.5</span> To summarise</h2>
+<section id="to-summarise" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="to-summarise"><span class="header-section-number">6.4</span> To summarise</h2>
 <p>Three things to take out of this chapter.</p>
 <ol type="1">
-<li><strong>Position is the most accurate channel.</strong> Spend it on what matters, and treat colour and area as rough.</li>
 <li><strong>Order is free emphasis.</strong> <code>fct_reorder()</code> costs one function and turns a lookup table into a ranking.</li>
-<li><strong>Colour fails silently.</strong> Simulate it, and prefer palettes that vary lightness.</li>
+<li><strong>Colour fails silently.</strong> Look at it with <code>swatchplot(cvd = TRUE)</code>, prefer palettes that vary lightness, and match the kind of palette to the kind of variable.</li>
+<li><strong>Grey is a decision.</strong> Highlight the one series you’re talking about, demote the rest, and put the label on the line rather than in a legend.</li>
 </ol>
 <p>And the habit: before you style anything, decide what you want the reader to see first. Then make that the loudest thing on the page and demote everything else.</p>
 <p>Next up is making it land, which is the last mile: labels, themes, and getting a file out that looks the way it did on your screen.</p>
