@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./making-it-land.html" rel="next">
 <link href="./whats-in-the-way.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -198,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./making-it-land.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></a>
   </div>
 </li>
     </ul>
@@ -377,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_68646835" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_95ec0cb7" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -421,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name)) <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-label="4"></a>        <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-alpha-order" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A bar chart of total foot traffic per sensor, in alphabetical order, so the bar lengths jump up and down with no pattern.">
+<div id="fig-alpha-order" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A bar chart of total foot traffic per sensor, in alphabetical order, so the bar lengths jump up and down with no pattern." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-alpha-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-alpha-order-1.png" id="fig-alpha-order" class="img-fluid figure-img" alt="A bar chart of total foot traffic per sensor, in alphabetical order, so the bar lengths jump up and down with no pattern." width="672">
@@ -441,7 +448,7 @@ Figure&nbsp;6.1
 <span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>           <span class="at">y =</span> <span class="fu">fct_reorder</span>(sensor_name, total))) <span class="sc">+</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>        <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same bar chart sorted by total, so the bars form a clean descending staircase.">
+<div id="fig-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same bar chart sorted by total, so the bars form a clean descending staircase." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sorted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-sorted-1.png" id="fig-sorted" class="img-fluid figure-img" alt="The same bar chart sorted by total, so the bars form a clean descending staircase." width="672">
@@ -467,7 +474,7 @@ Figure&nbsp;6.2
 <span id="cb8-6"><a href="#cb8-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-label="7"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-facet-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels of hourly foot traffic, ordered from busiest sensor to quietest rather than alphabetically.">
+<div id="fig-facet-sorted" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels of hourly foot traffic, ordered from busiest sensor to quietest rather than alphabetically." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-facet-sorted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-facet-sorted-1.png" id="fig-facet-sorted" class="img-fluid figure-img" alt="Four panels of hourly foot traffic, ordered from busiest sensor to quietest rather than alphabetically." width="672">
@@ -548,7 +555,7 @@ Figure&nbsp;6.3
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_a319218e" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_c01bcac7" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -597,7 +604,7 @@ Figure&nbsp;6.3
 <span id="cb11-7"><a href="#cb11-7" aria-label="7"></a></span>
 <span id="cb11-8"><a href="#cb11-8" aria-label="8"></a>p_sensors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-default-cols" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four hourly foot traffic lines, one per sensor, in ggplot2's default red, green, blue and purple.">
+<div id="fig-default-cols" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four hourly foot traffic lines, one per sensor, in ggplot2's default red, green, blue and purple." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-default-cols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-default-cols-1.png" id="fig-default-cols" class="img-fluid figure-img" alt="Four hourly foot traffic lines, one per sensor, in ggplot2's default red, green, blue and purple." width="672">
@@ -622,7 +629,7 @@ Figure&nbsp;6.4
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a>p_sensors <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-label="2"></a>        <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">deutan</span>(scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">4</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-cvd-sim" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same four lines with the colours simulated for deuteranopia, where two pairs are now nearly identical.">
+<div id="fig-cvd-sim" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same four lines with the colours simulated for deuteranopia, where two pairs are now nearly identical." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cvd-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-cvd-sim-1.png" id="fig-cvd-sim" class="img-fluid figure-img" alt="The same four lines with the colours simulated for deuteranopia, where two pairs are now nearly identical." width="672">
@@ -654,7 +661,7 @@ Figure&nbsp;6.5
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a>p_sensors <span class="sc">+</span> <span class="fu">scale_colour_viridis_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-viridis" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same four lines in the viridis palette, which runs dark purple through green to yellow.">
+<div id="fig-viridis" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same four lines in the viridis palette, which runs dark purple through green to yellow." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-viridis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-viridis-1.png" id="fig-viridis" class="img-fluid figure-img" alt="The same four lines in the viridis palette, which runs dark purple through green to yellow." width="672">
@@ -777,7 +784,7 @@ Figure&nbsp;6.6
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_85ab65b5" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_ad424f23" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -829,7 +836,7 @@ Figure&nbsp;6.6
 <span id="cb22-10"><a href="#cb22-10" aria-label="10"></a>                                sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>),</span>
 <span id="cb22-11"><a href="#cb22-11" aria-label="11"></a>                  <span class="at">colour =</span> <span class="st">"firebrick"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-demote" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four hourly lines, three in pale grey and one, Flagstaff Station, in dark red.">
+<div id="fig-demote" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four hourly lines, three in pale grey and one, Flagstaff Station, in dark red." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-demote-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-demote-1.png" id="fig-demote" class="img-fluid figure-img" alt="Four hourly lines, three in pale grey and one, Flagstaff Station, in dark red." width="672">
@@ -858,7 +865,7 @@ Figure&nbsp;6.7
 <span id="cb23-12"><a href="#cb23-12" aria-label="12"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
 <span id="cb23-13"><a href="#cb23-13" aria-label="13"></a>        <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">32</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-direct-label" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The four sensor lines with each name printed at the right hand end of its own line, and no legend.">
+<div id="fig-direct-label" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The four sensor lines with each name printed at the right hand end of its own line, and no legend." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-direct-label-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="where-should-the-eye-go_files/figure-html/fig-direct-label-1.png" id="fig-direct-label" class="img-fluid figure-img" alt="The four sensor lines with each name printed at the right hand end of its own line, and no legend." width="672">
@@ -942,7 +949,7 @@ Figure&nbsp;6.8
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_942d614c" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_2e017602" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -1402,6 +1409,9 @@ Figure&nbsp;6.8
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./making-it-land.html" class="pagination-link" aria-label="Making it land">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

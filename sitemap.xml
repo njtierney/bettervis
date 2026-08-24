@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://better-vis.njtierney.com/index.html</loc>
-    <lastmod>2026-08-23T23:56:16.061Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.263Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/setup.html</loc>
-    <lastmod>2026-08-23T23:56:16.063Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.264Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/anatomy-of-a-ggplot.html</loc>
-    <lastmod>2026-08-23T23:56:16.025Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.227Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/shape-of-your-data.html</loc>
-    <lastmod>2026-08-23T23:56:16.063Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.264Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/what-gets-computed.html</loc>
-    <lastmod>2026-08-23T23:56:16.063Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.265Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/what-am-i-comparing.html</loc>
-    <lastmod>2026-08-23T23:56:16.063Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.265Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/whats-in-the-way.html</loc>
-    <lastmod>2026-08-23T23:56:16.063Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.265Z</lastmod>
   </url>
   <url>
     <loc>https://better-vis.njtierney.com/where-should-the-eye-go.html</loc>
-    <lastmod>2026-08-23T23:56:16.063Z</lastmod>
+    <lastmod>2026-08-24T02:58:44.265Z</lastmod>
+  </url>
+  <url>
+    <loc>https://better-vis.njtierney.com/making-it-land.html</loc>
+    <lastmod>2026-08-24T02:58:44.263Z</lastmod>
   </url>
 </urlset>

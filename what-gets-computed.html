@@ -201,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./making-it-land.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -694,7 +700,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You don’t need exact number on the axes. I am just curious on the <strong>shape</strong>. You can use bars, dots, lines, other summaries, whatever you want!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_878a3d17" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_03a53d68" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <ul>
@@ -893,7 +899,7 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Let’s take a couple of minutes to explore this, draw some sketches, imagine the types of data summary we might see as tables, as plots!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_2a4dc948" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_b2eba526" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -1007,7 +1013,7 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Is that a fairer picture of 8am than the one box was?</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_9dd9cf97" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_79393f40" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -1105,7 +1111,7 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Sketch it out!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_1b0b9ad7" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_ceefd317" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>It should look something like the following:</p>
@@ -1325,7 +1331,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_9d9f5803" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_def2b43b" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -1490,7 +1496,7 @@ Figure&nbsp;3.5: The default. Note what ggplot2 says about it.
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-bw-1000" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A histogram with wide bins, showing about eleven bars.">
+<div id="fig-bw-1000" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A histogram with wide bins, showing about eleven bars." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bw-1000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="what-gets-computed_files/figure-html/fig-bw-1000-1.png" id="fig-bw-1000" class="img-fluid figure-img" alt="A histogram with wide bins, showing about eleven bars." width="672">
@@ -1508,7 +1514,7 @@ Figure&nbsp;3.6
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-bw-100" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A histogram with narrower bins, showing a smooth decay from a peak near zero.">
+<div id="fig-bw-100" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A histogram with narrower bins, showing a smooth decay from a peak near zero." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bw-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="what-gets-computed_files/figure-html/fig-bw-100-1.png" id="fig-bw-100" class="img-fluid figure-img" alt="A histogram with narrower bins, showing a smooth decay from a peak near zero." width="672">
@@ -1526,7 +1532,7 @@ Figure&nbsp;3.7
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-bw-10" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A histogram with very narrow bins, spiky and noisy, with a tall cluster near zero.">
+<div id="fig-bw-10" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A histogram with very narrow bins, spiky and noisy, with a tall cluster near zero." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bw-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="what-gets-computed_files/figure-html/fig-bw-10-1.png" id="fig-bw-10" class="img-fluid figure-img" alt="A histogram with very narrow bins, spiky and noisy, with a tall cluster near zero." width="672">
@@ -1773,7 +1779,7 @@ Figure&nbsp;3.13: The same comparison, as curves.
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_16a2fe8a" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_cb1dff63" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
