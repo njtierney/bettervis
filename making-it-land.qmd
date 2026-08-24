@@ -130,6 +130,62 @@ of those tells you what you're looking at.
 If you can't write that sentence, that's worth knowing **before** you spend an
 hour on themes.
 
+### `labs()` names everything, not just the title
+
+`labs()` is the one function for every piece of text on the plot. The arguments
+are the aesthetics, so anything you can map you can also label:
+
+- `title`, `subtitle`, `caption`, and `tag`
+- `x` and `y`, which default to your column names
+- **any aesthetic**: `colour`, `fill`, `shape`, `size`, `linetype`, `alpha`
+
+That last group is the one people miss. A legend title is not a special thing to
+be styled, it is just the label for whatever you mapped.
+
+```{r}
+#| label: fig-labs-fill
+#| fig-alt: |
+#|   A stacked bar chart of total foot traffic by sensor, with the legend
+#|   titled "Day type" rather than "day_type".
+pedestrian_totals <- pedestrian |>
+        mutate(day_type = if_else(
+                condition = str_starts(week_day, "S"),
+                true = "weekend",
+                false = "weekday"
+                )
+        ) |>
+        group_by(sensor_name, day_type) |>
+        summarise(total = sum(hourly_counts, na.rm = TRUE), .groups = "drop")
+
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = sensor_name,
+           fill = day_type)) +
+        geom_col() +
+        labs(
+                title = "Bourke Street Mall is the busiest, on any day",
+                x = "Total foot traffic, 2016",
+                y = NULL,
+                fill = "Day type"
+        )
+```
+
+Three things happening there:
+
+- `fill = "Day type"` retitles the legend. Had we mapped `colour` instead, it
+  would be `colour = `. The argument name follows the aesthetic
+- `y = NULL` removes the axis title. The sensor names are already on the axis,
+  so a title saying "sensor_name" is ink with no job
+- `NULL` removes, `""` leaves an empty gap. Reach for `NULL`
+
+If you map the same variable to two aesthetics, you have to name both or you get
+two legends:
+
+```{r}
+#| eval: false
+labs(fill = "Day type", colour = "Day type")
+```
+
 ### Axes a human can read
 
 The axis is text too, and the defaults are safe rather than readable.
@@ -234,7 +290,7 @@ useful outcome, not a failure.
 
 :::
 
-### What to hold onto
+### Takeaways
 
 - The title is the loudest element. Spend it on the finding
 - If you can't state the finding, stop polishing and go back to the plot
@@ -366,7 +422,7 @@ a report, confusing in a script somebody else reads.
 
 :::
 
-### What to hold onto
+### Takeaways
 
 - A theme is every non-data decision in one place
 - Wrapping it in a function is what makes a report look like one document
@@ -459,7 +515,7 @@ is the bit that catches people.
 
 :::
 
-### What to hold onto
+### Takeaways
 
 - `+` for side by side, `/` for stacked, brackets to group
 - `plot_layout(guides = "collect")` for one legend instead of three
@@ -493,16 +549,97 @@ ggsave("wide.png", p_labelled, width = 12, height = 9)
 
 Open both. The wide one has tiny text and nothing about the code changed.
 
+::: {.callout-tip title="Going deeper: picking a shape" collapse="true"}
+
+`width = 8, height = 5` up there is not arbitrary. Most plots read better wider
+than they are tall, and a ratio that has been used for a very long time is the
+**golden ratio**, about 1.618 to 1.
+
+So for a width of 8 inches:
+
+```{r}
+#| label: golden
+8 / 1.618
+```
+
+Which is where `height = 5` came from. It is not a rule, and I do not think
+there is anything mystical about it. It is a good default when you have no
+reason to pick something else, and "no reason to pick something else" describes
+most figures.
+
+Two cases where you should pick something else:
+
+- **A tall categorical axis.** Twenty sensors on the y axis wants a tall figure,
+  not a wide one
+- **A shared shape across a report.** Consistency beats any individual ratio.
+  Pick one and use it everywhere
+
+You can also set the ratio on the plot rather than the file, which keeps the
+panel itself golden however big the canvas is:
+
+```{r}
+#| label: fig-aspect
+#| fig-alt: |
+#|   The four panel plot with each panel constrained to a golden ratio, wider
+#|   than it is tall.
+p_labelled +
+        theme(aspect.ratio = 1 / 1.618)
+```
+
+:::
+
+:::: {.callout-tip title="Going deeper: letting Quarto size your figures" collapse="true"}
+
+Everything above is for a file you are writing yourself. For a figure going
+straight into a Quarto document, you usually do not call `ggsave()` at all: you
+set the size on the chunk and let Quarto save it for you.
+
+```r
+#| fig-width: 8
+#| fig-height: 5
+#| fig-format: png
+#| fig-dpi: 300
+```
+
+Or once, in the YAML, so every figure in the document matches:
+
+```yaml
+---
+format:
+  html:
+    fig-width: 8
+    fig-height: 5
+    fig-format: png
+    fig-dpi: 300
+---
+```
+
+That is the same width, height, format and resolution decision as `ggsave()`,
+made once for the document instead of once per figure. It is also why a plot can
+look different in your rendered report than it did in the RStudio pane: the
+document set a size and the pane did not.
+
+::: {.callout-tip title="Read more"}
+
+There is a fuller treatment of the figure chunk options, including `fig-align`
+and `fig-cap`, in the *Changing figures* chapter of [Quarto for
+Scientists](https://qmd4sci.njtierney.com/).
+
+:::
+
 Things worth knowing:
 
 - `ggsave()` defaults to the **last plot drawn**, which bites once you've moved
   on. Pass `plot =` explicitly
-- `width` and `height` are inches unless you set `units =`
+- `width` and `height` are inches unless you set `units =`, and their **ratio**
+  matters more than their size
 - `dpi = 300` for print, and it does nothing for a vector format
 - the file extension picks the device
 - vector (`.pdf`, `.svg`) for line art, raster (`.png`) for anything with
   thousands of overplotted points. A hex plot from @sec-in-the-way is small as a
   PDF; 35,152 points is not
+
+::::
 
 ::: {.callout-note title="Your Turn"}
 
@@ -541,7 +678,7 @@ they all publish one.
 
 :::
 
-### What to hold onto
+### Takeaways
 
 - Text doesn't scale with the canvas, so size the canvas to its final home
 - Always pass `plot =`
