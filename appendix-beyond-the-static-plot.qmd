@@ -1,0 +1,61 @@
+# Beyond the static plot {#sec-beyond-static}
+
+Sometimes a plot wants to move, or wants the reader to poke at it.
+
+Neither is core to making better graphs, and both eat time, so they live here
+rather than in the day. If we've got time at the end I'll demo them. If not,
+they're here when you want them.
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** Optional
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- When is animation worth it?
+- When should a plot be interactive?
+
+:::
+
+## Animation with gganimate
+
+<!-- Animation is a channel like any other, and it is the most expensive one.
+     It works when the thing changing is time and the reader needs to feel the
+     change. It fails as a substitute for small multiples, which is what most
+     animated plots should have been.
+
+     Cross reference @sec-comparing.
+
+     The honest demo is the pedestrian year animated by month against the same
+     thing faceted by month. The facets win, and I should say so while showing
+     my own animation losing. gapminder over time is the case where animation
+     genuinely helps, and it is the one everybody has seen.
+
+     gganimate is NOT in the main setup install list, it is in the optional
+     block in schedule.md. Say that at the top of the section so nobody stalls
+     on an install mid-demo. It also needs a renderer (gifski or av), which is
+     the usual failure and worth naming. -->
+
+## Interactive graphics with ggiraph
+
+<!-- Tooltips and hover, which are genuinely useful when a plot has more detail
+     than fits on the page. The trap is using interactivity to avoid making a
+     decision about what matters, which is the same failure @sec-eye is about.
+
+     The one-line version: geom_point_interactive(aes(tooltip = sensor_name))
+     plus girafe(). Close to free if they already have the ggplot.
+
+     Two things worth saying, because both cost people real time:
+       - a tooltip does not exist in a PDF or a printed paper, so anything you
+         only put in a tooltip is invisible to half your readers
+       - plotly::ggplotly() is the other route, and it silently drops parts of
+         a ggplot it cannot translate. ggiraph is more faithful.
+
+     This appendix only renders usefully in HTML. Guard the chunks the same way
+     the countdown timers are guarded in @sec-computed:
+       #| eval: !expr knitr::is_html_output()
+     if the PDF format ever comes back on in _quarto.yml. -->

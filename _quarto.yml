@@ -34,10 +34,7 @@ book:
     - "what-am-i-comparing.qmd"
     - "whats-in-the-way.qmd"
     - "where-should-the-eye-go.qmd"
-    # - "making-it-land.qmd"
-  # appendices:
-    # - "appendix-just-enough-dplyr.qmd"
-    # - "appendix-beyond-the-static-plot.qmd"
+    - "making-it-land.qmd"
 
 # Only `##` and above get a number. Set 4 Aug 2026: the review section in
 # chapter 3 nests named moves under named passes, and Quarto's own numbering

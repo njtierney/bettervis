@@ -1,0 +1,75 @@
+# Just enough dplyr {#sec-dplyr}
+
+Nearly every plot in this course needs the data summarised, filtered, or
+reshaped before it can be drawn.
+
+That work isn't ggplot2, and I don't teach it in the room. But you can't do any
+of this on your own data without it, so here's the short version. Four verbs and
+one reshape, which is all the course actually uses.
+
+::: {.overview}
+
+## Overview {.unnumbered}
+
+**Duration** 10 minutes, optional
+
+**Questions**
+
+<!-- These map onto the sections below, in order. If you move a section, move its question. -->
+
+- How do I keep only the rows I want?
+- How do I make a new column?
+- How do I go from 37,700 rows to one per hour?
+- How do I get my data into the shape ggplot2 wants?
+
+:::
+
+## `filter()`
+
+<!-- Keeping rows. One sensor, one month.
+
+     Use the exact filters the chapters use, so this doubles as a reference for
+     the code they have already run:
+       filter(sensor_name == "Flagstaff Station")      @sec-computed
+       filter(hour == 8)                               @sec-computed
+       filter(sensor_name %in% c(...))                 @sec-computed
+     == for one, %in% for several, and the classic gotcha of = instead of ==. -->
+
+## `mutate()` and `if_else()`
+
+<!-- Making columns. day_type from week_day is the one the course leans on
+     hardest, in @sec-comparing.
+
+       mutate(day_type = if_else(week_day %in% c("Saturday","Sunday"),
+                                 "weekend", "weekday"))
+
+     This exact line appears in @sec-computed and again in @sec-comparing, so
+     it earns its own worked explanation here: test, value if true, value if
+     false. Mention case_when() for more than two outcomes and leave it. -->
+
+## `group_by()` and `summarise()`
+
+<!-- The one that matters. Mean count per hour per sensor is the shape behind
+     almost every plot in @sec-comparing onwards.
+
+     37,700 rows in, 24 rows out. Show the row count shrinking - that is the
+     whole concept and a dimension printout makes it concrete.
+
+     Two things that bite, both of which they will hit:
+       - na.rm = TRUE. 2,548 missing hours, so without it every mean is NA.
+         Already flagged as a Your Turn in @sec-computed.
+       - the grouping persists. summarise() peels one layer, which is why the
+         chapters call ungroup(). Show it rather than just saying it.
+
+     count() belongs here too, as the shorthand that @sec-computed uses to
+     explain geom_bar(). -->
+
+## `pivot_longer()`
+
+<!-- Cross reference @sec-shape rather than repeating it. This appendix is for
+     people who want the wrangling on its own, the teaching version lives in
+     the chapter.
+
+     Keep the names/values mnemonic consistent with @sec-shape, do not invent a
+     second phrasing for it here. If the wording drifts between the two, the
+     appendix stops being a reference and becomes a competing explanation. -->
