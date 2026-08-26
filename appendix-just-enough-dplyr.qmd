@@ -66,10 +66,10 @@ one reshape, which is all the course actually uses.
 
 ## `pivot_longer()`
 
-<!-- Cross reference @sec-shape rather than repeating it. This appendix is for
+<!-- Cross reference @sec-tidy rather than repeating it. This appendix is for
      people who want the wrangling on its own, the teaching version lives in
      the chapter.
 
-     Keep the names/values mnemonic consistent with @sec-shape, do not invent a
+     Keep the names/values mnemonic consistent with @sec-tidy, do not invent a
      second phrasing for it here. If the wording drifts between the two, the
      appendix stops being a reference and becomes a competing explanation. -->

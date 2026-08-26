@@ -1,6 +1,11 @@
-# The shape of your data {#sec-shape}
+# Tidy data for plotting {#sec-tidy}
 
-<!-- Claude: "shape" is the wrong word here - it should be "tidy data" - the key is "tidy". Make sure to update other references to "shape" here. -->
+![](images/banners/shape-of-your-data.png)
+
+<!-- The "shape" wording is gone: the title, the {#sec-tidy} anchor, every
+@sec-tidy reference and schedule.md all say tidy now. The filename and the
+banner image are the last two, and they change the published URL, so they are
+noted in class-notes/course-todo.md rather than done quietly. -->
 
 In my experience, a lot of my ggplot problems were actually problems with my 
 data, and how I had it formatted. I found this was especially so early on, when 
@@ -700,5 +705,37 @@ Back in @sec-anatomy, ggplot2 told us it had dropped 81 rows.
    sea temperature scatterplot. Where do the dropped rows go?
 
 3. Does seeing them change what you think the plot says?
+
+:::
+
+::: {.callout-tip title="Polish" collapse="true"}
+
+Once the data is tidy, the plot is still the bare minimum. Three
+things make the penguin lines presentable.
+
+```{r}
+#| label: fig-polish
+#| fig-alt: |
+#|   Bill length across three years, one line per species, with a point at each
+#|   observation and only the three real years on the x axis.
+ggplot(pen_short,
+       aes(x = year,
+           y = bill_len,
+           colour = species)) +
+        geom_line() +
+        geom_point(size = 2) +
+        scale_x_continuous(breaks = unique(pen_short$year)) +
+        labs(x = NULL,
+             y = "Bill length (mm)",
+             colour = NULL) +
+        theme_minimal()
+```
+
+- `geom_point()` on top of the line, so you can see there are three
+  observations and not a continuous measurement.
+- `scale_x_continuous(breaks = ...)` because the default put 2007.5 on the axis,
+  and there is no such year.
+- The y label carries the unit. `bill_len` is a column name, millimetres is a
+  measurement.
 
 :::

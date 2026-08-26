@@ -11,7 +11,7 @@
 - Aesthetics inside `aes()` versus outside
 - Adding layers
 
-## The shape of your data
+## Tidy data for plotting
 
 **tidy data, `pivot_longer()`, `separate_\*()`**
 
@@ -29,7 +29,7 @@
 - Overlaying distributions
 - Scales, log scales, and coords
 
-## What am I comparing?
+## Comparing groups
 
 **`facet_wrap()`, `facet_grid()`, position adjustments**
 
@@ -40,7 +40,7 @@
 - Position in bar plots (stack, dodge, fill)
 - Free scales, and what they cost
 
-## What's in the way?
+## Clutter and overplotting
 
 **data:ink, `alpha`, `geom_hex()`, gghighlight, raincloud plots**
 
@@ -51,7 +51,7 @@
 - Boxplots, and when they mislead
 - Showing distribution and data together: half plots, raincloud plots
 
-## Where should the eye go?
+## Colour and emphasis
 
 **`fct_reorder()`, colour palettes, colourblind safety**
 
@@ -62,7 +62,7 @@
 - Aesthetics: `fill` versus `colour`
 - Emphasis by contrast, and direct labelling instead of legends
 
-## Making it land
+## Labels, themes and saving
 
 **`labs()`, themes, patchwork, `ggsave()`**
 

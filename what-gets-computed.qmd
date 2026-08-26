@@ -1,5 +1,7 @@
 # What gets computed {#sec-computed}
 
+![](images/banners/what-gets-computed.png)
+
 Some geoms draw exactly what you expect: `geom_point()`, `geom_line()`.
 
 Others need to do some computation! `geom_histogram()`, `geom_density()`, `geom_bar()`, and `geom_boxplot()` are all examples of this.
@@ -176,7 +178,7 @@ ggplot(flagstaff,
 
 Hmmm - we get a single box - this isn't what we want.
 
-We saw something similar earlier - in @sec-shape, `geom_line()` sawtoothed across the whole plot, because it did not know species was a thing. We even get a few (!) warnings from ggplot2:
+We saw something similar earlier - in @sec-tidy, `geom_line()` sawtoothed across the whole plot, because it did not know species was a thing. We even get a few (!) warnings from ggplot2:
 
 ```
 Warning messages:
@@ -309,7 +311,7 @@ flagstaff_8am |>
 
 Nobody catches a train to work on a weekend, and the boxplot summarised across every day at once - so it generalised across both.
 
-We come back to this properly in @sec-in-the-way. For now, notice that the
+We come back to this properly in @sec-clutter. For now, notice that the
 computation was correct, even if the the answer was a little misleading.
 
 ::: {.callout-note title="Your Turn"}
@@ -451,6 +453,7 @@ tibble(
 
 </details>
 
+:::
 
 ```{r}
 #| label: flagstaff-hourly
@@ -721,7 +724,7 @@ Removed 2548 rows containing non-finite outside the scale range
 ```
 
 There are 2548 hours where the sensor recorded nothing. We come back to those in
-@sec-in-the-way.
+@sec-clutter.
 
 So is 30 bins any good here? With a range of 0 to 11273, thirty bins makes each
 one about 389 people wide, and the first bin alone holds 40% of the data.
@@ -981,6 +984,35 @@ number you could describe to somebody.
 A histogram is still a summary, so put a `geom_rug()` under it when there are
 few enough points to see them.
 
+::: {.callout-tip title="Polish" collapse="true"}
+
+The histograms in this chapter were deliberately plain, so the computation was
+the only thing to look at. Here is one dressed for showing somebody.
+
+```{r}
+#| label: fig-polish
+#| fig-alt: |
+#|   A histogram of 8am counts at Flagstaff Station with a rug underneath, comma
+#|   formatted axis numbers, and the bin width stated in the subtitle.
+ggplot(flagstaff_8am, aes(x = hourly_counts)) +
+  geom_histogram(binwidth = 250, fill = "grey30") +
+  geom_rug(alpha = 0.2) +
+  scale_x_continuous(labels = scales::label_comma()) +
+  labs(x = "People per hour",
+       y = "Days",
+       subtitle = "Bins of 250 people") +
+  theme_minimal()
+```
+
+- **State the binwidth.** The reader is looking at a computation, and the
+  subtitle is the cheapest place to say which one.
+- `geom_rug()` puts the actual observations under the summary, so the bins can
+  be checked against something.
+- `scales::label_comma()` on any axis with thousands on it. `4000` and `4,000`
+  are not the same reading effort.
+
+:::
+
 ## To summarise
 
 Three things to take out of this chapter.
@@ -1001,5 +1033,5 @@ When a plot surprises you, ask what got computed between the data and the marks.
 Nearly every surprise in this chapter came from a computation happening exactly
 as documented, on data I hadn't noticed was different to what I thought.
 
-Next up is what you are comparing, which is where we stop asking how a plot is
+Next up is comparing groups, which is where we stop asking how a plot is
 built and start asking what it is for.

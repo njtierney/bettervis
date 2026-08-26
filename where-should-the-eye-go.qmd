@@ -1,6 +1,8 @@
-# Where should the eye go? {#sec-eye}
+# Colour and emphasis {#sec-colour}
 
-@sec-in-the-way was about taking things out. This chapter is about what's left,
+![](images/banners/where-should-the-eye-go.png)
+
+@sec-clutter was about taking things out. This chapter is about what's left,
 and which part of it a reader meets first.
 
 A plot where everything has equal weight has no first, second or third, so the
@@ -37,6 +39,7 @@ library(naniar)
 library(colorspace)
 library(gghighlight)
 library(ggrepel)
+library(patchwork)
 ```
 
 ```{r}
@@ -225,7 +228,7 @@ p_sensors
 
 Note the `filter()`. `pedestrian_hourly` holds a weekday and a weekend row for
 every hour, so colouring by sensor alone gives each line two values per hour and
-it sawtooths, as in @sec-shape. One kind of day is enough to talk about colour,
+it sawtooths, as in @sec-tidy. One kind of day is enough to talk about colour,
 so keep those rows in their own object. Everything from here uses it:
 
 ```{r}
@@ -252,18 +255,25 @@ Read down a column to see what one colour turns into. Read across the
 **Deuteranope** row, the commonest kind, and the first two blocks are both
 olive and the last two are both blue. Four colours went in, two came out.
 
-Here it is on the plot:
+Side by side, with the legends off so it's just the lines:
 
 ```{r}
 #| label: fig-cvd-sim
+#| fig-height: 3.2
 #| fig-alt: |
-#|   The same four lines with the colours simulated for deuteranopia, where two
-#|   pairs are now nearly identical.
-p_sensors +
-        scale_colour_manual(values = deutan(scales::hue_pal()(4)))
+#|   Two copies of the four line plot next to each other. On the left the four
+#|   lines are four colours. On the right, simulated for deuteranopia, they are
+#|   two.
+p_plain <- p_sensors + theme(legend.position = "none")
+
+(p_plain + labs(title = "what you drew")) +
+        (p_plain +
+                scale_colour_manual(values = deutan(scales::hue_pal()(4))) +
+                labs(title = "deuteranopia"))
 ```
 
-Half the information is gone. This is roughly 8% of men of northern European
+That's `patchwork`, which puts two plots next to each other with `+`. Half the
+information is gone. This is roughly 8% of men of northern European
 descent, and about 0.5% of women.
 
 **And the palette you were about to reach for has the same problem.** Dark2 is
@@ -295,6 +305,50 @@ its four colours span 76 points, where the ggplot2 default spans 6 and Dark2
 spans 8.
 
 A palette that survives a black and white photocopier will survive most eyes.
+
+::: {.callout-tip title="Going deeper: seeing the lightness, and three tools that need a live session" collapse="true"}
+
+"Varies lightness" isn't a matter of opinion, it's something you can plot.
+`specplot()` pulls a palette apart into the three things a colour actually is:
+**hue**, which colour it is; **chroma**, how saturated it is; and **luminance**,
+how light it is.
+
+```{r}
+#| label: fig-spec-viridis
+#| fig-height: 3
+#| fig-alt: |
+#|   An HCL spectrum plot of viridis. The luminance line climbs steadily from
+#|   about 15 to about 95 across the palette.
+specplot(viridisLite::viridis(100), main = "viridis")
+```
+
+```{r}
+#| label: fig-spec-default
+#| fig-height: 3
+#| fig-alt: |
+#|   An HCL spectrum plot of the ggplot2 default colours. The luminance line is
+#|   flat at about 65 the whole way across, while hue climbs.
+specplot(scales::hue_pal()(100), main = "ggplot2 default")
+```
+
+The blue luminance line is the whole argument. Viridis climbs from dark to
+light in a near straight line, so the palette keeps an order even with the
+colour taken away. The ggplot2 default sits flat at about 65 the whole way
+across: every hue you like, all at the same brightness.
+
+Three more from colorspace that want a live R session, so they aren't run here:
+
+- **`hcl_wizard()`** opens a Shiny app for building a palette by dragging hue,
+  chroma and luminance around, with the CVD simulations updating as you go, and
+  hands you the hex codes at the end. It also lives at
+  [hclwizard.org](https://hclwizard.org/) if you'd rather not run it locally.
+- **`cvd_emulator()`** takes a jpg or png, a screenshot of a plot a colleague
+  sent you, say, and re-renders it as protanope, deuteranope and desaturated.
+  Useful when you can't get at the code.
+- **`choose_color()`** is the same idea for a single colour, with sliders for
+  hue, chroma and luminance.
+
+:::
 
 Our four lines again, in viridis:
 
@@ -330,6 +384,22 @@ swatchplot(
 - **sequential** for magnitude, like a count. Lightness runs one way.
 - **diverging** for distance from a midpoint, like above and below average. Two
   sequential palettes back to back, meeting at a neutral middle.
+
+colorspace ships a ggplot2 scale for every combination of those, and the names
+are built out of one rule:
+
+`scale_<aesthetic>_<datatype>_<colourscale>()`
+
+| piece | what goes there |
+|---|---|
+| aesthetic | `colour`, `color`, `fill` |
+| datatype | `discrete`, `continuous`, `binned` |
+| colourscale | `qualitative`, `sequential`, `diverging`, `divergingx` |
+
+So `scale_fill_continuous_sequential()` is a fill, for a number, using a
+sequential palette. That's 36 functions you never have to look up. Say what
+you're colouring, what kind of variable it is, and what kind of palette you
+want, and the name assembles itself.
 
 The last two want a plot that can carry a magnitude, so here is the same
 weekday data as tiles, one row per sensor and one column per hour:
@@ -487,6 +557,17 @@ Colour Palettes](https://www.njtierney.com/posts/2020-10-15-assess-colour/).
 `swatchplot(cvd = TRUE)`, from a different package, if you'd rather one call
 than two arguments.
 
+I gave a talk at Monash Data Fluency on how colour vision actually works and
+what follows from it for graphics: [The Use of Colour in
+Graphics](https://github.com/njtierney/monash-colour-in-graphics), slides and
+resources.
+
+And if you want to know where viridis came from, the talk that produced it is
+[A Better Default Colormap for
+Matplotlib](https://www.youtube.com/watch?v=xAoljeRJ3lU) by Nathaniel Smith and
+Stéfan van der Walt, SciPy 2015. Half an hour, and you'll never look at a
+rainbow scale the same way.
+
 :::
 
 ::: {.callout-tip title="Going deeper: hour is cyclic" collapse="true"}
@@ -585,7 +666,7 @@ ggplot(pedestrian_weekday,
 ```
 
 Two `geom_line()` calls, one of them filtered. `gghighlight()` from
-@sec-in-the-way does the same job in one line, and it's worth having seen the
+@sec-clutter does the same job in one line, and it's worth having seen the
 manual version so it isn't magic.
 
 Then get rid of the legend by putting the label on the line.
@@ -680,6 +761,48 @@ should follow the finding, not replace it.
 - Highlight one series rather than colouring four
 - A direct label beats a legend, because the reader stops travelling
 
+::: {.callout-tip title="Polish" collapse="true"}
+
+The highlight told the reader where to look. It did not tell them what they were
+looking at.
+
+```{r}
+#| label: fig-polish
+#| warning: false
+#| fig-alt: |
+#|   The greyed line plot with Flagstaff Station in red, a point on its 8am peak
+#|   and a label naming it.
+peak <- pedestrian_weekday |>
+        filter(sensor_name == "Flagstaff Station") |>
+        slice_max(mean_count, n = 1)
+
+ggplot(pedestrian_weekday,
+       aes(x = hour,
+           y = mean_count,
+           group = sensor_name)) +
+        geom_line(colour = "grey80") +
+        geom_line(data = filter(pedestrian_weekday,
+                                sensor_name == "Flagstaff Station"),
+                  colour = "firebrick") +
+        geom_point(data = peak, colour = "firebrick", size = 2) +
+        geom_text_repel(data = peak,
+                        aes(label = "Flagstaff, 8am"),
+                        nudge_y = 400,
+                        colour = "firebrick") +
+        scale_y_continuous(labels = scales::label_comma()) +
+        labs(x = "Hour", y = NULL) +
+        theme_minimal()
+```
+
+- **Annotate the one point you are talking about.** A highlighted line says
+  "this one". A label says why.
+- **Match the annotation colour to the thing.** The label is the same red as the
+  line, so nothing has to be traced.
+- **Drop the y title.** `mean_count` was never doing any work, and the comma
+  formatted numbers say what they are.
+
+:::
+
 ## To summarise
 
 Three things to take out of this chapter.
@@ -695,5 +818,5 @@ Three things to take out of this chapter.
 And the habit: before you style anything, decide what you want the reader to see
 first. Then make that the loudest thing on the page and demote everything else.
 
-Next up is making it land, which is the last mile: labels, themes, and getting a
-file out that looks the way it did on your screen.
+Next up is the last mile: labels, themes, and getting a file out that looks
+the way it did on your screen.

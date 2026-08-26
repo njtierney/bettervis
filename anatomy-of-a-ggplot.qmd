@@ -1148,6 +1148,38 @@ not have the thing you want.
 
 :::
 
+::: {.callout-tip title="Polish" collapse="true"}
+
+The el Niño scatter has been bare the whole chapter, which was the point: seven
+pieces and nothing else. Here it is with a few more of them turned on.
+
+```{r}
+#| label: fig-polish
+#| warning: false
+#| fig-alt: |
+#|   The sea against air temperature scatter, coloured by year, which separates
+#|   the two clusters.
+ggplot(oceanbuoys,
+       aes(x = air_temp_c,
+           y = sea_temp_c,
+           colour = factor(year))) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Air temperature (°C)",
+       y = "Sea temperature (°C)",
+       colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+- `colour = factor(year)` names the two clumps. They were 1993 and 1997 all
+  along, and the plot never said so.
+- `alpha = 0.5` because the points overlap, and where they pile up is
+  information.
+- Units in the axis labels, so nobody has to ask.
+- `colour = NULL` drops a legend title that only repeated what the values say.
+
+:::
+
 ## To summarise
 
 Three things to take out of this chapter.
@@ -1166,7 +1198,7 @@ which of the seven pieces is doing something you did not ask it to do. Nearly
 every ggplot2 problem I have ever had turned out to be one piece behaving
 exactly as documented, in a way I had not thought about.
 
-Next up is the shape of your data, which is where most of the remaining
+Next up is tidy data, which is where most of the remaining
 surprises come from.
 
 

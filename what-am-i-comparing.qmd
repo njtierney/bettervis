@@ -1,4 +1,6 @@
-# What am I comparing? {#sec-comparing}
+# Comparing groups {#sec-comparing}
+
+![](images/banners/what-am-i-comparing.png)
 
 Perhaps the most important consideration when plotting is to ask:
 
@@ -82,7 +84,7 @@ pedestrian_totals
 
 ::: {.callout-tip title="Code for this data" collapse="true"}
 
-This contains the parts from from @sec-shape and @sec-computed:
+This contains the parts from from @sec-tidy and @sec-computed:
 
 ```{r}
 #| ref.label: ["pkgs", "ped-totals"]
@@ -360,7 +362,7 @@ ggplot(pedestrian_totals,
 ```
 
 
-We come back to ordering properly in @sec-eye.
+We come back to ordering properly in @sec-colour.
 
 
 :::
@@ -794,7 +796,7 @@ keep having to choose between them.
 A sawtooth always means the same thing: **more than one y for each x, inside what ggplot2 thinks is one group.** So the line runs out to the right, comes
 back, and does it again.
 
-**Tell it about the group.** `group = species` in @sec-shape,
+**Tell it about the group.** `group = species` in @sec-tidy,
 `group = hour` in @sec-computed. Keeps every value you have. Needs a column
 worth grouping by, and few enough groups that you can still see them.
 
@@ -831,5 +833,36 @@ that I picked it.
 For a longer worked example of hunting one of these down, see [Just Quickly:
 Removing Sawtooth Patterns in Line
 Graphs](https://www.njtierney.com/posts/2020-06-14-jq-sawtooth/).
+
+:::
+
+::: {.callout-tip title="Polish" collapse="true"}
+
+The dodged bars made the comparison. They are still hard to read a number off.
+
+```{r}
+#| label: fig-polish
+#| fig-alt: |
+#|   Weekday and weekend totals per sensor as dodged bars, sorted by total, with
+#|   the axis in millions and the legend above the plot.
+ggplot(pedestrian_totals,
+       aes(x = total,
+           y = fct_reorder(sensor_name, total),
+           fill = day_type)) +
+        geom_col(position = "dodge") +
+        scale_x_continuous(
+                labels = scales::label_number(scale = 1e-6, suffix = "M")
+        ) +
+        labs(x = NULL, y = NULL, fill = NULL) +
+        theme_minimal() +
+        theme(legend.position = "top",
+              panel.grid.major.y = element_blank())
+```
+
+- **Sort the bars.** Alphabetical is not an order. This is @sec-colour's argument,
+  and it costs one function.
+- `label_number(scale = 1e-6, suffix = "M")` because nobody reads `7000000`.
+- Drop the horizontal grid lines. On a bar chart they cross the bars and add
+  nothing, since the bars already start from a common baseline.
 
 :::

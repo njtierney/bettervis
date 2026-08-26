@@ -24,10 +24,11 @@ book:
   chapters:
     - "index.qmd"
     - "setup.qmd"
-    # Two chapters of grammar, then the course turns and every chapter is
-    # named for a design question. Those four questions are the critique
-    # checklist the course hands over at the end, so their order and their
-    # wording are load bearing.
+    # Two chapters of grammar, then the course turns from how a plot is built
+    # to what it is for. Chapter titles name their subject, the way they do in
+    # the other course books. The four critique questions the course hands over
+    # at the end used to be the titles: they now live in `## Four questions` in
+    # the last chapter, which is the only place their wording is load bearing.
     - "anatomy-of-a-ggplot.qmd"
     - "shape-of-your-data.qmd"
     - "what-gets-computed.qmd"

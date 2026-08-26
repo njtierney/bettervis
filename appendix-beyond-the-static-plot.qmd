@@ -44,7 +44,7 @@ they're here when you want them.
 
 <!-- Tooltips and hover, which are genuinely useful when a plot has more detail
      than fits on the page. The trap is using interactivity to avoid making a
-     decision about what matters, which is the same failure @sec-eye is about.
+     decision about what matters, which is the same failure @sec-colour is about.
 
      The one-line version: geom_point_interactive(aes(tooltip = sensor_name))
      plus girafe(). Close to free if they already have the ggplot.

@@ -1,4 +1,6 @@
-# Making it land {#sec-land}
+# Labels, themes and saving {#sec-labels}
+
+![](images/banners/making-it-land.png)
 
 Your plot is right. Now it has to survive leaving your screen, and end up in a
 paper, a slide, or a report where nobody's there to explain it.
@@ -70,7 +72,7 @@ pedestrian_hourly <- pedestrian |>
 > **The idea:** polishing a plot you're going to throw away is the most common
 > way to waste an afternoon.
 
-Everything here comes **after** @sec-comparing, @sec-in-the-way and @sec-eye
+Everything here comes **after** @sec-comparing, @sec-clutter and @sec-colour
 have been answered. The order I work in:
 
 1. `labs()`
@@ -457,7 +459,7 @@ p_weekday + p_weekend
 - `p1 / p2` stacked
 - `(p1 + p2) / p3` nested
 
-Two legends saying the same thing is the decoration @sec-in-the-way was about.
+Two legends saying the same thing is the decoration @sec-clutter was about.
 `plot_layout(guides = "collect")` fixes it.
 
 ```{r}
@@ -636,7 +638,7 @@ Things worth knowing:
 - `dpi = 300` for print, and it does nothing for a vector format
 - the file extension picks the device
 - vector (`.pdf`, `.svg`) for line art, raster (`.png`) for anything with
-  thousands of overplotted points. A hex plot from @sec-in-the-way is small as a
+  thousands of overplotted points. A hex plot from @sec-clutter is small as a
   PDF; 35,152 points is not
 
 ::::
@@ -686,15 +688,16 @@ they all publish one.
 
 ## Four questions
 
-The chapter titles of this course are a checklist. That was deliberate.
+Four chapters of this course were each answering one question. Pulled out
+of their chapters they are a checklist, and you can run it on anything.
 
 > **What am I comparing?** (@sec-comparing)
 > Is the thing I want compared next to the thing I want it compared to?
 >
-> **What's in the way?** (@sec-in-the-way)
+> **What's in the way?** (@sec-clutter)
 > How much of this is not data, and can I see the data through it?
 >
-> **Where should the eye go?** (@sec-eye)
+> **Where should the eye go?** (@sec-colour)
 > What does a reader meet first, and did I choose it?
 >
 > **Does it say its finding?** (this chapter)
@@ -726,6 +729,45 @@ that would not survive all four.
 #| eval: !expr knitr::is_html_output()
 countdown(minutes = 10)
 ```
+
+:::
+
+::: {.callout-tip title="Polish" collapse="true"}
+
+This whole chapter was polish, so this box is the layer after it: the things
+that make a plot look like it came from somewhere rather than from a default.
+
+```{r}
+#| label: fig-polish
+#| fig-alt: |
+#|   The four panel plot with a bold title, the legend above, thicker lines and
+#|   a qualitative palette.
+ggplot(pedestrian_hourly,
+       aes(x = hour,
+           y = mean_count,
+           colour = day_type)) +
+        geom_line(linewidth = 0.8) +
+        facet_wrap(vars(sensor_name)) +
+        colorspace::scale_colour_discrete_qualitative(palette = "Dark 3") +
+        labs(title = "Only the park gets busier on a weekend",
+             x = NULL,
+             y = NULL,
+             colour = NULL) +
+        theme_minimal(base_size = 12) +
+        theme(plot.title = element_text(face = "bold"),
+              legend.position = "top",
+              panel.grid.minor = element_blank())
+```
+
+Three habits, rather than three lines of code:
+
+- **`theme_set()` once, at the top of the script.** Every plot in the file then
+  matches, and you stop pasting the same `theme()` call around.
+- **Pick a palette for the project, not for the plot.** Same colours across
+  every figure in a report and the reader learns them once.
+- **Write the alt text as you go.** Every figure in this book has a `fig-alt`.
+  Written at the time it takes twenty seconds, and written later it is a
+  weekend.
 
 :::
 

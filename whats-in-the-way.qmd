@@ -1,4 +1,6 @@
-# What's in the way? {#sec-in-the-way}
+# Clutter and overplotting {#sec-clutter}
+
+![](images/banners/whats-in-the-way.png)
 
 Once you've got the message clear in your plot, there can still be some clutter in the graphic. 
 
@@ -385,13 +387,13 @@ pedestrian_hourly |>
 
 Note the `filter()`. `pedestrian_hourly` holds a weekday *and* a weekend row for
 every hour, so colouring by sensor alone gives each line two values at every
-hour and it sawtooths straight away, exactly as in @sec-shape. Either filter to
+hour and it sawtooths straight away, exactly as in @sec-tidy. Either filter to
 one kind of day, or add `linetype = day_type` so ggplot2 knows there are eight
 groups and not four.
 
 There's more on this in the Summary section below, where it turns out to be the
 same trick as drawing your whole dataset in grey behind a facet. We come back to
-it as a design principle in @sec-eye.
+it as a design principle in @sec-colour.
 
 :::
 
@@ -625,7 +627,7 @@ whatever belongs to each panel.
 
 Grey for context, colour for the thing you mean. It's the same move whether you
 write it yourself or let a package do it, and we come back to it as a design
-principle in @sec-eye.
+principle in @sec-colour.
 
 :::
 
@@ -689,6 +691,34 @@ side violins are easier to compare.
 - Layer the points over the summary when you can afford the ink
 - Ridgelines for many ordered groups, violins for a few
 
+::: {.callout-tip title="Polish" collapse="true"}
+
+Taking things out got us most of the way. What is left is spacing and where the
+reader's eye enters each panel.
+
+```{r}
+#| label: fig-polish
+#| fig-alt: |
+#|   The four panel foot traffic plot with a light theme, the legend above the
+#|   plot, left aligned bold panel titles and more space between panels.
+p_busy +
+        theme_minimal(base_size = 11) +
+        theme(panel.grid.minor = element_blank(),
+              legend.position = "top",
+              panel.spacing = unit(1.2, "lines"),
+              strip.text = element_text(hjust = 0, face = "bold")) +
+        labs(x = NULL, y = NULL, colour = NULL)
+```
+
+- **`panel.spacing`.** Facets sharing an edge read as one plot. Give them room
+  and they read as four.
+- **Left align the strip titles.** Centred labels float; left aligned ones line
+  up with the panel they name and with the way the page is read.
+- **Legend above, not beside.** Beside the plot it takes width away from the
+  data. Above, it costs a line of height nobody was using.
+
+:::
+
 ## To summarise
 
 Three things to take out of this chapter.
@@ -703,4 +733,4 @@ Three things to take out of this chapter.
 When a plot looks like a mess, don't start styling it. Ask what is between the
 reader and the data, and take that out first.
 
-Next up is where the eye goes: not what to take away, but what to make loud.
+Next up is colour and emphasis: not what to take away, but what to make loud.
