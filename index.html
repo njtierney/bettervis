@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicholas Tierney">
-<meta name="dcterms.date" content="2026-08-24">
+<meta name="dcterms.date" content="2026-08-26">
 
 <title>Making Better Graphs</title>
 <style>
@@ -173,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shape-of-your-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -185,25 +185,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Clutter and overplotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour and emphasis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./making-it-land.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Labels, themes and saving</span></span></a>
   </div>
 </li>
     </ul>
@@ -221,12 +221,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a>
   <ul class="collapse">
   <li><a href="#anatomy-of-a-ggplot" id="toc-anatomy-of-a-ggplot" class="nav-link" data-scroll-target="#anatomy-of-a-ggplot">Anatomy of a ggplot</a></li>
-  <li><a href="#the-shape-of-your-data" id="toc-the-shape-of-your-data" class="nav-link" data-scroll-target="#the-shape-of-your-data">The shape of your data</a></li>
+  <li><a href="#tidy-data-for-plotting" id="toc-tidy-data-for-plotting" class="nav-link" data-scroll-target="#tidy-data-for-plotting">Tidy data for plotting</a></li>
   <li><a href="#what-gets-computed" id="toc-what-gets-computed" class="nav-link" data-scroll-target="#what-gets-computed">What gets computed</a></li>
-  <li><a href="#what-am-i-comparing" id="toc-what-am-i-comparing" class="nav-link" data-scroll-target="#what-am-i-comparing">What am I comparing?</a></li>
-  <li><a href="#whats-in-the-way" id="toc-whats-in-the-way" class="nav-link" data-scroll-target="#whats-in-the-way">What’s in the way?</a></li>
-  <li><a href="#where-should-the-eye-go" id="toc-where-should-the-eye-go" class="nav-link" data-scroll-target="#where-should-the-eye-go">Where should the eye go?</a></li>
-  <li><a href="#making-it-land" id="toc-making-it-land" class="nav-link" data-scroll-target="#making-it-land">Making it land</a></li>
+  <li><a href="#comparing-groups" id="toc-comparing-groups" class="nav-link" data-scroll-target="#comparing-groups">Comparing groups</a></li>
+  <li><a href="#clutter-and-overplotting" id="toc-clutter-and-overplotting" class="nav-link" data-scroll-target="#clutter-and-overplotting">Clutter and overplotting</a></li>
+  <li><a href="#colour-and-emphasis" id="toc-colour-and-emphasis" class="nav-link" data-scroll-target="#colour-and-emphasis">Colour and emphasis</a></li>
+  <li><a href="#labels-themes-and-saving" id="toc-labels-themes-and-saving" class="nav-link" data-scroll-target="#labels-themes-and-saving">Labels, themes and saving</a></li>
   <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">Appendices</a></li>
   </ul></li>
   <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 24, 2026</p>
+      <p class="date">August 26, 2026</p>
     </div>
   </div>
   
@@ -312,8 +312,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Adding layers</li>
 </ul>
 </section>
-<section id="the-shape-of-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="the-shape-of-your-data">The shape of your data</h2>
+<section id="tidy-data-for-plotting" class="level2">
+<h2 class="anchored" data-anchor-id="tidy-data-for-plotting">Tidy data for plotting</h2>
 <p><strong>tidy data, <code>pivot_longer()</code>, <code>separate_\*()</code></strong></p>
 <ul>
 <li>What shape ggplot2 expects</li>
@@ -332,8 +332,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Scales, log scales, and coords</li>
 </ul>
 </section>
-<section id="what-am-i-comparing" class="level2">
-<h2 class="anchored" data-anchor-id="what-am-i-comparing">What am I comparing?</h2>
+<section id="comparing-groups" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-groups">Comparing groups</h2>
 <p><strong><code>facet_wrap()</code>, <code>facet_grid()</code>, position adjustments</strong></p>
 <ul>
 <li>Why a plot can hold all your data and answer nothing</li>
@@ -344,8 +344,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Free scales, and what they cost</li>
 </ul>
 </section>
-<section id="whats-in-the-way" class="level2">
-<h2 class="anchored" data-anchor-id="whats-in-the-way">What’s in the way?</h2>
+<section id="clutter-and-overplotting" class="level2">
+<h2 class="anchored" data-anchor-id="clutter-and-overplotting">Clutter and overplotting</h2>
 <p><strong>data:ink, <code>alpha</code>, <code>geom_hex()</code>, gghighlight, raincloud plots</strong></p>
 <ul>
 <li>The data:ink ratio, and how far to take it</li>
@@ -356,8 +356,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Showing distribution and data together: half plots, raincloud plots</li>
 </ul>
 </section>
-<section id="where-should-the-eye-go" class="level2">
-<h2 class="anchored" data-anchor-id="where-should-the-eye-go">Where should the eye go?</h2>
+<section id="colour-and-emphasis" class="level2">
+<h2 class="anchored" data-anchor-id="colour-and-emphasis">Colour and emphasis</h2>
 <p><strong><code>fct_reorder()</code>, colour palettes, colourblind safety</strong></p>
 <ul>
 <li>Visual hierarchy, and what a reader looks at first</li>
@@ -368,8 +368,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Emphasis by contrast, and direct labelling instead of legends</li>
 </ul>
 </section>
-<section id="making-it-land" class="level2">
-<h2 class="anchored" data-anchor-id="making-it-land">Making it land</h2>
+<section id="labels-themes-and-saving" class="level2">
+<h2 class="anchored" data-anchor-id="labels-themes-and-saving">Labels, themes and saving</h2>
 <p><strong><code>labs()</code>, themes, patchwork, <code>ggsave()</code></strong></p>
 <ul>
 <li>When to start polishing</li>

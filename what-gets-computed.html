@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shape-of-your-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -186,25 +186,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Clutter and overplotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour and emphasis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./making-it-land.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Labels, themes and saving</span></span></a>
   </div>
 </li>
     </ul>
@@ -224,7 +224,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-did-it-compute" id="toc-what-did-it-compute" class="nav-link" data-scroll-target="#what-did-it-compute">What did it compute?</a></li>
   <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
   </ul></li>
-  <li><a href="#geoms-that-count-for-you" id="toc-geoms-that-count-for-you" class="nav-link" data-scroll-target="#geoms-that-count-for-you"><span class="header-section-number">3.3</span> Geoms that count for you</a></li>
+  <li><a href="#geoms-that-count-for-you" id="toc-geoms-that-count-for-you" class="nav-link" data-scroll-target="#geoms-that-count-for-you"><span class="header-section-number">3.3</span> Geoms that count for you</a>
+  <ul class="collapse">
+  <li><a href="#takeaways-1" id="toc-takeaways-1" class="nav-link" data-scroll-target="#takeaways-1">Takeaways</a></li>
+  </ul></li>
+  <li><a href="#geoms-that-bin-for-you" id="toc-geoms-that-bin-for-you" class="nav-link" data-scroll-target="#geoms-that-bin-for-you"><span class="header-section-number">3.4</span> Geoms that bin for you</a>
+  <ul class="collapse">
+  <li><a href="#back-to-that-8am-box" id="toc-back-to-that-8am-box" class="nav-link" data-scroll-target="#back-to-that-8am-box">Back to that 8am box</a></li>
+  <li><a href="#showing-the-actual-readings-with-geom_rug" id="toc-showing-the-actual-readings-with-geom_rug" class="nav-link" data-scroll-target="#showing-the-actual-readings-with-geom_rug">Showing the actual readings with <code>geom_rug()</code></a></li>
+  <li><a href="#takeaways-2" id="toc-takeaways-2" class="nav-link" data-scroll-target="#takeaways-2">Takeaways</a></li>
+  </ul></li>
+  <li><a href="#to-summarise" id="toc-to-summarise" class="nav-link" data-scroll-target="#to-summarise"><span class="header-section-number">3.5</span> To summarise</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/njtierney/bettervis/edit/main/what-gets-computed.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/njtierney/bettervis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -250,6 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><img src="images/banners/what-gets-computed.png" class="img-fluid"></p>
 <p>Some geoms draw exactly what you expect: <code>geom_point()</code>, <code>geom_line()</code>.</p>
 <p>Others need to do some computation! <code>geom_histogram()</code>, <code>geom_density()</code>, <code>geom_bar()</code>, and <code>geom_boxplot()</code> are all examples of this.</p>
 <p>This chapter is what happens between your data and the vis on screen.</p>
@@ -700,7 +711,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You don’t need exact number on the axes. I am just curious on the <strong>shape</strong>. You can use bars, dots, lines, other summaries, whatever you want!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_753491f3" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_734fab3d" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <ul>
@@ -899,7 +910,7 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Let’s take a couple of minutes to explore this, draw some sketches, imagine the types of data summary we might see as tables, as plots!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_d1019563" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_df58a7a6" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -1013,7 +1024,7 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Is that a fairer picture of 8am than the one box was?</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_02365967" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_bf379df1" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -1111,7 +1122,7 @@ Figure&nbsp;3.2: A day at Flagstaff Station, with the variation left in.
 <p>Sketch it out!</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_4d28f5b0" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_6b1c0b6a" minutes="2" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>It should look something like the following:</p>
@@ -1135,6 +1146,8 @@ Answer
 </div>
 </div>
 </details>
+</div>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-label="1"></a>flagstaff_hourly <span class="ot">&lt;-</span> flagstaff <span class="sc">|&gt;</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-label="2"></a>  <span class="fu">group_by</span>(hour) <span class="sc">|&gt;</span></span>
@@ -1182,7 +1195,7 @@ Figure&nbsp;3.3: Flagstaff Station. A train station, drawn as a train station.
 <p>It is only describing a single number - not the variation.</p>
 <p>This doesn’t make <code>geom_col()</code> wrong! You’ve displayed a summary.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="So what does `geom_bar()` do?">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1191,7 +1204,7 @@ Figure&nbsp;3.3: Flagstaff Station. A train station, drawn as a train station.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are two bar geoms, and the other one is <code>geom_bar()</code>.</p>
 <p>The difference is that <code>geom_col()</code> needs you to give it a y, and <code>geom_bar()</code> works one out for itself. What it works out is a <strong>count of rows</strong>.</p>
@@ -1269,7 +1282,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1278,7 +1291,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
@@ -1331,11 +1344,11 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_af73273d" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_efd774d7" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1344,7 +1357,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Only open this if you have actually had a go.</p>
 <p><strong>2.</strong> The park peaks at 5pm, not 8am. People walk by the river after work, not on the way to it.</p>
@@ -1372,6 +1385,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 <p><code>geom_col()</code> draws the number you give it. <code>geom_bar()</code> counts your rows and draws that.</p>
 <p>So the question is not “which function is right”, it is <strong>have I already worked out the number I want on the y axis?</strong></p>
 </section>
+</section>
 <section id="geoms-that-bin-for-you" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="geoms-that-bin-for-you"><span class="header-section-number">3.4</span> Geoms that bin for you</h2>
 <blockquote class="blockquote">
@@ -1388,7 +1402,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1397,7 +1411,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
@@ -1425,7 +1439,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1434,7 +1448,7 @@ Figure&nbsp;3.4: Every hour is exactly as busy as every other hour. Suspicious.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
@@ -1600,7 +1614,7 @@ Figure&nbsp;3.10: Every one of the 397 mornings, drawn underneath the bins.
 <p>Look along the bottom. Each tick is one morning in 2016, and you can see them bunch under the two humps and thin out to nearly nothing across the middle.</p>
 <p>I like <code>geom_rug()</code> a lot for this - because it costs you one line and it puts the evidence next to the summary.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Comparing two distributions on one plot">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1609,7 +1623,7 @@ Figure&nbsp;3.10: Every one of the 397 mornings, drawn underneath the bins.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The other thing you often want is two distributions side by side. Let’s take the station and the park.</p>
 <div class="cell">
@@ -1694,7 +1708,7 @@ Figure&nbsp;3.13: The same comparison, as curves.
 </div>
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-tip callout-titled" title="Setup code">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1703,7 +1717,7 @@ Figure&nbsp;3.13: The same comparison, as curves.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
@@ -1759,7 +1773,7 @@ Figure&nbsp;3.13: The same comparison, as curves.
 <li><p><code>geom_histogram()</code> bins for you. <code>geom_freqpoly()</code> does the same computation and draws a line instead. Swap one for the other on <code>flagstaff_8am</code>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1768,7 +1782,7 @@ Figure&nbsp;3.13: The same comparison, as curves.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Only open this if you have actually had a go.</p>
 <p><strong>1 and 2.</strong> One hump. Birrarung Marr at 8am runs from 95 to 7218 with no gap in the middle, because a park does not care what day it is. No commute means no second population.</p>
@@ -1779,7 +1793,7 @@ Figure&nbsp;3.13: The same comparison, as curves.
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_d9e279ff" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_c5d3b07a" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -1789,6 +1803,49 @@ Figure&nbsp;3.13: The same comparison, as curves.
 <h3 class="anchored" data-anchor-id="takeaways-2">Takeaways</h3>
 <p>The default binwidth is a placeholder, and ggplot2 says so out loud. Pick a number you could describe to somebody.</p>
 <p>A histogram is still a summary, so put a <code>geom_rug()</code> under it when there are few enough points to see them.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Polish">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Polish
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The histograms in this chapter were deliberately plain, so the computation was the only thing to look at. Here is one dressed for showing somebody.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-label="1"></a><span class="fu">ggplot</span>(flagstaff_8am, <span class="fu">aes</span>(<span class="at">x =</span> hourly_counts)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">250</span>, <span class="at">fill =</span> <span class="st">"grey30"</span>) <span class="sc">+</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-label="3"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-label="4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>()) <span class="sc">+</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-label="5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"People per hour"</span>,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-label="6"></a>       <span class="at">y =</span> <span class="st">"Days"</span>,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-label="7"></a>       <span class="at">subtitle =</span> <span class="st">"Bins of 250 people"</span>) <span class="sc">+</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-label="8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-polish" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A histogram of 8am counts at Flagstaff Station with a rug underneath, comma formatted axis numbers, and the bin width stated in the subtitle.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="what-gets-computed_files/figure-html/fig-polish-1.png" id="fig-polish" class="img-fluid figure-img" alt="A histogram of 8am counts at Flagstaff Station with a rug underneath, comma formatted axis numbers, and the bin width stated in the subtitle." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.14
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>State the binwidth.</strong> The reader is looking at a computation, and the subtitle is the cheapest place to say which one.</li>
+<li><code>geom_rug()</code> puts the actual observations under the summary, so the bins can be checked against something.</li>
+<li><code>scales::label_comma()</code> on any axis with thousands on it. <code>4000</code> and <code>4,000</code> are not the same reading effort.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="to-summarise" class="level2" data-number="3.5">
@@ -1801,12 +1858,9 @@ Figure&nbsp;3.13: The same comparison, as curves.
 </ol>
 <p>And the habit underneath all three.</p>
 <p>When a plot surprises you, ask what got computed between the data and the marks. Nearly every surprise in this chapter came from a computation happening exactly as documented, on data I hadn’t noticed was different to what I thought.</p>
-<p>Next up is what you are comparing, which is where we stop asking how a plot is built and start asking what it is for.</p>
+<p>Next up is comparing groups, which is where we stop asking how a plot is built and start asking what it is for.</p>
 
 
-</section>
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -2212,13 +2266,13 @@ Figure&nbsp;3.13: The same comparison, as curves.
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./shape-of-your-data.html" class="pagination-link" aria-label="The shape of your data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span>
+      <a href="./shape-of-your-data.html" class="pagination-link" aria-label="Tidy data for plotting">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./what-am-i-comparing.html" class="pagination-link" aria-label="What am I comparing?">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./what-am-i-comparing.html" class="pagination-link" aria-label="Comparing groups">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparing groups</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; The shape of your data – Making Better Graphs</title>
+<title>2&nbsp; Tidy data for plotting – Making Better Graphs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./shape-of-your-data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./shape-of-your-data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shape-of-your-data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -186,25 +186,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Clutter and overplotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour and emphasis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./making-it-land.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Labels, themes and saving</span></span></a>
   </div>
 </li>
     </ul>
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-shape" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></h1>
+<h1 class="title"><span id="sec-tidy" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></span></h1>
 </div>
 
 
@@ -250,7 +250,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<!-- Claude: "shape" is the wrong word here - it should be "tidy data" - the key is "tidy". Make sure to update other references to "shape" here. -->
+<p><img src="images/banners/shape-of-your-data.png" class="img-fluid"></p>
+<!-- The "shape" wording is gone: the title, the {#sec-tidy} anchor, every
+@sec-tidy reference and schedule.md all say tidy now. The filename and the
+banner image are the last two, and they change the published URL, so they are
+noted in class-notes/course-todo.md rather than done quietly. -->
 <p>In my experience, a lot of my ggplot problems were actually problems with my data, and how I had it formatted. I found this was especially so early on, when I was learning how to use ggplot.</p>
 <p>I believe these data problems are somewhat solved by making sure your data is in a format called “tidy data”. We will talk about what that means, and how to spot data that isn’t “tidy”, and fix it.</p>
 <p>We also come back to those missing observations in the oceanbuoys data we look at in <a href="anatomy-of-a-ggplot.html" class="quarto-xref"><span>Chapter 1</span></a>.</p>
@@ -776,7 +780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_de167bfc" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_9b97f90a" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Run the code below to create the <code>hi_score</code> dataset:</p>
@@ -1058,7 +1062,7 @@ Answer code below
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_2a56501b" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_c6c8bce2" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Now try using <code>pivot_longer()</code> with a different dataset: <code>relig_income</code>, which comes bundled inside <code>tidyr</code>. This is a dataset that contains religion and income ranges.</p>
@@ -1131,7 +1135,7 @@ Answer code below
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_ef0573e3" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_5c5bb542" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <p>Now try with this data:</p>
@@ -1248,7 +1252,7 @@ Answer code below
 <span id="cb68-3"><a href="#cb68-3" aria-label="3"></a>           <span class="at">y =</span> bill_len)) <span class="sc">+</span></span>
 <span id="cb68-4"><a href="#cb68-4" aria-label="4"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-sawtooth" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point.">
+<div id="fig-sawtooth" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sawtooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="shape-of-your-data_files/figure-html/fig-sawtooth-1.png" id="fig-sawtooth" class="img-fluid figure-img" alt="A line plot of bill length against year. Instead of three separate lines there is a single line zigzagging steeply up and down between every point." width="672">
@@ -1330,6 +1334,52 @@ Figure&nbsp;2.1
 <li><p>Now swap <code>geom_point()</code> for <code>geom_miss_point()</code> on the air temperature and sea temperature scatterplot. Where do the dropped rows go?</p></li>
 <li><p>Does seeing them change what you think the plot says?</p></li>
 </ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Polish">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Polish
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Once the data is tidy, the plot is still the bare minimum. Three things make the penguin lines presentable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-label="1"></a><span class="fu">ggplot</span>(pen_short,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb71-3"><a href="#cb71-3" aria-label="3"></a>           <span class="at">y =</span> bill_len,</span>
+<span id="cb71-4"><a href="#cb71-4" aria-label="4"></a>           <span class="at">colour =</span> species)) <span class="sc">+</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-label="5"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-label="6"></a>        <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-label="7"></a>        <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">unique</span>(pen_short<span class="sc">$</span>year)) <span class="sc">+</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-label="8"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb71-9"><a href="#cb71-9" aria-label="9"></a>             <span class="at">y =</span> <span class="st">"Bill length (mm)"</span>,</span>
+<span id="cb71-10"><a href="#cb71-10" aria-label="10"></a>             <span class="at">colour =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb71-11"><a href="#cb71-11" aria-label="11"></a>        <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-polish" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Bill length across three years, one line per species, with a point at each observation and only the three real years on the x axis." width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="shape-of-your-data_files/figure-html/fig-polish-1.png" id="fig-polish" class="img-fluid figure-img" alt="Bill length across three years, one line per species, with a point at each observation and only the three real years on the x axis." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><code>geom_point()</code> on top of the line, so you can see there are three observations and not a continuous measurement.</li>
+<li><code>scale_x_continuous(breaks = ...)</code> because the default put 2007.5 on the axis, and there is no such year.</li>
+<li>The y label carries the unit. <code>bill_len</code> is a column name, millimetres is a measurement.</li>
+</ul>
+</div>
 </div>
 </div>
 

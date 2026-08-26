@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Making it land – Making Better Graphs</title>
+<title>7&nbsp; Labels, themes and saving – Making Better Graphs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./making-it-land.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./making-it-land.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Labels, themes and saving</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -173,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shape-of-your-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -185,25 +185,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Clutter and overplotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour and emphasis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./making-it-land.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Labels, themes and saving</span></span></a>
   </div>
 </li>
     </ul>
@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-land" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></h1>
+<h1 class="title"><span id="sec-labels" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Labels, themes and saving</span></span></h1>
 </div>
 
 
@@ -265,6 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><img src="images/banners/making-it-land.png" class="img-fluid"></p>
 <p>Your plot is right. Now it has to survive leaving your screen, and end up in a paper, a slide, or a report where nobody’s there to explain it.</p>
 <p>This chapter is the last mile: labels, themes, combining plots, and getting a file out that looks the way it did in RStudio.</p>
 <p>We finish by turning the course into a checklist you can run on anything.</p>
@@ -331,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-label="7"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-label="8"></a>p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-base-plot" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels of hourly foot traffic, one per sensor, with weekday and weekend lines, and default axis labels.">
+<div id="fig-base-plot" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels of hourly foot traffic, one per sensor, with weekday and weekend lines, and default axis labels." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-base-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-base-plot-1.png" id="fig-base-plot" class="img-fluid figure-img" alt="Four panels of hourly foot traffic, one per sensor, with weekday and weekend lines, and default axis labels." width="672">
@@ -363,7 +364,7 @@ Figure&nbsp;7.1
 <span id="cb4-10"><a href="#cb4-10" aria-label="10"></a></span>
 <span id="cb4-11"><a href="#cb4-11" aria-label="11"></a>p_labelled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-labelled" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same four panels with a title reading &quot;Only the park gets busier on a weekend&quot;, a subtitle, and readable axis labels.">
+<div id="fig-labelled" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same four panels with a title reading &quot;Only the park gets busier on a weekend&quot;, a subtitle, and readable axis labels." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-labelled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-labelled-1.png" id="fig-labelled" class="img-fluid figure-img" alt="The same four panels with a title reading &quot;Only the park gets busier on a weekend&quot;, a subtitle, and readable axis labels." width="672">
@@ -409,7 +410,7 @@ Figure&nbsp;7.2
 <span id="cb5-20"><a href="#cb5-20" aria-label="20"></a>                <span class="at">fill =</span> <span class="st">"Day type"</span></span>
 <span id="cb5-21"><a href="#cb5-21" aria-label="21"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-labs-fill" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A stacked bar chart of total foot traffic by sensor, with the legend titled &quot;Day type&quot; rather than &quot;day_type&quot;.">
+<div id="fig-labs-fill" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A stacked bar chart of total foot traffic by sensor, with the legend titled &quot;Day type&quot; rather than &quot;day_type&quot;." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-labs-fill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-labs-fill-1.png" id="fig-labs-fill" class="img-fluid figure-img" alt="A stacked bar chart of total foot traffic by sensor, with the legend titled &quot;Day type&quot; rather than &quot;day_type&quot;." width="672">
@@ -447,7 +448,7 @@ Figure&nbsp;7.3
 <span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"midnight"</span>, <span class="st">"6am"</span>, <span class="st">"noon"</span>, <span class="st">"6pm"</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-label="5"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-breaks" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot with the x axis labelled midnight, 6am, noon and 6pm instead of 0, 5, 10, 15, 20.">
+<div id="fig-breaks" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same plot with the x axis labelled midnight, 6am, noon and 6pm instead of 0, 5, 10, 15, 20." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-breaks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-breaks-1.png" id="fig-breaks" class="img-fluid figure-img" alt="The same plot with the x axis labelled midnight, 6am, noon and 6pm instead of 0, 5, 10, 15, 20." width="672">
@@ -566,7 +567,7 @@ Figure&nbsp;7.4
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_95b13c8a" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_dc9593c5" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -611,7 +612,7 @@ Figure&nbsp;7.4
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-label="1"></a>p_labelled <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-theme-minimal" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The labelled plot with theme_minimal applied.">
+<div id="fig-theme-minimal" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The labelled plot with theme_minimal applied." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-theme-minimal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-theme-minimal-1.png" id="fig-theme-minimal" class="img-fluid figure-img" alt="The labelled plot with theme_minimal applied." width="672">
@@ -628,7 +629,7 @@ Figure&nbsp;7.5
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a>p_labelled <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-theme-bw" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The labelled plot with theme_bw applied.">
+<div id="fig-theme-bw" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The labelled plot with theme_bw applied." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-theme-bw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-theme-bw-1.png" id="fig-theme-bw" class="img-fluid figure-img" alt="The labelled plot with theme_bw applied." width="672">
@@ -645,7 +646,7 @@ Figure&nbsp;7.6
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-label="1"></a>p_labelled <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-theme-classic" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The labelled plot with theme_classic applied.">
+<div id="fig-theme-classic" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The labelled plot with theme_classic applied." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-theme-classic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-theme-classic-1.png" id="fig-theme-classic" class="img-fluid figure-img" alt="The labelled plot with theme_classic applied." width="672">
@@ -662,7 +663,7 @@ Figure&nbsp;7.7
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a>p_labelled <span class="sc">+</span> <span class="fu">theme_light</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-theme-light" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The labelled plot with theme_light applied.">
+<div id="fig-theme-light" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The labelled plot with theme_light applied." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-theme-light-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-theme-light-1.png" id="fig-theme-light" class="img-fluid figure-img" alt="The labelled plot with theme_light applied." width="672">
@@ -690,7 +691,7 @@ Figure&nbsp;7.8
 <span id="cb17-9"><a href="#cb17-9" aria-label="9"></a></span>
 <span id="cb17-10"><a href="#cb17-10" aria-label="10"></a>p_labelled <span class="sc">+</span> <span class="fu">theme_pedestrian</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-theme-fn" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The labelled plot with a custom theme: minimal base, legend at the bottom, no minor gridlines, title aligned to the left edge.">
+<div id="fig-theme-fn" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The labelled plot with a custom theme: minimal base, legend at the bottom, no minor gridlines, title aligned to the left edge." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-theme-fn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-theme-fn-1.png" id="fig-theme-fn" class="img-fluid figure-img" alt="The labelled plot with a custom theme: minimal base, legend at the bottom, no minor gridlines, title aligned to the left edge." width="672">
@@ -798,7 +799,7 @@ Figure&nbsp;7.9
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_eb6c0716" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_d9097559" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -850,7 +851,7 @@ Figure&nbsp;7.9
 <span id="cb20-12"><a href="#cb20-12" aria-label="12"></a></span>
 <span id="cb20-13"><a href="#cb20-13" aria-label="13"></a>p_weekday <span class="sc">+</span> p_weekend</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-patchwork" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Two line charts side by side, one for weekdays and one for weekends, each with four coloured sensor lines.">
+<div id="fig-patchwork" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two line charts side by side, one for weekdays and one for weekends, each with four coloured sensor lines." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-patchwork-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-patchwork-1.png" id="fig-patchwork" class="img-fluid figure-img" alt="Two line charts side by side, one for weekdays and one for weekends, each with four coloured sensor lines." width="672">
@@ -877,7 +878,7 @@ Figure&nbsp;7.10
 <span id="cb21-6"><a href="#cb21-6" aria-label="6"></a>        ) <span class="sc">&amp;</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-label="7"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-patchwork-collect" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same two charts with a single shared legend underneath and panel tags A and B.">
+<div id="fig-patchwork-collect" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same two charts with a single shared legend underneath and panel tags A and B." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-patchwork-collect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-patchwork-collect-1.png" id="fig-patchwork-collect" class="img-fluid figure-img" alt="The same two charts with a single shared legend underneath and panel tags A and B." width="672">
@@ -960,7 +961,7 @@ Figure&nbsp;7.11
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_a979cc74" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_b146efec" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -1044,7 +1045,7 @@ Figure&nbsp;7.11
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-label="1"></a>p_labelled <span class="sc">+</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-label="2"></a>        <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fl">1.618</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-aspect" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The four panel plot with each panel constrained to a golden ratio, wider than it is tall.">
+<div id="fig-aspect" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The four panel plot with each panel constrained to a golden ratio, wider than it is tall." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-aspect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="making-it-land_files/figure-html/fig-aspect-1.png" id="fig-aspect" class="img-fluid figure-img" alt="The four panel plot with each panel constrained to a golden ratio, wider than it is tall." width="672">
@@ -1178,7 +1179,7 @@ Figure&nbsp;7.12
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_2733ba40" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_711a9b98" minutes="3" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -1211,7 +1212,7 @@ Figure&nbsp;7.12
 </section>
 <section id="four-questions" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="four-questions"><span class="header-section-number">7.6</span> Four questions</h2>
-<p>The chapter titles of this course are a checklist. That was deliberate.</p>
+<p>Four chapters of this course were each answering one question. Pulled out of their chapters they are a checklist, and you can run it on anything.</p>
 <blockquote class="blockquote">
 <p><strong>What am I comparing?</strong> (<a href="what-am-i-comparing.html" class="quarto-xref"><span>Chapter 4</span></a>) Is the thing I want compared next to the thing I want it compared to?</p>
 <p><strong>What’s in the way?</strong> (<a href="whats-in-the-way.html" class="quarto-xref"><span>Chapter 5</span></a>) How much of this is not data, and can I see the data through it?</p>
@@ -1268,8 +1269,59 @@ Figure&nbsp;7.12
 <p>Then run them on a plot from this book. Mine included: there are plenty in here that would not survive all four.</p>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_02f4f2a3" minutes="10" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_e15b8afe" minutes="10" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Polish">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Polish
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This whole chapter was polish, so this box is the layer after it: the things that make a plot look like it came from somewhere rather than from a default.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-label="1"></a><span class="fu">ggplot</span>(pedestrian_hourly,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-label="2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hour,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-label="3"></a>           <span class="at">y =</span> mean_count,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-label="4"></a>           <span class="at">colour =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-label="5"></a>        <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-label="6"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name)) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-label="7"></a>        colorspace<span class="sc">::</span><span class="fu">scale_colour_discrete_qualitative</span>(<span class="at">palette =</span> <span class="st">"Dark 3"</span>) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-label="8"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Only the park gets busier on a weekend"</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-label="9"></a>             <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-label="10"></a>             <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-label="11"></a>             <span class="at">colour =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-label="12"></a>        <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-label="13"></a>        <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb32-14"><a href="#cb32-14" aria-label="14"></a>              <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-label="15"></a>              <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-polish" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The four panel plot with a bold title, the legend above, thicker lines and a qualitative palette." width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="making-it-land_files/figure-html/fig-polish-1.png" id="fig-polish" class="img-fluid figure-img" alt="The four panel plot with a bold title, the legend above, thicker lines and a qualitative palette." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.13
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Three habits, rather than three lines of code:</p>
+<ul>
+<li><strong><code>theme_set()</code> once, at the top of the script.</strong> Every plot in the file then matches, and you stop pasting the same <code>theme()</code> call around.</li>
+<li><strong>Pick a palette for the project, not for the plot.</strong> Same colours across every figure in a report and the reader learns them once.</li>
+<li><strong>Write the alt text as you go.</strong> Every figure in this book has a <code>fig-alt</code>. Written at the time it takes twenty seconds, and written later it is a weekend.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1691,8 +1743,8 @@ Figure&nbsp;7.12
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./where-should-the-eye-go.html" class="pagination-link" aria-label="Where should the eye go?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span>
+      <a href="./where-should-the-eye-go.html" class="pagination-link" aria-label="Colour and emphasis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour and emphasis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

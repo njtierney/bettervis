@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; What’s in the way? – Making Better Graphs</title>
+<title>5&nbsp; Clutter and overplotting – Making Better Graphs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./whats-in-the-way.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./whats-in-the-way.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Clutter and overplotting</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shape-of-your-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The shape of your data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data for plotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -186,25 +186,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./what-am-i-comparing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./whats-in-the-way.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Clutter and overplotting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./where-should-the-eye-go.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour and emphasis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./making-it-land.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Making it land</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Labels, themes and saving</span></span></a>
   </div>
 </li>
     </ul>
@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-in-the-way" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s in the way?</span></span></h1>
+<h1 class="title"><span id="sec-clutter" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Clutter and overplotting</span></span></h1>
 </div>
 
 
@@ -260,6 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><img src="images/banners/whats-in-the-way.png" class="img-fluid"></p>
 <p>Once you’ve got the message clear in your plot, there can still be some clutter in the graphic.</p>
 <p>To structure how to clean up your plot, we will talk about</p>
 <ul>
@@ -321,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-label="7"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-label="8"></a>p_busy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-before" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels, one per sensor, each with a weekday and a weekend line, on ggplot2's default grey background with white gridlines and a legend on the right.">
+<div id="fig-before" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels, one per sensor, each with a weekday and a weekend line, on ggplot2's default grey background with white gridlines and a legend on the right." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-before-1.png" id="fig-before" class="img-fluid figure-img" alt="Four panels, one per sensor, each with a weekday and a weekend line, on ggplot2's default grey background with white gridlines and a legend on the right." width="672">
@@ -346,7 +347,7 @@ Figure&nbsp;5.1
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_d806dfcf" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_ec392bbe" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 </div>
@@ -366,7 +367,7 @@ Figure&nbsp;5.1
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-label="1"></a>p_busy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-0" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The four panel plot with ggplot2's default grey theme.">
+<div id="fig-strip-0" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The four panel plot with ggplot2's default grey theme." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-0-1.png" id="fig-strip-0" class="img-fluid figure-img" alt="The four panel plot with ggplot2's default grey theme." width="672">
@@ -383,7 +384,7 @@ Figure&nbsp;5.2
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-label="1"></a>p_busy <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot with a white background and light grey gridlines.">
+<div id="fig-strip-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same plot with a white background and light grey gridlines." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-1-1.png" id="fig-strip-1" class="img-fluid figure-img" alt="The same plot with a white background and light grey gridlines." width="672">
@@ -402,7 +403,7 @@ Figure&nbsp;5.3
 <span id="cb6-2"><a href="#cb6-2" aria-label="2"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-label="3"></a>        <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot again with the minor gridlines removed.">
+<div id="fig-strip-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same plot again with the minor gridlines removed." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-2-1.png" id="fig-strip-2" class="img-fluid figure-img" alt="The same plot again with the minor gridlines removed." width="672">
@@ -422,7 +423,7 @@ Figure&nbsp;5.4
 <span id="cb7-3"><a href="#cb7-3" aria-label="3"></a>        <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>              <span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-strip-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same plot with the legend moved underneath, giving the panels more width.">
+<div id="fig-strip-3" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same plot with the legend moved underneath, giving the panels more width." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-strip-3-1.png" id="fig-strip-3" class="img-fluid figure-img" alt="The same plot with the legend moved underneath, giving the panels more width." width="672">
@@ -448,7 +449,7 @@ Figure&nbsp;5.5
 <span id="cb8-4"><a href="#cb8-4" aria-label="4"></a>           <span class="at">fill =</span> sensor_name)) <span class="sc">+</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-label="5"></a>        <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-colour-redundant" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four boxplots, each filled with a different colour, with a legend on the right repeating the sensor names already on the x axis.">
+<div id="fig-colour-redundant" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four boxplots, each filled with a different colour, with a legend on the right repeating the sensor names already on the x axis." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-colour-redundant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-colour-redundant-1.png" id="fig-colour-redundant" class="img-fluid figure-img" alt="Four boxplots, each filled with a different colour, with a legend on the right repeating the sensor names already on the x axis." width="672">
@@ -467,7 +468,7 @@ Figure&nbsp;5.6
 <span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>           <span class="at">y =</span> sensor_name)) <span class="sc">+</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-label="4"></a>        <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-colour-dropped" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same four boxplots in plain grey, with no legend, and the sensor names still labelled on the x axis.">
+<div id="fig-colour-dropped" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same four boxplots in plain grey, with no legend, and the sensor names still labelled on the x axis." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-colour-dropped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-colour-dropped-1.png" id="fig-colour-dropped" class="img-fluid figure-img" alt="The same four boxplots in plain grey, with no legend, and the sensor names still labelled on the x axis." width="672">
@@ -567,7 +568,7 @@ Figure&nbsp;5.7
 <!-- TODO: Add instruction on changing labels/axes -->
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_1a18303b" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_327ae7a1" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -634,7 +635,7 @@ Figure&nbsp;5.7
 <span id="cb14-3"><a href="#cb14-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-label="4"></a>        <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-overplot" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A scatterplot of pedestrian count against hour, drawn as solid black columns of points with no visible structure.">
+<div id="fig-overplot" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot of pedestrian count against hour, drawn as solid black columns of points with no visible structure." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-overplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-overplot-1.png" id="fig-overplot" class="img-fluid figure-img" alt="A scatterplot of pedestrian count against hour, drawn as solid black columns of points with no visible structure." width="672">
@@ -659,7 +660,7 @@ Figure&nbsp;5.8
 <span id="cb15-3"><a href="#cb15-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-label="4"></a>        <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-alpha" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same scatterplot with very transparent points, so denser regions appear darker and the daily shape emerges.">
+<div id="fig-alpha" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same scatterplot with very transparent points, so denser regions appear darker and the daily shape emerges." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-alpha-1.png" id="fig-alpha" class="img-fluid figure-img" alt="The same scatterplot with very transparent points, so denser regions appear darker and the daily shape emerges." width="672">
@@ -678,7 +679,7 @@ Figure&nbsp;5.9
 <span id="cb16-3"><a href="#cb16-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-label="4"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">width =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-jitter" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="The same data jittered horizontally, so each hour becomes a cloud rather than a line of points.">
+<div id="fig-jitter" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same data jittered horizontally, so each hour becomes a cloud rather than a line of points." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-jitter-1.png" id="fig-jitter" class="img-fluid figure-img" alt="The same data jittered horizontally, so each hour becomes a cloud rather than a line of points." width="672">
@@ -698,7 +699,7 @@ Figure&nbsp;5.10
 <span id="cb17-4"><a href="#cb17-4" aria-label="4"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-label="5"></a>        <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-jitter-box" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Jittered points for each hour with a boxplot drawn over the top, so the median and quartiles sit inside the cloud of raw readings.">
+<div id="fig-jitter-box" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Jittered points for each hour with a boxplot drawn over the top, so the median and quartiles sit inside the cloud of raw readings." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-jitter-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-jitter-box-1.png" id="fig-jitter-box" class="img-fluid figure-img" alt="Jittered points for each hour with a boxplot drawn over the top, so the median and quartiles sit inside the cloud of raw readings." width="672">
@@ -730,7 +731,7 @@ Figure&nbsp;5.11
 <span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>        <span class="fu">geom_hex</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-hex" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A hexagonal binned plot of the same data, with colour showing how many readings fall in each hexagon.">
+<div id="fig-hex" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A hexagonal binned plot of the same data, with colour showing how many readings fall in each hexagon." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-hex-1.png" id="fig-hex" class="img-fluid figure-img" alt="A hexagonal binned plot of the same data, with colour showing how many readings fall in each hexagon." width="672">
@@ -769,7 +770,7 @@ Figure&nbsp;5.12
 <span id="cb19-6"><a href="#cb19-6" aria-label="6"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-label="7"></a>        <span class="fu">gghighlight</span>(sensor_name <span class="sc">==</span> <span class="st">"Flagstaff Station"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-gghighlight" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Weekday foot traffic for four sensors, with Flagstaff Station in colour and the other three greyed out behind it.">
+<div id="fig-gghighlight" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Weekday foot traffic for four sensors, with Flagstaff Station in colour and the other three greyed out behind it." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gghighlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-gghighlight-1.png" id="fig-gghighlight" class="img-fluid figure-img" alt="Weekday foot traffic for four sensors, with Flagstaff Station in colour and the other three greyed out behind it." width="672">
@@ -835,7 +836,7 @@ Figure&nbsp;5.13
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_d9e9f7b1" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_5fbc509d" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -881,7 +882,7 @@ Figure&nbsp;5.13
 <span id="cb22-3"><a href="#cb22-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-label="4"></a>        <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-box-sensors" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four boxplots, one per sensor. Each box is squashed near the bottom of the range with a long column of outlier dots above it.">
+<div id="fig-box-sensors" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four boxplots, one per sensor. Each box is squashed near the bottom of the range with a long column of outlier dots above it." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-box-sensors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-box-sensors-1.png" id="fig-box-sensors" class="img-fluid figure-img" alt="Four boxplots, one per sensor. Each box is squashed near the bottom of the range with a long column of outlier dots above it." width="672">
@@ -924,7 +925,7 @@ Figure&nbsp;5.14
 <span id="cb25-4"><a href="#cb25-4" aria-label="4"></a>        <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-label="5"></a>        <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>, <span class="at">width =</span> <span class="fl">0.15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-violin-points" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four violin plots with the raw readings jittered over the top, so both the estimated shape and the actual points are visible.">
+<div id="fig-violin-points" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four violin plots with the raw readings jittered over the top, so both the estimated shape and the actual points are visible." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-violin-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-violin-points-1.png" id="fig-violin-points" class="img-fluid figure-img" alt="Four violin plots with the raw readings jittered over the top, so both the estimated shape and the actual points are visible." width="672">
@@ -944,7 +945,7 @@ Figure&nbsp;5.15
 <span id="cb26-3"><a href="#cb26-3" aria-label="3"></a>           <span class="at">y =</span> hourly_counts)) <span class="sc">+</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-label="4"></a>        <span class="fu">geom_rain</span>(<span class="at">alpha =</span> <span class="fl">0.02</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-rain" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="A raincloud plot for each sensor: a half violin, a boxplot, and the raw points scattered below.">
+<div id="fig-rain" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A raincloud plot for each sensor: a half violin, a boxplot, and the raw points scattered below." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-rain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-rain-1.png" id="fig-rain" class="img-fluid figure-img" alt="A raincloud plot for each sensor: a half violin, a boxplot, and the raw points scattered below." width="672">
@@ -967,7 +968,7 @@ Figure&nbsp;5.16
 <span id="cb27-4"><a href="#cb27-4" aria-label="4"></a>                   <span class="at">y =</span> <span class="fu">factor</span>(hour))) <span class="sc">+</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-label="5"></a>        <span class="fu">geom_density_ridges</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-ridge-hour" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Twenty four density curves stacked vertically, one per hour of the day at Flagstaff Station, showing the two commuter peaks emerging and fading.">
+<div id="fig-ridge-hour" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Twenty four density curves stacked vertically, one per hour of the day at Flagstaff Station, showing the two commuter peaks emerging and fading." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ridge-hour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-ridge-hour-1.png" id="fig-ridge-hour" class="img-fluid figure-img" alt="Twenty four density curves stacked vertically, one per hour of the day at Flagstaff Station, showing the two commuter peaks emerging and fading." width="672">
@@ -1027,7 +1028,7 @@ Figure&nbsp;5.17
 <span id="cb28-11"><a href="#cb28-11" aria-label="11"></a>                   <span class="at">colour =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
 <span id="cb28-12"><a href="#cb28-12" aria-label="12"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-background" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels, each showing all the data in light grey with that panel's own sensor drawn over the top in blue.">
+<div id="fig-background" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels, each showing all the data in light grey with that panel's own sensor drawn over the top in blue." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-background-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-background-1.png" id="fig-background" class="img-fluid figure-img" alt="Four panels, each showing all the data in light grey with that panel's own sensor drawn over the top in blue." width="672">
@@ -1051,7 +1052,7 @@ Figure&nbsp;5.18
 <span id="cb29-7"><a href="#cb29-7" aria-label="7"></a>        <span class="fu">gghighlight</span>(<span class="at">use_direct_label =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb29-8"><a href="#cb29-8" aria-label="8"></a>        <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sensor_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-gghighlight-facet" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" alt="Four panels, one per sensor, each showing its own line in colour with the other three greyed out behind it.">
+<div id="fig-gghighlight-facet" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels, one per sensor, each showing its own line in colour with the other three greyed out behind it." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gghighlight-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="whats-in-the-way_files/figure-html/fig-gghighlight-facet-1.png" id="fig-gghighlight-facet" class="img-fluid figure-img" alt="Four panels, one per sensor, each showing its own line in colour with the other three greyed out behind it." width="672">
@@ -1116,7 +1117,7 @@ Figure&nbsp;5.19
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<countdown-timer class="countdown" id="timer_85109c0f" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
+<countdown-timer class="countdown" id="timer_e14a7419" minutes="5" seconds="0" update-every="1" tabindex="0" style="right:0;bottom:0;"></countdown-timer>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Answer">
@@ -1149,6 +1150,48 @@ Figure&nbsp;5.19
 <li>Layer the points over the summary when you can afford the ink</li>
 <li>Ridgelines for many ordered groups, violins for a few</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Polish">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Polish
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Taking things out got us most of the way. What is left is spacing and where the reader’s eye enters each panel.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-label="1"></a>p_busy <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-label="2"></a>        <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-label="3"></a>        <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-label="4"></a>              <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-label="5"></a>              <span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="fl">1.2</span>, <span class="st">"lines"</span>),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-label="6"></a>              <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>)) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-label="7"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-polish" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The four panel foot traffic plot with a light theme, the legend above the plot, left aligned bold panel titles and more space between panels." width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="whats-in-the-way_files/figure-html/fig-polish-1.png" id="fig-polish" class="img-fluid figure-img" alt="The four panel foot traffic plot with a light theme, the legend above the plot, left aligned bold panel titles and more space between panels." width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-polish-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.20
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong><code>panel.spacing</code>.</strong> Facets sharing an edge read as one plot. Give them room and they read as four.</li>
+<li><strong>Left align the strip titles.</strong> Centred labels float; left aligned ones line up with the panel they name and with the way the page is read.</li>
+<li><strong>Legend above, not beside.</strong> Beside the plot it takes width away from the data. Above, it costs a line of height nobody was using.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="to-summarise" class="level2" data-number="5.4">
@@ -1160,7 +1203,7 @@ Figure&nbsp;5.19
 <li><strong>A summary is a claim about shape.</strong> Show the data on top of it and the claim has to hold up.</li>
 </ol>
 <p>When a plot looks like a mess, don’t start styling it. Ask what is between the reader and the data, and take that out first.</p>
-<p>Next up is where the eye goes: not what to take away, but what to make loud.</p>
+<p>Next up is colour and emphasis: not what to take away, but what to make loud.</p>
 
 
 </section>
@@ -1577,13 +1620,13 @@ Figure&nbsp;5.19
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./what-am-i-comparing.html" class="pagination-link" aria-label="What am I comparing?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What am I comparing?</span></span>
+      <a href="./what-am-i-comparing.html" class="pagination-link" aria-label="Comparing groups">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Comparing groups</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./where-should-the-eye-go.html" class="pagination-link" aria-label="Where should the eye go?">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Where should the eye go?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./where-should-the-eye-go.html" class="pagination-link" aria-label="Colour and emphasis">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour and emphasis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
